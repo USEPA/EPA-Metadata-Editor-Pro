@@ -168,6 +168,9 @@
     <Compile Include="Pages\EditorRichTextBox.xaml.cs">
       <DependentUpon>EditorRichTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EME_Header.xaml.cs">
+      <DependentUpon>EME_Header.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EntityAttribute.xaml.cs">
       <DependentUpon>EntityAttribute.xaml</DependentUpon>
     </Compile>
@@ -517,6 +520,10 @@
     <Page Include="Pages\EditorRichTextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EME_Header.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EntityAttribute.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -885,6 +892,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Icons\epa_logo_horizontal_black.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

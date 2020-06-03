@@ -29,8 +29,8 @@ limitations under the License.​
   <categories>
     <updateCategory refID="esri_metadata_metadataEditors">
       <insertComponent id="EMEProToolkit_metadataEditor_toolkit" className="ToolkitMetadataEditor">
-        <content type="ToolkitEditor" displayName="EMEProToolkit Metadata Toolkit Editor" id="8328efcc-345c-4f6b-9b4a-918f9f443771">
-          <metadataConfig ArcGISProfile="ISO19139" ValidatePages="True">
+        <content type="ToolkitEditor" displayName="EMEProToolkit Metadata Editor Dev v3" id="8328efcc-345c-4f6b-9b4a-918f9f443771">
+          <metadataConfig ArcGISProfile="NAP" ValidatePages="True">
             <validationNamespaceURI>http://www.isotc211.org/2005/gmd</validationNamespaceURI>
             <validationSchemaURL>http://www.isotc211.org/schemas/2005/gmd/metadataEntity.xsd</validationSchemaURL>
             <tranformStyle>ISO19139</tranformStyle>
