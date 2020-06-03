@@ -29,7 +29,7 @@ limitations under the License.​
   <categories>
     <updateCategory refID="esri_metadata_metadataEditors">
       <insertComponent id="EMEProToolkit_metadataEditor_toolkit" className="ToolkitMetadataEditor">
-        <content type="ToolkitEditor" displayName="EMEProToolkit Metadata Editor Dev v3" id="8328efcc-345c-4f6b-9b4a-918f9f443771">
+        <content type="ToolkitEditor" displayName="EMEProToolkit Metadata Editor Dev" id="8328efcc-345c-4f6b-9b4a-918f9f443771">
           <metadataConfig ArcGISProfile="NAP" ValidatePages="True">
             <validationNamespaceURI>http://www.isotc211.org/2005/gmd</validationNamespaceURI>
             <validationSchemaURL>http://www.isotc211.org/schemas/2005/gmd/metadataEntity.xsd</validationSchemaURL>
@@ -39,31 +39,42 @@ limitations under the License.​
               <forms>
                 <section class="EMEProToolkit.Sections.Overview">
                   <page class="EMEProToolkit.Pages.MTK_ItemInfo">
-                    <validation>
-                      <!-- title -->
-                      <exists xpath="/metadata/dataIdInfo/idCitation/resTitle[. != '']" ref="resTitle" />
-                      <!-- abstract -->
-                      <for xpath="/metadata[not(tool)]">
-                        <exists xpath="dataIdInfo/idAbs[. != '']" ref="idAbs" />
-                      </for>
-                      <!-- tool summary -->
-                      <for xpath="/metadata[tool]">
-                        <exists xpath="tool/summary[. != '']" ref="toolSummary" />
-                      </for>
-                      <!-- tools -->
-                      <for xpath="//scriptExample">
-                        <exists xpath="title[. != '']" ref="scriptTitle" />
-                      </for>
-                      <!-- extent -->
-                      <for xpath="//dataExt//GeoBndBox[@esriExtentType = 'search' AND * != '']">
-                        <exists xpath="westBL[. != '']" ref="westBL,.,westBL" />
-                        <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL" />
-                        <exists xpath="northBL[. != '']" ref="northBL,.,northBL" />
-                        <exists xpath="southBL[. != '']" ref="southBL,.,southBL" />
-                        <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range" />
-                        <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range" />
-                      </for>
-                    </validation>
+				  <validation>
+                    <!-- title -->
+                    <!--<exists xpath="/metadata/dataIdInfo/idCitation/resTitle[. != '']" ref="resTitle"/>-->
+                    <exists xpath="/metadata/dataIdInfo/idCitation/resTitle[(. != '') and (string-length(substring-before(normalize-space(), ' ')) > 1) and (string-length(substring-after(normalize-space(), ' ')) > 1)]" ref="resTitle"/>
+
+                    <!-- tags -->
+                    <for xpath="/metadata/dataIdInfo/searchKeys">
+                        <exists xpath="bag[not(. != '')]" ref="searchKeys"/>
+                    </for>
+            
+                    <!-- abstract -->
+                    <for xpath="/metadata[not(tool)]">
+                        <!--<exists xpath="dataIdInfo/idAbs[. != '']" ref="idAbs"/>-->
+                        <exists xpath="dataIdInfo/idAbs[(. != '') and (string-length(normalize-space()) > 100)]" ref="idAbs"/>
+                    </for>
+
+                    <!-- tool summary -->
+                    <for xpath="/metadata[tool]">
+                        <exists xpath="tool/summary[. != '']" ref="toolSummary"/>   
+                    </for>
+            
+                    <!-- tools -->
+                    <for xpath="//scriptExample">
+                        <exists xpath="title[. != '']" ref="scriptTitle"/>   
+                    </for>
+            
+                    <!-- extent -->
+                    <for xpath="//dataExt//GeoBndBox[@esriExtentType = 'search' AND * != '']">
+                        <exists xpath="westBL[. != '']" ref="westBL,.,westBL"/>
+                        <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL"/>
+                        <exists xpath="northBL[. != '']" ref="northBL,.,northBL"/>
+                        <exists xpath="southBL[. != '']" ref="southBL,.,southBL"/>
+                        <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range"/>
+                        <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range"/>
+                    </for>
+                  </validation>
                   </page>
                   <page class="EMEProToolkit.Pages.MTK_Keywords">
                     <validation>

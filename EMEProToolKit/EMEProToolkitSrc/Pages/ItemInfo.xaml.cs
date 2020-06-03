@@ -24,6 +24,14 @@ using Microsoft.Win32;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Metadata;
 using ArcGIS.Desktop.Metadata.Editor.Pages;
+using System.Windows.Navigation;
+using System.Diagnostics;
+using System.Windows.Documents;
+
+using System.Collections.Generic;
+using System.Windows.Media;
+using System.Linq;
+
 
 namespace EMEProToolkit.Pages
 {
@@ -46,12 +54,12 @@ namespace EMEProToolkit.Pages
     {
         private Image _thumbnailImage = null;
         private bool _isDefault = false;
+        private List<string> _listThemeK = new List<string>();
 
         public MTK_ItemInfo()
         {
             InitializeComponent();
         }
-
         public override string SidebarLabel
         {
             get { return ItemInfoSidebarLabel.SidebarLabel; }
@@ -251,7 +259,6 @@ namespace EMEProToolkit.Pages
                 base64imageNode.InnerText = base64;
             }
         }
-
         public void LoadedThumbnailImage(object sender, RoutedEventArgs e)
         {
             // add me, so I can be called later
@@ -262,5 +269,61 @@ namespace EMEProToolkit.Pages
             _thumbnailImage = sender as Image;
             UpdateThumbnail();
         }
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
+        }
+        public List<Control> AllChildren(DependencyObject parent)
+        {
+            var _List = new List<Control> { };
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var _Child = VisualTreeHelper.GetChild(parent, i);
+                if (_Child is Control)
+                    _List.Add(_Child as Control);
+                _List.AddRange(AllChildren(_Child));
+            }
+            return _List;
+        }
+        private void tbxMdDateSt_Loaded(object sender, RoutedEventArgs e)
+        {
+            //tbxMdDateSt.Text = DateTime.Now.ToString("yyyyMMdd");
+            tbxMdDateSt.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            tbxMdDateSt.Focus();
+            tbxTopOfPage.Focus();
+        }
+
+        private void btnDelSearchTags_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbxItemDesc.IsVisible == true)
+            {
+                ListBox liBox = (ListBox)lbxItemDesc;
+                foreach (var liBoxItem in liBox.Items)
+                {
+                    var liBoxCont = liBox.ItemContainerGenerator.ContainerFromItem(liBoxItem);
+                    var liBoxChildren = AllChildren(liBoxCont);
+                    var liBoxName = "tbxSearchTags";
+                    var liBoxCtrl = (TextBox)liBoxChildren.First(c => c.Name == liBoxName);
+                    //Add logic to copy to clipboard
+                    List<string> listSearchTag = new List<string>();
+                    if (liBoxCtrl.Text.Any())
+                    {
+                        string[] strsearchTag = liBoxCtrl.Text.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (string s in strsearchTag)
+                        {
+                            listSearchTag.Add(s.Trim());
+                        }
+                    }
+                    listSearchTag = listSearchTag.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+                    listSearchTag.Sort();
+                    //clear TextBox
+                    liBoxCtrl.Text = "";
+                    liBoxCtrl.Focus();
+                    tbxTopOfPage.Focus();
+                }
+            }
+        }
     }
 }
+
