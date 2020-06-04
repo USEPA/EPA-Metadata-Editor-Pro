@@ -37,6 +37,9 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ArcGIS.Desktop.Resources">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Resources.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -167,6 +170,9 @@
     </Compile>
     <Compile Include="Pages\EditorRichTextBox.xaml.cs">
       <DependentUpon>EditorRichTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EME_Header.xaml.cs">
+      <DependentUpon>EME_Header.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EntityAttribute.xaml.cs">
       <DependentUpon>EntityAttribute.xaml</DependentUpon>
@@ -517,6 +523,10 @@
     <Page Include="Pages\EditorRichTextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EME_Header.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EntityAttribute.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -885,6 +895,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Icons\epa_logo_horizontal_black.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -912,6 +923,9 @@
     <AddInContent Include="Icons\RichTextEditor\pjustify.png" />
     <AddInContent Include="Icons\RichTextEditor\pleft.png" />
     <AddInContent Include="Icons\RichTextEditor\pright.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\info.rnd.white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
