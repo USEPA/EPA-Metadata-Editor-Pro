@@ -262,6 +262,7 @@ namespace EMEProToolkit.Pages
         public void LoadedThumbnailImage(object sender, RoutedEventArgs e)
         {
             // add me, so I can be called later
+            //below replaces Utils.GetMetadataEditorControl(this).AddCommitPage(this)
             var mdModule = FrameworkApplication.FindModule("esri_metadata_module") as IMetadataEditorHost;
             if (mdModule != null)
                 mdModule.AddCommitPage(this);
