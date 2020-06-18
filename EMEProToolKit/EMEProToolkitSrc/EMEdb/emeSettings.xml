@@ -1,0 +1,372 @@
+<?xml version="1.0" standalone="yes"?>
+<emeSettings>
+	<xs:schema id="emeSettings" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xs:element name="emeControl">
+			<xs:complexType>
+				<xs:sequence>          
+					<xs:element name="controlName">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="50" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="Iso19115_2">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="500" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="Iso19115_1">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="500" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="Csdgm">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="500" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="DCATrequired">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="50" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="EPArequired">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="50" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="sourceTable">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="50" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="sourceField">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="50" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="displayField">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="50" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		<xs:element name="emeSettings" msdata:IsDataSet="true" msdata:MainDataTable="emeControl" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+			<xs:complexType>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="emeControl" />
+				</xs:choice>
+			</xs:complexType>
+		</xs:element>
+	</xs:schema>
+	<emeControl>
+		<controlName>fileIdentifier</controlName>
+		<Iso19115_2>./*[local-name()='fileIdentifier']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired>required</DCATrequired>
+		<EPArequired/>
+	</emeControl>
+	<emeControl>
+		<controlName>language</controlName>
+		<Iso19115_2>./*[local-name()='language']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>    
+	</emeControl>
+	<emeControl>
+		<controlName>hierarchyLevel_MD_ScopeCode</controlName>
+		<Iso19115_2>./*[local-name()='hierarchyLevel']</Iso19115_2>
+		<Iso19115_1>./*[local-name()='hierarchyLevel']/*[local-name()='MD_ScopeCode']</Iso19115_1>
+		<Csdgm/>
+		<DCATrequired/>
+		<EPArequired>required</EPArequired>
+	</emeControl>  
+	<emeControl>
+		<controlName>contact_CI_ResponsibleParty</controlName>
+		<Iso19115_2>./*[local-name()='contact']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired/>
+		<EPArequired>required</EPArequired>
+	</emeControl>
+	<emeControl>
+		<controlName>dateStamp</controlName>
+		<Iso19115_2>./*[local-name()='dateStamp']</Iso19115_2>
+		<Iso19115_1>./*[local-name()='dateStamp']/*[[local-name()='Date'] or [local-name()='DateTime']] </Iso19115_1>
+		<Csdgm/>
+		<DCATrequired>required</DCATrequired>
+		<EPArequired>required</EPArequired>
+	</emeControl> 
+	<emeControl>
+		<controlName>metadataStandardName</controlName>
+		<Iso19115_2>./*[local-name()='metadataStandardName']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired/>
+		<EPArequired/>
+	</emeControl>
+	<emeControl>
+		<controlName>metadataStandardVersion</controlName>
+		<Iso19115_2>./*[local-name()='metadataStandardVersion']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired/>
+		<EPArequired/>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_citation_Title</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='citation']/*[local-name()='CI_Citation']/*[local-name()='title']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired>required</DCATrequired>
+		<EPArequired>required</EPArequired>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_citation_date_creation</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='citation']/*[local-name()='CI_Citation']/*[local-name()='date']/*[local-name()='CI_Date']/*[local-name()='dateType'][*[local-name()='CI_DateTypeCode']='creation']/../..//*[local-name()='date']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired></DCATrequired>
+		<EPArequired>required1</EPArequired>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_citation_date_publication</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='citation']/*[local-name()='CI_Citation']/*[local-name()='date']/*[local-name()='CI_Date']/*[local-name()='dateType'][*[local-name()='CI_DateTypeCode']='publication']/../..//*[local-name()='date']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired></DCATrequired>
+		<EPArequired>required1</EPArequired>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_citation_date_revision</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='citation']/*[local-name()='CI_Citation']/*[local-name()='date']/*[local-name()='CI_Date']/*[local-name()='dateType'][*[local-name()='CI_DateTypeCode']='revision']/../..//*[local-name()='date']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired>required</DCATrequired>
+		<EPArequired>required</EPArequired>
+	</emeControl>  
+	<emeControl>
+		<controlName>idInfo_citation_citedResponsibleParty</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='citation']/*[local-name()='CI_Citation']/*[local-name()='citedResponsibleParty']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>    
+	</emeControl>    
+	<emeControl>
+		<controlName>idInfo_Abstract</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='abstract']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired>required</DCATrequired>
+		<EPArequired>required</EPArequired>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_Purpose</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='purpose']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>    
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_Status_MD_ProgressCode</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='status']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>    
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_pointOfContact</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='pointOfContact']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired>required</DCATrequired>
+		<EPArequired>required</EPArequired>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_resourceMaintenance</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='resourceMaintenance']/*[local-name()='MD_MaintenanceInformation']/*[local-name()='maintenanceAndUpdateFrequency']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>    
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_keywordsIsoTopicCategory</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='topicCategory']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired/>		
+		<EPArequired>required</EPArequired>
+		<sourceTable>KeywordsISO</sourceTable>
+		<sourceField>themekey</sourceField>
+	</emeControl>  
+	<emeControl>
+		<controlName>idInfo_keywordsEpa</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='descriptiveKeywords']/*[local-name()='MD_Keywords']/*[local-name()='thesaurusName']/*[local-name()='CI_Citation']/*[local-name()='title'][*[local-name()='CharacterString']='EPA GIS Keyword Thesaurus']/../../../..</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired/>
+		<sourceTable>KeywordsEPA</sourceTable>
+		<sourceField>themekey</sourceField>
+	</emeControl>  
+	<emeControl>
+		<controlName>idInfo_keywordsUser</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='descriptiveKeywords']/*[local-name()='MD_Keywords']/*[local-name()='thesaurusName']/*[local-name()='CI_Citation']/*[local-name()='title'][*[local-name()='CharacterString']='User']/../../../..</Iso19115_2>
+		<Iso19115_1>./gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title[gco:CharacterString='User']/../../../..</Iso19115_1>
+		<Csdgm/>
+		<DCATrequired/>
+		<sourceTable>KeywordsUser</sourceTable>
+		<sourceField>themekey</sourceField>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_keywordsPlace</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='descriptiveKeywords']/*[local-name()='MD_Keywords']/*[local-name()='type'][*[local-name()='MD_KeywordTypeCode']='place']/../..</Iso19115_2>
+		<Iso19115_1>./gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:type[gmd:MD_KeywordTypeCode='place']/..</Iso19115_1>
+		<Csdgm/>
+		<DCATrequired/>
+		<sourceTable>KeywordsPlace</sourceTable>
+		<sourceField>placekey</sourceField>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_resourceConstraints_MD_Constraints_useLimitation</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='resourceConstraints']/*[local-name()='MD_Constraints']/*[local-name()='useLimitation']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired/>
+		<EPArequired/>
+		<sourceTable>SystemofRecord</sourceTable>
+		<sourceField>SysRcrdURL</sourceField>
+		<displayField>SysRcrdName</displayField>		
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_resourceConstraints_MD_LegalConstraints_useLimitation</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='resourceConstraints']/*[local-name()='MD_LegalConstraints']/*[local-name()='useLimitation']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired/>
+		<EPArequired/>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_resourceConstraints_MD_LegalConstraints_accessConstraints</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='resourceConstraints']/*[local-name()='MD_LegalConstraints']/*[local-name()='accessConstraints']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired/>
+		<EPArequired/>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_resourceConstraints_MD_LegalConstraints_useConstraints</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='resourceConstraints']/*[local-name()='MD_LegalConstraints']/*[local-name()='useConstraints']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired/>
+		<EPArequired/>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_resourceConstraints_MD_LegalConstraints_otherConstraints</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='resourceConstraints']/*[local-name()='MD_LegalConstraints']/*[local-name()='otherConstraints']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>    
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_resourceConstraints_MD_SecurityConstraints_useLimitation</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='resourceConstraints']/*[local-name()='MD_SecurityConstraints']/*[local-name()='useLimitation']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired>required</DCATrequired>
+		<EPArequired>required</EPArequired>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_resourceConstraints_MD_SecurityConstraints_classification</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='resourceConstraints']/*[local-name()='MD_SecurityConstraints']/*[local-name()='classification']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired>required</DCATrequired>
+		<EPArequired>required</EPArequired>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_resourceConstraints_MD_SecurityConstraints_userNote</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='resourceConstraints']/*[local-name()='MD_SecurityConstraints']/*[local-name()='userNote']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>    
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_resourceConstraints_MD_SecurityConstraints_classificationSystem</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='resourceConstraints']/*[local-name()='MD_SecurityConstraints']/*[local-name()='classificationSystem']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>    
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_resourceConstraints_MD_SecurityConstraints_handlingDescription</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='resourceConstraints']/*[local-name()='MD_SecurityConstraints']/*[local-name()='handlingDescription']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>    
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_extent_description</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='extent']/*[local-name()='EX_Extent']/*[local-name()='description']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired/>
+		<EPArequired></EPArequired>		
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_extent_geographicBoundingBox_westLongDD</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='extent']/*[local-name()='EX_Extent']/*[local-name()='geographicElement']/*[local-name()='EX_GeographicBoundingBox']/*[local-name()='westBoundLongitude']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired/>
+		<EPArequired>required</EPArequired>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_extent_geographicBoundingBox_eastLongDD</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='extent']/*[local-name()='EX_Extent']/*[local-name()='geographicElement']/*[local-name()='EX_GeographicBoundingBox']/*[local-name()='eastBoundLongitude']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<EPArequired>required</EPArequired>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_extent_geographicBoundingBox_southLatDD</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='extent']/*[local-name()='EX_Extent']/*[local-name()='geographicElement']/*[local-name()='EX_GeographicBoundingBox']/*[local-name()='southBoundLatitude']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<EPArequired>required</EPArequired>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_extent_geographicBoundingBox_northLatDD</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='extent']/*[local-name()='EX_Extent']/*[local-name()='geographicElement']/*[local-name()='EX_GeographicBoundingBox']/*[local-name()='northBoundLatitude']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<EPArequired>required</EPArequired>
+	</emeControl>
+	<emeControl>
+		<controlName>idInfo_extent_temporalExtent</controlName>
+		<Iso19115_2>./*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='extent']/*[local-name()='EX_Extent']/*[local-name()='temporalElement']/*[local-name()='EX_TemporalExtent']/*[local-name()='extent']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired/>
+		<EPArequired>required</EPArequired>
+	</emeControl>	
+	<emeControl>
+		<controlName>distributionInfo__MD_Distribution</controlName>
+		<Iso19115_2>./*[local-name()='distributionInfo']/*[local-name()='MD_Distribution']/*[local-name()='distributor']</Iso19115_2>
+		<Iso19115_1/>
+		<Csdgm/>
+		<DCATrequired/>
+		<EPArequired>required</EPArequired>
+	</emeControl>
+	</emeSettings>

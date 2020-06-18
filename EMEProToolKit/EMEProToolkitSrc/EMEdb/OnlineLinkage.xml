@@ -1,0 +1,164 @@
+<?xml version="1.0" standalone="yes"?>
+<emeData>
+  <xs:schema id="emeData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="OnlineLinkage">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="primary_onlink">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="secondary_onlink">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="onlink_3">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="onlink_4">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="onlink_5">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="onlink_6">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="onlink_7">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="onlink_8">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="onlink_9">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="onlink_10">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="onlink_11">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="default">
+            <xs:simpleType>
+              <xs:restriction base="xs:boolean" />
+            </xs:simpleType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="emeData" msdata:IsDataSet="true" msdata:MainDataTable="OnlineLinkage" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="OnlineLinkage" />
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <OnlineLinkage>
+    <primary_onlink>https://edg.epa.gov</primary_onlink>
+    <secondary_onlink>http://www.epa.gov/geospatial/</secondary_onlink>
+    <onlink_3>http://www.epa.gov/geospatial/</onlink_3>
+    <onlink_4>http://www.epa.gov/geospatial/</onlink_4>
+    <onlink_5>http://www.epa.gov/geospatial/</onlink_5>
+    <onlink_6>http://www.epa.gov/geospatial/</onlink_6>
+    <onlink_7>http://www.epa.gov/geospatial/</onlink_7>
+    <onlink_8>http://www.epa.gov/geospatial/</onlink_8>
+    <onlink_9>http://www.epa.gov/geospatial/</onlink_9>
+    <onlink_10>http://www.epa.gov/geospatial/</onlink_10>
+    <onlink_11>http://www.epa.gov/geospatial/</onlink_11>
+    <default>true</default>
+  </OnlineLinkage>
+  <OnlineLinkage>
+    <primary_onlink>http://www.epa.gov/region01/</primary_onlink>
+    <secondary_onlink>http://www.epa.gov</secondary_onlink>
+    <default>false</default>
+  </OnlineLinkage>
+  <OnlineLinkage>
+    <primary_onlink>http://www.epa.gov/region02/</primary_onlink>
+    <secondary_onlink>http://www.epa.gov</secondary_onlink>
+    <default>false</default>
+  </OnlineLinkage>
+  <OnlineLinkage>
+    <primary_onlink>http://www.epa.gov/region03/</primary_onlink>
+    <secondary_onlink>http://www.epa.gov</secondary_onlink>
+    <default>false</default>
+  </OnlineLinkage>
+  <OnlineLinkage>
+    <primary_onlink>http://www.epa.gov/region04/</primary_onlink>
+    <secondary_onlink>http://www.epa.gov</secondary_onlink>
+    <default>false</default>
+  </OnlineLinkage>
+  <OnlineLinkage>
+    <primary_onlink>http://www.epa.gov/region05/</primary_onlink>
+    <secondary_onlink>http://www.epa.gov</secondary_onlink>
+    <default>false</default>
+  </OnlineLinkage>
+  <OnlineLinkage>
+    <primary_onlink>http://www.epa.gov/region06/</primary_onlink>
+    <secondary_onlink>http://www.epa.gov</secondary_onlink>
+    <default>false</default>
+  </OnlineLinkage>
+  <OnlineLinkage>
+    <primary_onlink>http://www.epa.gov/region07/</primary_onlink>
+    <secondary_onlink>http://www.epa.gov</secondary_onlink>
+    <default>false</default>
+  </OnlineLinkage>
+  <OnlineLinkage>
+    <primary_onlink>http://www.epa.gov/region08/</primary_onlink>
+    <secondary_onlink>http://www.epa.gov</secondary_onlink>
+    <default>false</default>
+  </OnlineLinkage>
+  <OnlineLinkage>
+    <primary_onlink>http://www.epa.gov/region09/</primary_onlink>
+    <secondary_onlink>http://www.epa.gov</secondary_onlink>
+    <default>false</default>
+  </OnlineLinkage>
+  <OnlineLinkage>
+    <primary_onlink>http://www.epa.gov/region10/</primary_onlink>
+    <secondary_onlink>http://www.epa.gov</secondary_onlink>
+    <default>false</default>
+  </OnlineLinkage>
+</emeData>

@@ -1,0 +1,84 @@
+<?xml version="1.0" standalone="yes"?>
+<emeData>
+  <xs:schema id="emeData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="SecurityConstraints">
+      <xs:complexType>
+        <xs:sequence>
+		  <xs:element name="usenote">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="constsclass">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="emeData" msdata:IsDataSet="true" msdata:MainDataTable="SecurityConstraints" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="SecurityConstraints" />
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <SecurityConstraints>
+    <usenote>EPA Category: Mission Sensitive, NARA Category: Critical Infrastructure</usenote>
+    <constsclass>non-public</constsclass>
+  </SecurityConstraints>
+  <SecurityConstraints>
+    <usenote>EPA Category: Drinking Water Vulnerability Assessments, NARA Category: Critical Infrastructure-Water Assessments</usenote>
+    <constsclass>non-public</constsclass>
+  </SecurityConstraints>
+  <SecurityConstraints>
+    <usenote>EPA Category: Sensitive Drinking Water Related, NARA Category: Critical Infrastructure-Water Assessments</usenote>
+    <constsclass>non-public</constsclass>
+  </SecurityConstraints>
+  <SecurityConstraints>
+    <usenote>EPA Category: IT Security, NARA Category: Information Systems Vulnerability Information</usenote>
+    <constsclass>non-public</constsclass>
+  </SecurityConstraints>
+  <SecurityConstraints>
+    <usenote>EPA Category: Law Enforcement Sensitive, NARA Category: Law Enforcement</usenote>
+    <constsclass>non-public</constsclass>
+  </SecurityConstraints>
+  <SecurityConstraints>
+    <usenote>EPA Category: Attorney Client Privilege, NARA Category: Legal-Privilege</usenote>
+    <constsclass>non-public</constsclass>
+  </SecurityConstraints>
+  <SecurityConstraints>
+    <usenote>EPA Category: Attorney Work Product, NARA Category: Legal-Privilege</usenote>
+    <constsclass>non-public</constsclass>
+  </SecurityConstraints>
+  <SecurityConstraints>
+    <usenote>EPA Category: Deliberative Process Privilege, NARA Category: Legal-Privilege</usenote>
+    <constsclass>non-public</constsclass>
+  </SecurityConstraints>
+  <SecurityConstraints>
+    <usenote>EPA Category: Personally Identifiable Information (PII), NARA Category: Privacy</usenote>
+    <constsclass>non-public</constsclass>
+  </SecurityConstraints>
+  <SecurityConstraints>
+    <usenote>EPA Category: Proprietary, NARA Category: Proprietary</usenote>
+    <constsclass>non-public</constsclass>
+  </SecurityConstraints>
+  <SecurityConstraints>
+    <usenote>EPA Category: Confidential Business Information, NARA Category: Proprietary-Manufacturer</usenote>
+    <constsclass>non-public</constsclass>
+  </SecurityConstraints>
+  <SecurityConstraints>
+    <usenote>EPA Category: Source Selection Information, NARA Category: Proprietary-Source Selection</usenote>
+    <constsclass>non-public</constsclass>
+  </SecurityConstraints>
+  <SecurityConstraints>
+    <usenote>Public dataset: User defined text describing access to the dataset (limit is 255 characters)</usenote>
+    <constsclass>public</constsclass>
+  </SecurityConstraints>
+</emeData>

@@ -1,0 +1,357 @@
+<?xml version="1.0" standalone="yes"?>
+<emeData>
+  <xs:schema id="emeData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="Publisher">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="pubplace">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="publish">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="default">
+            <xs:simpleType>
+              <xs:restriction base="xs:boolean" />
+            </xs:simpleType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="emeData" msdata:IsDataSet="true" msdata:MainDataTable="Publisher" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="Publisher" />
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Publisher>
+    <pubplace>Annapolis, MD</pubplace>
+    <publish>Chesapeake Bay Program (CBP)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Chicago, IL</pubplace>
+    <publish>Great Lakes National Program Office (GLNPO)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. Environmental Protection Agency, Headquarters</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Boston, MA</pubplace>
+    <publish>U.S. Environmental Protection Agency, Region 1</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Seattle, WA</pubplace>
+    <publish>U.S. Environmental Protection Agency, Region 10</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>New York, NY</pubplace>
+    <publish>U.S. Environmental Protection Agency, Region 2</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Philadelphia, PA</pubplace>
+    <publish>U.S. Environmental Protection Agency, Region 3</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Atlanta, GA</pubplace>
+    <publish>U.S. Environmental Protection Agency, Region 4</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Chicago, IL</pubplace>
+    <publish>U.S. Environmental Protection Agency, Region 5</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Dallas, TX</pubplace>
+    <publish>U.S. Environmental Protection Agency, Region 6</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Kansas City, KS</pubplace>
+    <publish>U.S. Environmental Protection Agency, Region 7</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Denver, CO</pubplace>
+    <publish>U.S. Environmental Protection Agency, Region 8</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>San Francisco, CA</pubplace>
+    <publish>U.S. Environmental Protection Agency, Region 9</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Air and Radiation (OAR)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Research Triangle Park, NC</pubplace>
+    <publish>U.S. EPA Office of Air and Radiation (OAR) - Office of Air Quality Planning and Standards (OAQPS)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Research Triangle Park, NC</pubplace>
+    <publish>U.S. EPA Office of Air and Radiation (OAR) - Office of Atmospheric Programs (OAP)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Air and Radiation (OAR) - Office of Radiation and Indoor Air (ORIA)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Air and Radiation (OAR) - Office of Transportation and Air Quality (OTAQ)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Enforcement and Compliance Assurance (OECA)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Enforcement and Compliance Assurance (OECA) - Office of Civil Enforcement (OCE)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Enforcement and Compliance Assurance (OECA) - Office of Compliance (OC)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Enforcement and Compliance Assurance (OECA) - Office of Criminal Enforcement, Forensics and Training (OCEFT)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Enforcement and Compliance Assurance (OECA) - Office of Federal Activities (OFA)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Enforcement and Compliance Assurance (OECA) - Office of Site Remediation Enforcement (OSRE)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Environmental Information (OEI)</publish>
+    <default>true</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Environmental Information (OEI) - Office of Information Analysis and Access (OIAA)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Environmental Information (OEI) - Office of Information Collection (OIC)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Environmental Information (OEI) - Office of Technology Operations and Planning (OTOP)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Prevention, Pesticides and Toxic Substances (OPPTS)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Prevention, Pesticides and Toxic Substances (OPPTS) - Office of Pesticide Programs (OPP)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Prevention, Pesticides and Toxic Substances (OPPTS) - Office of Pollution Prevention and Toxics (OPPT)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Prevention, Pesticides and Toxic Substances (OPPTS) - Office of Science Coordination and Policy (OSCP)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Research Triangle Park, NC</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Research Triangle Park, NC</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Center for Computational Toxicology (NCCT)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Cincinnati, OH</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Center for Environmental Assessment (NCEA)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Research Triangle Park, NC</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Center for Environmental Assessment (NCEA)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Center for Environmental Assessment (NCEA)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Center for Environmental Research (NCER)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Cincinnati, OH</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Exposure Research Laboratory (NERL)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Las Vegas, NV</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Exposure Research Laboratory (NERL)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Athens, GA</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Exposure Research Laboratory (NERL)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Research Triangle Park, NC</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Exposure Research Laboratory (NERL)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Gulf Breeze, FL</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Health and Environmental Effects Research Laboratory (NHEERL) </publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Corvallis, OR</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Health and Environmental Effects Research Laboratory (NHEERL)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Duluth, MN</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Health and Environmental Effects Research Laboratory (NHEERL)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Narragansett, RI</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Health and Environmental Effects Research Laboratory (NHEERL)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Research Triangle Park, NC</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Health and Environmental Effects Research Laboratory (NHEERL)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Chapel Hill, NC</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Health and Environmental Effects Research Laboratory (NHEERL) </publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Cincinnati, OH</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Homeland Security Research Center (NHSRC)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Ada, OK</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Risk Management Research Laboratory  (NRMRL)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Cincinnati, OH</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Risk Management Research Laboratory  (NRMRL)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Edison, NJ</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Risk Management Research Laboratory  (NRMRL)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Research Triangle Park, NC</pubplace>
+    <publish>U.S. EPA Office of Research &amp; Development (ORD) - National Risk Management Research Laboratory  (NRMRL)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Solid Waste and Emergency Response (OSWER)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Solid Waste and Emergency Response (OSWER) - Office of Brownfields Cleanup and Redevelopment (OBCR)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Solid Waste and Emergency Response (OSWER) - Office of Emergency Management (OEM)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Solid Waste and Emergency Response (OSWER) - Office of Solid Waste (OSW)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Solid Waste and Emergency Response (OSWER) - Office of Superfund Remediation and Technology Innovation (OSRTI)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Solid Waste and Emergency Response (OSWER) - Office of Underground Storage Tanks (OUST)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Water (OW)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Water (OW) - Office of Ground Water and Drinking Water (OGWDW)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Water (OW) - Office of Science and Technology (OST)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Water (OW) - Office of Wastewater Management (OWM)</publish>
+    <default>false</default>
+  </Publisher>
+  <Publisher>
+    <pubplace>Washington, DC</pubplace>
+    <publish>U.S. EPA Office of Water (OW) - Office of Wetlands Oceans &amp; Watersheds (OWOW)</publish>
+    <default>false</default>
+  </Publisher>
+</emeData>

@@ -1,0 +1,181 @@
+<?xml version="1.0" standalone="yes"?>
+<emeData>
+ <xs:schema id="emeData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+   <xs:element name="BoundingBox">
+     <xs:complexType>
+       <xs:sequence>
+         <xs:element name="orderedId">
+           <xs:simpleType>
+             <xs:restriction base="xs:int">
+             </xs:restriction>
+           </xs:simpleType>
+         </xs:element>
+         <xs:element name="Area">
+           <xs:simpleType>
+             <xs:restriction base="xs:string">
+               <xs:maxLength value="50" />
+             </xs:restriction>
+           </xs:simpleType>
+         </xs:element>
+		 <xs:element name="westbc">
+           <xs:simpleType>
+             <xs:restriction base="xs:string">
+               <xs:maxLength value="255" />
+             </xs:restriction>
+           </xs:simpleType>
+         </xs:element>
+		 <xs:element name="eastbc">
+           <xs:simpleType>
+             <xs:restriction base="xs:string">
+               <xs:maxLength value="255" />
+             </xs:restriction>
+           </xs:simpleType>
+         </xs:element>
+		 <xs:element name="northbc">
+           <xs:simpleType>
+             <xs:restriction base="xs:string">
+               <xs:maxLength value="255" />
+             </xs:restriction>
+           </xs:simpleType>
+         </xs:element>
+		 <xs:element name="southbc">
+           <xs:simpleType>
+             <xs:restriction base="xs:string">
+               <xs:maxLength value="255" />
+             </xs:restriction>
+           </xs:simpleType>
+         </xs:element>
+         <xs:element name="default">
+           <xs:simpleType>
+             <xs:restriction base="xs:boolean" />
+           </xs:simpleType>
+         </xs:element>
+       </xs:sequence>
+     </xs:complexType>
+   </xs:element>
+     <xs:element name="emeData" msdata:IsDataSet="true" msdata:MainDataTable="BoundingBox" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+       <xs:complexType>
+         <xs:choice minOccurs="0" maxOccurs="unbounded">
+           <xs:element ref="BoundingBox" />
+         </xs:choice>
+       </xs:complexType>
+     </xs:element>
+  </xs:schema>
+  <BoundingBox>
+    <orderedId>0</orderedId>
+    <Area>USA</Area>
+    <westbc>-180</westbc>
+    <eastbc>-66</eastbc>
+    <northbc>72</northbc>
+    <southbc>18</southbc>
+    <default>true</default>
+  </BoundingBox>
+  <BoundingBox>
+    <orderedId>10</orderedId>
+    <Area>Region 1</Area>
+    <westbc>-73.725238</westbc>
+    <eastbc>-66.969271</eastbc>
+    <northbc>47.453335</northbc>
+	<southbc>40.998392</southbc>
+	<default>false</default>
+  </BoundingBox>
+  <BoundingBox>
+    <orderedId>20</orderedId>
+	<Area>Region 2</Area>
+	<westbc>-79.762590</westbc>
+	<eastbc>-64.512674</eastbc>
+	<northbc>45.015865</northbc>
+	<southbc>17.623468</southbc>
+	<default>false</default>
+  </BoundingBox>
+  <BoundingBox>
+	<orderedId>30</orderedId>
+	<Area>Region 3</Area>
+	<westbc>-83.675395</westbc>
+	<eastbc>-74.689502</eastbc>
+	<northbc>42.516072</northbc>
+	<southbc>36.540759</southbc>
+	<default>false</default>
+  </BoundingBox>
+  <BoundingBox>
+	<orderedId>40</orderedId>
+	<Area>Region 4</Area>
+	<westbc>-91.643682</westbc>
+	<eastbc>-75.456580</eastbc>
+	<northbc>39.142064</northbc>
+	<southbc>24.956376</southbc>
+	<default>false</default>
+  </BoundingBox>
+  <BoundingBox>
+	<orderedId>50</orderedId>
+	<Area>Region 5</Area>
+	<westbc>-97.229436</westbc>
+	<eastbc>-80.519996</eastbc>
+	<northbc>49.371730</northbc>
+	<southbc>36.986822</southbc>
+	<default>false</default>
+  </BoundingBox>
+  <BoundingBox>
+	<orderedId>60</orderedId>
+	<Area>Region 6</Area>
+	<westbc>-109.051346</westbc>
+	<eastbc>-89.021803</eastbc>
+	<northbc>37.001478</northbc>
+	<southbc>25.845557</southbc>
+	<default>false</default>
+  </BoundingBox>
+  <BoundingBox>
+	<orderedId>70</orderedId>
+	<Area>Region 7</Area>
+	<westbc>-104.056219</westbc>
+	<eastbc>-89.105034</eastbc>
+	<northbc>43.501457</northbc>
+	<southbc>35.989656</southbc>
+	<default>false</default>
+  </BoundingBox>
+  <BoundingBox>
+	<orderedId>80</orderedId>
+	<Area>Region 8</Area>
+	<westbc>-116.063531</westbc>
+	<eastbc>-96.439395</eastbc>
+	<northbc>49.000027</northbc>
+	<southbc>36.988994</southbc>
+	<default>false</default>
+  </BoundingBox>
+  <BoundingBox>
+	<orderedId>90</orderedId>
+	<Area>Region 9</Area>
+	<westbc>144.552</westbc>
+	<eastbc>-106.793</eastbc>
+	<northbc>42.258</northbc>
+	<southbc>-14.459</southbc>
+	<default>false</default>
+  </BoundingBox>
+  <BoundingBox>
+	<orderedId>100</orderedId>
+	<Area>Region 10</Area>
+	<westbc>-178.217598</westbc>
+	<eastbc>-111.046771</eastbc>
+	<northbc>71.406235</northbc>
+	<southbc>41.987672</southbc>
+	<default>false</default>
+  </BoundingBox>
+  <BoundingBox>
+	<orderedId>110</orderedId>
+	<Area>Chesapeake Bay</Area>
+	<westbc>-77.464154</westbc>
+	<eastbc>-75.39099</eastbc>
+	<northbc>39.609273</northbc>
+	<southbc>36.714623</southbc>
+	<default>false</default>
+  </BoundingBox>
+  <BoundingBox>
+	<orderedId>120</orderedId>
+	<Area>Chesapeake Bay Watershed</Area>
+	<westbc>-80.542601</westbc>
+	<eastbc>-74.580735</eastbc>
+	<northbc>42.987042</northbc>
+	<southbc>36.666691</southbc>
+	<default>false</default>
+  </BoundingBox>
+</emeData>

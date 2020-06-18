@@ -38,7 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ArcGIS.Desktop.Resources">
-      <HintPath>..\..\..\..\..\..\..\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Resources.dll</HintPath>
+      <HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Resources.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -107,6 +107,9 @@
     </Compile>
     <Compile Include="Pages\CI_Citation.xaml.cs">
       <DependentUpon>CI_Citation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CI_CitationEPA.xaml.cs">
+      <DependentUpon>CI_CitationEPA.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\CI_Contact.xaml.cs">
       <DependentUpon>CI_Contact.xaml</DependentUpon>
@@ -225,8 +228,8 @@
     <Compile Include="Pages\ItemInfo.xaml.cs">
       <DependentUpon>ItemInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Keywords.xaml.cs">
-      <DependentUpon>Keywords.xaml</DependentUpon>
+    <Compile Include="Pages\Keywords_EME.xaml.cs">
+      <DependentUpon>Keywords_EME.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LanguageCode.xaml.cs">
       <DependentUpon>LanguageCode.xaml</DependentUpon>
@@ -315,6 +318,21 @@
     <Compile Include="Pages\MD_Keywords.xaml.cs">
       <DependentUpon>MD_Keywords.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MD_KeywordsCode.xaml.cs">
+      <DependentUpon>MD_KeywordsCode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MD_KeywordsEPA.xaml.cs">
+      <DependentUpon>MD_KeywordsEPA.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MD_KeywordsNoThesaurus.xaml.cs">
+      <DependentUpon>MD_KeywordsNoThesaurus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MD_KeywordsPlace.xaml.cs">
+      <DependentUpon>MD_KeywordsPlace.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MD_KeywordsUser.xaml.cs">
+      <DependentUpon>MD_KeywordsUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MD_LegalConstraints.xaml.cs">
       <DependentUpon>MD_LegalConstraints.xaml</DependentUpon>
     </Compile>
@@ -378,6 +396,9 @@
     <Compile Include="Pages\PartyPickerControl.xaml.cs">
       <DependentUpon>PartyPickerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PartyPickerControlEME.xaml.cs">
+      <DependentUpon>PartyPickerControlEME.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\References.xaml.cs">
       <DependentUpon>References.xaml</DependentUpon>
     </Compile>
@@ -439,6 +460,10 @@
     <Page Include="Pages\CI_Citation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CI_CitationEPA.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CI_Contact.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -596,7 +621,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Keywords.xaml">
+    <Page Include="Pages\Keywords_EME.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -716,6 +741,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\MD_KeywordsCode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MD_KeywordsEPA.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Pages\MD_KeywordsNoThesaurus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MD_KeywordsPlace.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MD_KeywordsUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MD_LegalConstraints.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -799,6 +844,10 @@
     <Page Include="Pages\PartyPickerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PartyPickerControlEME.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\References.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -926,6 +975,29 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\info.rnd.white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="EMEdb\BoundingBox.xml" />
+    <Resource Include="EMEdb\Citation.xml" />
+    <Resource Include="EMEdb\contacts.xml" />
+    <Resource Include="EMEdb\Contact_Information.xml" />
+    <Resource Include="EMEdb\DistributionLiability.xml" />
+    <Resource Include="EMEdb\emeConfig.xml" />
+    <Resource Include="EMEdb\emeGUI.xml" />
+    <Resource Include="EMEdb\emeSettings.xml" />
+    <Resource Include="EMEdb\ISO19115MD_GenericMetadataTemplate.xml" />
+    <Resource Include="EMEdb\KeywordsEPA.xml" />
+    <Resource Include="EMEdb\KeywordsISO.xml" />
+    <Resource Include="EMEdb\KeywordsPlace.xml" />
+    <Resource Include="EMEdb\KeywordsUser.xml" />
+    <Resource Include="EMEdb\MDtemplate.xml" />
+    <Resource Include="EMEdb\MItemplate.xml" />
+    <Resource Include="EMEdb\OnlineLinkage.xml" />
+    <Resource Include="EMEdb\OnlineProtocol.xml" />
+    <Resource Include="EMEdb\ProgramCode.xml" />
+    <Resource Include="EMEdb\Publisher.xml" />
+    <Resource Include="EMEdb\SecurityConstraints.xml" />
+    <Resource Include="EMEdb\SystemofRecords.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
