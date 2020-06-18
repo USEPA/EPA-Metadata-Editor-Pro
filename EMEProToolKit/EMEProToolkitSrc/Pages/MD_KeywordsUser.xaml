@@ -1,0 +1,202 @@
+﻿<p:EditorPage x:Class="EMEProToolkit.Pages.MD_KeywordsUser"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:t="clr-namespace:EMEProToolkit"
+             xmlns:tp="clr-namespace:EMEProToolkit.Pages"
+             xmlns:tu="clr-namespace:EMEProToolkit.Utils"
+             xmlns:r="clr-namespace:EMEProToolkit.Properties"             
+             xmlns:p="clr-namespace:ArcGIS.Desktop.Metadata.Editor.Pages;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:v="clr-namespace:ArcGIS.Desktop.Metadata.Editor.Validation;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:e="clr-namespace:ArcGIS.Desktop.Metadata.Editor;assembly=ArcGIS.Desktop.Metadata"             
+             xmlns:converters="clr-namespace:ArcGIS.Desktop.Metadata.Pages.Converters;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:controls="clr-namespace:ArcGIS.Desktop.Metadata.Editor.Controls;assembly=ArcGIS.Desktop.Metadata"
+             mc:Ignorable="d" 
+             Loaded="EditorPage_Loaded">
+  <UserControl.Resources>
+    <XmlDataProvider x:Key="XmlRecord" XPath="/metadata/dataIdInfo/themeKeys[thesaName/resTitle[contains(. , 'User')]]" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="" editorExpand="False">
+          <bag/>
+          <thesaName editorExpand="" editorFillOnly="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <!-- thesaName -->
+    <XmlDataProvider x:Key="XmlRecord_thesaName" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <thesaName editorExpand="False"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="EPAData"
+                         Source="KeywordsUser.xml"
+                         XPath="emeData/KeywordsUser"
+                         IsInitialLoadEnabled="True"/>
+
+    <DataTemplate x:Key="keywordItemCheckBox">
+      <CheckBox Content="{Binding XPath=themekey}"/>
+    </DataTemplate>
+
+    <ControlTemplate x:Key="ListBoxNoScroll">
+      <ItemsPresenter />
+    </ControlTemplate>
+
+    <ItemsPanelTemplate x:Key="ThreeColumnList">
+      <UniformGrid Columns="3"/>
+    </ItemsPanelTemplate>
+
+    <Style x:Key="ChbxListItem" TargetType="{x:Type ListViewItem}">
+      <Setter Property="Focusable" Value="False"/>
+    </Style>
+
+    <Style x:Key="TbxHidden" TargetType="{x:Type TextBox}">
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="FontSize" Value="0.125"/>
+      <Setter Property="Height" Value="0"/>
+      <Setter Property="Width" Value="0"/>
+    </Style>
+
+  </UserControl.Resources>
+
+  <StackPanel>
+
+    <Border Style="{DynamicResource EditorBorderSubStyle}">
+      <!-- user keywords -->
+      <controls:Resizer>
+        <StackPanel>
+          <Label Content="(this list can be customized using the EME Database Manager)" Margin="0,0,0,20" FontSize="10"/>
+          <!--User Keyword List from: KeywordsUser.xml-->
+          <ListView x:Name="lbxEpaUserK"
+                              DataContext="{DynamicResource EPAData}"
+                              ItemsSource = "{Binding}"
+                              Template="{StaticResource ListBoxNoScroll}"
+                              ItemsPanel="{StaticResource ThreeColumnList}"
+                              ItemContainerStyle="{StaticResource ChbxListItem}"
+                              SelectionMode="Multiple"
+                              Margin="10,0,0,0" Loaded="tbxMDEpaUserK_Loaded">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <CheckBox Name="chbxEpaUserkey" Content="{Binding XPath=themekey}" Checked="chbxEpaUserkey_Checked" Unchecked="chbxEpaUserkey_Unchecked"/>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
+            <!--Metadata Keywords-->
+            <TextBox x:Name="tbxMDEpaUserK" Text="{e:MetadataBinding XPath=bag}" Style="{DynamicResource TbxHidden}"
+                                 v:Nav.AnchorName="bag,bag" v:MetadataRules.HasIssue="{Binding Path=(v:MetadataRules.HasIssue), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type p:EditorPage}}}"/>
+
+            <!--<Button Name="btnLoadMDUserK" Click="btnLoadMDUserK_Click" Style="{DynamicResource AddButton}">
+                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                <Image Style="{DynamicResource AddImageStyle}" Source="../Icons/GenericAddGreen16.png"/>
+                                <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="Load Existing"/>
+                            </StackPanel>
+                        </Button>-->
+            <Button Name="btnLoadDefaultThemeK" Click="btnLoadDefaultUserK_Click" Style="{DynamicResource AddButton}">
+              <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                <Image Style="{DynamicResource AddImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericAddGreen16.png"/>
+                <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="Load Defaults"/>
+              </StackPanel>
+            </Button>
+            <Button Name="btnClearThemeK" Click="btnClearUserK_Click" Style="{DynamicResource DeleteButton}">
+              <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                <Image Style="{DynamicResource TopButtonImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="Clear"/>
+              </StackPanel>
+            </Button>
+          </StackPanel>
+        </StackPanel>
+      </controls:Resizer>
+    </Border>
+
+    <!-- NAP style only -->
+    <!--<e:MetadataStyle Only="NAP">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                -->
+    <!-- thesaurus language code -->
+    <!--
+                <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource EditorHLabelStyle}" Content="{x:Static r:Resources.LBL_DESC_THELANG}"/>
+                <ListBox Grid.Row="0" Grid.Column="1" Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=thesaLang}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <p:LanguageCode ToolTip=""/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                -->
+    <!-- thesaurus country code -->
+    <!--
+                <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource EditorHLabelStyle}" Content="{x:Static r:Resources.LBL_DESC_THECOUNTRY}"/>
+                <ListBox Grid.Row="1" Grid.Column="1" Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=thesaLang}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <p:CountryCode/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </e:MetadataStyle>-->
+
+    <!-- user thesaurus citation -->
+    <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=thesaName}">
+      <ListBox.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel/>
+        </ItemsPanelTemplate>
+      </ListBox.ItemsPanel>
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <Expander ToolTip="{x:Static r:Definitions.MD_Keywords_thesaurusName}" Style="{DynamicResource EditorExpander2Style}" IsExpanded="{Binding XPath=@editorExpand, Mode=TwoWay}">
+            <Expander.Header>
+              <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                                       RelativeSource={RelativeSource FindAncestor,
+                                       AncestorType={x:Type ContentPresenter}},
+                                       Mode=OneWayToSource}" LastChildFill="True">
+                <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}">
+                  <Image Style="{DynamicResource TopButtonImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                </Button>
+                <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_DESC_THESCITE}"/>
+              </DockPanel>
+            </Expander.Header>
+            <Border Style="{DynamicResource EditorBorderSubStyle}">
+              <tp:CI_CitationEPA/>
+            </Border>
+          </Expander>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+
+    <!-- ADD thesaurus -->
+    <!--<ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=self::*[not(following-sibling::thesaName)]}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Button Tag="thesaName" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}">
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                            <Image Style="{DynamicResource AddImageStyle}" Source="../Icons/GenericAddGreen16.png"/>
+                            <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="Add User Thesaurus"/>
+                        </StackPanel>
+                    </Button>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>-->
+
+    <!-- validate after all anchors are loaded -->
+    <v:PageValidateControl/>
+
+  </StackPanel>
+
+</p:EditorPage>
