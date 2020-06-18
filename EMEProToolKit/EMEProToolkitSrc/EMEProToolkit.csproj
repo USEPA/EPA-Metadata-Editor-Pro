@@ -111,6 +111,9 @@
     <Compile Include="Pages\CI_CitationEPA.xaml.cs">
       <DependentUpon>CI_CitationEPA.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CI_CitationSelect.xaml.cs">
+      <DependentUpon>CI_CitationSelect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CI_Contact.xaml.cs">
       <DependentUpon>CI_Contact.xaml</DependentUpon>
     </Compile>
@@ -462,6 +465,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\CI_CitationEPA.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CI_CitationSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
