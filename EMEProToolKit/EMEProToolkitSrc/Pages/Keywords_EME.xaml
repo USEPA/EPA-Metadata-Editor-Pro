@@ -1,0 +1,556 @@
+<!--
+Copyright 2019 Esri
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.​
+-->
+
+<p:EditorPage x:Class="EMEProToolkit.Pages.Keywords_EME" x:ClassModifier="internal" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:t="clr-namespace:EMEProToolkit"
+             xmlns:tp="clr-namespace:EMEProToolkit.Pages"
+             xmlns:tu="clr-namespace:EMEProToolkit.Utils"
+             xmlns:r="clr-namespace:EMEProToolkit.Properties"
+             xmlns:p="clr-namespace:ArcGIS.Desktop.Metadata.Editor.Pages;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:v="clr-namespace:ArcGIS.Desktop.Metadata.Editor.Validation;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:e="clr-namespace:ArcGIS.Desktop.Metadata.Editor;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:converters="clr-namespace:ArcGIS.Desktop.Metadata.Pages.Converters;assembly=ArcGIS.Desktop.Metadata"              
+             mc:Ignorable="d" 
+             Loaded="FillXml">
+  <UserControl.Resources>
+    <!-- 
+    <!ENTITY % DataIdent '(idCitation, idAbs, idPurp?, idCredit*, idStatus*, idPoC*, resMaint*, graphOver*, dsFormat*, 
+          discKeys*, otherKeys*, placeKeys*, searchKeys*, stratKeys*, tempKeys*, themeKeys*, idSpecUse*, resConst*, aggrInfo*, spatRpType*, dataScale*, dataLang+, dataChar*, tpCat*, envirDesc?, dataExt*, suppInfo?)'>
+    <!ENTITY % Keywords '(keyword+, keyTyp?, thesaName?, thesaLang?)'> 
+    <!ELEMENT topicCat (TopicCat)>    
+    <!ELEMENT discKeys %Keywords;>
+    <!ELEMENT otherKeys %Keywords;>
+    <!ELEMENT placeKeys %Keywords;>
+    <!ELEMENT searchKeys (keyword+)>
+    <!ELEMENT stratKeys %Keywords;>
+    <!ELEMENT tempKeys %Keywords;>
+    <!ELEMENT themeKeys %Keywords;>    
+    -->
+
+    <converters:ListBoxItemToAutomationIdConverter x:Key="_lbiToAutoIdConverter" />
+    <XmlDataProvider x:Key="XmlRecord" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <metadata>
+            <Esri>
+              <DataProperties>
+                <itemProps>
+                  <imsContentType export="False"/>
+                </itemProps>
+              </DataProperties>
+            </Esri>
+            <dataIdInfo>
+              <tpCatBag>
+                <TopicCatCd_001 value="False"/>
+                <TopicCatCd_002 value="False"/>
+                <TopicCatCd_003 value="False"/>
+                <TopicCatCd_004 value="False"/>
+                <TopicCatCd_005 value="False"/>
+                <TopicCatCd_006 value="False"/>
+                <TopicCatCd_007 value="False"/>
+                <TopicCatCd_008 value="False"/>
+                <TopicCatCd_009 value="False"/>
+                <TopicCatCd_010 value="False"/>
+                <TopicCatCd_011 value="False"/>
+                <TopicCatCd_012 value="False"/>
+                <TopicCatCd_013 value="False"/>
+                <TopicCatCd_014 value="False"/>
+                <TopicCatCd_015 value="False"/>
+                <TopicCatCd_016 value="False"/>
+                <TopicCatCd_017 value="False"/>
+                <TopicCatCd_018 value="False"/>
+                <TopicCatCd_019 value="False"/>
+              </tpCatBag>
+              <!--epa place names title-->
+              <placeKeys>
+                <thesaName xmlns="">
+                  <resTitle>EPA Place Names</resTitle>
+                </thesaName>
+                <thesaLang>
+                  <languageCode value="eng"/>
+                  <countryCode value="US"/>
+                </thesaLang>
+                <keyword></keyword>
+              </placeKeys>
+            </dataIdInfo>
+          </metadata>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_OtherKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <otherKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_ThemeKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <themeKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_PlaceKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <placeKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_TempKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <tempKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_DisKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <discKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_StratKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <stratKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_SearchKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <searchKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_ProductKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <productKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <XmlDataProvider x:Key="XmlRecord_SubTopicKey" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
+      <x:XData>
+        <ANY xmlns="">
+          <subTopicCatKeys editorExpand="True" editorAppend="True"/>
+        </ANY>
+      </x:XData>
+    </XmlDataProvider>
+
+    <e:Codelists x:Key="IMS_ContentType" CodelistName="IMS_ContentType"/>
+
+    <!-- validation issues  -->
+    <v:MetadataIssueInfo x:Key="topics" Message="{x:Static r:Issues.topics_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="themeKeywords" Name="themeKeywords" Message="{x:Static r:Issues.themeKeywords_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="themeKeywords" Name="themeKeywords" Message="please select at least one keyword per section" />
+    <v:MetadataIssueInfo x:Key="themeKeywordsCd" Message="program code section required" />
+    <v:MetadataIssueInfo x:Key="themeKeywordsEpa" Message="epa keywords section required" />
+    <!--<v:MetadataIssueInfo x:Key="placeKeywords" Name="placeKeywords" Message="{x:Static r:Issues.placeKeywords_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="placeKeywords" Name="placeKeywords" Message="please select at least one place keyword" />
+    <v:MetadataIssueInfo x:Key="temporalKeywords" Name="temporalKeywords" Message="{x:Static r:Issues.temporalKeywords_REQ}" />
+    <v:MetadataIssueInfo x:Key="disciplineKeywords" Name="disciplineKeywords" Message="{x:Static r:Issues.disciplineKeywords_REQ}" />
+    <v:MetadataIssueInfo x:Key="stratumKeywords" Name="stratumKeywords" Message="{x:Static r:Issues.stratumKeywords_REQ}" />
+    <v:MetadataIssueInfo x:Key="otherKeywords" Name="otherKeywords" Message="{x:Static r:Issues.otherKeywords_REQ}" />
+    <v:MetadataIssueInfo x:Key="productKeywords" Name="productKeywords" Message="{x:Static r:Issues.productKeywords_REQ}" />
+
+    <v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />
+    <v:MetadataIssueInfo x:Key="partyFgdc" Message="{x:Static r:Issues.partyFgdc_FGDC_REQ}" />
+    <v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />
+    <v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />
+    <v:MetadataIssueInfo x:Key="protocol" Message="{x:Static r:Issues.protocol_REQ}" />
+    <v:MetadataIssueInfo x:Key="rpCntInfo_NAP_REQ" Message="{x:Static r:Issues.rpCntInfo_NAP_REQ}" />
+    <v:MetadataIssueInfo x:Key="tagTopicKeyword" Message="{x:Static r:Issues.tagTopicKeyword_REQ}" />
+    <v:MetadataIssueInfo x:Key="voiceNum" Message="{x:Static r:Issues.voiceNum_FGDC_REQ}" />
+
+    <v:MetadataIssueInfo x:Key="cntAddress" Message="{x:Static r:Issues.cntAddress_FGDC_REQ}" />
+    <v:MetadataIssueInfo x:Key="addressType" Message="{x:Static r:Issues.addressType_REQ}" />
+    <v:MetadataIssueInfo x:Key="adminArea" Message="{x:Static r:Issues.adminArea_REQ}" />
+    <v:MetadataIssueInfo x:Key="adminArea_FGDC" Name="adminArea_FGDC" Message="{x:Static r:Issues.adminArea_FGDC_REQ}" />
+    <v:MetadataIssueInfo x:Key="city" Message="{x:Static r:Issues.city_REQ}" />
+    <v:MetadataIssueInfo x:Key="postCode" Message="{x:Static r:Issues.postCode_REQ}" />
+
+    <!-- id and citation -->
+    <v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />
+    <v:MetadataIssueInfo x:Key="dates" Message="{x:Static r:Issues.dates_REQ}" />
+    <v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />
+
+  </UserControl.Resources>
+
+  <Grid Style="{DynamicResource EditorFrontPageStyle}">
+    <StackPanel>
+      <!--org header-->
+      <tp:EME_Header/>
+      
+      <!--<ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/dataIdInfo[1]}">-->
+      <ListBox x:Name="lbxKeywordEditorPage" Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/dataIdInfo[1]}">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel>
+              
+              <!-- page title -->
+              <StackPanel Orientation="Horizontal">
+                <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.SEC_KEYWORDS}"/>
+              </StackPanel>
+              
+              <!--iso keyword section-->
+              <Border Style="{DynamicResource EditorBorder2Style}" Background="LemonChiffon">
+                <StackPanel>
+                  <!-- topics -->
+                  <StackPanel Orientation="Horizontal">
+                    <Label Style="{DynamicResource EditorVLabelNoIndentStyle}"
+                           ToolTip="{x:Static r:Definitions.MD_DataIdentification_topicCategory}"
+                           v:Nav.AnchorName="topics, tpCatBag">
+                          <!--Content="{x:Static r:Resources.LBL_DESC_TOPICS}" />-->
+                      <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#tags-iso" RequestNavigate="Hyperlink_RequestNavigate">
+                        <!--<TextBlock Text="{x:Static r:Resources.LBL_DESC_TOPICS}"/>-->
+                        <TextBlock Text="ISO 19115 Topic Categories" FontWeight="Bold" />
+                      </Hyperlink>
+                    </Label>
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
+                      <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-iso" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                        <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
+                      </Hyperlink>
+                    </Label>
+                  </StackPanel>
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*"/>
+                      <ColumnDefinition Width="*"/>
+                      <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Style="{DynamicResource EditorCheckboxPanel}">
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_001}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_001/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_002}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_002/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_003}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_003/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_004}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_004/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_005}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_005/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_006}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_006/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_007}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_007/@value}" v:Nav.Check="True"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Style="{DynamicResource EditorCheckboxPanel}">
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_008}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_008/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_009}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_009/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_010}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_010/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_011}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_011/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_012}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_012/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_013}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_013/@value}" v:Nav.Check="True"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Style="{DynamicResource EditorCheckboxPanel}">
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_014}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_014/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_015}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_015/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_016}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_016/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_017}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_017/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_018}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_018/@value}" v:Nav.Check="True"/>
+                      <CheckBox Style="{DynamicResource EditorCheckBoxStyle}" Content="{x:Static r:Resources.LBL_TOPICS_019}" IsChecked="{Binding XPath=//tpCatBag/TopicCatCd_019/@value}" v:Nav.Check="True"/>
+                    </StackPanel>
+                  </Grid>
+
+                </StackPanel>
+              </Border>
+              
+              <!--epa keywords-->
+              <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}">
+                <ListBox.ItemsSource>
+                  <Binding XPath="themeKeys[thesaName/resTitle[contains(. , 'EPA GIS Keyword Thesaurus')]]"/>
+                </ListBox.ItemsSource>
+                <ListBox.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel/>
+                  </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                  <DataTemplate>
+                    <Border Style="{DynamicResource EditorBorder2Style}" Background="LemonChiffon">
+                      <Expander Style="{DynamicResource EditorExpander2Style}" IsExpanded="{Binding XPath=@editorExpand, Mode=TwoWay}">
+                        <Expander.Header>
+                          <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                                                               RelativeSource={RelativeSource FindAncestor,
+                                                               AncestorType={x:Type ContentPresenter}},
+                                                               Mode=OneWayToSource}" LastChildFill="True">
+                            <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}">
+                              <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                            </Button>
+                            <!--<Label Style="{DynamicResource EditorHExpanderLabel}"  Content="EPA Keywords"/>-->
+                            <Label Style="{DynamicResource EditorHExpanderLabel}">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#tags-epa-theme" RequestNavigate="Hyperlink_RequestNavigate">
+                                <TextBlock Text="EPA Keywords" FontWeight="Bold"/>
+                              </Hyperlink>
+                            </Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-epa-theme" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                                <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
+                              </Hyperlink>
+                            </Label>
+                          </DockPanel>
+                        </Expander.Header>
+                        <StackPanel Style="{DynamicResource ExpanderBodyStyle}">
+                          <tp:MD_KeywordsEPA ToolTip="{x:Static r:Definitions.MD_Keywords_theme}"/>
+                          <Border Style="{DynamicResource EditorBorderHRuleStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+                        </StackPanel>
+                      </Expander>
+                    </Border>
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+              
+              <!--program code-->
+              <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}">
+                <ListBox.ItemsSource>
+                  <Binding XPath="themeKeys[thesaName/resTitle[contains(. , 'Federal Program Inventory')]]"/>
+                </ListBox.ItemsSource>
+                <ListBox.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel/>
+                  </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                  <DataTemplate>
+                    <Border Style="{DynamicResource EditorBorder2Style}" Background="LemonChiffon">
+                      <Expander Style="{DynamicResource EditorExpander2Style}" IsExpanded="{Binding XPath=@editorExpand, Mode=TwoWay}">
+                        <Expander.Header>
+                          <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                                                               RelativeSource={RelativeSource FindAncestor,
+                                                               AncestorType={x:Type ContentPresenter}},
+                                                               Mode=OneWayToSource}" LastChildFill="True">
+                            <!--<Label Style="{DynamicResource EditorHExpanderLabel}"  Content="Program Code Keywords"/>-->
+                            <Label Style="{DynamicResource EditorHExpanderLabel}">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#tags-federal-program-code" RequestNavigate="Hyperlink_RequestNavigate">
+                                <TextBlock Text="Program Code Keywords" FontWeight="Bold"/>
+                              </Hyperlink>
+                            </Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-federal-program-code" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                                <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
+                              </Hyperlink>
+                            </Label>
+                          </DockPanel>
+                        </Expander.Header>
+                        <StackPanel Style="{DynamicResource ExpanderBodyStyle}">
+                          <tp:MD_KeywordsCode ToolTip="{x:Static r:Definitions.MD_Keywords_theme}"/>
+                          <Border Style="{DynamicResource EditorBorderHRuleStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+                        </StackPanel>
+                      </Expander>
+                    </Border>
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+              
+              <!--place keywords-->
+              <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=placeKeys}">
+                <ListBox.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel/>
+                  </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                  <DataTemplate>
+                    <Border Style="{DynamicResource EditorBorder2Style}" Background="LemonChiffon">
+                      <Expander Style="{DynamicResource EditorExpander2Style}" IsExpanded="{Binding XPath=@editorExpand, Mode=TwoWay}">
+                        <Expander.Header>
+                          <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                                                               RelativeSource={RelativeSource FindAncestor,
+                                                               AncestorType={x:Type ContentPresenter}},
+                                                               Mode=OneWayToSource}" LastChildFill="True">
+                            <!--<Label Style="{DynamicResource EditorHExpanderLabel}"  Content="Place Keywords"/>-->
+                            <Label Style="{DynamicResource EditorHExpanderLabel}">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#tags-place" RequestNavigate="Hyperlink_RequestNavigate">
+                                <TextBlock Text="Place Keywords" FontWeight="Bold"/>
+                              </Hyperlink>
+                            </Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-place" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                                <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
+                              </Hyperlink>
+                            </Label>
+                          </DockPanel>
+                        </Expander.Header>
+                        <StackPanel Style="{DynamicResource ExpanderBodyStyle}">
+                          <tp:MD_KeywordsPlace ToolTip="{x:Static r:Definitions.MD_Keywords_place}"/>
+                          <Border Style="{DynamicResource EditorBorderHRuleStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+                        </StackPanel>
+                      </Expander>
+                    </Border>
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+              
+              <!--user keywords-->
+              <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}">
+                <ListBox.ItemsSource>
+                  <Binding XPath="themeKeys[thesaName/resTitle[contains(. , 'User')]]"/>
+                </ListBox.ItemsSource>
+                <ListBox.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel/>
+                  </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                  <DataTemplate>
+                    <Border Style="{DynamicResource EditorBorder2Style}" Background="LemonChiffon">
+                      <Expander Style="{DynamicResource EditorExpander2Style}" IsExpanded="{Binding XPath=@editorExpand, Mode=TwoWay}">
+                        <Expander.Header>
+                          <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                                                               RelativeSource={RelativeSource FindAncestor,
+                                                               AncestorType={x:Type ContentPresenter}},
+                                                               Mode=OneWayToSource}" LastChildFill="True">
+                            <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}">
+                              <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                            </Button>
+                            <!--<Label Style="{DynamicResource EditorHExpanderLabel}"  Content="User Keywords"/>-->
+                            <Label Style="{DynamicResource EditorHExpanderLabel}">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#tags-general" RequestNavigate="Hyperlink_RequestNavigate">
+                                <TextBlock Text="User Keywords" FontWeight="Bold"/>
+                              </Hyperlink>
+                            </Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-general" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                                <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
+                              </Hyperlink>
+                            </Label>
+                          </DockPanel>
+                        </Expander.Header>
+                        <StackPanel Style="{DynamicResource ExpanderBodyStyle}">
+                          <tp:MD_KeywordsUser ToolTip="{x:Static r:Definitions.MD_Keywords_theme}"/>
+                          <Border Style="{DynamicResource EditorBorderHRuleStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+                        </StackPanel>
+                      </Expander>
+                    </Border>
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+              
+              <!--theme key with generic thesaurus-->
+              <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}">
+                <ListBox.ItemsSource>
+                  <Binding XPath="themeKeys[thesaName/resTitle[not(text() = '')] and thesaName/resTitle[not(contains(. , 'User')) and not(contains(. , 'EPA GIS Keyword Thesaurus')) and not(contains(. , 'Federal Program Inventory'))]]"/>
+                  <!--<Binding XPath="themeKeys[not(thesaName/resTitle) or thesaName/resTitle[not(contains(. , 'User')) and not(contains(. , 'EPA GIS Keyword Thesaurus')) and not(contains(. , 'Federal Program Inventory'))]]"/>-->
+                </ListBox.ItemsSource>
+                <ListBox.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel/>
+                  </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                  <DataTemplate>
+                    <Border Style="{DynamicResource EditorBorder2Style}" Background="LemonChiffon">
+                      <Expander Style="{DynamicResource EditorExpander2Style}" IsExpanded="{Binding XPath=@editorExpand, Mode=TwoWay}">
+                        <Expander.Header>
+                          <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                                                               RelativeSource={RelativeSource FindAncestor,
+                                                               AncestorType={x:Type ContentPresenter}},
+                                                               Mode=OneWayToSource}" LastChildFill="True">
+                            <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}">
+                              <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                            </Button>
+
+                            <Label Style="{DynamicResource EditorHExpanderLabel}">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#tags-general" RequestNavigate="Hyperlink_RequestNavigate">
+                                <TextBlock Text="Custom Keywords" FontWeight="Bold"/>
+                              </Hyperlink>
+                            </Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-general" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                                <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
+                              </Hyperlink>
+                            </Label>
+                          </DockPanel>
+                        </Expander.Header>
+                        <StackPanel Style="{DynamicResource ExpanderBodyStyle}">
+                          <tp:MTK_MD_Keywords ToolTip="{x:Static r:Definitions.MD_Keywords_theme}"/>
+                        </StackPanel>
+                      </Expander>
+                    </Border>
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+              
+              <!--theme keys with no thesaurus-->
+              <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}">
+                <ListBox.ItemsSource>
+                  <Binding XPath="themeKeys[not(thesaName/resTitle) or thesaName/resTitle[text() = '']]"/>
+                </ListBox.ItemsSource>
+                <ListBox.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel/>
+                  </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                  <DataTemplate>
+                    <Border Style="{DynamicResource EditorBorder2Style}" Background="LemonChiffon">
+                      <Expander Style="{DynamicResource EditorExpander2Style}" IsExpanded="{Binding XPath=@editorExpand, Mode=TwoWay}">
+                        <Expander.Header>
+                          <DockPanel HorizontalAlignment="{Binding HorizontalAlignment,
+                                                               RelativeSource={RelativeSource FindAncestor,
+                                                               AncestorType={x:Type ContentPresenter}},
+                                                               Mode=OneWayToSource}" LastChildFill="True">
+                            <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}">
+                              <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                            </Button>
+
+                            <Label Style="{DynamicResource EditorHExpanderLabel}">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#tags-general" RequestNavigate="Hyperlink_RequestNavigate">
+                                <TextBlock Text="Keywords and Program Code" FontWeight="Bold"/>
+                              </Hyperlink>
+                            </Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-general" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                                <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
+                              </Hyperlink>
+                            </Label>
+                          </DockPanel>
+                        </Expander.Header>
+                        <StackPanel Style="{DynamicResource ExpanderBodyStyle}">
+                          <tp:MD_KeywordsNoThesaurus ToolTip="{x:Static r:Definitions.MD_Keywords_theme}"/>
+                        </StackPanel>
+                      </Expander>
+                    </Border>
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+              
+              <!--ADD theme keywords-->
+              <Button Tag="ThemeKey" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}">
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                  <Image Style="{DynamicResource AddImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericAddGreen16.png"/>
+                  <!--<TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_KEY_NEW_THEME}"/>-->
+                  <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="Add Keyword or Program Code"/>
+                </StackPanel>
+              </Button>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+
+      <!-- validate after all anchors are loaded -->
+      <v:PageValidateControl/>
+
+    </StackPanel>
+  </Grid>
+</p:EditorPage>
