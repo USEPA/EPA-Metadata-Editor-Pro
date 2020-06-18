@@ -15,6 +15,8 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 using ArcGIS.Desktop.Metadata.Editor.Pages;
+using System.Windows.Navigation;
+using System.Diagnostics;
 
 namespace EMEProToolkit.Pages
 {
@@ -48,6 +50,11 @@ namespace EMEProToolkit.Pages
         {
             get { return (Boolean)this.GetValue(SupressOnlineResourceProperty); }
             set { this.SetValue(SupressOnlineResourceProperty, value); }
+        }
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
 
     }
