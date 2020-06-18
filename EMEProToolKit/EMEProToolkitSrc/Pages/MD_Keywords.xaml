@@ -80,15 +80,21 @@ limitations under the License.​
     <XmlDataProvider x:Key="XmlRecord_thesaName" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
       <x:XData>
         <ANY xmlns="">
-          <thesaName editorExpand="True"/>
+          <thesaName editorExpand="False"/>
         </ANY>
       </x:XData>
     </XmlDataProvider>
+    <Style x:Key="TbxHidden" TargetType="{x:Type TextBox}">
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="FontSize" Value="0.125"/>
+      <Setter Property="Height" Value="0"/>
+      <Setter Property="Width" Value="0"/>
+    </Style>
   </UserControl.Resources>
 
-  <Grid Style="{DynamicResource EditorSubPageStyle}">
+  <!--<Grid Style="{DynamicResource EditorSubPageStyle}">
     <StackPanel>
-      <!-- keywords -->
+      --><!-- keywords --><!--
       <controls:Resizer>
       <TextBox Style="{DynamicResource EditorTextAreaResizeStyle}"
             v:Nav.AnchorName="bag,bag" v:MetadataRules.HasIssue="{Binding Path=(v:MetadataRules.HasIssue), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type p:EditorPage}}}"
@@ -96,7 +102,7 @@ limitations under the License.​
             Name="MD_Keywords_Keywords"/>
       </controls:Resizer>
 
-      <!-- NAP style only -->
+      --><!-- NAP style only --><!--
       <tu:MetadataStyle Only="NAP">
         <Grid>
           <Grid.RowDefinitions>
@@ -108,7 +114,7 @@ limitations under the License.​
             <ColumnDefinition Width="*"/>
           </Grid.ColumnDefinitions>
 
-          <!-- thesaurus language code -->
+          --><!-- thesaurus language code --><!--
           <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource EditorHLabelStyle}" Content="{x:Static r:Resources.LBL_DESC_THELANG}"/>
           <ListBox Grid.Row="0" Grid.Column="1" Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=thesaLang}">
             <ListBox.ItemTemplate>
@@ -118,7 +124,7 @@ limitations under the License.​
             </ListBox.ItemTemplate>
           </ListBox>
 
-          <!-- thesaurus country code -->
+          --><!-- thesaurus country code --><!--
           <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource EditorHLabelStyle}" Content="{x:Static r:Resources.LBL_DESC_THECOUNTRY}"/>
           <ListBox Grid.Row="1" Grid.Column="1" Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=thesaLang}">
             <ListBox.ItemTemplate>
@@ -130,7 +136,7 @@ limitations under the License.​
         </Grid>
       </tu:MetadataStyle>
 
-      <!-- thesaurus citation -->
+      --><!-- thesaurus citation --><!--
       <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=thesaName}">
         <ListBox.ItemsPanel>
           <ItemsPanelTemplate>
@@ -161,7 +167,7 @@ limitations under the License.​
         </ListBox.ItemTemplate>
       </ListBox>
 
-      <!-- ADD thesaurus -->
+      --><!-- ADD thesaurus --><!--
       <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=self::*[not(following-sibling::thesaName)]}">
         <ListBox.ItemTemplate>
           <DataTemplate>
@@ -176,9 +182,53 @@ limitations under the License.​
         </ListBox.ItemTemplate>
       </ListBox>
 
-      <!-- validate after all anchors are loaded -->
+      --><!-- validate after all anchors are loaded --><!--
       <v:PageValidateControl/>
 
     </StackPanel>
-  </Grid>
+  </Grid>-->
+  <StackPanel>
+
+    <Border Style="{DynamicResource EditorBorderSubStyle}">
+      <StackPanel>
+
+        <!-- keywords -->
+        <controls:Resizer>
+          <TextBox Style="{DynamicResource EditorTextAreaResizeStyle}"
+                             v:Nav.AnchorName="bag,bag" v:MetadataRules.HasIssue="{Binding Path=(v:MetadataRules.HasIssue), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type p:EditorPage}}}"
+                             Text="{e:MetadataBinding XPath=bag}"/>
+        </controls:Resizer>
+      </StackPanel>
+    </Border>
+
+    <!-- thesaurus citation -->
+    <ListBox x:Name="lbxThesaCitation" Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=thesaName}">
+      <ListBox.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel/>
+        </ItemsPanelTemplate>
+      </ListBox.ItemsPanel>
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <Expander ToolTip="{x:Static r:Definitions.MD_Keywords_thesaurusName}" Style="{DynamicResource EditorExpander2Style}">
+            <Expander.Header>
+              <DockPanel HorizontalAlignment="{Binding HorizontalAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Mode=OneWayToSource}" LastChildFill="True">
+                <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}">
+                  <Image Style="{DynamicResource DeleteImageStyle}" Source="../Icons/GenericDeleteRed16.png"/>
+                </Button>
+                <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_DESC_THESCITE}"/>
+              </DockPanel>
+            </Expander.Header>
+            <Border Style="{DynamicResource EditorBorderSubStyle}">
+              <tp:CI_CitationEPA/>
+            </Border>
+          </Expander>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+
+    <!-- validate after all anchors are loaded -->
+    <v:PageValidateControl/>
+
+  </StackPanel>
 </p:EditorPage>
