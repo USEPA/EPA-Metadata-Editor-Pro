@@ -10,7 +10,20 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.​
 */
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using ArcGIS.Desktop.Metadata.Editor;
 using ArcGIS.Desktop.Metadata.Editor.Pages;
 
 namespace EMEProToolkit.Pages
@@ -19,10 +32,31 @@ namespace EMEProToolkit.Pages
     /// Interaction logic for MTK_CI_OnlineResource.xaml
     /// </summary>
     internal partial class MTK_CI_OnlineResource : EditorPage
+
     {
+        private string _pathEmeDb = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\Emedb\\";
         public MTK_CI_OnlineResource()
         {
             InitializeComponent();
+        }
+        private void CI_OnlineResource_Loaded(object sender, RoutedEventArgs e)
+        {
+            FillXml();
+            var xmldp = (XmlDataProvider)this.Resources["EPAData"];
+            string dbname = "OnlineProtocol.xml";
+            xmldp.Source = new Uri(_pathEmeDb + dbname);
+        }
+        private void cboOrProtocol_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        private void cboOrProtocol_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void cboOrProtocol_LostMouseCapture(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }
