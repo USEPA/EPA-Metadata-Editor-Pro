@@ -30,8 +30,6 @@ namespace EMEProToolkit.Pages
         public MD_KeywordsEPA()
         {
             InitializeComponent();
-            Console.WriteLine(_pathEmeDb);
-            Trace.WriteLine(_pathEmeDb);
         }
 
         public List<Control> AllChildren(DependencyObject parent)
