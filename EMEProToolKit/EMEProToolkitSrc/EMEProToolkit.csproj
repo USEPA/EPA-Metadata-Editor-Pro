@@ -393,6 +393,9 @@
     <Compile Include="Pages\MetadataDetails.xaml.cs">
       <DependentUpon>MetadataDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MetadataDetailsEME.xaml.cs">
+      <DependentUpon>MetadataDetailsEME.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MetadataMaintenance.xaml.cs">
       <DependentUpon>MetadataMaintenance.xaml</DependentUpon>
     </Compile>
@@ -843,6 +846,10 @@
     <Page Include="Pages\MetadataDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MetadataDetailsEME.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MetadataMaintenance.xaml">
       <Generator>MSBuild:Compile</Generator>

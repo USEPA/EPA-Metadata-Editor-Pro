@@ -12,6 +12,7 @@ limitations under the License.​
 */
 
 using System.Windows.Controls;
+using System.Windows;
 using ArcGIS.Desktop.Metadata.Editor.Pages;
 
 namespace EMEProToolkit.Pages
@@ -36,6 +37,18 @@ namespace EMEProToolkit.Pages
             set
             {
                 // NOOP
+            }
+        }
+        private void EditorPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            FillXml();
+            if (this.IsVisible == true)
+            {
+                //var dataContextXml = Utils.GetXmlDataContext(this.DataContext);
+                //lblContactsFileLocation.Content = Utils.GetContactsFileLocation();
+                //lblThisDataContextStr.Content = this.DataContext.ToString();
+                //lblThisDataContext.Content = this.DataContext;
+                //lblGetDataContext.Content = dataContextXml;
             }
         }
     }
