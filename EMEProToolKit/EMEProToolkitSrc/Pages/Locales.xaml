@@ -60,6 +60,8 @@ limitations under the License.​
   <Grid Style="{DynamicResource EditorFrontPageStyle}">
 
     <StackPanel>
+      <!--org header-->
+      <t:EME_Header/>
       <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.SEC_LOCALES}"/>
 
       <ListBox ItemsSource="{Binding XPath=/metadata/Esri/locales}">

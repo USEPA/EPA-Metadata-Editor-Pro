@@ -25,7 +25,7 @@ limitations under the License.​
     <updateCategory refID="esri_metadata_metadataEditors">
       <insertComponent id="EMEProToolkit_metadataEditor_toolkit" className="ToolkitMetadataEditor">
         <content type="ToolkitEditor" displayName="EMEProToolkit Metadata Editor Dev" id="8328efcc-345c-4f6b-9b4a-918f9f443771">
-          <metadataConfig ArcGISProfile="NAP" ValidatePages="True">
+          <metadataConfig ArcGISProfile="ISO19139" ValidatePages="True">
             <validationNamespaceURI>http://www.isotc211.org/2005/gmd</validationNamespaceURI>
             <validationSchemaURL>http://www.isotc211.org/schemas/2005/gmd/metadataEntity.xsd</validationSchemaURL>
             <tranformStyle>ISO19139</tranformStyle>
@@ -66,7 +66,6 @@ limitations under the License.​
                       </for>
                     </validation>
                   </page>
-                  <!--<page class="EMEProToolkit.Pages.MTK_Keywords_OG">-->
                   <page class="EMEProToolkit.Pages.Keywords_EME">
                     <validation>
                       <!-- topic categories required for dataset or series -->
@@ -186,7 +185,9 @@ limitations under the License.​
                       <for xpath="/metadata/dataIdInfo/idCitation/citRespParty/rpCntInfo/cntOnlineRes">
                         <exists xpath="linkage[. != '']" ref="linkage" />
                       </for>
-                    </validation>
+						<!--no NAP: protocol-->
+						<!--No NAP: {count(phone + address + onlineResource) > 0} -->
+					</validation>
                   </page>
                   <page class="EMEProToolkit.Pages.MTK_ContactManager"></page>
                   <page class="EMEProToolkit.Pages.MTK_Locales">
@@ -196,10 +197,6 @@ limitations under the License.​
                         <exists xpath=".[@language != '']" ref="language" />
                       </for>
                     </validation>
-                  </page>
-                  <!-- TODO add your custom pages for Overview here -->
-                  <page class="EMEProToolkit.Pages.CustomPage">
-                    <validation></validation>
                   </page>
                 </section>
                 <section class="EMEProToolkit.Sections.Metadata">
