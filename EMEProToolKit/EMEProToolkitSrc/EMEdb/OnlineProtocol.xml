@@ -1,0 +1,807 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emeData>
+  <orProtocol>
+    <identifier>OGC:CSW</identifier>
+    <uri>http://www.opengis.net/def/serviceType/ogc/csw</uri>
+    <label>OGC Catalogue Service for the Web</label>
+    <url>http://www.opengeospatial.org/standards/cat</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@tomkralidis</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC Catalog service for the web v2.0.2 endpoint (should use differnt protocol identifier if the endpoint is not v2.0.2; these are not yet defined here).  The gmd:function value in the CI_Online resource should be &apos;information&apos; if the provided URL is a getCapabilities request. </comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:SOS</identifier>
+    <uri>http://www.opengis.net/def/serviceType/ogc/sos</uri>
+    <label>OGC Sensor Observation Service</label>
+    <url>http://www.opengeospatial.org/standards/sos</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@tomkralidis</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC Sensor Observation service v?? endpoint (should use differnt protocol identifier if the endpoint is not that version; these are not yet defined here).  The gmd:function value in the CI_Online resource should be &apos;information&apos; if the provided URL is a getCapabilities request. Note that if the service offers multiple datasets in different offerings, the parameters necessary to access the correct offering should be specified in the gmd:CI_OnlineResource/gmd:description element; recommended practice is to use a JSON object with keys that are parameter names and values that are the necessary parameters.</comments>
+    <deprecated>urn:x-esri:specification:ServiceType:SOS; urn:x-esri:specification:ServiceType:sos:url</deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:SPS</identifier>
+    <uri>http://www.opengeospatial.org/standards/sps</uri>
+    <label>OGC Sensor Planning Service</label>
+    <url>http://www.opengeospatial.org/standards/sps</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an Sensor Planning Service </comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:SAS</identifier>
+    <uri>http://www.ogcnetwork.net/SAS</uri>
+    <label>OGC Sensor Alert Service</label>
+    <url>http://www.ogcnetwork.net/SAS</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an Sensor Alert Service</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:WNS</identifier>
+    <uri>http://www.ogcnetwork.net/WNS</uri>
+    <label>OGC Web Notification Service</label>
+    <url>http://portal.opengeospatial.org/files/?artifact_id=1367</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an Web Notification Service </comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:WCS</identifier>
+    <uri>http://www.opengis.net/def/serviceType/ogc/wcs</uri>
+    <label>OGC Web Coverage Service</label>
+    <url>http://www.opengeospatial.org/standards/wcs</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@tomkralidis</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC Web coverage service v?? endpoint (should use differnt protocol identifier if the endpoint is not that version; these are not yet defined here).  The gmd:function value in the CI_Online resource should be &apos;information&apos; if the provided URL is a getCapabilities request. Note that if the service offers multiple datasets in different coverages, the parameters necessary to access the correct coverage should be specified in the gmd:CI_OnlineResource/gmd:description element; recommended practice is to use a JSON object with keys that are parameter names and values that are the necessary parameters.</comments>
+    <deprecated>urn:x-esri:specification:ServiceType:WCS; urn:x-esri:specification:ServiceType:wcs:url</deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:WFS</identifier>
+    <uri>http://www.opengis.net/def/serviceType/ogc/wfs</uri>
+    <label>OGC Web Feature Service</label>
+    <url>http://www.opengeospatial.org/standards/wfs</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@tomkralidis</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC Web Feature Service v?? endpoint (should use differnt protocol identifier if the endpoint is not that version; these are not yet defined here).  The gmd:function value in the CI_Online resource should be &apos;information&apos; if the provided URL is a getCapabilities request. Note that if the service offers multiple datasets in different feature types the typeName parameter necessary to access the correct data should be specified in the gmd:CI_OnlineResource/gmd:description element; recommended practice is to use a JSON object with keys that are parameter names and values that are the necessary parameters.</comments>
+    <deprecated>urn:x-esri:specification:ServiceType:WFS; urn:x-esri:specification:ServiceType:wfs:url</deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:WMS</identifier>
+    <uri>http://www.opengis.net/def/serviceType/ogc/wms</uri>
+    <label>OGC Web Map Service</label>
+    <url>http://www.opengeospatial.org/standards/wms</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@tomkralidis</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC Web Map Service v?? endpoint (should use differnt protocol identifier if the endpoint is not that version; these are not yet defined here).  The gmd:function value in the CI_Online resource should be &apos;information&apos; if the provided URL is a getCapabilities request. Note that if the service offers multiple datasets in different map layers, the layers parameters necessary to access the correct data should be specified in the gmd:CI_OnlineResource/gmd:description element; recommended practice is to use a JSON object with keys that are parameter names and values that are the necessary parameters.</comments>
+    <deprecated>urn:x-esri:specification:ServiceType:WMS; urn:x-esri:specification:ServiceType:wms:url</deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:WMS-C</identifier>
+    <uri>http://www.opengis.net/def/serviceType/ogc/wms</uri>
+    <label>OGC Web Map Service - Cached</label>
+    <url>https://wiki.osgeo.org/wiki/WMS_Tile_Caching</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pacioos</registrant>
+    <comments>This is an unofficial profile of WMS using OSGeo recommendations to pull cached map tiles from the server when available. Often this is specified with a &apos;tiled=true&apos; URL parameter in the GetMap request.</comments>
+    <deprecated>While WMS-C has been superceded by the OSGeo Tile Map Service specification (TMS) and the OGC Web Map Tile Service standard (WMTS), it is still widely supported.</deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:WMTS</identifier>
+    <uri>http://www.opengeospatial.org/standards/wmts</uri>
+    <label>OGC Web Map Tile Service</label>
+    <url>http://www.opengeospatial.org/standards/wmts</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC Web Map Tile Service</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:WPS</identifier>
+    <uri>http://www.opengis.net/def/serviceType/ogc/wps</uri>
+    <label>OGC Web Processing Service</label>
+    <url>http://www.opengeospatial.org/standards/wps</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@tomkralidis</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC Web Processing Service v?? endpoint (should use differnt protocol identifier if the endpoint is not that version; these are not yet defined here).  The gmd:function value in the CI_Online resource should be &apos;information&apos; if the provided URL is a getCapabilities request. Other parameters necessary to access the correct processing service should be specified in the gmd:CI_OnlineResource/gmd:description element; recommended practice is to use a JSON object with keys that are parameter names and values that are the necessary parameters.</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:ODS</identifier>
+    <uri>http://www.opengeospatial.org/standards/ols#ods</uri>
+    <label>OGC OpenLS Directory Service</label>
+    <url>http://www.opengeospatial.org/standards/ols</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC OpenLS Directory Service </comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:OGS</identifier>
+    <uri>http://www.opengeospatial.org/standards/ols#ogs</uri>
+    <label>OGC OpenLS Gateway Service</label>
+    <url>http://www.opengeospatial.org/standards/ols</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC OpenLS Gateway Service</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:OUS</identifier>
+    <uri>http://www.opengeospatial.org/standards/ols#ous</uri>
+    <label>OGC OpenLS Utility Service</label>
+    <url>http://www.opengeospatial.org/standards/ols</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC OpenLS Utility Service</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:OPS</identifier>
+    <uri>http://www.opengeospatial.org/standards/ols#ops</uri>
+    <label>OGC OpenLS Presentation Service</label>
+    <url>http://www.opengeospatial.org/standards/ols</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC OpenLS Presentation Service </comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:ORS</identifier>
+    <uri>http://www.opengeospatial.org/standards/ols#ors</uri>
+    <label>OGC OpenLS Route Service</label>
+    <url>http://www.opengeospatial.org/standards/ols</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC OpenLS Route Service</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:CT</identifier>
+    <uri>http://www.opengeospatial.org/standards/ct</uri>
+    <label>OGC Coordinate Transformation Service</label>
+    <url>http://www.opengeospatial.org/standards/ct</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC Coordinate Transformation Service</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:WFS-G</identifier>
+    <uri>http://www.opengeospatial.org/standards/wfs-g</uri>
+    <label>Gazetteer Service Profile of the Web Feature Service Implementation Specification</label>
+    <url>http://portal.opengeospatial.org/files/?artifact_id=7175</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OGC Gazetteer Service Profile of the Web Feature Service Implementation Specification</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:OWC</identifier>
+    <uri>http://www.opengeospatial.org/standards/owc</uri>
+    <label>OGC OWS Context</label>
+    <url>http://www.opengeospatial.org/standards/owc</url>
+    <target>gmd:MD_Format/gmd:name;gmd:applicationProfile</target>
+    <owner></owner>
+    <resource_type>data</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>Specifies a fully configured service set which can be exchanged</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:GPKG</identifier>
+    <uri>http://www.opengeospatial.org/standards/geopackage</uri>
+    <label>OGC Geopackage</label>
+    <url>http://www.opengeospatial.org/standards/geopackage</url>
+    <target>gmd:MD_Format/gmd:name;gmd:applicationProfile</target>
+    <owner></owner>
+    <resource_type>data</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>SQLite Extension for exchange or direct use of vector geospatial features and / or tile matrix sets of earth images and raster maps at various scales</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:IoT</identifier>
+    <uri>http://www.ogcnetwork.net/IoT</uri>
+    <label>OGC SensorThings API</label>
+    <url>http://ogc-iot.github.io/ogc-iot-api</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for a SensorThings API</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>ESRI:ArcIMS</identifier>
+    <uri>urn:x-esri:serviceType:ArcIMS</uri>
+    <label>ESRI ArcIMS Service</label>
+    <url></url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner>Esri Inc.</owner>
+    <resource_type>service</resource_type>
+    <registrant>@tomkralidis</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an ArcIMS endpoint. ArcIMS requests are tunneled via HTTP Get URL&apos;s</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>ESRI:ArcGIS</identifier>
+    <uri>urn:x-esri:serviceType:ArcGIS</uri>
+    <label>ESRI ArcGIS Service</label>
+    <url></url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner>Esri Inc.</owner>
+    <resource_type>service</resource_type>
+    <registrant>@tomkralidis</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an ESRI Map service endpoint. ESRI REST requests are tunneled via HTTP Get URL&apos;s</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>ESRI:MPK</identifier>
+    <uri>http://esriurl.com/mpk.xml</uri>
+    <label>ArcGIS Map Package</label>
+    <url> http://esriurl.com/mpk.xml</url>
+    <target>gmd:MD_Format/gmd:name;gmd:applicationProfile</target>
+    <owner>Esri Inc.</owner>
+    <resource_type>data</resource_type>
+    <registrant>@mhogeweg</registrant>
+    <comments>Example URI for ArcGIS Map Package. Mpk is a file format. A map package contains a map document (.mxd) and the data referenced by the layers it contains, packaged into one convenient, portable file.</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OPeNDAP:OPeNDAP</identifier>
+    <uri></uri>
+    <label>OPeNDAP root URL</label>
+    <url>http://docs.opendap.org/index.php/UserGuideOPeNDAPMessages</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@tomkralidis</registrant>
+    <comments>Link is the root URL for an OpenDAP endpoint. An OPeNDAP server replies to queries for data and other services in the form of specially formed URLs that start with a root URL, and use a suffix on the root URL and a constraint expression to indicate which service is requested and what the parameters are. Example suffixes are dods, das, dds, nc. OpenDAP defines a syntax for constraint expressions as well.</comments>
+    <deprecated>urn:x-esri:specification:ServiceType:OPeNDAP; urn:x-esri:specification:ServiceType:odp:url</deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OPeNDAP:Hyrax</identifier>
+    <uri></uri>
+    <label>OPeNDAP Hyrax server</label>
+    <url>http://docs.opendap.org/index.php/Hyrax</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@amilan17</registrant>
+    <comments>Link is the root URL for an This is the OPeNDAP 4 Data Server, also known as Hyrax. Hyrax is a data server that implements the DAP2 and DAP4 protocols, works with a number of different data formats and supports a wide variety of customization options from tailoring the look of the server&apos;s web pages to complex server-side processing operations.</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>UNIDATA:NCSS</identifier>
+    <uri></uri>
+    <label>NetCDF Subset Service</label>
+    <url>https://www.unidata.ucar.edu/software/thredds/current/tds/interfaceSpec/NetcdfSubsetService.html</url>
+    <target>gmd:protocol; usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@tomkralidis</registrant>
+    <comments>Link is the root URL for a THREDDS datasets. The NetCDF Subset Service enables subsetting CDM scientific datasets using earth coordinates, such as lat/lon bounding boxes and date ranges; requests are made via HTTP GET with key-value pairs (KVP) for parameters encoded in HTTP URIs.  The resources identified are THREDDS datasets. The resource URIs have a root host name and path, typically something like http://servername:8080/thredds/ncss/, followed by a path that identifies a particular dataset {path/dataset}. A subset of the dataset is considered a view of a resource, specified by query parameters following the character &apos;?&apos; after the dataset path: http://servername:8080/thredds/ncss/{path/dataset}?{subset}. An &apos;accept&apos; parameter may be used to specify the desired resource representation.</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>UNIDATA:CDM</identifier>
+    <uri></uri>
+    <label>Common Data Model Remote Web Service</label>
+    <url>https://www.unidata.ucar.edu/software/thredds/current/netcdf-java/stream/CdmRemote.html</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner>Unidata</owner>
+    <resource_type>service</resource_type>
+    <registrant>@tomkralidis</registrant>
+    <comments>Example</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>UNIDATA:CdmRemote</identifier>
+    <uri></uri>
+    <label>Common Data Model index subsetting</label>
+    <url>https://www.unidata.ucar.edu/software/thredds/current/netcdf-java/stream/CdmRemote.html</url>
+    <target>gmd:protocol; usgin:overlayAPI</target>
+    <owner>Unidata</owner>
+    <resource_type>service</resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>CDM Remote provides remote access to UNIDATA Common Data Model (CDM) datasets, using ncstream as the on-the-wire protocol. Client requests are of the form endpoint?query, and the specification defines a vocabulary of valid query parameters. There are two levels of service: 1) CdmRemote provides index subsetting on remote CDM datasets; 2) CdmrFeature provides coordinate subsetting on remote CDM Feature Datasets</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>UNIDATA:CdmrFeature</identifier>
+    <uri></uri>
+    <label>Common Data Model coordinate subsetting</label>
+    <url>https://www.unidata.ucar.edu/software/thredds/current/netcdf-java/stream/CdmRemote.html</url>
+    <target>gmd:protocol; usgin:overlayAPI</target>
+    <owner>Unidata</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>Link is endpoint URL that provides coordinate subsetting on UNIDATA Common Data Model (CDM) datasets, using ncstream as the on-the-wire protocol. Client requests are of the form endpoint?query, and the specification defines a vocabulary of valid query parameters.</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>UNIDATA:THREDDS</identifier>
+    <uri>http://www.unidata.ucar.edu/namespaces/thredds/InvCatalog/v1.0</uri>
+    <label>THREDDS Catalog</label>
+    <url>http://www.unidata.ucar.edu/software/thredds/current/tds/catalog/InvCatalogSpec.html</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner>Unidata</owner>
+    <resource_type>service</resource_type>
+    <registrant>@kwilcox</registrant>
+    <comments>Link is a THREDDS Catalog URL that provides the XML for traversing programatically. Can be used for datasets and collections of datasets.</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OGC:GML</identifier>
+    <uri>http://www.opengis.net/gml</uri>
+    <label>OGC Geography Markup Language</label>
+    <url></url>
+    <target>gmd:MD_Format/gmd:name;gmd:applicationProfile</target>
+    <owner></owner>
+    <resource_type>data</resource_type>
+    <registrant>@tomkralidis</registrant>
+    <comments>Example</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>WWW:LINK</identifier>
+    <uri>http://www.w3.org/TR/xlink/</uri>
+    <label>Web Address (URL)</label>
+    <url></url>
+    <target>dct:references/@scheme</target>
+    <owner></owner>
+    <resource_type>information</resource_type>
+    <registrant>@tomkralidis @smrazgs</registrant>
+    <comments>Indicates that XLINK properties are encoded as key-value pairs in content of a dct:references element to provide a machine actionable link. </comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>WWW:WSDL</identifier>
+    <uri>http://www.w3.org/TR/wsdl</uri>
+    <label>Web Service Description Language XML document describing service operation</label>
+    <url>http://www.w3.org/TR/wsdl</url>
+    <target>gmd:applicationProfile</target>
+    <owner>W3C</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments></comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>WWW:SPARQL:1.1</identifier>
+    <uri>http://www.w3.org/TR/sparql11-protocol</uri>
+    <label>SPARQL protocol for HTTP</label>
+    <url>http://www.w3.org/TR/rdf-sparql-query</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>SPARQL Protocol specifies a means for conveying SPARQL queries and updates to a SPARQL processing service and returning the results via HTTP to the entity that requested them</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OpenSearch1.1</identifier>
+    <uri>http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_URL_template_syntax</uri>
+    <label>OpenSearch template</label>
+    <url>http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_URL_template_syntax</url>
+    <target>usgin:template;gmd:applicationProfile</target>
+    <owner>OpenSearch.org</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>use to indicate link is a template conforming to the OpenSearch specification</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OpenSearch1.1:Description</identifier>
+    <uri>http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_description_document</uri>
+    <label>OpenSearch description document</label>
+    <url>http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_description_document</url>
+    <target>gmd:applicationProfile</target>
+    <owner>OpenSearch.org</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>indicates a link to get an openSearch description document</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>information</identifier>
+    <uri></uri>
+    <label>link provides information about resource</label>
+    <url></url>
+    <target>gmd:function</target>
+    <owner>ISO TC211</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>function of link it to http:GET information about resource</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>template</identifier>
+    <uri>http://tools.ietf.org/html/rfc6570</uri>
+    <label>link provides template to access resource</label>
+    <url>http://tools.ietf.org/html/rfc6570</url>
+    <target>gmd:function</target>
+    <owner>USGIN</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>Link text is a URI template; applicationProfile attribute value associated with the link should indicate the specification for the template scheme (e.g. OpenSearch1.1).</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>download</identifier>
+    <uri></uri>
+    <label>link will get resource</label>
+    <url></url>
+    <target>gmd:function</target>
+    <owner>ISO TC211</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>function of link it to http:GET a representation of the resource; the link type attribute value(s) should indicate the MIME types of available representations</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>service</identifier>
+    <uri></uri>
+    <label>link is service endpoint</label>
+    <url></url>
+    <target>gmd:function</target>
+    <owner>ISO TC211</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>Link value is the URL of a service endpoint; the link protocol and applicationProfile (and possibly other link properties like overlayAPI, depending on the link attributes profile in use) attribute values should identify the service protocol specification</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>order</identifier>
+    <uri></uri>
+    <label>link provides form to obtain resource</label>
+    <url></url>
+    <target>gmd:function</target>
+    <owner>ISO TC211</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>link value is URL of web application requiring user interaction to order/request access to the resource</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>search</identifier>
+    <uri></uri>
+    <label>link provides form for searching resource</label>
+    <url></url>
+    <target>gmd:function</target>
+    <owner>ISO TC211</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>link value is URL of web application requiring user interaction to search/browse/subset the resource.</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>esip:CollectionCast</identifier>
+    <uri>http://commons.esipfed.org/ns/discovery/1.2/collectionCast# </uri>
+    <label>ESIP collection cast</label>
+    <url></url>
+    <target>gmd:applicationProfile</target>
+    <owner>ESIP</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments></comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>tilejson:2.0.0</identifier>
+    <uri></uri>
+    <label>tile mill map service description</label>
+    <url>https://github.com/mapbox/tilejson-spec</url>
+    <target>gmd:applicationProfile</target>
+    <owner>MapBox</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>link is description of a TileMill map service endpoint. Link type would be application/json; function would be information.</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>iris:fdsnws-event</identifier>
+    <uri>http://service.iris.edu/fdsnws/event/1/</uri>
+    <label>IRIS Seismic event service</label>
+    <url>http://service.iris.edu/fdsnws/event/1</url>
+    <target>gmd:applicationProfile;usgin:overlayAPI</target>
+    <owner>IRIS</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>Link returns event (earthquake) information from the catalogs submitted to the IRIS DMC</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>QuakeML1.2</identifier>
+    <uri>http://quakeml.org /xmlns /quakeml/1.2</uri>
+    <label>Earthquake markup language</label>
+    <url>https://quake.ethz.ch/quakeml</url>
+    <target>gmd:MD_Format/gmd:name;gmd:applicationProfile</target>
+    <owner>quakeml@sed.ethz.ch</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>XML markup language for earthquake hypocenter data</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>file</identifier>
+    <uri></uri>
+    <label>a file</label>
+    <url>http://docs.ckan.org/en/ckan-1.8/domain-model-resource.html</url>
+    <target>gmd:function</target>
+    <owner>OKFN</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>CKAN metadata vocabulary for populating the type attribute on a CKAN resource; indicates that an http  GET of this url should yield a bitstream</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>ISO 19115:2003/19139</identifier>
+    <uri></uri>
+    <label>ISO 19115 metadata in ISO19139 encoding</label>
+    <url></url>
+    <target>gmd:metadataStandardName</target>
+    <owner>GeoNetwork</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>This is the CharacterString value used by Geonetwork OpenSource to identify ISO metadata record instances; apparently have to assume that its using the 2006 corrigendum with no specific profile conventions.</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>ISO-USGIN</identifier>
+    <uri></uri>
+    <label>USGIN-profile ISO 19115 metadata</label>
+    <url>http://repository.usgin.org/uri_gin/usgin/dlio/337</url>
+    <target>gmd:metadataStandardName</target>
+    <owner>USGIN</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>This is the CharacterString Value mandated by the USGIN profile of ISO19115/19139 for instance documents to self-identify.  </comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>http</identifier>
+    <uri>https://www.ietf.org/rfc/rfc2616</uri>
+    <label>Hypertext transfer Protocol, v1.1</label>
+    <url>https://www.ietf.org/rfc/rfc2616.txt</url>
+    <target>gmd:protocol</target>
+    <owner>IETF</owner>
+    <resource_type></resource_type>
+    <registrant>@smrazgs</registrant>
+    <comments>Use to indicate gmd:CI_OnlineResource URLs that are simple http links to a target resource representation for download; redundant as the URL prefix &apos;http:&apos; conveys the same information.</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>https</identifier>
+    <uri>https://tools.ietf.org/html/rfc2818</uri>
+    <label>HTTP over TLS</label>
+    <url>https://www.ietf.org/rfc/rfc2818.txt</url>
+    <target>gmd:protocol</target>
+    <owner>IETF</owner>
+    <resource_type></resource_type>
+    <registrant>@amilan17</registrant>
+    <comments>Use to indicate gmd:CI_OnlineResource URLs that are simple https links to a target resource representation for download; redundant as the URL prefix &apos;https:&apos; conveys the same information.</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>ftp</identifier>
+    <uri>https://tools.ietf.org/html/rfc959</uri>
+    <label>FILE TRANSFER PROTOCOL (FTP)</label>
+    <url>https://www.ietf.org/rfc/rfc959.txt</url>
+    <target>gmd:protocol</target>
+    <owner>IETF</owner>
+    <resource_type></resource_type>
+    <registrant>@amilan17</registrant>
+    <comments>Use to indicate gmd:CI_OnlineResource URLs that are simple ftp links to a target resource representation for download; redundant as the URL prefix &apos;ftp:&apos; conveys the same information.</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>IETF:GeoJSON</identifier>
+    <uri>http://geojson.org</uri>
+    <label>GeoJSON</label>
+    <url>https://datatracker.ietf.org/doc/draft-butler-geojson</url>
+    <target>gmd:MD_Format/gmd:name;gmd:applicationProfile</target>
+    <owner></owner>
+    <resource_type>data</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>GeoJSON is a geospatial data interchange format based on JavaScript Object Notation (JSON)</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>GIT</identifier>
+    <uri>http://git-scm.com/</uri>
+    <label>GIT</label>
+    <url>http://git-scm.com/book/commands</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for a GIT repository</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OKFN:datapackage</identifier>
+    <uri>http://data.okfn.org/doc/data-package</uri>
+    <label>OKFN Data Package</label>
+    <url>http://dataprotocols.org/data-packages</url>
+    <target>gmd:MD_Format/gmd:name;gmd:applicationProfile</target>
+    <owner></owner>
+    <resource_type>data</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>A Data Package is a simple way of packaging up data</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>boundless:geogig</identifier>
+    <uri>http://geogig.org</uri>
+    <label>Boundless GeoGig</label>
+    <url>http://geogig.org/docs/interaction/web-api.html</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner>Boundless</owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for a GeoGig REST API</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OASIS:OData:4.0</identifier>
+    <uri>http://docs.oasis-open.org/odata/odata/v4.0</uri>
+    <label>OData v4.0</label>
+    <url>http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an OData JSON endpoint</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>maxogden:dat</identifier>
+    <uri>http://dat-data.com</uri>
+    <label>dat REST API</label>
+    <url>https://github.com/maxogden/dat/blob/master/docs/rest-api.md</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for a dat REST API</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>geoserver:rest</identifier>
+    <uri>http://docs.geoserver.org/latest/en/user/rest</uri>
+    <label>GeoServer REST configuration API</label>
+    <url>http://docs.geoserver.org/latest/en/user/rest</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for a Geoserver rest API to configure featuretypes in Geoserver (and mapserver) remotely</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>google:protocol-buffers</identifier>
+    <uri>https://developers.google.com/protocol-buffers</uri>
+    <label>Google Protocol Buffers</label>
+    <url>https://developers.google.com/protocol-buffers</url>
+    <target>gmd:MD_Format/gmd:name;gmd:applicationProfile</target>
+    <owner>Google</owner>
+    <resource_type>data</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>Googles mechanism for serializing structured data</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>google:fusion-tables</identifier>
+    <uri>http://google.com/fusiontables</uri>
+    <label>Google Fusion Tables</label>
+    <url>https://developers.google.com/fusiontables</url>
+    <target>gmd:MD_Format/gmd:name;gmd:applicationProfile</target>
+    <owner>Google</owner>
+    <resource_type>data</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>Google mechanism for interating with online data tables</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>NOAA:LAS</identifier>
+    <uri>http://ferret.pmel.noaa.gov/LAS</uri>
+    <label>Live Access Server</label>
+    <url>http://ferret.pmel.noaa.gov/LAS/documentation/developer-documentation/the-xml-messages-used-by-las</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is a LAS endpoint</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OSM</identifier>
+    <uri>http://wiki.openstreetmap.org/wiki/API</uri>
+    <label>Open Street Map API</label>
+    <url>http://wiki.openstreetmap.org/wiki/API</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@pvgenuchten</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for a OSM APIfor fetching and saving raw geodata from/to an OpenStreetMap database </comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>ERDDAP:griddap</identifier>
+    <uri>http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html</uri>
+    <label>ERDDAP Data Service for Gridded Datasets</label>
+    <url>http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner>@BobSimons</owner>
+    <resource_type>service</resource_type>
+    <registrant>@BobSimons</registrant>
+    <comments>griddap lets you request a data subset, graph, or map from a gridded dataset (for example, sea surface temperature data from a satellite), via a specially formed URL. griddap uses the OPeNDAP (external link) Data Access Protocol (DAP) (external link) and its projection constraints (external link).  Link is the root URL for an ERDDAP griddap service endpoint. The service responds to OPeNDAP requests and related ERDDAP-specific requests to a gridded dataset. A request starts with this root URL, adds a file type extension, and sometimes a constraint expression to specify a subset of data. Example file type extensions which don&apos;t require a constraint are .das, .dds, .html, and .graph. Example file type extensions which do require a constraint are .dods, .nc, .mat, .json, and .htmlTable. Full documentation for ERDDAP API at http://coastwatch.pfeg.noaa.gov/erddap/rest.html</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>ERDDAP:tabledap</identifier>
+    <uri>http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html</uri>
+    <label>ERDDAP Data Service for Tabular Datasets</label>
+    <url>http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html</url>
+    <target>srv:serviceType;gmd:protocol;usgin:overlayAPI</target>
+    <owner>@BobSimons</owner>
+    <resource_type>service</resource_type>
+    <registrant>@BobSimons</registrant>
+    <comments>Tabledap lets you request a data subset, a graph, or a map from a tabular dataset (for example, buoy data), via a specially formed URL. tabledap uses the OPeNDAP (external link) Data Access Protocol (DAP) (external link) and its selection constraints (external link).  Link is the root URL for an ERDDAP tabledap service endpoint. The service responds to OPeNDAP requests and related ERDDAP-specific requests to a tabular (sequence) dataset. A request starts with this root URL, adds a file type extension, and sometimes a constraint expression to specify a subset of data. Example file type extensions which don&apos;t require a constraint are .das, .dds, .html, and .graph. Example file type extensions which do require a constraint are .dods, .nc, .mat, .json, and .htmlTable.  Full documentation for ERDDAP API at http://coastwatch.pfeg.noaa.gov/erddap/rest.html</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+  <orProtocol>
+    <identifier>OASIS:AMQP</identifier>
+    <uri>https://amqp.org</uri>
+    <label>Advanced Message Queuing Protocol</label>
+    <url>https://amqp.org</url>
+    <target>gmd:protocol</target>
+    <owner></owner>
+    <resource_type>service</resource_type>
+    <registrant>@tomkralidis</registrant>
+    <comments>gmd:protocol value that indicates CI_OnlineResource URL is for an AMQP broker</comments>
+    <deprecated></deprecated>
+  </orProtocol>
+</emeData>

@@ -22,7 +22,7 @@ limitations under the License.​
              xmlns:e="clr-namespace:ArcGIS.Desktop.Metadata.Editor;assembly=ArcGIS.Desktop.Metadata"
              xmlns:converters="clr-namespace:ArcGIS.Desktop.Metadata.Pages.Converters;assembly=ArcGIS.Desktop.Metadata"
              mc:Ignorable="d"
-             Loaded="FillXml">
+             Loaded="CI_OnlineResource_Loaded">
   <UserControl.Resources>
 
     <!--     
@@ -44,6 +44,10 @@ limitations under the License.​
         </ANY>
       </x:XData>
     </XmlDataProvider>
+    <XmlDataProvider x:Key="EPAData"
+                         Source="OnlineProtocol.xml"
+                         XPath="emeData/orProtocol"
+                         IsInitialLoadEnabled="True"/>
 
     <e:Codelists x:Key="CI_OnLineFunctionCode" CodelistName="CI_OnLineFunctionCode"/>
 
@@ -76,11 +80,28 @@ limitations under the License.​
 
         <!-- protocol -->
         <Label Style="{DynamicResource EditorHLabelStyle}" Grid.Row="1" Grid.Column="0" Content="{x:Static r:Resources.LBL_ONLINE_PROTOCOL}"/>
-        <TextBox Style="{DynamicResource EditorTextBoxStyle}" Grid.Row="1" Grid.Column="1"
+        <!--<TextBox Style="{DynamicResource EditorTextBoxStyle}" Grid.Row="1" Grid.Column="1"
             ToolTip="{x:Static r:Definitions.CI_OnlineResource_protocol}"
             v:Nav.AnchorName="protocol,protocol"
             Text="{e:MetadataBinding XPath=protocol}"
-            Name="CI_OnlineResource_protocol"/>
+            Name="CI_OnlineResource_protocol"/>-->
+        <ComboBox Loaded="PostProcessComboBoxValues" Grid.Row="1" Grid.Column="1"
+                          Style="{DynamicResource EditorHComboBoxStyle}" IsEditable="False" x:Name="cboOrProtocol" 
+                          ItemsSource="{Binding Source={StaticResource EPAData}}"
+                          SelectedValuePath="identifier" 
+                          ToolTip="{x:Static r:Definitions.CI_OnlineResource_protocol}" v:Nav.AnchorName="protocol,protocol"
+                          SelectionChanged="cboOrProtocol_SelectionChanged" LostFocus="cboOrProtocol_LostFocus" LostMouseCapture="cboOrProtocol_LostMouseCapture" >
+          <ComboBox.SelectedValue>
+            <e:MetadataBinding XPath="protocol"/>
+          </ComboBox.SelectedValue>
+          <ComboBox.ItemTemplate>
+            <DataTemplate>
+              <DockPanel HorizontalAlignment="{Binding HorizontalAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Mode=OneWayToSource}" LastChildFill="True">
+                <TextBlock x:Name="tbkProtocolLabel" HorizontalAlignment="Left" Text="{Binding XPath=label}" />
+              </DockPanel>
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
 
         <!-- profile -->
         <Label Style="{DynamicResource EditorHLabelStyle}" Grid.Row="2" Grid.Column="0" Content="{x:Static r:Resources.LBL_ONLINE_PROFILE}"/>

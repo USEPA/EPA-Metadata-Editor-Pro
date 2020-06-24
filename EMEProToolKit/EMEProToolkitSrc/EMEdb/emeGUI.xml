@@ -1,0 +1,681 @@
+<?xml version="1.0" standalone="yes"?>
+<emeGUI>
+  <xs:schema id="emeGUI" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="emeControl">
+      <xs:complexType>
+        <xs:sequence>          
+          <xs:element name="controlName">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="50" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+		      <xs:element name="TabNum">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="50" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="FGDC_Def">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="500" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="EPARequirementGuidance">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="500" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="HoverNote">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="500" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+		  <xs:element name="HelpLink">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="500" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>          
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="emeGUI" msdata:IsDataSet="true" msdata:MainDataTable="emeControl" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="emeControl" />
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <emeControl>
+    <controlName>idInfo_citation_Title_lbl</controlName>
+    <TabNum>1</TabNum>
+	  <FGDC_Def></FGDC_Def>
+	  <EPARequirementGuidance></EPARequirementGuidance>
+	  <HoverNote>What to call the resource</HoverNote>
+	  <HelpLink>t1_title.html</HelpLink>	  
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_Abstract_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Brief summary about the resource</HoverNote>
+	<HelpLink>t1_abstract.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_Purpose_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Why was the resource developed</HoverNote>
+	<HelpLink>t1_purpose.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>keywordsGroupBox</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Keywords about your resource</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>idinfo_keywords_theme_themekt__ISO_19115_Topic_Category___themekey_____help</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HelpLink>t1_isothemekey.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>idinfo_keywords_theme_themekt__EPA_GIS_Keyword_Thesaurus___themekey_____help</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HelpLink>t1_epathemekey.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>idinfo_keywords_theme_themekt__User___themekey_____help</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HelpLink>t1_userthemekey.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>idinfo_keywords_place_placekt__None___placekey_____help</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HelpLink>t1_placekey.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>boundingBoxGroupBox</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The spatial extent for the resource</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_extent_description_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>A description of the geographic extent or area</HoverNote>
+	<HelpLink>t1_bcDescription.html</HelpLink>
+  </emeControl>    
+  <emeControl>
+    <controlName>idInfo_extent_geographicBoundingBox_northLatDD_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Northern Latitude (-90 to 90)</HoverNote>
+	<HelpLink>t1_bc.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_extent_geographicBoundingBox_southLatDD_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Southern Latitude (-90 to 90)</HoverNote>
+	<HelpLink>t1_bc.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_extent_geographicBoundingBox_eastLongDD_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Eastern Longitude (-180 to 180)</HoverNote>
+	<HelpLink>t1_bc.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_extent_geographicBoundingBox_westLongDD_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Western Longitude (-180 to 180)</HoverNote>
+	<HelpLink>t1_bc.html</HelpLink>
+  </emeControl>   
+  <emeControl>
+    <controlName>idInfo_extent_temporalExtent</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Time period covered by the content of the resource</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>temporalExtent_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote></HoverNote>
+	<HelpLink>t1_timeinfo.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>extent__TimePeriod__description_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Description of the date documented</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>timePeriod_Begin_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The beginning date for the content of the resource</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>timePeriod_End_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The ending date for the content of the resource</HoverNote>
+  </emeControl>  
+  <emeControl>
+    <controlName>timePeriod_Interval_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Frequency between time events based on floating point values for temporal length</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>extent__TimeInstant__description_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Description of the date documented</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>timeInstant_timePosition_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The date for the content of the resource</HoverNote>
+  </emeControl>  
+  <emeControl>
+    <controlName>idInfo_citation_date_creation_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>When the resource was brought into existence</HoverNote>
+	<HelpLink>t1_dateCreate.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_citation_date_publication_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>When the resource was issued</HoverNote>
+	<HelpLink>t1_datePub.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_citation_date_revision_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>When the resource was examined or re-examined and improved or amended</HoverNote>
+	<HelpLink>t1_dateRevise.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_resourceMaintenance_lbl</controlName>
+    <TabNum>1</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Frequency of changes and additions made to the resource after the initial completion</HoverNote>
+	<HelpLink>t1_update.html</HelpLink>
+  </emeControl>
+  <emeControl>  
+    <controlName>contactsGeneral_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote></HoverNote>	
+	<HelpLink>t2_contactGeneral.html</HelpLink>
+  </emeControl>  
+  <emeControl>  
+    <controlName>contact_CI_ResponsibleParty</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+	<HelpLink>t2_contactGeneral.html</HelpLink>
+    <HoverNote>Author(s) of the metadata</HoverNote>	
+  </emeControl>   
+  <emeControl>
+    <controlName>idInfo_pointOfContact</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+	<HelpLink>t2_contactGeneral.html</HelpLink>
+    <HoverNote>The owner(s) of the resource</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_citation_citedResponsibleParty</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+	<HelpLink>t2_contactGeneral.html</HelpLink>
+    <HoverNote>Who created/produced the resource</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>roleCode_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Function performed by the contact</HoverNote>
+	<HelpLink>t2_contactHowTo.html#role</HelpLink>
+  </emeControl> 
+  <emeControl>
+    <controlName>dcatProgramCode_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>User friendly name of the primary program related to this data asset, from the Federal Program Inventory.</HoverNote>
+	<HelpLink>t2_contactHowTo.html#programcode</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>contactInfo__CI_Contact__onlineResource__CI_OnlineResource__linkage_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Provide the Internet location (URL) for access to on-line hosted resources.</HoverNote>
+	<HelpLink>t2_onlink.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>contactInfo__CI_Contact__onlineResource__CI_OnlineResource__functionCode_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Choose a value for the function performed by the Linkage (online resource).</HoverNote>
+	<HelpLink>t2_onlink.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>metadataInformation_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote></HoverNote>
+	<HelpLink>t2_metainfo.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>hierarchyLevel_MD_ScopeCode_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Class of information to which the referencing entity applies.</HoverNote>
+	<HelpLink>t2_metainfo.html#typeofresource</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>fileIdentifier_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Value that uniquely identifies this metadata record (UUID). This identifier is assigned and maintained by the custodian of the metadata record</HoverNote>
+	<HelpLink>t2_metainfo.html#UUID</HelpLink>
+  </emeControl>  
+  <emeControl>
+    <controlName>fileIdentifier_new</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>This generates a value that uniquely identifies the metadata record (UUID)</HoverNote>	
+  </emeControl>
+  <emeControl>
+    <controlName>language_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Language of the metadata record</HoverNote>
+	<HelpLink>t2_metainfo.html#language</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>dateStamp_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The date that the metadata was last updated</HoverNote>
+	<HelpLink>t2_metainfo.html#lastmodified</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>metadataStandardName_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The name of the metadata standard used to document the data set</HoverNote>
+	<HelpLink>t2_metainfo.html#standardname</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>metadataStandardVersion_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Identification of the version of the metadata standard used to document the data set</HoverNote>
+	<HelpLink>t2_metainfo.html#standardversion</HelpLink>
+  </emeControl>  
+  <emeControl>
+    <controlName>uc_distribution_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Information about the distributor and options for obtaining the resource.</HoverNote>
+	<HelpLink>t2_distinfo.html</HelpLink>
+  </emeControl>  
+  <emeControl>
+    <controlName>distributor_Contact</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+	<HelpLink>t2_distcnt.html</HelpLink>
+    <HoverNote>The resource distributor contact</HoverNote>
+  </emeControl>   
+  <emeControl>
+    <controlName>md_standardOrderProcess_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The process for obtaining the resource</HoverNote>
+	<HelpLink>t2_distSOP.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>md_distributionFormat_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The resource transfer format</HoverNote>
+	<HelpLink>t2_distFormat.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>md_digitalTranferOptions_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Technical means and media by which a resource is obtained from the distributor.</HoverNote>
+	<HelpLink>t2_distDTO.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>MD_SOP_Fees_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Fees for obtaining resource</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>md_SOP_AvailableDate_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Date the resource will be available.</HoverNote>
+	<HelpLink>t2_distSOP.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>md_SOP_Ordering_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>General instructions, terms, and services provided by the resource distributor.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>md_SOP_Turnaround_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Typical time required for filing a resource request.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>md_format_name_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Name of the resource transfer format.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>md_format_version_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Version of the format (date, number, etc).</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>md_format_AmendmentNumber_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Format version amendment number.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>md_format_Specification_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The subset name, profile, or product specification of the format.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>md_format_decompressionTechnique_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Description of recommended processes or algorithms to apply to the compressed resource.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>md_digitalTransferOptions_UnitsOfDistribution_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Tiles, layers, geographic areas, etc. in which the resource is available.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>md_digitalTransferOptions_transferSize_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Estimated size of the transfer unit in the specified format, expressed in megabytes.</HoverNote>
+  </emeControl>  
+  <emeControl>
+    <controlName>onLine__CI_OnlineResource__linkage__URL_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Internet location (address) for on-line access which uses a URL</HoverNote>
+	<HelpLink>t2_onlink.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>onLine__CI_OnlineResource__protocol_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The connection protocol to be used such as http, ftp, etc.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>onLine__CI_OnlineResource__applicationProfile_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Name of an application profile that can be used with the online resource.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>onLine__CI_OnlineResource__name_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The name (title) of the online resource.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>onLine__CI_OnlineResource__description_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Description of the online resource that provides the resource sought.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>onLine__CI_OnlineResource__function_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Function performed by the resource linkage URL.</HoverNote>
+	<HelpLink>t2_onlink.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>offLine__MD_Medium__name_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Name of Medium (cdRom, DVD, etc.)</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>offLine__MD_Medium__density__Real_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The recording density on the specified media.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>offLine__MD_Medium__densityUnits_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The recording density units.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>offLine__MD_Medium__volumes_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Identification of the number of recorded items on the media.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>offLine__MD_Medium__mediumFormat_lbl</controlName>
+    <TabNum>3</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Method used to write to the medium.</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>offLine__MD_Medium__mediumNode_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Description of limitations or requirements for using the medium</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_resourceConstraints_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The limitations, restrictions, or statements on the resource fitness for use</HoverNote>
+	<HelpLink></HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_resourceConstraints_MD_Constraints_useLimitation_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Statement on the fitness of use or limitations on the use of the resource or metadata. If the systems is designated as a System of Records under the Privacy Act of 1974, choose the System of Records Notice related to this dataset.</HoverNote>
+	<HelpLink>t2_useconstGeneral.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_resourceConstraints_MD_LegalConstraints_useLimitation_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Statement on the fitness of use or limitations on the use of the resource or metadata</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>accessConstraints_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Limitations on access to the resource or metadata to protect privacy, intellectual property, or any special limitations</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>useConstraints_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Restrictions or limitations or warnings to protect privacy, intellectual property, or other special restrictions on the resource or the metadata</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_resourceConstraints_MD_LegalConstraints_otherConstraints_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Other restrictions or legal prerequisites for accessing the resource or metadata</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>securityConstraints_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Restrictions applied to the resource or metadata to protect security concerns</HoverNote>
+	<HelpLink>t2_secclass.html</HelpLink>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_resourceConstraints_MD_SecurityConstraints_useLimitation_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Statement on the fitness of use or limitations on the use of the resource or metadata</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>securityConstraints_classification_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Name of the handling restrictions on the resource or the metadata</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_resourceConstraints_MD_SecurityConstraints_userNote_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>An explanation of the classification level applied to the resource or metadata</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_resourceConstraints_MD_SecurityConstraints_classificationSystem_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Name of the security classification system</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>idInfo_resourceConstraints_MD_SecurityConstraints_handlingDescription_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>Additional information regarding security restrictions on handling the resource or metadata</HoverNote>
+  </emeControl>
+  <emeControl>
+    <controlName>legalContraints_lbl</controlName>
+    <TabNum>2</TabNum>
+    <FGDC_Def></FGDC_Def>
+    <EPARequirementGuidance></EPARequirementGuidance>
+    <HoverNote>The legal restrictions or prerequisites to using the resource or accessing the metadata</HoverNote>
+	<HelpLink>t2_useconst.html</HelpLink>
+  </emeControl>
+</emeGUI>

@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright 2019 Esri
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -30,9 +30,9 @@ namespace EMEProToolkit.Pages
     /// <summary>
     /// Interaction logic for MTK_MD_Keywords.xaml
     /// </summary>
-    internal partial class MTK_MD_Keywords : EditorPage
+    public partial class MD_KeywordsNoThesaurus : EditorPage
     {
-        public MTK_MD_Keywords()
+        public MD_KeywordsNoThesaurus()
         {
             InitializeComponent();
         }
@@ -53,5 +53,6 @@ namespace EMEProToolkit.Pages
         {
             AddRecordByTagToLocal(sender, e);
         }
+
     }
 }

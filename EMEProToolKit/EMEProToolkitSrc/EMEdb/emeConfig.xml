@@ -1,0 +1,49 @@
+<?xml version="1.0" standalone="yes"?>
+<emeConfig>
+  <xs:schema id="emeConfig" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="emeControl">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="controlName" type="xs:string" />
+          <xs:element name="param" maxOccurs="10" minOccurs="0">
+            <xs:complexType mixed="true">
+              <xs:attribute name="label" type="xs:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="url" maxOccurs="10" minOccurs="0">
+            <xs:complexType mixed="true">
+              <xs:attribute name="label" type="xs:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="date" maxOccurs="10" minOccurs="0">
+            <xs:complexType mixed="true">
+              <xs:attribute name="label" type="xs:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="required" maxOccurs="10" minOccurs="0">
+            <xs:complexType mixed="true">
+              <xs:attribute name="label" type="xs:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="emeConfig" msdata:IsDataSet="true" msdata:MainDataTable="emeControl" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="emeControl" />
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <emeControl>
+    <controlName>Organization</controlName>
+    <param label="Agency Name">U.S. Environmental Protection Agency</param>
+  </emeControl>
+  <emeControl>
+    <controlName>Contacts Manager</controlName>
+    <param label="Contacts Source">EPA Directory</param>
+    <url label="Contacts URL">https://edg.epa.gov/EME/contacts.xml</url>
+    <date label="Local Cache">2010-06-27T12:00:00-07:00</date>
+  </emeControl>
+</emeConfig>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
 Copyright 2019 Esri
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,12 +11,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.​
 -->
-
-<ArcGIS defaultAssembly="EMEProToolkit.dll" 
-        defaultNamespace="EMEProToolkit" 
-        xmlns="http://schemas.esri.com/DADF/Registry" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
+<ArcGIS defaultAssembly="EMEProToolkit.dll" defaultNamespace="EMEProToolkit" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
   <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="1.0" desktopVersion="2.5.22081">
     <Name>EMEProToolkit</Name>
     <Description>EMEProToolkit Toolkit</Description>
@@ -39,44 +34,40 @@ limitations under the License.​
               <forms>
                 <section class="EMEProToolkit.Sections.Overview">
                   <page class="EMEProToolkit.Pages.MTK_ItemInfo">
-				  <validation>
-                    <!-- title -->
-                    <!--<exists xpath="/metadata/dataIdInfo/idCitation/resTitle[. != '']" ref="resTitle"/>-->
-                    <exists xpath="/metadata/dataIdInfo/idCitation/resTitle[(. != '') and (string-length(substring-before(normalize-space(), ' ')) > 1) and (string-length(substring-after(normalize-space(), ' ')) > 1)]" ref="resTitle"/>
-
-                    <!-- tags -->
-                    <for xpath="/metadata/dataIdInfo/searchKeys">
-                        <exists xpath="bag[not(. != '')]" ref="searchKeys"/>
-                    </for>
-            
-                    <!-- abstract -->
-                    <for xpath="/metadata[not(tool)]">
+                    <validation>
+                      <!-- title -->
+                      <!--<exists xpath="/metadata/dataIdInfo/idCitation/resTitle[. != '']" ref="resTitle"/>-->
+                      <exists xpath="/metadata/dataIdInfo/idCitation/resTitle[(. != '') and (string-length(substring-before(normalize-space(), ' ')) &gt; 1) and (string-length(substring-after(normalize-space(), ' ')) &gt; 1)]" ref="resTitle" />
+                      <!-- tags -->
+                      <for xpath="/metadata/dataIdInfo/searchKeys">
+                        <exists xpath="bag[not(. != '')]" ref="searchKeys" />
+                      </for>
+                      <!-- abstract -->
+                      <for xpath="/metadata[not(tool)]">
                         <!--<exists xpath="dataIdInfo/idAbs[. != '']" ref="idAbs"/>-->
-                        <exists xpath="dataIdInfo/idAbs[(. != '') and (string-length(normalize-space()) > 100)]" ref="idAbs"/>
-                    </for>
-
-                    <!-- tool summary -->
-                    <for xpath="/metadata[tool]">
-                        <exists xpath="tool/summary[. != '']" ref="toolSummary"/>   
-                    </for>
-            
-                    <!-- tools -->
-                    <for xpath="//scriptExample">
-                        <exists xpath="title[. != '']" ref="scriptTitle"/>   
-                    </for>
-            
-                    <!-- extent -->
-                    <for xpath="//dataExt//GeoBndBox[@esriExtentType = 'search' AND * != '']">
-                        <exists xpath="westBL[. != '']" ref="westBL,.,westBL"/>
-                        <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL"/>
-                        <exists xpath="northBL[. != '']" ref="northBL,.,northBL"/>
-                        <exists xpath="southBL[. != '']" ref="southBL,.,southBL"/>
-                        <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range"/>
-                        <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range"/>
-                    </for>
-                  </validation>
+                        <exists xpath="dataIdInfo/idAbs[(. != '') and (string-length(normalize-space()) &gt; 100)]" ref="idAbs" />
+                      </for>
+                      <!-- tool summary -->
+                      <for xpath="/metadata[tool]">
+                        <exists xpath="tool/summary[. != '']" ref="toolSummary" />
+                      </for>
+                      <!-- tools -->
+                      <for xpath="//scriptExample">
+                        <exists xpath="title[. != '']" ref="scriptTitle" />
+                      </for>
+                      <!-- extent -->
+                      <for xpath="//dataExt//GeoBndBox[@esriExtentType = 'search' AND * != '']">
+                        <exists xpath="westBL[. != '']" ref="westBL,.,westBL" />
+                        <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL" />
+                        <exists xpath="northBL[. != '']" ref="northBL,.,northBL" />
+                        <exists xpath="southBL[. != '']" ref="southBL,.,southBL" />
+                        <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range" />
+                        <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range" />
+                      </for>
+                    </validation>
                   </page>
-                  <page class="EMEProToolkit.Pages.MTK_Keywords">
+                  <!--<page class="EMEProToolkit.Pages.MTK_Keywords_OG">-->
+                  <page class="EMEProToolkit.Pages.Keywords_EME">
                     <validation>
                       <!-- topic categories required for dataset or series -->
                       <for xpath="/metadata[mdHrLv/ScopeCd/@value = '005' or mdHrLv/ScopeCd/@value = '006']">
@@ -86,6 +77,20 @@ limitations under the License.​
                       <for xpath="/metadata/dataIdInfo/themeKeys">
                         <exists xpath="bag[. != '']" ref="bag,.,themeKeywords" />
                       </for>
+                      <!-- epa keywords -->
+                      <for xpath="/metadata/dataIdInfo">
+                        <exists xpath="//themeKeys/thesaName/resTitle[. = 'EPA GIS Keyword Thesaurus']" ref="themeKeywordsEpa" />
+                      </for>
+                      <!--<for xpath="/metadata/dataIdInfo/themeKeys[thesaName/resTitle[contains(. , 'EPA GIS Keyword Thesaurus')]]">
+              <exists xpath="bag[. != '']" ref="bag,.,themeKeywords"/>
+            </for>-->
+                      <!-- program code -->
+                      <for xpath="/metadata/dataIdInfo">
+                        <exists xpath="//themeKeys/thesaName/resTitle[. = 'Federal Program Inventory']" ref="themeKeywordsCd" />
+                      </for>
+                      <!--<for xpath="/metadata/dataIdInfo/themeKeys[thesaName/resTitle[contains(. , 'Federal Program Inventory')]]">
+              <exists xpath="bag[. != '']" ref="bag,.,themeKeywords"/>
+            </for>-->
                       <!-- place keywords -->
                       <for xpath="/metadata/dataIdInfo/placeKeys">
                         <exists xpath="bag[. != '']" ref="bag,.,placeKeywords" />
@@ -192,14 +197,10 @@ limitations under the License.​
                       </for>
                     </validation>
                   </page>
-
                   <!-- TODO add your custom pages for Overview here -->
-
                   <page class="EMEProToolkit.Pages.CustomPage">
-                    <validation>
-                    </validation>
+                    <validation></validation>
                   </page>
-                  
                 </section>
                 <section class="EMEProToolkit.Sections.Metadata">
                   <page class="EMEProToolkit.Pages.MTK_MetadataDetails">

@@ -1,0 +1,332 @@
+<?xml version="1.0" standalone="yes"?>
+<emeData>
+  <xs:schema id="emeData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="KeywordsPlace">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="placekt" default="None">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="placekey">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="default" default="false">
+            <xs:simpleType>
+              <xs:restriction base="xs:boolean" />
+            </xs:simpleType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="emeData" msdata:IsDataSet="true" msdata:MainDataTable="KeywordsPlace" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="KeywordsPlace" />
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>United States</placekey>
+    <default>true</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Canada</placekey>
+    <default>true</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Mexico</placekey>
+    <default>true</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Alaska</placekey>
+    <default>true</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Hawaii</placekey>
+    <default>true</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Washington DC</placekey>
+    <default>true</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>American Samoa</placekey>
+    <default>true</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Puerto Rico</placekey>
+    <default>true</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Virgin Islands</placekey>
+    <default>true</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Alabama</placekey>
+    <default>true</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Arizona</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Arkansas</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>California</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Colorado</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Connecticut</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Delaware</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Florida</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Georgia</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Idaho</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Illinois</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Indiana</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Iowa</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Kansas</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Kentucky</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Louisiana</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Maine</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Maryland</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Massachusetts</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Michigan</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Minnesota</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Mississippi</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Missouri</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Montana</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Nebraska</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Nevada</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>New Hampshire</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>New Jersey</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>New Mexico</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>New York</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>North Carolina</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>North Dakota</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Ohio</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Oklahoma</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Oregon</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Pennsylvania</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Rhode Island</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>South Carolina</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>South Dakota</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Tennessee</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Texas</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Utah</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Vermont</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Virginia</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Washington</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>West Virginia</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Wisconsin</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Wyoming</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Chesapeake Bay</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+  <KeywordsPlace>
+    <placekt>None</placekt>
+    <placekey>Chesapeake Bay Watershed</placekey>
+    <default>false</default>
+  </KeywordsPlace>
+</emeData>

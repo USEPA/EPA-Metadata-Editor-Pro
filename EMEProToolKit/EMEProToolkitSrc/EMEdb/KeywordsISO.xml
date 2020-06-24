@@ -1,0 +1,132 @@
+<?xml version="1.0" standalone="yes"?>
+<emeData>
+  <xs:schema id="emeData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="KeywordsISO">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="themekt">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="themekey">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="default" default="false">
+            <xs:simpleType>
+              <xs:restriction base="xs:boolean" />
+            </xs:simpleType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="emeData" msdata:IsDataSet="true" msdata:MainDataTable="KeywordsISO" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="KeywordsISO" />
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>biota</themekey>
+    <default>true</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>boundaries</themekey>
+    <default>true</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>climatologyMeteorologyAtmosphere</themekey>
+    <default>true</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>economy</themekey>
+    <default>false</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>elevation</themekey>
+    <default>false</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>environment</themekey>
+    <default>true</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>farming</themekey>
+    <default>false</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>geoscientificInformation</themekey>
+    <default>false</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>health</themekey>
+    <default>true</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>imageryBaseMapsEarthCover</themekey>
+    <default>true</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>inlandWaters</themekey>
+    <default>false</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>intelligenceMilitary</themekey>
+    <default>false</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>location</themekey>
+    <default>false</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>oceans</themekey>
+    <default>false</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>planningCadastre</themekey>
+    <default>false</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>society</themekey>
+    <default>false</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>structure</themekey>
+    <default>false</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>transportation</themekey>
+    <default>true</default>
+  </KeywordsISO>
+  <KeywordsISO>
+    <themekt>ISO 19115 Topic Category</themekt>
+    <themekey>utilitiesCommunication</themekey>
+    <default>true</default>
+  </KeywordsISO>  
+</emeData>

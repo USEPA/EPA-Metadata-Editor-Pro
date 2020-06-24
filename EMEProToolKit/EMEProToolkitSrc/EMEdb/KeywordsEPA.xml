@@ -1,0 +1,277 @@
+<?xml version="1.0" standalone="yes"?>
+<emeData>
+  <xs:schema id="emeData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="KeywordsEPA">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="themekt">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="themekey">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="default" default="false">
+            <xs:simpleType>
+              <xs:restriction base="xs:boolean" />
+            </xs:simpleType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="emeData" msdata:IsDataSet="true" msdata:MainDataTable="KeywordsEPA" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="KeywordsEPA" />
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Agriculture</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Air</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Biology</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Cleanup</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Climate</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Compliance</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Conservation</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Contaminant</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Disaster</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Drinking Water</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Ecology</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Ecosystem</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Emergency</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Energy</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Environment</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Estuary</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Exposure</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Facilities</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Ground Water</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Hazards</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Health</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Human</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Impact</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Indicator</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Indoor Air</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Inspections</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Land</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Management</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Marine</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Modeling</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Monitoring</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Natural Resources</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Permits</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Pesticides</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Quality</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Radiation</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Recreation</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Regulatory</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Remediation</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Response</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Risk</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Sites</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Spills</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Surface Water</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Toxics</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Transportation</themekey>
+    <default>false</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Waste</themekey>
+    <default>true</default>
+  </KeywordsEPA>
+  <KeywordsEPA>
+    <themekt>EPA GIS Keyword Thesaurus</themekt>
+    <themekey>Water</themekey>
+    <default>false</default>
+  </KeywordsEPA>  
+</emeData>

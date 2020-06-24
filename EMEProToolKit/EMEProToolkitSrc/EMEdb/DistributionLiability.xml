@@ -1,0 +1,37 @@
+<?xml version="1.0" standalone="yes"?>
+<emeData>
+ <xs:schema id="emeData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+   <xs:element name="DistributionLiability">
+     <xs:complexType>
+       <xs:sequence>
+         <xs:element name="distliab">
+           <xs:simpleType>
+             <xs:restriction base="xs:string">
+             </xs:restriction>
+           </xs:simpleType>
+         </xs:element>
+         <xs:element name="default">
+           <xs:simpleType>
+             <xs:restriction base="xs:boolean" />
+           </xs:simpleType>
+         </xs:element>
+       </xs:sequence>
+     </xs:complexType>
+   </xs:element>
+   <xs:element name="emeData" msdata:IsDataSet="true" msdata:MainDataTable="DistributionLiability" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+     <xs:complexType>
+       <xs:choice minOccurs="0" maxOccurs="unbounded">
+         <xs:element ref="DistributionLiability" />
+       </xs:choice>
+     </xs:complexType>
+   </xs:element>
+  </xs:schema>
+  <DistributionLiability>
+	<distliab>Although these data have been processed successfully on a computer system at the Environmental Protection Agency, no warranty expressed or implied is made regarding the accuracy or utility of the data on any other system or for general or scientific purposes, nor shall the act of distribution constitute any such warranty. It is also strongly recommended that careful attention be paid to the contents of the metadata file associated with these data to evaluate data set limitations, restrictions or intended use. The U.S. Environmental Protection Agency shall not be held liable for improper or incorrect use of the data described and/or contained herein.</distliab>
+	<default>1</default>
+  </DistributionLiability>
+  <DistributionLiability>
+	<distliab>This is a licensed product by &lt;insert licensor here&gt; for use within the U.S. EPA. No third party copy or use of this product will be permitted.</distliab>
+	<default>0</default>
+  </DistributionLiability>
+</emeData>

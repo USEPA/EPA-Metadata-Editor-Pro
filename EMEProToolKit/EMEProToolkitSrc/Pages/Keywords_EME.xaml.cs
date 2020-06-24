@@ -13,34 +13,32 @@ limitations under the License.​
 
 using ArcGIS.Desktop.Metadata;
 using ArcGIS.Desktop.Metadata.Editor.Pages;
+using System.Windows.Navigation;
+using System.Diagnostics;
+using System;
 
 namespace EMEProToolkit.Pages
 {
-    internal class KeywordsSidebarLabel : ISidebarLabel
-    {
-        string ISidebarLabel.SidebarLabel
-        {
-            get { return KeywordsSidebarLabel.SidebarLabel; }
-        }
-
-        public static string SidebarLabel
-        {
-            get { return EMEProToolkit.Properties.Resources.CFG_LBL_KEYWORDS; }
-        }
-    }
     /// <summary>
-    /// Interaction logic for MTK_Keywords.xaml
+    /// Interaction logic for KeywordsEME.xaml
     /// </summary>
-    internal partial class MTK_Keywords : EditorPage
+    internal partial class Keywords_EME : EditorPage
     {
-        public MTK_Keywords()
+        public Keywords_EME()
         {
-            InitializeComponent();
+        InitializeComponent();
         }
 
         public override string SidebarLabel
         {
-            get { return KeywordsSidebarLabel.SidebarLabel; }
+            get { return EMEProToolkit.Properties.Resources.CFG_LBL_KEYWORDS; }
+            //get { return "TEST: Topics & Keywords"; }
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
     }
 }

@@ -1,0 +1,977 @@
+<?xml version="1.0" standalone="yes"?>
+<emeData>
+	<xs:schema id="emeData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xs:element name="Contact_Information">			
+			<xs:complexType>			
+				<xs:sequence>
+					<xs:element name="OrderedId" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+					<xs:element name="organizationName">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">							
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="individualName">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="positionName">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:minLength value="0"/>
+								<xs:maxLength value="50" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="addrtype">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="deliveryPoint">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="address2">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">								
+								<xs:maxLength value="50" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="city">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="administrativeArea">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">								
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="postalCode">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">								
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="voice">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">								
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="facsimile">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">								
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="electronicMailAddress">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">								
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="linkage">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="50" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="linkageType">						
+						<xs:simpleType>						
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="12" />
+							</xs:restriction>
+						</xs:simpleType>						
+					</xs:element>			
+					<xs:element name="hoursOfService">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">								
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="contactInstructions">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">								
+								<xs:maxLength value="255" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="default" default="false">
+						<xs:simpleType>
+							<xs:restriction base="xs:boolean" />
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		<xs:element name="emeData" msdata:IsDataSet="true" msdata:MainDataTable="Contact_Information" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+			<xs:complexType>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="Contact_Information" />
+				</xs:choice>
+			</xs:complexType>
+		</xs:element>
+	</xs:schema>
+	<Contact_Information>
+		<OrderedId>32</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 1</organizationName>
+		<individualName>Tom Giffen</individualName>
+		<positionName>Chief, Information Technology Section</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>5 Post Office Square, Suite 100</deliveryPoint>
+		<city>Boston</city>
+		<administrativeArea>MA</administrativeArea>
+		<postalCode>02109</postalCode>
+		<voice>617-918-1444</voice>
+		<facsimile>(617) 918-1809</facsimile>
+		<electronicMailAddress>giffen.tom@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region01/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>33</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 2, GIS Team</organizationName>
+		<individualName>Bob Simpson</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>290 Broadway</deliveryPoint>
+		<city>New York</city>
+		<administrativeArea>NY </administrativeArea>
+		<postalCode>10007</postalCode>
+		<voice>(212) 637-3335</voice>
+		<facsimile>(212) 637-3358</facsimile>
+		<electronicMailAddress>r2gisdata@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region02/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>34</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 2, GIS Team</organizationName>
+		<individualName>Grace Smith</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>290 Broadway</deliveryPoint>
+		<city>New York</city>
+		<administrativeArea>NY </administrativeArea>
+		<postalCode>10007</postalCode>
+		<voice>212-637-3589</voice>
+		<facsimile>212-637-5045</facsimile>
+		<electronicMailAddress>r2gisdata@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region02/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>35</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Environmental Information</organizationName>
+		<individualName>Harvey Simon</individualName>
+		<positionName>EPA Geospatial Information Officer</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>2810A, Room 5312C EPA Ariel Rios North</deliveryPoint>
+		<city>Washington</city>
+		<administrativeArea>DC</administrativeArea>
+		<postalCode>20460</postalCode>
+		<voice>(202) 566-0917</voice>
+		<electronicMailAddress>simon.harvey@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/aboutepa/oei.html</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>36</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 2, GIS Team</organizationName>
+		<individualName>Linda Timander</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>290 Broadway</deliveryPoint>
+		<city>New York</city>
+		<administrativeArea>NY </administrativeArea>
+		<postalCode>10007-1866</postalCode>
+		<voice>(212) 637-3596</voice>
+		<electronicMailAddress>r2gisdata@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region02/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>38</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 2, GIS Team</organizationName>
+		<individualName>Robert Eckman</individualName>
+		<positionName>GIS Database Administrator</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>290 Broadway</deliveryPoint>
+		<city>New York</city>
+		<administrativeArea>NY </administrativeArea>
+		<postalCode>10007-1866</postalCode>
+		<voice>(212) 637-3336</voice>
+		<facsimile>212-637-3354</facsimile>
+		<electronicMailAddress>r2gisdata@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region02/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>39</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 2, GIS Team</organizationName>
+		<individualName>Suk-Yee Tang</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>290 Broadway</deliveryPoint>
+		<city>New York</city>
+		<administrativeArea>NY </administrativeArea>
+		<postalCode>10007-1866</postalCode>
+		<voice>(212) 637-3570</voice>
+		<facsimile>(212) 637-5045</facsimile>
+		<electronicMailAddress>r2gisdata@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region02/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>41</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 3</organizationName>
+		<individualName>Don Evans</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1650 Arch Street</deliveryPoint>
+		<city>Philadelphia</city>
+		<administrativeArea>PA </administrativeArea>
+		<postalCode>19103-2029</postalCode>
+		<voice>(215) 814-5000</voice>
+		<facsimile>(215) 814-5103</facsimile>
+		<electronicMailAddress>evans.don@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region03/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>42</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 3</organizationName>
+		<individualName>John Graves</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1650 Arch Street</deliveryPoint>
+		<address2>Mail Code: 3EA10</address2>
+		<city>Philadelphia</city>
+		<administrativeArea>PA </administrativeArea>
+		<postalCode>19103-2029</postalCode>
+		<voice>215-814-5710</voice>
+		<facsimile>(215) 814-5103</facsimile>
+		<electronicMailAddress>graves.john@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region03/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>43</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 3</organizationName>
+		<individualName>Matthew Mellon</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1650 Arch Street</deliveryPoint>
+		<city>Philadelphia</city>
+		<administrativeArea>PA </administrativeArea>
+		<postalCode>19103-2029</postalCode>
+		<voice>215.814.3168</voice>
+		<electronicMailAddress>mellon.matthew@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region03/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>48</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 6</organizationName>
+		<individualName>David Parrish</individualName>
+		<positionName>EDG Project Manager</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1445 Ross Avenue, Suite 1200</deliveryPoint>
+		<city>Dallas</city>
+		<administrativeArea>TX </administrativeArea>
+		<postalCode>75202-2733</postalCode>
+		<voice>214-665-8352</voice>
+		<facsimile>(214) 665-7113</facsimile>
+		<electronicMailAddress>parrish.david@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region06/</linkage>
+		<linkageType>information</linkageType>
+		<default>true</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>49</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 6</organizationName>
+		<individualName>Jeff Danielson</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1445 Ross Avenue, Suite 1200</deliveryPoint>
+		<city>Dallas</city>
+		<administrativeArea>TX </administrativeArea>
+		<postalCode>75202-2733</postalCode>
+		<voice>214-665-8559</voice>
+		<facsimile>(214) 665-7113</facsimile>
+		<electronicMailAddress>danielson.jeff@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region06/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>50</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 6</organizationName>
+		<individualName>Melody Lister</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1445 Ross Avenue, Suite 1200</deliveryPoint>
+		<city>Dallas</city>
+		<administrativeArea>TX </administrativeArea>
+		<postalCode>75202-2733</postalCode>
+		<voice>214.665.8564</voice>
+		<facsimile>(214) 665-7113</facsimile>
+		<electronicMailAddress>lister.melody@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region06/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>51</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 7</organizationName>
+		<individualName>Holly Mehl</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>901 North 5th Street</deliveryPoint>
+		<city>Kansas City</city>
+		<administrativeArea>KS </administrativeArea>
+		<postalCode>66101</postalCode>
+		<voice>(913) 551-7103</voice>
+		<facsimile>(913) 551-8688</facsimile>
+		<electronicMailAddress>mehl.hollis@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region07/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>52</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 8</organizationName>
+		<individualName>Tony Selle</individualName>
+		<positionName>GIS Technical Coordinator</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1595 Wynkoop Street</deliveryPoint>
+		<city>Denver</city>
+		<administrativeArea>CO </administrativeArea>
+		<postalCode>80202</postalCode>
+		<voice>(303) 312-6774</voice>
+		<facsimile>(303) 312-6339</facsimile>
+		<electronicMailAddress>selle.tony@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region08/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>53</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 9</organizationName>
+		<individualName>Cheryl Henley</individualName>
+		<positionName>GIS Coordinator</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>75 Hawthorne Street</deliveryPoint>
+		<address2>MTS-6-1</address2>
+		<city>San Francisco</city>
+		<administrativeArea>CA</administrativeArea>
+		<postalCode>94105</postalCode>
+		<voice>415-972-3586</voice>
+		<facsimile></facsimile>
+		<electronicMailAddress>henley.cheryl@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region09/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>54</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 10</organizationName>
+		<individualName>Scott Augustine</individualName>
+		<positionName>GIS Technical Coordinator</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1200 Sixth Avenue</deliveryPoint>
+		<city>Seattle</city>
+		<administrativeArea>WA </administrativeArea>
+		<postalCode>98101</postalCode>
+		<voice>206.553.1795</voice>
+		<facsimile>(206) 553-2955</facsimile>
+		<electronicMailAddress>augustine.scott@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region10/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>55</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Research Triangle Park</organizationName>
+		<individualName>National Geospatial Support Team</individualName>
+		<positionName>OEI RTP NCC GIS</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>USEPA Mailroom N127-02</deliveryPoint>
+		<city>Research Triangle Park</city>
+		<administrativeArea>NC</administrativeArea>
+		<postalCode>27711</postalCode>
+		<voice></voice>
+		<facsimile></facsimile>
+		<electronicMailAddress>geoservices@epa.gov</electronicMailAddress>
+		<linkage>http://intranet.epa.gov/rtpgis</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>56</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Environmental Information, Office of Information Collection</organizationName>
+		<individualName>Ana Greene</individualName>
+		<positionName>Environmental Protection Specialist</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1200 Pennsylvania Avenue, N.W.</deliveryPoint>
+		<city>Washington</city>
+		<administrativeArea>DC </administrativeArea>
+		<postalCode>20460</postalCode>
+		<voice>(202) 566-2132</voice>
+		<facsimile>202-566-1684</facsimile>
+		<electronicMailAddress>greene.ana@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>58</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Air and Radiation-Office of Air Quality Planning and Standards</organizationName>
+		<individualName>Brian Stitt</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>109 T.W. Alexander Drive</deliveryPoint>
+		<city>Research Triangle Park</city>
+		<administrativeArea>NC</administrativeArea>
+		<postalCode>27709</postalCode>
+		<voice>919-541-3757</voice>
+		<electronicMailAddress>stitt.brian@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/aboutepa/oei.html</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>63</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Environmental Information</organizationName>
+		<individualName>Kim Balassiano</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1200 Pennsylvania Avenue, N.W.</deliveryPoint>
+		<city>Washington</city>
+		<administrativeArea>DC</administrativeArea>
+		<postalCode>20460</postalCode>
+		<voice>202-579-3540</voice>
+		<electronicMailAddress>balassiano.kim@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/aboutepa/oei.html</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>64</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Environmental Information</organizationName>
+		<individualName>David Smith</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1200 Pennsylvania Avenue, N.W.</deliveryPoint>
+		<city>Washington</city>
+		<administrativeArea>DC</administrativeArea>
+		<postalCode>20460</postalCode>
+		<voice>202-566-0797</voice>
+		<electronicMailAddress>smith.davidg@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/aboutepa/oei.html</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>66</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Environmental Information</organizationName>
+		<individualName>Lee Kyle</individualName>
+		<positionName>Geospatial Data Owner</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1200 Pennsylvania Avenue, N.W.</deliveryPoint>
+		<city>Washington</city>
+		<administrativeArea>DC</administrativeArea>
+		<postalCode>20460</postalCode>
+		<voice>202-564-4622</voice>
+		<electronicMailAddress>kyle.lee@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/aboutepa/oei.html</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>67</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Environmental Information</organizationName>
+		<individualName>Tim Richards</individualName>
+		<positionName>Geospatial Data Owner</positionName>
+		<addrtype>mailing address</addrtype>
+		<deliveryPoint>109 T.W. Alexander Drive</deliveryPoint>
+		<address2>N252-01</address2>
+		<city>Research Triangle Park</city>
+		<administrativeArea>NC</administrativeArea>
+		<postalCode>27709</postalCode>
+		<voice>919-541-5307</voice>
+		<electronicMailAddress>richards.tim@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/aboutepa/oei.html</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>68</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Research and Development-National Center for Environmental Assessment</organizationName>
+		<individualName>Phillip Morefield</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1200 Pennsylvania Avenue, N.W.</deliveryPoint>
+		<city>Washington</city>
+		<administrativeArea>DC</administrativeArea>
+		<postalCode>20460</postalCode>
+		<voice>(703) 308-8135</voice>
+		<electronicMailAddress>morefield.philip@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/ord/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>69</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Research and Development-National Exposure Research Laboratory-Environmental Sciences Division-Regional Environmental Vulnerability Assessment</organizationName>
+		<individualName>Vasu Kilaru</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>109 T.W. Alexander Drive</deliveryPoint>
+		<address2>Room D476</address2>
+		<city>Research Triangle Park</city>
+		<administrativeArea>NC</administrativeArea>
+		<postalCode>27709</postalCode>
+		<voice>919.541.5332</voice>
+		<electronicMailAddress>kilaru.vasu@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/ord/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>71</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Research and Development-National Health and Environmental Effects Research Laboratory-Western Ecology Division</organizationName>
+		<individualName>Marc Weber</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>200 S.W. 35th Street</deliveryPoint>
+		<city>Corvallis</city>
+		<administrativeArea>OR</administrativeArea>
+		<postalCode>97333</postalCode>
+		<voice>(541) 754-4469</voice>
+		<electronicMailAddress>weber.marc@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/ord/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>74</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Research and Development-Sustainable and Healthy Communities Research Program, Nation Atlas for Sustainability</organizationName>
+		<individualName>Anne Neale</individualName>
+		<positionName>Geospatial Data Owner</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>109 T.W. Alexander Drive</deliveryPoint>
+		<address2>E243-05</address2>
+		<city>Research Triangle Park</city>
+		<administrativeArea>NC</administrativeArea>
+		<postalCode>27709</postalCode>
+		<voice>(919) 541-3832</voice>
+		<facsimile>(919) 541-4329</facsimile>
+		<electronicMailAddress>neale.anne@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/ord/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>79</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Solid Waste and Emergency Response-Office of Emergency Management</organizationName>
+		<individualName>Chris Burgess</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1200 Pennsylvania Avenue, N.W.</deliveryPoint>
+		<city>Washington</city>
+		<administrativeArea>DC</administrativeArea>
+		<postalCode>20460</postalCode>
+		<voice>202.564.8026</voice>
+		<electronicMailAddress>burgess.christopher@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/aboutepa/oswer.html</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>80</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Solid Waste and Emergency Response-Office of Emergency Management</organizationName>
+		<individualName>Josh Krochmal</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1200 Pennsylvania Avenue, N.W.</deliveryPoint>
+		<city>Washington</city>
+		<administrativeArea>DC</administrativeArea>
+		<postalCode>20460</postalCode>
+		<voice>202.564.8753</voice>
+		<linkage>http://www.epa.gov/aboutepa/oswer.html</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>95</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Water</organizationName>
+		<individualName>Craig Malkmes</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1200 Pennsylvania Avenue, N.W.</deliveryPoint>
+		<city>Washington</city>
+		<administrativeArea>DC</administrativeArea>
+		<postalCode>20460</postalCode>
+		<voice>202-564-0501</voice>
+		<electronicMailAddress>malkmes.craig@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/aboutepa/ow.html</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>97</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Water</organizationName>
+		<individualName>Vince Allen</individualName>
+		<positionName>Geospatial Data Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1200 Pennsylvania Avenue, N.W.</deliveryPoint>
+		<address2>Mail Code 4101M</address2>
+		<city>Washington</city>
+		<administrativeArea>DC</administrativeArea>
+		<postalCode>20460</postalCode>
+		<voice>202-564-1675</voice>
+		<facsimile>202-564-0500</facsimile>
+		<electronicMailAddress>allen.vince@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/aboutepa/ow.html</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>98</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Water</organizationName>
+		<individualName>Thomas Dabolt</individualName>
+		<positionName>Geospatial Data Owner</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1200 Pennsylvania Avenue, N.W.</deliveryPoint>
+		<city>Washington</city>
+		<administrativeArea>DC</administrativeArea>
+		<postalCode>20460</postalCode>
+		<voice>202 564-1450</voice>
+		<electronicMailAddress>dabolt.thomas@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/aboutepa/ow.html</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>99</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 1</organizationName>
+		<individualName>Alexandra Dichter</individualName>
+		<positionName>GIS Coordinator</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>5 Post Office Square, Suite 100</deliveryPoint>
+		<city>Boston</city>
+		<administrativeArea>MA</administrativeArea>
+		<postalCode>02109</postalCode>
+		<voice>(617) 918-1142</voice>
+		<electronicMailAddress>dichter.alexandra@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region01/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>100</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 1</organizationName>
+		<individualName>Gordon Hamilton</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>5 Post Office Square, Suite 100</deliveryPoint>
+		<city>Boston</city>
+		<administrativeArea>MA</administrativeArea>
+		<postalCode>02109</postalCode>
+		<voice>617-918-1159</voice>
+		<electronicMailAddress>hamilton.gordon@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region01/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>101</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 1</organizationName>
+		<individualName>Jori Bonner</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>5 Post Office Square, Suite 100</deliveryPoint>
+		<city>Boston</city>
+		<administrativeArea>MA</administrativeArea>
+		<postalCode>02109</postalCode>
+		<voice>617.918.1154</voice>
+		<facsimile>617.918.2089</facsimile>
+		<electronicMailAddress>bonner.Jori@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region01/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>102</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 3-Chesapeake Bay Program</organizationName>
+		<individualName>John Wolf</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>410 Severn Avenue, Suite 112</deliveryPoint>
+		<city>Annapolis</city>
+		<administrativeArea>MD</administrativeArea>
+		<postalCode>21403</postalCode>
+		<voice>410-267-5739</voice>
+		<facsimile>(410) 267-5777</facsimile>
+		<electronicMailAddress>jwolf@chesapeakebay.net</electronicMailAddress>
+		<linkage>http://www.chesapeakebay.net/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>103</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 3-Chesapeake Bay Program</organizationName>
+		<individualName>Brian Burch</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>410 Severn Avenue, Suite 112</deliveryPoint>
+		<city>Annapolis</city>
+		<administrativeArea>MD</administrativeArea>
+		<postalCode>21403</postalCode>
+		<voice>410-267-5736</voice>
+		<facsimile>(410) 267-5777</facsimile>
+		<electronicMailAddress>burch.brian@epa.gov</electronicMailAddress>
+		<linkage>http://www.chesapeakebay.net/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>104</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 3-Chesapeake Bay Program</organizationName>
+		<individualName>Howard Weinberg</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>410 Severn Avenue, Suite 112</deliveryPoint>
+		<city>Annapolis</city>
+		<administrativeArea>MD</administrativeArea>
+		<postalCode>21403</postalCode>
+		<voice>(410) 267-5735</voice>
+		<facsimile>(410) 267-5777</facsimile>
+		<electronicMailAddress>hweinber@chesapeakebay.net</electronicMailAddress>
+		<linkage>http://www.chesapeakebay.net/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>105</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 5</organizationName>
+		<individualName>Carmen Maso</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>77 West Jackson Boulevard</deliveryPoint>
+		<address2>Mail Code MI-10J</address2>
+		<city>Chicago</city>
+		<administrativeArea>IL</administrativeArea>
+		<postalCode>60604-3507</postalCode>
+		<voice>312-886-1070</voice>
+		<facsimile>312-692-2040</facsimile>
+		<electronicMailAddress>carmen maso.carmen@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region5/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>106</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 5</organizationName>
+		<individualName>Jan Krysa</individualName>
+		<positionName>Geospatial Data Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>77 West Jackson Boulevard</deliveryPoint>
+		<city>Chicago</city>
+		<administrativeArea>IL</administrativeArea>
+		<postalCode>60604</postalCode>
+		<voice>  (312) 353-7210</voice>
+		<electronicMailAddress>krysa.jan@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region5/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>107</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 5</organizationName>
+		<individualName>Paisly Di Bianca</individualName>
+		<positionName>Geospatial Data Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>77 West Jackson Boulevard</deliveryPoint>
+		<city>Chicago</city>
+		<administrativeArea>IL</administrativeArea>
+		<postalCode>60604-3507</postalCode>
+		<voice>312-353-4774</voice>
+		<electronicMailAddress>dibianca.paisly@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region5/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>108</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 7</organizationName>
+		<individualName>Casey McLaughlin</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>901 North 5th Street</deliveryPoint>
+		<city>Kansas City</city>
+		<administrativeArea>KS</administrativeArea>
+		<postalCode>66101</postalCode>
+		<voice>913-551-7486</voice>
+		<facsimile>913-551-9486</facsimile>
+		<electronicMailAddress>mclaughlin.casey@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region07/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>109</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 8</organizationName>
+		<individualName>John Wieber</individualName>
+		<positionName>EDG Steward</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1595 Wynkoop Street</deliveryPoint>
+		<city>Denver</city>
+		<administrativeArea>CO</administrativeArea>
+		<postalCode>80202</postalCode>
+		<voice>(303) 312-6118</voice>
+		<facsimile>(303) 312-7517</facsimile>
+		<electronicMailAddress>wieber.john@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region08/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>110</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 9</organizationName>
+		<individualName>Linda Chambers</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>75 Hawthorne Street</deliveryPoint>
+		<address2>MTS-6-1</address2>
+		<city>San Francisco</city>
+		<administrativeArea>CA</administrativeArea>
+		<postalCode>94105</postalCode>
+		<voice>(415) 947-4578</voice>
+		<facsimile></facsimile>
+		<electronicMailAddress>chambers.linda@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region09/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>111</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 9</organizationName>
+		<individualName>Stacy Takeda</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>75 Hawthorne Street</deliveryPoint>
+		<address2>MTS-6-1</address2>
+		<city>San Francisco</city>
+		<administrativeArea>CA</administrativeArea>
+		<postalCode>94105</postalCode>
+		<voice>(415) 972-3641</voice>
+		<electronicMailAddress>takeda.stacy@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region09/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>112</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 9</organizationName>
+		<individualName>Mo Tangestani</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>75 Hawthorne Street</deliveryPoint>
+		<address2>MTS-6-1</address2>
+		<city>San Francisco</city>
+		<administrativeArea>CA</administrativeArea>
+		<postalCode>94105</postalCode>
+		<voice>415-947-4579</voice>
+		<facsimile></facsimile>
+		<electronicMailAddress>tangestani.mo@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region09/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>113</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 9</organizationName>
+		<individualName>Fletcher Clover</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>75 Hawthorne Street</deliveryPoint>
+		<address2>AIR-7</address2>
+		<city>San Francisco</city>
+		<administrativeArea>CA</administrativeArea>
+		<postalCode>94105</postalCode>
+		<voice>(415) 972-3991</voice>
+		<facsimile></facsimile>
+		<electronicMailAddress>clover.fletcher@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region09/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>114</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Region 9</organizationName>
+		<individualName>Charles Swanson</individualName>
+		<positionName>GIS Analyst</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>75 Hawthorne Street</deliveryPoint>
+		<address2>ENF-4-2</address2>
+		<city>San Francisco</city>
+		<administrativeArea>CA</administrativeArea>
+		<postalCode>94105</postalCode>
+		<voice>(415) 947-4219</voice>
+		<facsimile></facsimile>
+		<electronicMailAddress>swanson.charles@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/region09/</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>
+	<Contact_Information>
+		<OrderedId>115</OrderedId>
+		<organizationName>U.S. Environmental Protection Agency, Office of Environmental Information</organizationName>
+		<individualName>Dave Catlin</individualName>
+		<positionName>Geospatial Data Owner</positionName>
+		<addrtype>mailing and physical address</addrtype>
+		<deliveryPoint>1200 Pennsylvania Avenue, N.W.</deliveryPoint>
+		<city>Washington</city>
+		<administrativeArea>DC</administrativeArea>
+		<postalCode>20460</postalCode>
+		<voice>(202) 566-0694</voice>
+		<electronicMailAddress>catlin.dave@epa.gov</electronicMailAddress>
+		<linkage>http://www.epa.gov/aboutepa/oei.html</linkage>
+		<linkageType>information</linkageType>
+		<default>false</default>
+	</Contact_Information>	
+</emeData>
