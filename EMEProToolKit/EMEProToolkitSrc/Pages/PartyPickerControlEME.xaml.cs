@@ -106,10 +106,6 @@ namespace EMEProToolkit.Pages
             var directoryName = _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/param").InnerText;
             var directoryUrl = _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/url").InnerText;
 
-            Console.WriteLine("_________________________________Directory URL: " + directoryUrl + "________________________________________");
-            //diag
-            Trace.WriteLine("_________________________________Directory URL: " + directoryUrl + "________________________________________");
-
             TimeSpan syncAge = ((DateTime.Now) - (DateTime.Parse(_emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/date").InnerText)));
             var syncDays = syncAge.ToString("d'd 'h'h 'm'm 's's'");
 
@@ -137,7 +133,6 @@ namespace EMEProToolkit.Pages
                 {
                     using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                     {
-                        Trace.WriteLine("_____________________________" + response + "____________________________________");
                         if (response.StatusCode.ToString() == "OK")
                         {
                             // Return contacts.xml Date Modified
