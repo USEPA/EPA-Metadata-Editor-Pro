@@ -70,10 +70,11 @@ limitations under the License.​
 
   <Grid Style="{DynamicResource EditorFrontPageStyle}">
     <StackPanel>
-      <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.SEC_METADATA_CONTACTS}"/>
+        <!--org header-->
+        <t:EME_Header/>
+        <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.SEC_METADATA_CONTACTS}"/>
       <ListBox ItemsSource="{Binding XPath=/metadata}"
-			    v:Nav.AnchorName="mdContact"
-      >
+			    v:Nav.AnchorName="mdContact">
         <ListBox.ItemTemplate>
           <DataTemplate>
             <StackPanel>
@@ -102,7 +103,7 @@ limitations under the License.​
                           </DockPanel>
                         </Expander.Header>
                         <!-- party -->
-                        <t:MTK_CI_ResponsibleParty
+                        <t:CI_ResponsiblePartyPoC
                             v:Nav.AnchorName="party"
                             x:Name="responsibleParty"/>
                       </Expander>
@@ -115,7 +116,7 @@ limitations under the License.​
                 <!-- LOAD SAVED CONTACT -->
                 <DockPanel LastChildFill="True">
                   <Label DockPanel.Dock="Left" VerticalAlignment="Center" Content="{x:Static r:Resources.LBL_CI_LOAD_META_CONTACT}"/>
-                  <t:MTK_PartyPickerControl ContainerElement="mdContact" DockPanel.Dock="Right"/>
+                  <t:PartyPickerControlEME ContainerElement="mdContact" DockPanel.Dock="Right"/>
                 </DockPanel>
               </Border>
 
