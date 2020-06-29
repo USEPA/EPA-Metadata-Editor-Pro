@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<!--
+﻿<!--
 Copyright 2019 Esri
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11,7 +10,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.​
 -->
-<ArcGIS defaultAssembly="EMEProToolkit.dll" defaultNamespace="EMEProToolkit" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
+<ArcGIS defaultAssembly="EMEProToolkit.dll" 
+        defaultNamespace="EMEProToolkit" 
+        xmlns="http://schemas.esri.com/DADF/Registry" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
+  
   <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="1.0" desktopVersion="2.5.22081">
     <Name>EMEProToolkit</Name>
     <Description>EMEProToolkit Toolkit</Description>
@@ -927,6 +931,35 @@ limitations under the License.​
     </updateCategory>
   </categories>
   <modules>
-    <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="false" caption="Metadata Toolkit Module"></insertModule>
-  </modules>
+    <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="false" caption="Metadata Toolkit Module">
+      <tabs>
+        <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">
+          <group refID="EMEProToolkit_Group1" />
+        </tab>
+      </tabs>
+      <controls>               
+        <button id="EMEProToolkit_EMEMenu_Items_UpdateContacts" caption="Update Contacts" className="EMEMenu_UpdateContacts" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
+          <tooltip heading="Update Contacts">ToolTip<disabledText /></tooltip>
+        </button>
+        <button id="EMEProToolkit_EMEMenu_Items_Button2" caption="Menu Button 2" className="EMEMenu_button2" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
+          <tooltip heading="Menu Button 2">ToolTip<disabledText /></tooltip>
+        </button>
+        <button id="EMEProToolkit_EMEMenu_Items_Button3" caption="Menu Button 3" className="EMEMenu_button3" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
+          <tooltip heading="Menu Button 3">ToolTip<disabledText /></tooltip>
+        </button>
+      </controls>
+      <menus>
+        <menu id="EMEProToolkit_EMEMenu" caption="EMEMenu" smallImage="GenericButtonGreen16.png" largeImage="GenericButtonGreen32.png">
+          <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" />
+          <button refID="EMEProToolkit_EMEMenu_Items_Button2" />
+          <button refID="EMEProToolkit_EMEMenu_Items_Button3" />
+        </menu>
+      </menus>
+      <groups>
+        <group id="EMEProToolkit_Group1" caption="Group 1">
+          <menu refID="EMEProToolkit_EMEMenu" size="middle" />
+        </group>
+      </groups>
+    </insertModule>
+  </modules>  
 </ArcGIS>
