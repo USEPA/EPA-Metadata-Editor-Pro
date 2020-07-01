@@ -342,6 +342,15 @@ limitations under the License.​
                       <for xpath="//idSpecUse/usrCntInfo/rpCntInfo/cntOnlineRes">
                         <exists xpath="linkage[. != '']" ref="linkage" />
                       </for>
+						<!-- NAP: protocol --><!--
+						<for xpath="//idSpecUse/usrCntInfo/rpCntInfo/cntOnlineRes">
+							<exists xpath="protocol[. != '']" ref="protocol"/>
+						</for>
+
+						--><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
+						<for xpath="//idSpecUse/usrCntInfo/rpCntInfo">
+							<exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
+						</for>-->
                     </validation>
                   </page>
                   <page class="EMEProToolkit.Pages.MTK_ResourceExtent">
@@ -361,7 +370,35 @@ limitations under the License.​
                         <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range" />
                         <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range" />
                       </for>
-                      <!-- vertical max and min -->
+						
+						<!--extra validation from EME5x, need to review NAP constraints-->
+						<!-- Temporal Extent is required --><!--
+						<for xpath="/metadata[mdHrLv/ScopeCd/@value = '005']">
+							<exists xpath="//dataExt//TempExtent//exTemp//TM_Period[*]" ref="temporalReq"/>
+						</for>
+
+						<for xpath="/metadata[mdHrLv/ScopeCd/@value = '005']">
+							<or ref="temporalPeriodReq">
+								<exists xpath="//dataExt//TempExtent//exTemp//TM_Period//tmBegin[ . != '']"/>
+								<exists xpath="//dataExt//TempExtent//exTemp//TM_Period//tmEnd[ . != '']"/>
+							</or>
+						</for>
+
+						--><!-- NAP: time instants are not allowed --><!--
+						<for xpath="//dataExt//TempExtent">
+							<exists xpath=".[not (.//tmPosition) or .//tmPosition = '']" ref="dataExt_NAP_REQ"/>
+						</for>
+
+						--><!-- NAP: if the resource being described is a service (hierarchyLevel is "service" or content is present in a service-specific element) 
+            and if the Coupling Type code = "mixed" or "tight", either a geographic bounding box or a geographic description is required. --><!--
+						<for xpath="/metadata[(mdHrLv/ScopeCd/@value = '014' or .//svType//* != '' or .//svAccProps//* != '') and (.//CouplTypCd/@value = '002' or .//CouplTypCd/@value = '003')]">
+							<or ref="dataExtServiceReq">
+								<exists xpath="//dataExt//GeoBndBox[*]"/>
+								<exists xpath="//dataExt//GeoDesc/geoId/identCode[ . != '']"/>
+							</or>
+						</for>-->
+
+						<!-- vertical max and min -->
                       <for xpath="//dataExt//vertEle[*]">
                         <exists xpath="vertMinVal[. != '']" ref="vertMinVal" />
                         <exists xpath="vertMaxVal[. != '']" ref="vertMaxVal" />

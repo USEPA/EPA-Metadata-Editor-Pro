@@ -11,7 +11,9 @@ See the License for the specific language governing permissions and
 limitations under the License.​
 */
 
+using System.Diagnostics;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 using ArcGIS.Desktop.Metadata.Editor.Pages;
 
 namespace EMEProToolkit.Pages
@@ -24,6 +26,11 @@ namespace EMEProToolkit.Pages
         public MTK_EX_Extent()
         {
             InitializeComponent();
+        }
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
     }
 }
