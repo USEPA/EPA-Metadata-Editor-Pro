@@ -64,6 +64,8 @@ limitations under the License.​
 
   <Grid Style="{DynamicResource EditorFrontPageStyle}">
     <StackPanel>
+      <!--org header-->
+      <t:EME_Header/>
       <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.LBL_RES_POCS}"/>
 
       <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=//dataIdInfo[1]}">
@@ -106,7 +108,7 @@ limitations under the License.​
                 <!-- LOAD SAVED CONTACT -->
                 <DockPanel LastChildFill="True">
                   <Label DockPanel.Dock="Left" VerticalAlignment="Center" Content="{x:Static r:Resources.LBL_CI_LOAD_POC_CONTACT}"/>
-                  <t:MTK_PartyPickerControl ContainerElement="idPoC" DockPanel.Dock="Right"/>
+                  <t:PartyPickerControlEME ContainerElement="idPoC" DockPanel.Dock="Right"/>
                 </DockPanel>
               </Border>
 
