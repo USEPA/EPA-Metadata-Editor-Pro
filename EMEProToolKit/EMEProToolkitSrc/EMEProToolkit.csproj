@@ -132,6 +132,9 @@
     <Compile Include="Pages\CI_ResponsiblePartyPoC.xaml.cs">
       <DependentUpon>CI_ResponsiblePartyPoC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CI_ResponsiblePartyPub.xaml.cs">
+      <DependentUpon>CI_ResponsiblePartyPub.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CI_ResponsiblePartyReadOnly.xaml.cs">
       <DependentUpon>CI_ResponsiblePartyReadOnly.xaml</DependentUpon>
     </Compile>
@@ -432,6 +435,9 @@
     <Compile Include="Pages\ResourcePoc.xaml.cs">
       <DependentUpon>ResourcePoc.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ResourcePub.xaml.cs">
+      <DependentUpon>ResourcePub.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RS_Identifier.xaml.cs">
       <DependentUpon>RS_Identifier.xaml</DependentUpon>
     </Compile>
@@ -499,6 +505,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\CI_ResponsiblePartyPoC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CI_ResponsiblePartyPub.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -901,6 +911,10 @@
     <Page Include="Pages\ResourcePoc.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ResourcePub.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RS_Identifier.xaml">
       <Generator>MSBuild:Compile</Generator>
