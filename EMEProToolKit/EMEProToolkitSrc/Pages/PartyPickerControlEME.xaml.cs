@@ -19,6 +19,7 @@ using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Metadata.Editor.Pages;
 using ArcGIS.Desktop.Metadata;
 using ArcGIS.Desktop.Metadata.Editor;
+using System.Diagnostics;
 
 
 
@@ -104,6 +105,7 @@ namespace EMEProToolkit.Pages
 
             var directoryName = _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/param").InnerText;
             var directoryUrl = _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/url").InnerText;
+
             TimeSpan syncAge = ((DateTime.Now) - (DateTime.Parse(_emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/date").InnerText)));
             var syncDays = syncAge.ToString("d'd 'h'h 'm'm 's's'");
 
@@ -121,11 +123,12 @@ namespace EMEProToolkit.Pages
             }
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://edg.epa.gov/EME/contacts.xml");
-            request.Timeout = 15000;
+            //request.Timeout = 15000;
+            request.Timeout = 25000;
             request.Method = "HEAD"; //test URL without downloading the content
             if (syncAge > (new TimeSpan(0, 12, 0, 0)))
             {
-                //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nLoading contacts from \"" + directoryName + "\"\n (" + directoryUrl + ")", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
+                //messageboxresult filecheck = messagebox.show("local cache is " + syncdays + " old.\nloading contacts from \"" + directoryname + "\"\n (" + directoryurl + ")", "eme contacts manager", messageboxbutton.ok, messageboximage.information);
                 try
                 {
                     using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())

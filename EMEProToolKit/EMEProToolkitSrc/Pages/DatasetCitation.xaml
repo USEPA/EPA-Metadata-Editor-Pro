@@ -39,7 +39,8 @@ limitations under the License.​
 
     <!-- validation issues -->
     <v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />
-    <v:MetadataIssueInfo x:Key="dates" Message="{x:Static r:Issues.dates_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="dates" Message="{x:Static r:Issues.dates_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="dates" Message="date published is required" />
     <v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />
     <v:MetadataIssueInfo x:Key="pubDate" Message="{x:Static r:Issues.pubDate_FGDC_REQ}" />
     <v:MetadataIssueInfo x:Key="datasetSeries" Message="{x:Static r:Issues.datasetSeries_FGDC_REQ}" />
@@ -54,9 +55,14 @@ limitations under the License.​
     <v:MetadataIssueInfo x:Key="postCode" Message="{x:Static r:Issues.postCode_REQ}" />
 
   </UserControl.Resources>
-
   <Grid Style="{DynamicResource EditorFrontPageStyle}">
-    <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/dataIdInfo[1]/idCitation}">
+    <Grid.RowDefinitions>
+      <RowDefinition></RowDefinition>
+      <RowDefinition></RowDefinition>
+    </Grid.RowDefinitions>
+    <!-- org header -->
+    <t:EME_Header/>
+    <ListBox Grid.Row="1" Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/dataIdInfo[1]/idCitation}">
       <ListBox.ItemsPanel>
         <ItemsPanelTemplate>
           <StackPanel/>
@@ -73,5 +79,26 @@ limitations under the License.​
       </ListBox.ItemTemplate>
     </ListBox>
   </Grid>
+
+  <!--<Grid Style="{DynamicResource EditorFrontPageStyle}">
+    --><!--org header--><!--
+    <t:EME_Header/>
+    <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/dataIdInfo[1]/idCitation}">
+      <ListBox.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel/>
+        </ItemsPanelTemplate>
+      </ListBox.ItemsPanel>
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <StackPanel>
+            <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.SEC_RES_CITE}"/>
+            --><!-- citation --><!--
+            <t:MTK_CI_Citation SupressParties="True" SupressOnlineResource="True"/>
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </Grid>-->
 
 </p:EditorPage>

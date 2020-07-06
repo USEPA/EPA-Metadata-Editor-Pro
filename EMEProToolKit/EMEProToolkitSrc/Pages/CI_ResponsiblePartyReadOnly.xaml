@@ -22,7 +22,7 @@ limitations under the License.​
              xmlns:e="clr-namespace:ArcGIS.Desktop.Metadata.Editor;assembly=ArcGIS.Desktop.Metadata"
              xmlns:converters="clr-namespace:ArcGIS.Desktop.Metadata.Pages.Converters;assembly=ArcGIS.Desktop.Metadata"
              mc:Ignorable="d"
-             Loaded="FillXml">
+             Loaded="EditorPage_Loaded">
   <UserControl.Resources>
     <!-- <!ENTITY % RespParty '(rpIndName?, rpOrgName?, rpPosName?, rpCntInfo?, role)'> -->
     <converters:ListBoxItemToAutomationIdConverter x:Key="_lbiToAutoIdConverter" />
@@ -79,7 +79,7 @@ limitations under the License.​
             Text="{e:MetadataBinding XPath=rpPosName}" 
             Name="CI_ResponsibleParty_positionName"/>
 
-        <!-- role 
+         <!--role--> 
         <Label Style="{DynamicResource EditorHLabelStyle}" Grid.Row="3" Grid.Column="0" Content="{x:Static r:Resources.LBL_CI_Role}"/>
         <ComboBox IsEnabled="False" Loaded="PostProcessComboBoxValues" p:EditorPage.SourceXPath="role/RoleCd/@value" Grid.Row="3" Grid.Column="1" Style="{DynamicResource EditorHComboBoxStyle}" IsEditable="False"
             v:Nav.AnchorName="role,role"
@@ -91,7 +91,7 @@ limitations under the License.​
             <e:MetadataBinding XPath="role/RoleCd/@value"/>
           </ComboBox.SelectedValue>
         </ComboBox>
-        -->
+        
       </Grid>
 
       <!-- validate after all anchors are loaded -->

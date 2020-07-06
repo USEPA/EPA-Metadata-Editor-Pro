@@ -29,7 +29,7 @@ limitations under the License.​
     <updateCategory refID="esri_metadata_metadataEditors">
       <insertComponent id="EMEProToolkit_metadataEditor_toolkit" className="ToolkitMetadataEditor">
         <content type="ToolkitEditor" displayName="EMEProToolkit Metadata Editor Dev" id="8328efcc-345c-4f6b-9b4a-918f9f443771">
-          <metadataConfig ArcGISProfile="NAP" ValidatePages="True">
+          <metadataConfig ArcGISProfile="ISO19139" ValidatePages="True">
             <validationNamespaceURI>http://www.isotc211.org/2005/gmd</validationNamespaceURI>
             <validationSchemaURL>http://www.isotc211.org/schemas/2005/gmd/metadataEntity.xsd</validationSchemaURL>
             <tranformStyle>ISO19139</tranformStyle>
@@ -70,7 +70,6 @@ limitations under the License.​
                       </for>
                     </validation>
                   </page>
-                  <!--<page class="EMEProToolkit.Pages.MTK_Keywords_OG">-->
                   <page class="EMEProToolkit.Pages.Keywords_EME">
                     <validation>
                       <!-- topic categories required for dataset or series -->
@@ -190,7 +189,11 @@ limitations under the License.​
                       <for xpath="/metadata/dataIdInfo/idCitation/citRespParty/rpCntInfo/cntOnlineRes">
                         <exists xpath="linkage[. != '']" ref="linkage" />
                       </for>
-                    </validation>
+						<!--TODO: NAP protocol--> 
+						<!--no NAP: protocol-->
+						<!--TODO NAP phone, address, onlineResource-->
+						<!--No NAP: {count(phone + address + onlineResource) > 0} -->
+					</validation>
                   </page>
                   <page class="EMEProToolkit.Pages.MTK_ContactManager"></page>
                   <page class="EMEProToolkit.Pages.MTK_Locales">
@@ -201,16 +204,31 @@ limitations under the License.​
                       </for>
                     </validation>
                   </page>
-                  <!-- TODO add your custom pages for Overview here -->
-                  <page class="EMEProToolkit.Pages.CustomPage">
-                    <validation></validation>
-                  </page>
                 </section>
                 <section class="EMEProToolkit.Sections.Metadata">
-                  <page class="EMEProToolkit.Pages.MTK_MetadataDetails">
+                  <page class="EMEProToolkit.Pages.MetadataDetailsEME">
                     <validation>
                       <!-- language is required for all iso styles -->
                       <exists xpath="/metadata/mdLang/languageCode[@value != '']" ref="languageCode" />
+						
+						<!--TODO NAP file identifier, country code, hierarchy, characterset-->
+						
+						<!-- NAP: file identifier is required -->
+						<!--
+						<exists xpath="/metadata/mdFileID[. != '']" ref="mdFileID"/>
+						-->
+						
+						<!-- NAP: country code is required with language --><!--
+						<for xpath="/metadata/mdLang[languageCode/@value != '']">
+							<exists xpath="countryCode[@value != '']" ref="countryCode"/>
+						</for>
+
+						--><!-- NAP: hierarchy level is required --><!--
+						<exists xpath="/metadata/mdHrLv/ScopeCd[@value != '' ]" ref="scopeCd"/>
+
+						--><!-- NAP: characterset is mandatory --><!--
+						<exists xpath="/metadata/mdChar[CharSetCd/@value = '004']" ref="mdChar,CharSetCd,mdChar_utf8"/>-->
+						
                       <!-- if the level code is not 'dataset', then level name is required -->
                       <for xpath="/metadata[mdHrLv/ScopeCd/@value != '005' and mdHrLv/ScopeCd/@value != '']">
                         <exists xpath="/metadata/mdHrLvName[. != '']" ref="mdHrLvName" />
@@ -232,6 +250,16 @@ limitations under the License.​
                       <for xpath="//mdContact/rpCntInfo/cntOnlineRes">
                         <exists xpath="linkage[. != '']" ref="linkage" />
                       </for>
+
+					    <!-- NAP: protocol --><!--
+					    <for xpath="//mdContact/rpCntInfo/cntOnlineRes">
+						    <exists xpath="protocol[. != '']" ref="protocol"/>
+					    </for>
+
+					    --><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
+					    <for xpath="//mdContact/rpCntInfo">
+						    <exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
+					    </for>-->
                     </validation>
                   </page>
                   <page class="EMEProToolkit.Pages.MTK_MetadataMaintenance">
@@ -255,24 +283,35 @@ limitations under the License.​
                       <for xpath="//mdMaint/maintCont/rpCntInfo/cntOnlineRes">
                         <exists xpath="linkage[. != '']" ref="linkage" />
                       </for>
+						<!--TODO - NAP protocol, phone + address + onlineResource-->
+						<!-- NAP: protocol --><!--
+						<for xpath="//mdMaint/maintCont/rpCntInfo/cntOnlineRes">
+							<exists xpath="protocol[. != '']" ref="protocol"/>
+						</for>
+
+						--><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
+						<for xpath="//mdMaint/maintCont/rpCntInfo">
+							<exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
+						</for>-->
                     </validation>
                   </page>
-                  <page class="EMEProToolkit.Pages.MTK_MetadataConstraints">
+					<!--TODO - Review - no metadata constraints?-->
+                  <!--<page class="EMEProToolkit.Pages.MTK_MetadataConstraints">
                     <validation>
-                      <!-- classification code -->
+                      --><!-- classification code --><!--
                       <for xpath="//mdConst/SecConsts">
                         <exists xpath="class/ClasscationCd[@value != '']" ref="ClasscationCd" />
                       </for>
-                      <!-- if the 'other contraints' code is used, then the other contraints tag is required -->
+                      --><!-- if the 'other contraints' code is used, then the other contraints tag is required --><!--
                       <for xpath="//mdConst/LegConsts[*/RestrictCd/@value = '008']">
                         <exists xpath="othConsts[. != '']" ref="othConsts" />
                       </for>
-                      <!-- use constraint is required in the general class -->
+                      --><!-- use constraint is required in the general class --><!--
                       <for xpath="//mdConst/Consts">
                         <exists xpath="useLimit[. != '']" ref="useLimit" />
                       </for>
                     </validation>
-                  </page>
+                  </page>-->
                 </section>
                 <section class="EMEProToolkit.Sections.Resource">
                   <page class="EMEProToolkit.Pages.MTK_ResourceDetails">

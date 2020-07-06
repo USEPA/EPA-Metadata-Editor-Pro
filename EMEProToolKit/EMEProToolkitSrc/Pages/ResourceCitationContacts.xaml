@@ -70,6 +70,8 @@ limitations under the License.​
 
   <Grid Style="{DynamicResource EditorFrontPageStyle}">
     <StackPanel>
+      <!--org header-->
+      <t:EME_Header/>
       <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/dataIdInfo/idCitation}">
         <ListBox.ItemTemplate>
           <DataTemplate>
@@ -88,6 +90,7 @@ limitations under the License.​
                 <ListBox.ItemTemplate>
                   <DataTemplate>
                     <Border Style="{DynamicResource EditorBorder2Style}">
+                      <!--<Expander Style="{DynamicResource EditorExpander2Style}" IsExpanded="{Binding XPath=@editorExpand, Mode=TwoWay}">-->
                       <Expander Style="{DynamicResource EditorExpander2Style}" 
                                 AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=ResourceCitationContact_ContactGroup}">
                         <Expander.Header>
@@ -118,7 +121,7 @@ limitations under the License.​
                 <!-- LOAD SAVED CONTACT -->
                 <DockPanel LastChildFill="True">
                   <Label DockPanel.Dock="Left" VerticalAlignment="Center" Content="{x:Static r:Resources.LBL_CI_PARTY_PICK}"/>
-                  <t:MTK_PartyPickerControl ContainerElement="citRespParty" DockPanel.Dock="Right"/>
+                  <t:PartyPickerControlEME ContainerElement="citRespParty" DockPanel.Dock="Right"/>
                 </DockPanel>
               </Border>
 

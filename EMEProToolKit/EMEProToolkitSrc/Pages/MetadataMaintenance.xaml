@@ -61,7 +61,9 @@ limitations under the License.​
 
   <Grid Style="{DynamicResource EditorFrontPageStyle}">
     <StackPanel>
-      <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.LBL_META_MAINT}"/>
+        <!--org header-->
+            <t:EME_Header/>
+            <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.LBL_META_MAINT}"/>
       <!-- maintanence info -->
       <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=//mdMaint[1]}">
         <ListBox.ItemsPanel>
