@@ -22,6 +22,7 @@ using ArcGIS.Desktop.Metadata;
 using ArcGIS.Desktop.Metadata.Editor.Pages;
 using System.Net;
 using System.IO;
+using System.Diagnostics;
 
 namespace EMEProToolkit.Pages
 {
@@ -50,6 +51,7 @@ namespace EMEProToolkit.Pages
         XmlDocument _contactsWEB = new XmlDocument();
         string _filePathEsri = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ArcGIS\\Descriptions\\";
         string _filePathEme = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
+        
 
         public string partySource = null;
         //private XmlDocument _contactsDoc = null;
@@ -261,7 +263,8 @@ namespace EMEProToolkit.Pages
                 File.Delete(_filePathEsri + "contacts.back");
             }
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(directoryUrl);
-            request.Timeout = 15000;
+            request.Timeout = 25000;
+            //request.Timeout = 15000;
             request.Method = "HEAD"; //test URL without downloading the content
 
             if (syncAge > (new TimeSpan(0, 12, 0, 0)))

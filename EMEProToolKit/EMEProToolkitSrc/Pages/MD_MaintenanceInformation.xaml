@@ -306,7 +306,7 @@ limitations under the License.​
               <!-- LOAD SAVED CONTACT -->
               <DockPanel LastChildFill="True">
                 <Label DockPanel.Dock="Left" VerticalAlignment="Center" Content="{x:Static r:Resources.LBL_CI_LOAD_MAINT_CONTACT}"/>
-                <t:MTK_PartyPickerControl ContainerElement="maintCont" DockPanel.Dock="Right"/>
+                <t:PartyPickerControlEME ContainerElement="maintCont" DockPanel.Dock="Right"/>
               </DockPanel>
             </Border>
 
