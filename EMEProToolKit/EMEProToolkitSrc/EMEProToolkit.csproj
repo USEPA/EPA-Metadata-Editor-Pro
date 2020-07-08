@@ -99,6 +99,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Daml.cs" />
+    <Compile Include="EMEMenu.cs" />
     <Compile Include="Pages\BooleanValueSync.xaml.cs">
       <DependentUpon>BooleanValueSync.xaml</DependentUpon>
     </Compile>
@@ -1082,6 +1084,18 @@
     <Resource Include="EMEdb\Publisher.xml" />
     <Resource Include="EMEdb\SecurityConstraints.xml" />
     <Resource Include="EMEdb\SystemofRecords.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AddInContent Include="Images\GenericButtonGreen16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AddInContent Include="Images\GenericButtonGreen32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AddInContent Include="DarkImages\GenericButtonGreen16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AddInContent Include="DarkImages\GenericButtonGreen32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
