@@ -1086,7 +1086,7 @@ limitations under the License.​
           <group refID="EMEProToolkit_Group2" />
         </tab>
       </tabs>
-      <controls>               
+      <controls>
         <button id="EMEProToolkit_EMEMenu_Items_UpdateContacts" caption="Update Contacts" className="EMEMenu_UpdateContacts" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
           <tooltip heading="Update Contacts">ToolTip<disabledText /></tooltip>
         </button>
@@ -1095,6 +1095,9 @@ limitations under the License.​
         </button>
         <button id="EMEProToolkit_EMEMenu_Items_Button3" caption="Menu Button 3" className="EMEMenu_button3" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
           <tooltip heading="Menu Button 3">ToolTip<disabledText /></tooltip>
+        </button>
+        <button id="EMEProToolkit_TestButton1" caption="TestButton 1" className="TestButton1" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue32.png">
+          <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
         </button>
       </controls>
       <!--<menus>
@@ -1111,11 +1114,13 @@ limitations under the License.​
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_Button2" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_Button3" size="large" />
+          <button refID="EMEProToolkit_TestButton1" size="large" />
+        </group>        
+        <group id="EMEProToolkit_Group2" caption="Group 2">          
+          <button refID="EMEProToolkit_TestButton1" size="large" />
         </group>
-        <group id="EMEProToolkit_Group2" caption="Group 2">
-          <button refID="EMEProToolkit_EMEMenu_Items_Button3" size="large" />
-        </group>
+     
       </groups>
     </insertModule>
-  </modules>  
+  </modules>
 </ArcGIS>
