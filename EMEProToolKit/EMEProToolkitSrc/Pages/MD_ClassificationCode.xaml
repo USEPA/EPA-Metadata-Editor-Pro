@@ -19,17 +19,41 @@ limitations under the License.​
              xmlns:r="clr-namespace:EMEProToolkit.Properties"
              xmlns:p="clr-namespace:ArcGIS.Desktop.Metadata.Editor.Pages;assembly=ArcGIS.Desktop.Metadata"
              xmlns:v="clr-namespace:ArcGIS.Desktop.Metadata.Editor.Validation;assembly=ArcGIS.Desktop.Metadata"
-             xmlns:e="clr-namespace:ArcGIS.Desktop.Metadata.Editor;assembly=ArcGIS.Desktop.Metadata"              
+             xmlns:e="clr-namespace:ArcGIS.Desktop.Metadata.Editor;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:prop="clr-namespace:EMEProToolkit.Properties"
              xmlns:converters="clr-namespace:ArcGIS.Desktop.Metadata.Pages.Converters;assembly=ArcGIS.Desktop.Metadata"
              mc:Ignorable="d" >
   <UserControl.Resources>
     <converters:ListBoxItemToAutomationIdConverter x:Key="_lbiToAutoIdConverter" />  
-    <e:Codelists x:Key="MD_ClassificationCode" CodelistName="MD_ClassificationCode"/>
+    <!--<e:Codelists x:Key="MD_ClassificationCode" CodelistName="MD_ClassificationCode"/>-->
+    <XmlDataProvider x:Key="MD_ClassificationCode"
+                         XPath="codelist/code"
+                         IsAsynchronous="False"
+                         IsInitialLoadEnabled="True">
+      <x:XData>
+        <codelist id="MD_ClassificationCode" source="ISO19115" xmlns="">
+          <code value="" source="ArcGIS">Empty</code>
+          <code value="001" source="ISO19115" podvalue="  data.gov:public" stdvalue="unclassified">Unclassified</code>
+          <code value="002" source="ISO19115" podvalue="  data.gov:restricted public" stdvalue="restricted">Restricted</code>
+          <code value="003" source="ISO19115" podvalue="  data.gov:non-public" stdvalue="confidential">Confidential</code>
+          <code value="004" source="ISO19115" podvalue="  data.gov:non-public" stdvalue="secret">Secret</code>
+          <code value="005" source="ISO19115" podvalue="  data.gov:non-public" stdvalue="topSecret">Top Secret</code>
+          <code value="006" source="NAP" podvalue="  data.gov:non-public" stdvalue="sensitive">Sensitive</code>
+          <code value="007" source="NAP" podvalue="  data.gov:restricted public" stdvalue="forOfficialUseOnly">Official Use Only</code>
+        </codelist>
+      </x:XData>
+    </XmlDataProvider>
+
+    <Style x:Key="TbkHidden" TargetType="{x:Type TextBlock}">
+      <Setter Property="FontSize" Value="0.125"/>
+      <Setter Property="Height" Value="0"/>
+      <Setter Property="Width" Value="0"/>
+    </Style>
   </UserControl.Resources>
 
   <Grid>
     <StackPanel>
-      <ComboBox Loaded="PostProcessComboBoxValues" Style="{DynamicResource EditorHComboBoxStyle}" IsEditable="False"
+      <!--<ComboBox Loaded="PostProcessComboBoxValues" Style="{DynamicResource EditorHComboBoxStyle}" IsEditable="False"
           ToolTip="{x:Static r:Definitions.MD_SecurityConstraints_classification}"
           ItemsSource="{Binding Source={StaticResource MD_ClassificationCode}, Path=List}"
           DisplayMemberPath="."
@@ -39,7 +63,26 @@ limitations under the License.​
         <ComboBox.SelectedValue>
           <e:MetadataBinding XPath="ClasscationCd/@value"/>
         </ComboBox.SelectedValue>
+      </ComboBox>-->
+      <ComboBox Loaded="PostProcessComboBoxValues" Style="{DynamicResource EditorHComboBoxStyle}" IsEditable="False"
+                      ToolTip="{x:Static prop:Definitions.MD_SecurityConstraints_classification}"
+                      ItemsSource="{Binding Source={StaticResource MD_ClassificationCode}}"
+                      v:Nav.AnchorName="ClasscationCd,ClasscationCd"
+                      SelectedValuePath="@value"
+                      x:Name="cboClassCd" SelectionChanged="cboClassCd_SelectionChanged" LostFocus="cboClassCd_LostFocus" LostMouseCapture="cboClassCd_LostMouseCapture">
+        <ComboBox.SelectedValue>
+          <e:MetadataBinding XPath="ClasscationCd/@value"/>
+        </ComboBox.SelectedValue>
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <DockPanel HorizontalAlignment="{Binding HorizontalAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Mode=OneWayToSource}" LastChildFill="True">
+              <TextBlock x:Name="tbkClassLabel" HorizontalAlignment="Left" Text="{Binding XPath=.}" />
+              <TextBlock x:Name="tbkPODDomain" HorizontalAlignment="Right" Text="{Binding XPath=@podvalue}" FontStyle="Italic" Opacity="0.7" FontSize="10" />
+            </DockPanel>
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
       </ComboBox>
+      <TextBlock x:Name="tbkClassName" Style="{DynamicResource TbkHidden}" HorizontalAlignment="Right" Text="{e:MetadataBinding XPath=ClasscationCd}"/>
 
       <!-- validate after all anchors are loaded -->
       <v:PageValidateControl/>

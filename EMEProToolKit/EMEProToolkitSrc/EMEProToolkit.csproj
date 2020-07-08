@@ -279,6 +279,9 @@
     <Compile Include="Pages\MD_Constraints.xaml.cs">
       <DependentUpon>MD_Constraints.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MD_ConstraintsEME.xaml.cs">
+      <DependentUpon>MD_ConstraintsEME.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MD_CoverageDescriptionBase.xaml.cs">
       <DependentUpon>MD_CoverageDescriptionBase.xaml</DependentUpon>
     </Compile>
@@ -345,6 +348,15 @@
     <Compile Include="Pages\MD_LegalConstraints.xaml.cs">
       <DependentUpon>MD_LegalConstraints.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MD_LegalConstraintsEME.xaml.cs">
+      <DependentUpon>MD_LegalConstraintsEME.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MD_LegalConstraintsEpaDataLic.xaml.cs">
+      <DependentUpon>MD_LegalConstraintsEpaDataLic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MD_LegalConstraintsSOR.xaml.cs">
+      <DependentUpon>MD_LegalConstraintsSOR.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MD_MaintenanceInformation.xaml.cs">
       <DependentUpon>MD_MaintenanceInformation.xaml</DependentUpon>
     </Compile>
@@ -369,6 +381,12 @@
     <Compile Include="Pages\MD_RestrictionCode.xaml.cs">
       <DependentUpon>MD_RestrictionCode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MD_RestrictionCodeEpaDataLic.xaml.cs">
+      <DependentUpon>MD_RestrictionCodeEpaDataLic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MD_RestrictionCodeSOR.xaml.cs">
+      <DependentUpon>MD_RestrictionCodeSOR.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MD_ScopeCode.xaml.cs">
       <DependentUpon>MD_ScopeCode.xaml</DependentUpon>
     </Compile>
@@ -380,6 +398,9 @@
     </Compile>
     <Compile Include="Pages\MD_SecurityConstraints.xaml.cs">
       <DependentUpon>MD_SecurityConstraints.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MD_SecurityConstraintsEME.xaml.cs">
+      <DependentUpon>MD_SecurityConstraintsEME.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MD_StandardOrderProcess.xaml.cs">
       <DependentUpon>MD_StandardOrderProcess.xaml</DependentUpon>
@@ -704,6 +725,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\MD_ConstraintsEME.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MD_CoverageDescriptionBase.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -792,6 +817,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\MD_LegalConstraintsEME.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MD_LegalConstraintsEpaDataLic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MD_LegalConstraintsSOR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MD_MaintenanceInformation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -824,6 +861,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\MD_RestrictionCodeEpaDataLic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MD_RestrictionCodeSOR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MD_ScopeCode.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -839,6 +884,10 @@
     <Page Include="Pages\MD_SecurityConstraints.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MD_SecurityConstraintsEME.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MD_StandardOrderProcess.xaml">
       <Generator>MSBuild:Compile</Generator>

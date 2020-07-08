@@ -505,6 +505,17 @@ limitations under the License.​
 					  <for xpath="//resMaint/maintCont/rpCntInfo/cntOnlineRes">
 						<exists xpath="linkage[. != '']" ref="linkage" />
 					  </for>
+
+            <!-- NAP: protocol --><!--
+            <for xpath="//resMaint/maintCont/rpCntInfo/cntOnlineRes">
+              <exists xpath="protocol[. != '']" ref="protocol"/>
+            </for>
+
+            --><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
+            <for xpath="//resMaint/maintCont/rpCntInfo">
+              <exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
+            </for>-->
+            
 					</validation>
 				  </page>
 				  <page class="EMEProToolkit.Pages.MTK_ResourceConstraints">
@@ -513,6 +524,10 @@ limitations under the License.​
 					  <for xpath="//resConst/SecConsts">
 						<exists xpath="class/ClasscationCd[@value != '']" ref="ClasscationCd" />
 					  </for>
+            <!-- if classification is other than public require "EPA Classification: ..." -->
+            <for xpath="//resConst/SecConsts[not(class/ClasscationCd[@value = '001'])]">
+              <exists xpath="userNote[contains(. , 'EPA Category:')]" ref="userNote"/>
+            </for>
 					  <!-- if the 'other contraints' code is used, then the other contraints tag is required -->
 					  <for xpath="//resConst/LegConsts[*/RestrictCd/@value = '008']">
 						<exists xpath="othConsts[. != '']" ref="othConsts" />
@@ -521,6 +536,20 @@ limitations under the License.​
 					  <for xpath="//resConst/Consts">
 						<exists xpath="useLimit[. != '']" ref="useLimit" />
 					  </for>
+
+            <!-- data license url is required -->
+            <for xpath="//resConst/LegConsts">
+              <exists xpath="useLimit[(. != '') or contains(. , 'FederalRegister.gov')]" ref="dataLicense"/>
+            </for>
+            <!--licenseURL-->
+            <for xpath="//resConst/LegConsts">
+              <exists xpath="othConsts[contains(. , 'https://') or contains(. , 'http://')]" ref="licenseURL"/>
+            </for>
+
+            <for xpath="//resConst/LegConsts">
+              <exists xpath="othConsts[contains(. , 'https://') or contains(. , 'http://')]" ref="othConsts,sornURL"/>
+            </for>
+            
 					</validation>
 				  </page>
 				  <page class="EMEProToolkit.Pages.MTK_ReferenceSystem">
