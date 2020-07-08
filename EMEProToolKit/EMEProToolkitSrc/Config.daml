@@ -10,12 +10,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.​
 -->
-<ArcGIS defaultAssembly="EMEProToolkit.dll" 
-        defaultNamespace="EMEProToolkit" 
-        xmlns="http://schemas.esri.com/DADF/Registry" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  
+<ArcGIS defaultAssembly="EMEProToolkit.dll" defaultNamespace="EMEProToolkit" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
   <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="1.0" desktopVersion="2.5.22081">
     <Name>EMEProToolkit</Name>
     <Description>EMEProToolkit Toolkit</Description>
@@ -189,11 +184,11 @@ limitations under the License.​
                       <for xpath="/metadata/dataIdInfo/idCitation/citRespParty/rpCntInfo/cntOnlineRes">
                         <exists xpath="linkage[. != '']" ref="linkage" />
                       </for>
-						<!--TODO: NAP protocol--> 
-						<!--no NAP: protocol-->
-						<!--TODO NAP phone, address, onlineResource-->
-						<!--No NAP: {count(phone + address + onlineResource) > 0} -->
-					</validation>
+                      <!--TODO: NAP protocol-->
+                      <!--no NAP: protocol-->
+                      <!--TODO NAP phone, address, onlineResource-->
+                      <!--No NAP: {count(phone + address + onlineResource) > 0} -->
+                    </validation>
                   </page>
                   <page class="EMEProToolkit.Pages.MTK_ContactManager"></page>
                   <page class="EMEProToolkit.Pages.MTK_Locales">
@@ -210,25 +205,26 @@ limitations under the License.​
                     <validation>
                       <!-- language is required for all iso styles -->
                       <exists xpath="/metadata/mdLang/languageCode[@value != '']" ref="languageCode" />
-						
-						<!--TODO NAP file identifier, country code, hierarchy, characterset-->
-						
-						<!-- NAP: file identifier is required -->
-						<!--
+                      <!--TODO NAP file identifier, country code, hierarchy, characterset-->
+                      <!-- NAP: file identifier is required -->
+                      <!--
 						<exists xpath="/metadata/mdFileID[. != '']" ref="mdFileID"/>
 						-->
-						
-						<!-- NAP: country code is required with language --><!--
+                      <!-- NAP: country code is required with language -->
+                      <!--
 						<for xpath="/metadata/mdLang[languageCode/@value != '']">
 							<exists xpath="countryCode[@value != '']" ref="countryCode"/>
 						</for>
 
-						--><!-- NAP: hierarchy level is required --><!--
+						-->
+                      <!-- NAP: hierarchy level is required -->
+                      <!--
 						<exists xpath="/metadata/mdHrLv/ScopeCd[@value != '' ]" ref="scopeCd"/>
 
-						--><!-- NAP: characterset is mandatory --><!--
+						-->
+                      <!-- NAP: characterset is mandatory -->
+                      <!--
 						<exists xpath="/metadata/mdChar[CharSetCd/@value = '004']" ref="mdChar,CharSetCd,mdChar_utf8"/>-->
-						
                       <!-- if the level code is not 'dataset', then level name is required -->
                       <for xpath="/metadata[mdHrLv/ScopeCd/@value != '005' and mdHrLv/ScopeCd/@value != '']">
                         <exists xpath="/metadata/mdHrLvName[. != '']" ref="mdHrLvName" />
@@ -250,13 +246,15 @@ limitations under the License.​
                       <for xpath="//mdContact/rpCntInfo/cntOnlineRes">
                         <exists xpath="linkage[. != '']" ref="linkage" />
                       </for>
-
-					    <!-- NAP: protocol --><!--
+                      <!-- NAP: protocol -->
+                      <!--
 					    <for xpath="//mdContact/rpCntInfo/cntOnlineRes">
 						    <exists xpath="protocol[. != '']" ref="protocol"/>
 					    </for>
 
-					    --><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
+					    -->
+                      <!-- NAP: {count(phone + address + onlineResource) > 0} -->
+                      <!--
 					    <for xpath="//mdContact/rpCntInfo">
 						    <exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
 					    </for>-->
@@ -283,30 +281,39 @@ limitations under the License.​
                       <for xpath="//mdMaint/maintCont/rpCntInfo/cntOnlineRes">
                         <exists xpath="linkage[. != '']" ref="linkage" />
                       </for>
-						<!--TODO - NAP protocol, phone + address + onlineResource-->
-						<!-- NAP: protocol --><!--
+                      <!--TODO - NAP protocol, phone + address + onlineResource-->
+                      <!-- NAP: protocol -->
+                      <!--
 						<for xpath="//mdMaint/maintCont/rpCntInfo/cntOnlineRes">
 							<exists xpath="protocol[. != '']" ref="protocol"/>
 						</for>
 
-						--><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
+						-->
+                      <!-- NAP: {count(phone + address + onlineResource) > 0} -->
+                      <!--
 						<for xpath="//mdMaint/maintCont/rpCntInfo">
 							<exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
 						</for>-->
                     </validation>
                   </page>
-					<!--TODO - Review - no metadata constraints?-->
+                  <!--TODO - Review - no metadata constraints?-->
                   <!--<page class="EMEProToolkit.Pages.MTK_MetadataConstraints">
                     <validation>
-                      --><!-- classification code --><!--
+                      -->
+                  <!-- classification code -->
+                  <!--
                       <for xpath="//mdConst/SecConsts">
                         <exists xpath="class/ClasscationCd[@value != '']" ref="ClasscationCd" />
                       </for>
-                      --><!-- if the 'other contraints' code is used, then the other contraints tag is required --><!--
+                      -->
+                  <!-- if the 'other contraints' code is used, then the other contraints tag is required -->
+                  <!--
                       <for xpath="//mdConst/LegConsts[*/RestrictCd/@value = '008']">
                         <exists xpath="othConsts[. != '']" ref="othConsts" />
                       </for>
-                      --><!-- use constraint is required in the general class --><!--
+                      -->
+                  <!-- use constraint is required in the general class -->
+                  <!--
                       <for xpath="//mdConst/Consts">
                         <exists xpath="useLimit[. != '']" ref="useLimit" />
                       </for>
@@ -974,9 +981,10 @@ limitations under the License.​
       <tabs>
         <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">
           <group refID="EMEProToolkit_Group1" />
+          <group refID="EMEProToolkit_Group2" />
         </tab>
       </tabs>
-      <controls>               
+      <controls>
         <button id="EMEProToolkit_EMEMenu_Items_UpdateContacts" caption="Update Contacts" className="EMEMenu_UpdateContacts" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
           <tooltip heading="Update Contacts">ToolTip<disabledText /></tooltip>
         </button>
@@ -986,19 +994,30 @@ limitations under the License.​
         <button id="EMEProToolkit_EMEMenu_Items_Button3" caption="Menu Button 3" className="EMEMenu_button3" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
           <tooltip heading="Menu Button 3">ToolTip<disabledText /></tooltip>
         </button>
+        <button id="EMEProToolkit_TestButton1" caption="TestButton 1" className="TestButton1" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue32.png">
+          <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
+        </button>
       </controls>
-      <menus>
+      <!--<menus>
         <menu id="EMEProToolkit_EMEMenu" caption="EMEMenu" smallImage="GenericButtonGreen16.png" largeImage="GenericButtonGreen32.png">
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" />
           <button refID="EMEProToolkit_EMEMenu_Items_Button2" />
           <button refID="EMEProToolkit_EMEMenu_Items_Button3" />
         </menu>
-      </menus>
+      </menus>-->
       <groups>
         <group id="EMEProToolkit_Group1" caption="Group 1">
-          <menu refID="EMEProToolkit_EMEMenu" size="middle" />
+          <!--<menu refID="EMEProToolkit_EMEMenu" size="middle" />-->
+          <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_Button2" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_Button3" size="large" />
+          <button refID="EMEProToolkit_TestButton1" size="large" />
+        </group>        
+        <group id="EMEProToolkit_Group2" caption="Group 2">          
+          <button refID="EMEProToolkit_TestButton1" size="large" />
         </group>
+     
       </groups>
     </insertModule>
-  </modules>  
+  </modules>
 </ArcGIS>
