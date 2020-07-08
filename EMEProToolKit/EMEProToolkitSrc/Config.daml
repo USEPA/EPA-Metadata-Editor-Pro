@@ -1083,6 +1083,7 @@ limitations under the License.​
       <tabs>
         <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">
           <group refID="EMEProToolkit_Group1" />
+          <group refID="EMEProToolkit_Group2" />
         </tab>
       </tabs>
       <controls>               
@@ -1096,16 +1097,23 @@ limitations under the License.​
           <tooltip heading="Menu Button 3">ToolTip<disabledText /></tooltip>
         </button>
       </controls>
-      <menus>
+      <!--<menus>
         <menu id="EMEProToolkit_EMEMenu" caption="EMEMenu" smallImage="GenericButtonGreen16.png" largeImage="GenericButtonGreen32.png">
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" />
           <button refID="EMEProToolkit_EMEMenu_Items_Button2" />
           <button refID="EMEProToolkit_EMEMenu_Items_Button3" />
         </menu>
-      </menus>
+      </menus>-->
       <groups>
+        
         <group id="EMEProToolkit_Group1" caption="Group 1">
-          <menu refID="EMEProToolkit_EMEMenu" size="middle" />
+          <!--<menu refID="EMEProToolkit_EMEMenu" size="middle" />-->
+          <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_Button2" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_Button3" size="large" />
+        </group>
+        <group id="EMEProToolkit_Group2" caption="Group 2">
+          <button refID="EMEProToolkit_EMEMenu_Items_Button3" size="large" />
         </group>
       </groups>
     </insertModule>
