@@ -1079,7 +1079,7 @@ limitations under the License.​
 	</updateCategory>
   </categories>
   <modules>
-    <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="false" caption="Metadata Toolkit Module">
+    <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="true" caption="Metadata Toolkit Module">
       <tabs>
         <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">
           <group refID="EMEProToolkit_Group1" />
@@ -1087,11 +1087,15 @@ limitations under the License.​
         </tab>
       </tabs>
       <controls>
-        <button id="EMEProToolkit_EMEMenu_Items_UpdateContacts" caption="Update Contacts" className="EMEMenu_UpdateContacts" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
-          <tooltip heading="Update Contacts">ToolTip<disabledText /></tooltip>
+        <button id="EMEProToolkit_EMEMenu_Items_UpdateContacts" caption="Update Contacts" 
+                className="EMEMenu_UpdateContacts" loadOnClick="false" 
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" 
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png"
+                condition="SyncContactsCondition">
+          <tooltip heading="Update Contacts">Sync Online Contacts<disabledText /></tooltip>
         </button>
         <button id="EMEProToolkit_EMEMenu_Items_Button2" caption="Menu Button 2" className="EMEMenu_button2" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
-          <tooltip heading="Menu Button 2">ToolTip<disabledText /></tooltip>
+          <tooltip heading="Toggle the state of the update contacts button">ToolTip<disabledText /></tooltip>
         </button>
         <button id="EMEProToolkit_EMEMenu_Items_Button3" caption="Menu Button 3" className="EMEMenu_button3" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
           <tooltip heading="Menu Button 3">ToolTip<disabledText /></tooltip>
@@ -1119,8 +1123,15 @@ limitations under the License.​
         <group id="EMEProToolkit_Group2" caption="Group 2">          
           <button refID="EMEProToolkit_TestButton1" size="large" />
         </group>
-     
       </groups>
     </insertModule>
   </modules>
+  <conditions>
+    <!--update contacts button state-->
+    <insertCondition id="SyncContactsCondition" caption="Sync Contacts State">
+      <not>
+        <state id="sync_contacts_state"/>
+      </not>
+    </insertCondition>
+  </conditions>
 </ArcGIS>

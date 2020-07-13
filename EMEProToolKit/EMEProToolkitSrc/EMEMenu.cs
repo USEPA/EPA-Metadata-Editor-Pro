@@ -25,7 +25,8 @@ using ArcGIS.Desktop.Metadata;
 
 namespace EMEProToolkit
 {
-    internal class EMEMenu_UpdateContacts : ArcGIS.Desktop.Framework.Contracts.Button
+    
+    public class EMEMenu_UpdateContacts : ArcGIS.Desktop.Framework.Contracts.Button
     {
     XmlDocument _emeConfig = new XmlDocument();
     XmlDocument _contactsDoc = new XmlDocument();
@@ -36,30 +37,28 @@ namespace EMEProToolkit
     string _filePathEsri = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ArcGIS\\Descriptions\\";
     string _filePathEme = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
 
-    protected async Task<string> TestAsync()
-    {
-      await Task.Delay(10);
-      return "true";
-    }
     protected override void OnClick()
         {
-            //TODO: Create/reference Async Process for updating contacts
-            string uri = ArcGIS.Desktop.Core.Project.Current.URI;
-            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show($"Project uri {uri}");
-            Trace.WriteLine("EME file path: " + _filePathEme);
-            CommitChanges();
-            ReloadContacts();
+            LoadContactsAsync(checksyncage: false);
         }
-        private void ReloadContacts()
+    public Task LoadContactsAsync(bool checksyncage)
+    {
+        return (Task)Task.Run(() =>
         {
+            FrameworkApplication.State.Activate("sync_contacts_state");
+            CommitChanges();
+            ReloadContacts(checksyncage);
+            FrameworkApplication.State.Deactivate("sync_contacts_state");
 
+        });
+    }
+    private void ReloadContacts(bool checkage = true)
+        {
             #region Load EME Configuration File
             // Load emeConfig.xml
             try { _emeConfig.Load(_filePathEme + "emeConfig.xml"); }
                 catch (System.IO.FileNotFoundException)
                 {
-                  Trace.WriteLine("Loading emeConfig.xml");
-
                   _emeConfig.LoadXml(
                   "<?xml version=\"1.0\" standalone=\"yes\"?> \n" +
                   "<emeConfig> \n" +
@@ -108,14 +107,15 @@ namespace EMEProToolkit
                   "</emeConfig>");
                 }
                 #endregion
-
                 var directoryName = _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/param").InnerText;
                 var directoryUrl = _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/url").InnerText;
-                TimeSpan syncAge = ((DateTime.Now) - (DateTime.Parse(_emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/date").InnerText)));
+                DateTime lastSync = DateTime.Parse(_emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/date").InnerText);
+                TimeSpan syncAge = ((DateTime.Now) - lastSync);
                 var syncDays = syncAge.ToString("d'd 'h'h 'm'm 's's'");
 
+
                 // Check to see if local file is older than 12 hours:
-                bool dbExpired = syncAge > (new TimeSpan(0, 12, 0, 0));
+                bool dbExpired = syncAge > (new TimeSpan(0, 8, 0, 0));
                 // Check if contacts.bak exists
                 // this is created during LoadList. If LoadList crashes, then contacts.xml will be corrupted
                 // replace contacts.xml with contacts.bak
@@ -126,14 +126,20 @@ namespace EMEProToolkit
                   File.Delete(_filePathEsri + "contacts.back");
                 }
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(directoryUrl);
-                request.Timeout = 25000;
-                //request.Timeout = 15000;
+                //one minute timeout
+                request.Timeout = 60000;
                 request.Method = "HEAD"; //test URL without downloading the content
-                if (1==1)
-                //if (syncAge > (new TimeSpan(0, 12, 0, 0)))
+                if (!checkage | (checkage & (syncAge > (new TimeSpan(0, 8, 0, 0)))))
+
                 {
-                  //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nLoading contacts from \"" + directoryName + "\"\n (" + directoryUrl + ")", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
-                  try
+                    Notification syncnotification = new Notification();
+                    //syncnotification.Title = FrameworkApplication.Title;
+                    syncnotification.Title = "EPA Metadata Editor Pro";
+                    syncnotification.Message = $"Syncing Online Contacts... \n Last sync was {lastSync.ToString()}";
+                    syncnotification.ImageUrl = @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericRefresh32.png";
+                    ArcGIS.Desktop.Framework.FrameworkApplication.AddNotification(syncnotification);
+                //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nLoading contacts from \"" + directoryName + "\"\n (" + directoryUrl + ")", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
+                try
                   {
                     using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                     {
@@ -177,7 +183,14 @@ namespace EMEProToolkit
                 }
                 else
                 {
-                  //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nContacts will be loaded from local cache.", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
+                //load recent contacts from local cache notification
+                Notification nosyncnotification = new Notification();
+                //syncnotification.Title = FrameworkApplication.Title;
+                nosyncnotification.Title = "EPA Metadata Editor Pro";
+                nosyncnotification.Message = $"Loading local contacts from {lastSync.ToString()}";
+                nosyncnotification.ImageUrl = @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericRefresh32.png";
+                ArcGIS.Desktop.Framework.FrameworkApplication.AddNotification(nosyncnotification);
+                //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nContacts will be loaded from local cache.", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
                 try { _contactsBAK.Load(_filePathEsri + "contacts.xml"); }
@@ -321,7 +334,6 @@ namespace EMEProToolkit
                 {
                   File.Delete(_filePathEsri + "contacts.bak");
                 }
-                Trace.WriteLine("End of ReloadContacts()");
 
                 //_contactsDoc = new XmlDocument();
                 //contactsListBox.ItemsSource = Utils.Utils.GenerateContactsList(_contactsDoc, this.DataContext);
@@ -329,40 +341,46 @@ namespace EMEProToolkit
                 //var mdModule = FrameworkApplication.FindModule("esri_metadata_module") as IMetadataEditorHost;
                 //if (mdModule != null)
                 //  mdModule.AddCommitPage(this);
+
+                //done notification 
+                Notification donenotification = new Notification();
+                donenotification.Title = "EPA Metadata Editor Pro";
+                donenotification.Message = "Contacts Loaded";
+                donenotification.ImageUrl = @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericCheckMark32.png";
+                ArcGIS.Desktop.Framework.FrameworkApplication.AddNotification(donenotification);
         }
 
-        protected void CommitChanges()
+    protected void CommitChanges()
         {
-        Trace.WriteLine("CommitChanges()");
-          //if (!_isContactsListDirty)
-          //    return;
+            //if (!_isContactsListDirty)
+            //    return;
 
-          if (null == _contactsDoc)
+            if (null == _contactsDoc)
             return;
 
-          // new document
-          XmlDocument clone = new XmlDocument();
-          XmlNode contactsNode = clone.CreateElement("contacts");
-          clone.AppendChild(contactsNode);
+            // new document
+            XmlDocument clone = new XmlDocument();
+            XmlNode contactsNode = clone.CreateElement("contacts");
+            clone.AppendChild(contactsNode);
 
-          // write back out the contacts marked saved
-          var list = _contactsDoc.SelectNodes("//contact[editorSave='True']");
-          StringBuilder sb = new StringBuilder();
+            // write back out the contacts marked saved
+            var list = _contactsDoc.SelectNodes("//contact[editorSave='True']");
+            StringBuilder sb = new StringBuilder();
 
-          foreach (XmlNode child in list)
-          {
+            foreach (XmlNode child in list)
+            {
             // remove elements
             //
             XmlNode e = child.SelectSingleNode("editorSource");
             if (null != e)
             {
-              child.RemoveChild(e);
+                child.RemoveChild(e);
             }
 
             e = child.SelectSingleNode("editorDigest");
             if (null != e)
             {
-              child.RemoveChild(e);
+                child.RemoveChild(e);
             }
 
             // remove role
@@ -370,11 +388,12 @@ namespace EMEProToolkit
             e = child.SelectSingleNode("role");
             if (null != e)
             {
-              child.RemoveChild(e);
+                child.RemoveChild(e);
             }
 
             // save back unique key
             string digest = Utils.Utils.GeneratePartyKey(child);
+
             sb.Append("<contact>");
             sb.Append("<editorSource>external</editorSource>");
             sb.Append("<editorDigest>");
@@ -382,14 +401,16 @@ namespace EMEProToolkit
             sb.Append("</editorDigest>");
             sb.Append(child.InnerXml);
             sb.Append("</contact>");
-          }
+            }
 
-          // append to clone
-          contactsNode.InnerXml = sb.ToString();
+            // append to clone
+            contactsNode.InnerXml = sb.ToString();
 
-          // save to file
-          string file = Utils.Utils.GetContactsFileLocation();
-          clone.Save(file);
+            // save to file
+          
+            string file = Utils.Utils.GetContactsFileLocation();
+            clone.Save(file);
+            Trace.WriteLine("saved contacts clone to: "+file);
         }
 
     }
@@ -398,8 +419,15 @@ namespace EMEProToolkit
     {
         protected override void OnClick()
         {
-            string bt2 = "This is button number 2";
-            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show($"Which button?: {bt2}");
+            //state is managed at two levels by the application state table, AND a pane state table. 
+            if (FrameworkApplication.State.Contains("sync_contacts_state"))
+            {
+                FrameworkApplication.State.Deactivate("sync_contacts_state");
+            }
+            else
+            {
+                FrameworkApplication.State.Activate("sync_contacts_state");
+            }
         }
     }
 
@@ -407,6 +435,7 @@ namespace EMEProToolkit
   {
         protected override void OnClick()
         {
+
         }
     }
 
