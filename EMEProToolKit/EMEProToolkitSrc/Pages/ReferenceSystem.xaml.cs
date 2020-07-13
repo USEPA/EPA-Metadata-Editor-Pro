@@ -13,6 +13,8 @@ limitations under the License.​
 
 using ArcGIS.Desktop.Metadata;
 using ArcGIS.Desktop.Metadata.Editor.Pages;
+using System.Diagnostics;
+using System.Windows.Navigation;
 
 namespace EMEProToolkit.Pages
 {
@@ -36,6 +38,12 @@ namespace EMEProToolkit.Pages
         public MTK_ReferenceSystem()
         {
             InitializeComponent();
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
 
         public override string SidebarLabel

@@ -86,6 +86,9 @@ limitations under the License.​
 
   <Grid Style="{DynamicResource EditorFrontPageStyle}">
     <StackPanel>
+      
+      <!--org header-->
+      <tp:EME_Header/>
 
       <!-- page title -->
       <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.SEC_REFSYSINFO}"/>
@@ -114,7 +117,17 @@ limitations under the License.​
                                     Name="SpatialReference_ReferenceSystemDelete">
                               <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
                             </Button>
-                            <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_MD_RS}"/>
+                            <!--<Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_MD_RS}"/>-->
+                            <Label Style="{DynamicResource EditorHExpanderLabel}">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#spatial-reference" RequestNavigate="Hyperlink_RequestNavigate">
+                                <TextBlock Text="{x:Static r:Resources.LBL_MD_RS}" FontWeight="Bold"/>
+                              </Hyperlink>
+                            </Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#spatial-reference" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                                <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
+                              </Hyperlink>
+                            </Label>
                           </DockPanel>
                         </Expander.Header>
 

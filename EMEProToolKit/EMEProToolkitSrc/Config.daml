@@ -558,10 +558,25 @@ limitations under the License.​
 				  </page>
 				  <page class="EMEProToolkit.Pages.MTK_ReferenceSystem">
 					<validation>
+            <!--This was in EME5-->
+            <!-- Spatial Reference system identifier required --><!--
+            <for xpath="//metadata">
+              <exists xpath="//refSysInfo//RefSystem[*]" ref="RefSystem_REQ"/>
+            </for>
+
+            --><!-- NAP: a reference system is mandatory if the spatial type is 001, 002, or 004 --><!--
+            <for xpath="//dataIdInfo/spatRpType/SpatRepTypCd[@value = '001' or @value = '002' or @value = '004']">
+              <exists xpath="//refSysInfo//refSysID" ref="RefSystem_REQ"/>
+            </for>-->
 					  <!-- reference system ID -->
 					  <for xpath="//RefSystem">
 						<exists xpath="refSysID/identCode[@code != '']" ref="refSysID" />
+
+              <!-- NAP: dimension required --><!--
+              <exists xpath=".[@dimension != '']" ref="RefSystem"/>-->
+              
 					  </for>
+            
 					  <!-- identifier authority citation -->
 					  <for xpath="//refSysInfo//identAuth[*]">
 						<exists xpath="resTitle[. != '']" ref="resTitle" />
@@ -585,7 +600,17 @@ limitations under the License.​
 					  <for xpath="//refSysInfo//identAuth//citRespParty/rpCntInfo/cntOnlineRes">
 						<exists xpath="linkage[. != '']" ref="linkage" />
 					  </for>
-					</validation>
+
+            <!-- NAP: protocol --><!--
+            <for xpath="//refSysInfo//identAuth//citRespParty/rpCntInfo/cntOnlineRes">
+              <exists xpath="protocol[. != '']" ref="protocol"/>
+            </for>
+            --><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
+            <for xpath="//refSysInfo//identAuth//citRespParty/rpCntInfo">
+              <exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
+            </for>-->
+
+          </validation>
 				  </page>
 				  <page class="EMEProToolkit.Pages.MTK_SpatialRepresentation">
 					<validation>
