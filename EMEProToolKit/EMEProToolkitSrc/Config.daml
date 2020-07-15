@@ -976,7 +976,12 @@ limitations under the License.​
       </insertComponent>
     </updateCategory>
   </categories>
-  <modules>
+  <conditions>
+    <insertCondition id="eme_state_condition" caption="EME State">
+      <state id="preview_map_state"/>
+    </insertCondition>
+  </conditions>
+    <modules>
     <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="false" caption="Metadata Toolkit Module">
       <tabs>
         <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">
@@ -988,8 +993,8 @@ limitations under the License.​
         <button id="EMEProToolkit_EMEMenu_Items_UpdateContacts" caption="Update Contacts" className="EMEMenu_UpdateContacts" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
           <tooltip heading="Update Contacts">ToolTip<disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_Button2" caption="Menu Button 2" className="EMEMenu_button2" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
-          <tooltip heading="Menu Button 2">ToolTip<disabledText /></tooltip>
+        <button id="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" caption="Update Thumbnail" className="EMEMenu_UpdateThumbnail" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
+          <tooltip heading="Update Thumbnaile">Click to update the thumbnail for a feature class<disabledText />Disabled Text here</tooltip>
         </button>
         <button id="EMEProToolkit_EMEMenu_Items_Button3" caption="Menu Button 3" className="EMEMenu_button3" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
           <tooltip heading="Menu Button 3">ToolTip<disabledText /></tooltip>
@@ -1008,13 +1013,15 @@ limitations under the License.​
       <groups>
         <group id="EMEProToolkit_Group1" caption="Group 1">
           <!--<menu refID="EMEProToolkit_EMEMenu" size="middle" />-->
-          <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" size="large" />
-          <button refID="EMEProToolkit_EMEMenu_Items_Button2" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" size="large" />          
           <button refID="EMEProToolkit_EMEMenu_Items_Button3" size="large" />
           <button refID="EMEProToolkit_TestButton1" size="large" />
         </group>        
-        <group id="EMEProToolkit_Group2" caption="Group 2">          
-          <button refID="EMEProToolkit_TestButton1" size="large" />
+        <group id="EMEProToolkit_Group2" caption="Thumbnails">          
+          <gallery refID="esri_mapping_previewBasemapGallery" size="large"/>          
+          <button refID="esri_core_previewCaptureThumbnail"/>          
+          <button refID="esri_core_previewShowBasemap"/>
+          <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />
         </group>
      
       </groups>
