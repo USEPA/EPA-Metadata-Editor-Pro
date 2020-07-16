@@ -132,7 +132,7 @@ limitations under the License.​
           <!-- LOAD SAVED CONTACT -->
           <DockPanel LastChildFill="True">
             <Label DockPanel.Dock="Left" VerticalAlignment="Center" Content="{x:Static r:Resources.LBL_CI_LOAD_PROCESSOR}"/>
-            <t:MTK_PartyPickerControl ContainerElement="stepProc" DockPanel.Dock="Right"/>
+            <t:PartyPickerControlEME ContainerElement="stepProc" DockPanel.Dock="Right"/>
           </DockPanel>
         </Border>
 

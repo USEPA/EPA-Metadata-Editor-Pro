@@ -117,6 +117,8 @@ limitations under the License.​
       <ListBox.ItemTemplate>
         <DataTemplate>
           <StackPanel>
+            <!--org header-->
+            <t:EME_Header/>
             <!-- label -->
             <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.SEC_LINEAGE}"
                 v:Nav.AnchorName="dataLineage" />
