@@ -982,6 +982,22 @@ limitations under the License.​
 					  <for xpath="//distInfo//onLineSrc">
 						<exists xpath="linkage[. != '']" ref="linkage" />
 					  </for>
+
+            <!-- function --><!--
+            <for xpath="//distInfo//onLineSrc">
+              <exists xpath="orFunct[OnFunctCd/@value != '']" ref="function"/>
+            </for>
+
+            --><!-- NAP: protocol --><!--
+            <for xpath="//distributor/distorCont/rpCntInfo/cntOnlineRes">
+              <exists xpath="protocol[. != '']" ref="protocol"/>
+            </for>
+
+            --><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
+            <for xpath="//distributor/distorCont/rpCntInfo">
+              <exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
+            </for>-->
+            
 					</validation>
 				  </page>
 				  <page class="EMEProToolkit.Pages.MTK_EntityAttributeInfo">
