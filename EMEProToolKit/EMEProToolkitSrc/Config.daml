@@ -1120,7 +1120,7 @@ limitations under the License.​
           <button refID="EMEProToolkit_EMEMenu_Items_Button3" size="large" />
           <button refID="EMEProToolkit_TestButton1" size="large" />
         </group>        
-        <group id="EMEProToolkit_Group2" caption="Group 2">          
+        <group id="EMEProToolkit_Group2" caption="Group 2" condition="esri_core_resourcesPane">          
           <button refID="EMEProToolkit_TestButton1" size="large" />
         </group>
       </groups>
