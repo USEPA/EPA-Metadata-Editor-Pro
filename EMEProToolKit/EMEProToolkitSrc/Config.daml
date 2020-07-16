@@ -874,6 +874,18 @@ limitations under the License.​
 					  <for xpath="//prcStep">
 						<exists xpath="stepDesc[. != '']" ref="stepDesc" />
 					  </for>
+
+            <!-- NAP: Within data source, a descripion is required AND extent or a citation must be provided --><!--
+            <for xpath="//dqInfo/dataLineage/dataSource">
+              <exists xpath="srcDesc[. != '']" ref="srcDesc"/>
+            </for>
+            <for xpath="//dqInfo/dataLineage/dataSource">
+              <or ref="dataSource_nap">
+                <exists xpath="srcExt/*[. != '']"/>
+                <exists xpath="srcCitatn/*[. != '']"/>
+              </or>
+            </for>-->
+            
 					  <!-- Within data source, either an extent or a description must be provided -->
 					  <for xpath="//dqInfo/dataLineage/dataSource">
 						<or ref="dataSource">
@@ -899,6 +911,17 @@ limitations under the License.​
 					  <for xpath="//dataLineage//citRespParty/rpCntInfo/cntOnlineRes">
 						<exists xpath="linkage[. != '']" ref="linkage" />
 					  </for>
+
+            <!-- NAP: protocol --><!--
+            <for xpath="//prcStep/stepProc/rpCntInfo/cntOnlineRes">
+              <exists xpath="protocol[. != '']" ref="protocol"/>
+            </for>
+
+            --><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
+            <for xpath="//prcStep/stepProc/rpCntInfo">
+              <exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
+            </for>-->
+            
 					  <!-- bounding box -->
 					  <for xpath="//srcExt//GeoBndBox[*]">
 						<exists xpath="westBL[. != '']" ref="westBL,.,westBL" />
@@ -913,7 +936,7 @@ limitations under the License.​
 						<exists xpath="vertMinVal[. != '']" ref="vertMinVal" />
 						<exists xpath="vertMaxVal[. != '']" ref="vertMaxVal" />
 					  </for>
-					  <!-- data source referense system -->
+					  <!-- data source reference system -->
 					  <for xpath="//dataLineage//srcRefSys[identCode]">
 						<exists xpath="identCode[@code != '']" ref="identCode" />
 					  </for>
