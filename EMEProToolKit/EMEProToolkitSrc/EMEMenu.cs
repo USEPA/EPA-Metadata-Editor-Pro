@@ -36,6 +36,16 @@ namespace EMEProToolkit
         public const string MyStateID = "preview_map_state";
         protected override void OnClick()
         {
+
+            var window = FrameworkApplication.ActiveWindow as ArcGIS.Desktop.Core.IProjectWindow;
+
+            MessageBox.Show(window.SelectionCount.ToString());
+
+            foreach (var pane in FrameworkApplication.Panes)
+            {
+                string z = pane.GetType().ToString();
+            }
+
             string s = FrameworkApplication.ActiveWindow.ToString();
             // int c = Project.Current.SelectedItems.Count;
 
