@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Net;
-using System.IO;
-using System.Diagnostics;
-using System.Xml;
-using System.Windows;
-using System.Windows.Controls;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using ArcGIS.Core.CIM;
 using ArcGIS.Core.Data;
 using ArcGIS.Core.Geometry;
@@ -20,394 +17,146 @@ using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Dialogs;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
+using ArcGIS.Desktop;
 using ArcGIS.Desktop.Mapping;
-using ArcGIS.Desktop.Metadata;
+using ArcGIS.Desktop.Core.Geoprocessing;
 
 namespace EMEProToolkit
 {
-    internal class EMEMenu_UpdateContacts : ArcGIS.Desktop.Framework.Contracts.Button
+    internal class EMEMenu_UpdateContacts : Button
     {
-    XmlDocument _emeConfig = new XmlDocument();
-    XmlDocument _contactsDoc = new XmlDocument();
-    XmlDocument _contactsEsri = new XmlDocument();
-    XmlDocument _contactsEpa = new XmlDocument();
-    XmlDocument _contactsBAK = new XmlDocument();
-    XmlDocument _contactsWEB = new XmlDocument();
-    string _filePathEsri = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ArcGIS\\Descriptions\\";
-    string _filePathEme = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
-
-    protected async Task<string> TestAsync()
-    {
-      await Task.Delay(10);
-      return "true";
-    }
-    protected override void OnClick()
+        protected override void OnClick()
         {
             //TODO: Create/reference Async Process for updating contacts
-            string uri = ArcGIS.Desktop.Core.Project.Current.URI;
-            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show($"Project uri {uri}");
-            Trace.WriteLine("EME file path: " + _filePathEme);
-            CommitChanges();
-            ReloadContacts();
         }
-        private void ReloadContacts()
+    }
+        
+    internal class EMEMenu_UpdateThumbnail : Button
+    {
+        public const string MyStateID = "preview_map_state";
+        protected override void OnClick()
         {
 
-            #region Load EME Configuration File
-            // Load emeConfig.xml
-            try { _emeConfig.Load(_filePathEme + "emeConfig.xml"); }
-                catch (System.IO.FileNotFoundException)
-                {
-                  Trace.WriteLine("Loading emeConfig.xml");
+            var window = FrameworkApplication.ActiveWindow as ArcGIS.Desktop.Core.IProjectWindow;
 
-                  _emeConfig.LoadXml(
-                  "<?xml version=\"1.0\" standalone=\"yes\"?> \n" +
-                  "<emeConfig> \n" +
-                  "  <xs:schema id=\"emeConfig\" xmlns=\"\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\"> \n" +
-                  "    <xs:element name=\"emeControl\"> \n" +
-                  "      <xs:complexType> \n" +
-                  "        <xs:sequence> \n" +
-                  "          <xs:element name=\"controlName\" type=\"xs:string\"/> \n" +
-                  "          <xs:element name=\"param\" maxOccurs=\"10\" minOccurs=\"0\"> \n" +
-                  "            <xs:complexType mixed=\"true\"> \n" +
-                  "              <xs:attribute name=\"label\" type=\"xs:string\" use=\"required\" /> \n" +
-                  "            </xs:complexType> \n" +
-                  "          </xs:element> \n" +
-                  "          <xs:element name=\"url\" maxOccurs=\"10\" minOccurs=\"0\"> \n" +
-                  "            <xs:complexType mixed=\"true\"> \n" +
-                  "              <xs:attribute name=\"label\" type=\"xs:string\" use=\"required\" /> \n" +
-                  "            </xs:complexType> \n" +
-                  "          </xs:element> \n" +
-                  "          <xs:element name=\"date\" maxOccurs=\"10\" minOccurs=\"0\"> \n" +
-                  "            <xs:complexType mixed=\"true\"> \n" +
-                  "              <xs:attribute name=\"label\" type=\"xs:string\" use=\"required\" /> \n" +
-                  "            </xs:complexType> \n" +
-                  "          </xs:element> \n" +
-                  "          <xs:element name=\"required\" maxOccurs=\"10\" minOccurs=\"0\"> \n" +
-                  "            <xs:complexType mixed=\"true\"> \n" +
-                  "              <xs:attribute name=\"label\" type=\"xs:string\" use=\"required\" /> \n" +
-                  "            </xs:complexType> \n" +
-                  "          </xs:element> \n" +
-                  "        </xs:sequence> \n" +
-                  "      </xs:complexType> \n" +
-                  "    </xs:element> \n" +
-                  "    <xs:element name=\"emeControl\"> \n" +
-                  "      <xs:complexType> \n" +
-                  "        <xs:choice minOccurs=\"0\" maxOccurs=\"unbounded\"> \n" +
-                  "          <xs:element ref=\"emeControl\" /> \n" +
-                  "        </xs:choice> \n" +
-                  "      </xs:complexType> \n" +
-                  "    </xs:element> \n" +
-                  "  </xs:schema> \n" +
-                  "  <emeControl> \n" +
-                  "    <controlName>Contacts Manager</controlName> \n" +
-                  "    <param label=\"Contacts Source\">EPA Contact</param> \n" +
-                  "    <url label=\"Contacts URL\">https://edg.epa.gov/EME/contacts.xml</url> \n" +
-                  "    <date label=\"Local Cache\">2010-06-27T12:00:00-07:00</date> \n" +
-                  "  </emeControl> \n" +
-                  "</emeConfig>");
-                }
-                #endregion
+            MessageBox.Show(window.SelectionCount.ToString());
 
-                var directoryName = _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/param").InnerText;
-                var directoryUrl = _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/url").InnerText;
-                TimeSpan syncAge = ((DateTime.Now) - (DateTime.Parse(_emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/date").InnerText)));
-                var syncDays = syncAge.ToString("d'd 'h'h 'm'm 's's'");
+            foreach (var pane in FrameworkApplication.Panes)
+            {
+                string z = pane.GetType().ToString();
+            }
 
-                // Check to see if local file is older than 12 hours:
-                bool dbExpired = syncAge > (new TimeSpan(0, 12, 0, 0));
-                // Check if contacts.bak exists
-                // this is created during LoadList. If LoadList crashes, then contacts.xml will be corrupted
-                // replace contacts.xml with contacts.bak
-                if (File.Exists(_filePathEsri + "contacts.bak"))
-                {
-                  File.Delete(_filePathEsri + "contacts.bak");
-                  File.Copy(_filePathEsri + "contacts.bak", _filePathEsri + "contacts.xml");
-                  File.Delete(_filePathEsri + "contacts.back");
-                }
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(directoryUrl);
-                request.Timeout = 25000;
-                //request.Timeout = 15000;
-                request.Method = "HEAD"; //test URL without downloading the content
-                if (1==1)
-                //if (syncAge > (new TimeSpan(0, 12, 0, 0)))
-                {
-                  //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nLoading contacts from \"" + directoryName + "\"\n (" + directoryUrl + ")", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
-                  try
-                  {
-                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                    {
-                      if (response.StatusCode.ToString() == "OK")
-                      {
-                        // Return contacts.xml Date Modified
-                        try { _contactsWEB.Load(directoryUrl); }
-                        catch (System.IO.FileNotFoundException)
-                        {
-                          _contactsWEB.LoadXml(
-                          "<contacts> \n" +
-                          "  <contact> \n" +
-                          "    <editorSource></editorSource> \n" +
-                          "    <editorDigest></editorDigest> \n" +
-                          "    <rpIndName></rpIndName> \n" +
-                          "    <rpOrgName></rpOrgName> \n" +
-                          "    <rpPosName></rpPosName> \n" +
-                          "    <editorSave></editorSave> \n" +
-                          "    <rpCntInfo></rpCntInfo> \n" +
-                          "  </contact> \n" +
-                          "</contacts>");
-                        }
-                        _contactsWEB.Save(_filePathEme + "contacts.xml");
+            string s = FrameworkApplication.ActiveWindow.ToString();
+            // int c = Project.Current.SelectedItems.Count;
 
-                        // Add timestamp to config file
-                        _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/date").InnerText = DateTime.Now.ToString("o");
-                        _emeConfig.Save(_filePathEme + "emeConfig.xml");
-                      }
-                      else
-                      {
-                        MessageBoxResult webResponse = System.Windows.MessageBox.Show("Error loading contacts from " + directoryUrl + "." + "\n" + "EME contacts will be loaded from local cache.", "EME 5.0 Web Request", MessageBoxButton.OK, MessageBoxImage.Information);
-                      }
-                    }
-                  }
-                  catch (Exception weberror)
-                  {
-                    {
-                      MessageBoxResult result = System.Windows.MessageBox.Show(weberror.Message + "\n" + "EME contacts will be loaded from local cache.", "EME 5.0 Web Request", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                  }
-                }
-                else
-                {
-                  //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nContacts will be loaded from local cache.", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+            foreach (var item in Project.Current.SelectedItems)
+            {
+                MessageBox.Show(item.Type);
 
-                try { _contactsBAK.Load(_filePathEsri + "contacts.xml"); }
-                catch (System.IO.FileNotFoundException)
-                {
-                  _contactsBAK.LoadXml(
-                  "<contacts> \n" +
-                  "  <contact> \n" +
-                  "    <editorSource></editorSource> \n" +
-                  "    <editorDigest></editorDigest> \n" +
-                  "    <rpIndName></rpIndName> \n" +
-                  "    <rpOrgName></rpOrgName> \n" +
-                  "    <rpPosName></rpPosName> \n" +
-                  "    <editorSave></editorSave> \n" +
-                  "    <rpCntInfo></rpCntInfo> \n" +
-                  "  </contact> \n" +
-                  "</contacts>");
-                }
-                // save backup of user contacts.xml
-                _contactsBAK.Save(_filePathEsri + "contacts.bak");
+            }
+                        
 
-                try { _contactsEsri.Load(_filePathEsri + "contacts.xml"); }
-                catch (System.IO.FileNotFoundException)
-                {
-                  _contactsEsri.LoadXml(
-                  "<contacts> \n" +
-                  "  <contact> \n" +
-                  "    <editorSource></editorSource> \n" +
-                  "    <editorDigest></editorDigest> \n" +
-                  "    <rpIndName></rpIndName> \n" +
-                  "    <rpOrgName></rpOrgName> \n" +
-                  "    <rpPosName></rpPosName> \n" +
-                  "    <editorSave></editorSave> \n" +
-                  "    <rpCntInfo></rpCntInfo> \n" +
-                  "  </contact> \n" +
-                  "</contacts>");
-                }
-
-                try { _contactsEpa.Load(_filePathEme + "contacts.xml"); }
-                catch (System.IO.FileNotFoundException)
-                {
-                  _contactsEpa.LoadXml(
-                  "<contacts> \n" +
-                  "  <contact> \n" +
-                  "    <editorSource></editorSource> \n" +
-                  "    <editorDigest></editorDigest> \n" +
-                  "    <rpIndName></rpIndName> \n" +
-                  "    <rpOrgName></rpOrgName> \n" +
-                  "    <rpPosName></rpPosName> \n" +
-                  "    <editorSave></editorSave> \n" +
-                  "    <rpCntInfo></rpCntInfo> \n" +
-                  "  </contact> \n" +
-                  "</contacts>");
-                }
-
-                // new document
-                XmlDocument cloneMerge = new XmlDocument();
-
-                #region This method took 8.66 seconds to load contacts
-                //try { cloneMerge.Load(_filePathEsri + "contacts.cfg"); }
-                //catch
-                //{
-                //    MessageBoxResult contactsTest = MessageBox.Show("Could not load contacts.cfg", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
-                //}
-                #endregion
-
-                #region This takes 8.00 seconds to load
-                XmlNode contactsNodeMerge = cloneMerge.CreateElement("contacts");
-                cloneMerge.AppendChild(contactsNodeMerge);
-
-                // Populate contacts list with local contacts.xml and Agency Directory
-                var listEsri = _contactsEsri.SelectNodes("//contact");
-                var listEpa = _contactsEpa.SelectNodes("//contact");
-                StringBuilder sb2 = new StringBuilder();
-                foreach (XmlNode child in listEsri)
-                {
-                  // remove editorSource
-                  XmlNode e1 = child.SelectSingleNode("editorSource");
-                  if (null != e1)
-                  {
-                    e1.InnerText = "My Contacts";
-                  }
-
-                  e1 = child.SelectSingleNode("editorDigest");
-                  if (null != e1)
-                  {
-                    string digest = Utils.Utils.GeneratePartyKey(child);
-                    e1.InnerText = digest;
-                  }
-
-                  // save back localuser editorSource
-                  sb2.Append("<contact>");
-                  sb2.Append(child.InnerXml);
-                  sb2.Append("</contact>");
-                }
-                foreach (XmlNode child in listEpa)
-                {
-                  // remove editorSource
-                  XmlNode e2 = child.SelectSingleNode("editorSource");
-                  if (null != e2)
-                  {
-                    e2.InnerText = directoryName;
-                  }
-
-                  e2 = child.SelectSingleNode("editorDigest");
-                  if (null != e2)
-                  {
-                    string digest = Utils.Utils.GeneratePartyKey(child);
-                    e2.InnerText = digest;
-                  }
-
-                  e2 = child.SelectSingleNode("editorSave");
-                  if (null != e2)
-                  {
-                    e2.InnerText = "False";
-                  }
-
-                  // save back epa editorSource
-                  sb2.Append("<contact>");
-                  sb2.Append(child.InnerXml);
-                  sb2.Append("</contact>");
-                }
-
-                // append to clone
-                contactsNodeMerge.InnerXml = sb2.ToString();
-                #endregion
-
-                // save to file
-                cloneMerge.Save(Utils.Utils.GetContactsFileLocation());
-                //cloneMerge.Save(_filePathEsri + "contacts.cfg");
+            //IProjectWindow ipv = ArcGIS.Desktop.Core.IProjectWindow;
+            var commandId = @"esri_core_previewCaptureThumbnail";
+            var iCommand = FrameworkApplication.GetPlugInWrapper(commandId) as ICommand;
+            //if (iCommand != null)
+            //{
+            //    if (iCommand.CanExecute(null)) iCommand.Execute(null);
+            //    System.Windows.MessageBox.Show("it worked?");
+            //}
 
 
-                // generate contact list
-                //contactsListBox.ItemsSource = Utils.Utils.GenerateContactsList(_contactsDoc, this.DataContext);
+            string f = FrameworkApplication.State.ToString();
+            System.Windows.MessageBox.Show(s);
+            //System.Windows.MessageBox.Show(c.ToString());
 
-                // restore contacts.xml to original state
-                _contactsBAK.Save(Utils.Utils.GetContactsFileLocation());
-
-                // contacts.xml restored successfully. It is now safe to delete BAK file.
-                if (File.Exists(_filePathEsri + "contacts.bak"))
-                {
-                  File.Delete(_filePathEsri + "contacts.bak");
-                }
-                Trace.WriteLine("End of ReloadContacts()");
-
-                //_contactsDoc = new XmlDocument();
-                //contactsListBox.ItemsSource = Utils.Utils.GenerateContactsList(_contactsDoc, this.DataContext);
-
-                //var mdModule = FrameworkApplication.FindModule("esri_metadata_module") as IMetadataEditorHost;
-                //if (mdModule != null)
-                //  mdModule.AddCommitPage(this);
         }
-
-        protected void CommitChanges()
-        {
-        Trace.WriteLine("CommitChanges()");
-          //if (!_isContactsListDirty)
-          //    return;
-
-          if (null == _contactsDoc)
-            return;
-
-          // new document
-          XmlDocument clone = new XmlDocument();
-          XmlNode contactsNode = clone.CreateElement("contacts");
-          clone.AppendChild(contactsNode);
-
-          // write back out the contacts marked saved
-          var list = _contactsDoc.SelectNodes("//contact[editorSave='True']");
-          StringBuilder sb = new StringBuilder();
-
-          foreach (XmlNode child in list)
-          {
-            // remove elements
-            //
-            XmlNode e = child.SelectSingleNode("editorSource");
-            if (null != e)
-            {
-              child.RemoveChild(e);
-            }
-
-            e = child.SelectSingleNode("editorDigest");
-            if (null != e)
-            {
-              child.RemoveChild(e);
-            }
-
-            // remove role
-            //
-            e = child.SelectSingleNode("role");
-            if (null != e)
-            {
-              child.RemoveChild(e);
-            }
-
-            // save back unique key
-            string digest = Utils.Utils.GeneratePartyKey(child);
-            sb.Append("<contact>");
-            sb.Append("<editorSource>external</editorSource>");
-            sb.Append("<editorDigest>");
-            sb.Append(digest);
-            sb.Append("</editorDigest>");
-            sb.Append(child.InnerXml);
-            sb.Append("</contact>");
-          }
-
-          // append to clone
-          contactsNode.InnerXml = sb.ToString();
-
-          // save to file
-          string file = Utils.Utils.GetContactsFileLocation();
-          clone.Save(file);
-        }
-
     }
 
-    internal class EMEMenu_button2 : ArcGIS.Desktop.Framework.Contracts.Button
+    internal class EMEMenu_clearMD : Button
+    {
+        protected override void OnClick()
+        {            
+            try
+            {                    
+                string j = "";
+                var arguments = Geoprocessing.MakeValueArray(j);
+                string toolpath = @"C:\EMESolutions\ProEmeTools\NotPyToolbox.tbx\Script";
+                Geoprocessing.OpenToolDialog(toolpath, null);
+
+                #region  Exmample for calling python
+
+                //// Inform user that add-in is about to call Python script.
+                //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Click OK to start script, and wait for completion messagebox.", "Info");
+                //// Create and format path to Pro
+                //var pathProExe = System.IO.Path.GetDirectoryName((new System.Uri(Assembly.GetEntryAssembly().CodeBase)).AbsolutePath);
+                //if (pathProExe == null) return;
+                //pathProExe = Uri.UnescapeDataString(pathProExe);
+                //pathProExe = System.IO.Path.Combine(pathProExe, @"Python\envs\arcgispro-py3");
+                //// Create and format path to Python
+                //var pathPython = System.IO.Path.GetDirectoryName((new System.Uri(Assembly.GetExecutingAssembly().CodeBase)).AbsolutePath);
+                //if (pathPython == null) return;
+                //pathPython = Uri.UnescapeDataString(pathPython);
+                //// Create and format process command string.
+                //// NOTE:  Path to Python script is below, "C:\temp\RunPython.py", which can be kept or updated based on the location you place it.
+                //var myCommand = string.Format(@"/c """"{0}"" ""{1}""""",
+                //    System.IO.Path.Combine(pathProExe, "python.exe"),
+                //    System.IO.Path.Combine(pathPython, @"C:\EMESolutions\ProEmeTools\clearMd.py"));
+                //// Create process start info, with instruction settings
+                //var procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", myCommand);
+                //procStartInfo.RedirectStandardOutput = true;
+                //procStartInfo.RedirectStandardError = true;
+                //procStartInfo.UseShellExecute = false;
+                //procStartInfo.CreateNoWindow = true;
+                //// Create process and start it
+                //System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                //proc.StartInfo = procStartInfo;
+                //proc.Start();
+                //// Create and format result string
+                //string result = proc.StandardOutput.ReadToEnd();
+                //string error = proc.StandardError.ReadToEnd();
+                //if (!string.IsNullOrEmpty(error)) result += string.Format("{0} Error: {1}", result, error);
+                //// Show result string
+                //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show(result, "Info");
+
+                #endregion
+            }
+
+            catch (Exception exc)
+            {
+                // Catch any exception found and display in a message box
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Exception caught while trying to run Python tool: " + exc.Message);
+                return;
+            }
+            
+
+
+        }
+    }
+
+    internal class EMEMenu_upgradeFgdcMD : Button
     {
         protected override void OnClick()
         {
-            string bt2 = "This is button number 2";
-            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show($"Which button?: {bt2}");
+
         }
+
     }
 
-    internal class EMEMenu_button3 : ArcGIS.Desktop.Framework.Contracts.Button
-  {
+    internal class EMEMenu_importMD : Button
+    {
         protected override void OnClick()
         {
+
+        }
+
+    }
+    internal class EMEMenu_exportMD : Button
+    {
+        protected override void OnClick()
+        {
+
+
         }
     }
-
 }
