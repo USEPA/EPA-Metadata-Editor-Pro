@@ -68,8 +68,8 @@ namespace EMEProToolkit
         private void OnProjectOpened(ProjectEventArgs obj) //Project Opened event handler      
         {
             //do on open...
-            EMEMenu_UpdateContacts updateContacts = new EMEMenu_UpdateContacts();
-            updateContacts.LoadContactsAsync(checksyncage: true);
+            var AsyncContacts = new AsyncContacts();
+            AsyncContacts.LoadContactsAsync(checksyncage: true);
         }
 
         protected override void Uninitialize() //unsubscribe to the project opened event      

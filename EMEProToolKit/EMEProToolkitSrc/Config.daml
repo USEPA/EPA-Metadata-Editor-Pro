@@ -558,10 +558,25 @@ limitations under the License.​
 				  </page>
 				  <page class="EMEProToolkit.Pages.MTK_ReferenceSystem">
 					<validation>
+            <!--This was in EME5-->
+            <!-- Spatial Reference system identifier required --><!--
+            <for xpath="//metadata">
+              <exists xpath="//refSysInfo//RefSystem[*]" ref="RefSystem_REQ"/>
+            </for>
+
+            --><!-- NAP: a reference system is mandatory if the spatial type is 001, 002, or 004 --><!--
+            <for xpath="//dataIdInfo/spatRpType/SpatRepTypCd[@value = '001' or @value = '002' or @value = '004']">
+              <exists xpath="//refSysInfo//refSysID" ref="RefSystem_REQ"/>
+            </for>-->
 					  <!-- reference system ID -->
 					  <for xpath="//RefSystem">
 						<exists xpath="refSysID/identCode[@code != '']" ref="refSysID" />
+
+              <!-- NAP: dimension required --><!--
+              <exists xpath=".[@dimension != '']" ref="RefSystem"/>-->
+              
 					  </for>
+            
 					  <!-- identifier authority citation -->
 					  <for xpath="//refSysInfo//identAuth[*]">
 						<exists xpath="resTitle[. != '']" ref="resTitle" />
@@ -585,7 +600,17 @@ limitations under the License.​
 					  <for xpath="//refSysInfo//identAuth//citRespParty/rpCntInfo/cntOnlineRes">
 						<exists xpath="linkage[. != '']" ref="linkage" />
 					  </for>
-					</validation>
+
+            <!-- NAP: protocol --><!--
+            <for xpath="//refSysInfo//identAuth//citRespParty/rpCntInfo/cntOnlineRes">
+              <exists xpath="protocol[. != '']" ref="protocol"/>
+            </for>
+            --><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
+            <for xpath="//refSysInfo//identAuth//citRespParty/rpCntInfo">
+              <exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
+            </for>-->
+
+          </validation>
 				  </page>
 				  <page class="EMEProToolkit.Pages.MTK_SpatialRepresentation">
 					<validation>
@@ -849,6 +874,18 @@ limitations under the License.​
 					  <for xpath="//prcStep">
 						<exists xpath="stepDesc[. != '']" ref="stepDesc" />
 					  </for>
+
+            <!-- NAP: Within data source, a descripion is required AND extent or a citation must be provided --><!--
+            <for xpath="//dqInfo/dataLineage/dataSource">
+              <exists xpath="srcDesc[. != '']" ref="srcDesc"/>
+            </for>
+            <for xpath="//dqInfo/dataLineage/dataSource">
+              <or ref="dataSource_nap">
+                <exists xpath="srcExt/*[. != '']"/>
+                <exists xpath="srcCitatn/*[. != '']"/>
+              </or>
+            </for>-->
+            
 					  <!-- Within data source, either an extent or a description must be provided -->
 					  <for xpath="//dqInfo/dataLineage/dataSource">
 						<or ref="dataSource">
@@ -874,6 +911,17 @@ limitations under the License.​
 					  <for xpath="//dataLineage//citRespParty/rpCntInfo/cntOnlineRes">
 						<exists xpath="linkage[. != '']" ref="linkage" />
 					  </for>
+
+            <!-- NAP: protocol --><!--
+            <for xpath="//prcStep/stepProc/rpCntInfo/cntOnlineRes">
+              <exists xpath="protocol[. != '']" ref="protocol"/>
+            </for>
+
+            --><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
+            <for xpath="//prcStep/stepProc/rpCntInfo">
+              <exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
+            </for>-->
+            
 					  <!-- bounding box -->
 					  <for xpath="//srcExt//GeoBndBox[*]">
 						<exists xpath="westBL[. != '']" ref="westBL,.,westBL" />
@@ -888,7 +936,7 @@ limitations under the License.​
 						<exists xpath="vertMinVal[. != '']" ref="vertMinVal" />
 						<exists xpath="vertMaxVal[. != '']" ref="vertMaxVal" />
 					  </for>
-					  <!-- data source referense system -->
+					  <!-- data source reference system -->
 					  <for xpath="//dataLineage//srcRefSys[identCode]">
 						<exists xpath="identCode[@code != '']" ref="identCode" />
 					  </for>
@@ -934,6 +982,22 @@ limitations under the License.​
 					  <for xpath="//distInfo//onLineSrc">
 						<exists xpath="linkage[. != '']" ref="linkage" />
 					  </for>
+
+            <!-- function --><!--
+            <for xpath="//distInfo//onLineSrc">
+              <exists xpath="orFunct[OnFunctCd/@value != '']" ref="function"/>
+            </for>
+
+            --><!-- NAP: protocol --><!--
+            <for xpath="//distributor/distorCont/rpCntInfo/cntOnlineRes">
+              <exists xpath="protocol[. != '']" ref="protocol"/>
+            </for>
+
+            --><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
+            <for xpath="//distributor/distorCont/rpCntInfo">
+              <exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
+            </for>-->
+            
 					</validation>
 				  </page>
 				  <page class="EMEProToolkit.Pages.MTK_EntityAttributeInfo">
@@ -1079,11 +1143,13 @@ limitations under the License.​
 	</updateCategory>
   </categories>
   <modules>
-    <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="true" caption="Metadata Toolkit Module">
+    <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="false" caption="Metadata Toolkit Module">
       <tabs>
-        <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">
+        <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">          
           <group refID="EMEProToolkit_Group1" />
           <group refID="EMEProToolkit_Group2" />
+          <group refID="EMEProToolkit_Group4" />
+          <group refID="EMEProToolkit_Group3" />
         </tab>
       </tabs>
       <controls>
@@ -1094,11 +1160,28 @@ limitations under the License.​
                 condition="SyncContactsCondition">
           <tooltip heading="Update Contacts">Sync Online Contacts<disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_Button2" caption="Menu Button 2" className="EMEMenu_button2" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
-          <tooltip heading="Toggle the state of the update contacts button">ToolTip<disabledText /></tooltip>
+        <button id="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" caption="Update Thumbnail" className="EMEMenu_UpdateThumbnail" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
+          <tooltip heading="Update Thumbnail">Click to update the thumbnail for a feature class<disabledText />Disabled Text here</tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_Button3" caption="Menu Button 3" className="EMEMenu_button3" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
-          <tooltip heading="Menu Button 3">ToolTip<disabledText /></tooltip>
+        <button id="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" caption="FGDC to ArcGIS" className="EMEMenu_upgradeFgdcMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUpgrade16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUpgrade32.png">
+          <tooltip heading="Upgrade FGDC CSDGM to ArcGIS">ToolTip<disabledText /></tooltip>
+        </button>
+        <button id="EMEProToolkit_EMEMenu_Items_clearMD" caption="Clear Metadata" className="EMEMenu_clearMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/DeleteJob16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/DeleteJob32.png">
+          <tooltip heading="Something Here">ToolTip<disabledText /></tooltip>
+        </button>
+         <button id="EMEProToolkit_EMEMenu_Items_importMD" caption="Import Metadata" className="EMEMenu_importMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobCreate16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobCreate32.png">
+          <tooltip heading="Something Here">ToolTip<disabledText /></tooltip>
+        </button>
+        <button id="EMEProToolkit_EMEMenu_Items_exportMD" caption="Export Metadata" className="EMEMenu_exportMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport32.png">
+          <tooltip heading="Something Here">ToolTip<disabledText /></tooltip>
         </button>
         <button id="EMEProToolkit_TestButton1" caption="TestButton 1" className="TestButton1" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue32.png">
           <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
@@ -1112,17 +1195,28 @@ limitations under the License.​
         </menu>
       </menus>-->
       <groups>
-        
-        <group id="EMEProToolkit_Group1" caption="Group 1">
-          <!--<menu refID="EMEProToolkit_EMEMenu" size="middle" />-->
+        <group id="EMEProToolkit_Group1" caption="">
+          <button refID="esri_core_showProjectView" />
+        </group>
+        <group id="EMEProToolkit_Group2" caption="EmeDb Tools" condition="esri_core_resourcesPane">          
+          <!--<menu refID="EMEProToolkit_EMEMenu" size="middle" />-->          
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" size="large" />
-          <button refID="EMEProToolkit_EMEMenu_Items_Button2" size="large" />
-          <button refID="EMEProToolkit_EMEMenu_Items_Button3" size="large" />
-          <button refID="EMEProToolkit_TestButton1" size="large" />
-        </group>        
-        <group id="EMEProToolkit_Group2" caption="Group 2" condition="esri_core_resourcesPane">          
           <button refID="EMEProToolkit_TestButton1" size="large" />
         </group>
+        <group id="EMEProToolkit_Group3" caption="Metadata Tools" condition="esri_core_resourcesPane">
+          <button refID="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_clearMD" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_importMD" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_exportMD" size="large" />
+        
+        </group>
+        <group id="EMEProToolkit_Group4" caption="Thumbnails" condition="esri_core_resourcesPane">          
+          <gallery refID="esri_mapping_previewBasemapGallery" size="large"/>          
+          <button refID="esri_core_previewCaptureThumbnail"/>          
+          <button refID="esri_core_previewShowBasemap"/>
+          <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />
+        </group>
+     
       </groups>
     </insertModule>
   </modules>

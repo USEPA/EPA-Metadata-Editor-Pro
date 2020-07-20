@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncContacts.cs" />
     <Compile Include="Daml.cs" />
     <Compile Include="EMEMenu.cs" />
     <Compile Include="Pages\BooleanValueSync.xaml.cs">
