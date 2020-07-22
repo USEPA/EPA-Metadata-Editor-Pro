@@ -1018,6 +1018,11 @@ limitations under the License.​
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport32.png">
           <tooltip heading="Something Here">ToolTip<disabledText /></tooltip>
         </button>
+        <button id="EMEProToolkit_EMEMenu_Items_test" caption="Export Metadata" className="EMEMenu_test" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport32.png">
+          <tooltip heading="Something Here">ToolTip<disabledText /></tooltip>
+        </button>
         <button id="EMEProToolkit_TestButton1" caption="TestButton 1" className="TestButton1" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue32.png">
           <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
         </button>
@@ -1032,6 +1037,7 @@ limitations under the License.​
       <groups>
         <group id="EMEProToolkit_Group1" caption="">
           <button refID="esri_core_showProjectView" />
+          <button refID="EMEProToolkit_EMEMenu_Items_test" />
         </group>
         <group id="EMEProToolkit_Group2" caption="EmeDb Tools" condition="esri_core_resourcesPane">          
           <!--<menu refID="EMEProToolkit_EMEMenu" size="middle" />-->          

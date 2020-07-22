@@ -30,6 +30,45 @@ namespace EMEProToolkit
             //TODO: Create/reference Async Process for updating contacts
         }
     }
+    internal class EMEMenu_test : Button
+    {
+        protected override async void OnClick()
+        {
+            await QueuedTask.Run(() =>
+            {
+                var newMap = MapFactory.Instance.CreateMap("junk", basemap: Basemap.ProjectDefault);
+                //TODO: use the map...
+                //ProApp.Panes.CreateMapPaneAsync(newMap);
+
+                //MapView
+
+                //string s = MapView.Active.Map.Name;
+                //MessageBox.Show(s);
+
+                //Map j = MapView.Active.Map;
+
+            });
+
+            //string s = MapView.Active.Map.Name;
+            //MessageBox.Show(s);
+
+
+            //Map newMap = MapFactory.Instance.CreateMap("junk", MapType.Map, MapViewingMode.Map, Basemap.Streets);
+            //string url = @"http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer";
+            //Uri uri = new Uri(url);
+            //LayerFactory.Instance.CreateLayer(uri, newMap);
+
+
+
+            //Coordinate2D ll = new Coordinate2D(1, 0.5);
+            //Coordinate2D ur = new Coordinate2D(13, 9);
+            //Envelope mapEnv = EnvelopeBuilder.CreateEnvelope(ll, ur);
+
+            //MessageBox.Show(newMap.Name.ToString());
+
+
+        }
+    }
         
     internal class EMEMenu_UpdateThumbnail : Button
     {
@@ -49,9 +88,11 @@ namespace EMEProToolkit
             string s = FrameworkApplication.ActiveWindow.ToString();
             // int c = Project.Current.SelectedItems.Count;
 
+
             foreach (var item in Project.Current.SelectedItems)
             {
                 MessageBox.Show(item.Type);
+                               
 
             }
                         
