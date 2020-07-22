@@ -1160,7 +1160,9 @@ limitations under the License.​
                 condition="SyncContactsCondition">
           <tooltip heading="Update Contacts">Sync Online Contacts<disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" caption="Update Thumbnail" className="EMEMenu_UpdateThumbnail" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png">
+        <button id="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" caption="Update Thumbnail" className="EMEMenu_UpdateThumbnail" loadOnClick="true" 
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ItemThumbnailCreate16.png" 
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ItemThumbnailCreate32.png">
           <tooltip heading="Update Thumbnail">Click to update the thumbnail for a feature class<disabledText />Disabled Text here</tooltip>
         </button>
         <button id="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" caption="FGDC to ArcGIS" className="EMEMenu_upgradeFgdcMD" loadOnClick="true"
@@ -1183,7 +1185,7 @@ limitations under the License.​
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport32.png">
           <tooltip heading="Something Here">ToolTip<disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_TestButton1" caption="TestButton 1" className="TestButton1" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue32.png">
+        <button id="EMEProToolkit_TestButton1" caption="TestButton 1" className="EMEMenu_TESTBUTTON" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue32.png">
           <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
         </button>
       </controls>
@@ -1212,7 +1214,7 @@ limitations under the License.​
         </group>
         <group id="EMEProToolkit_Group4" caption="Thumbnails" condition="esri_core_resourcesPane">          
           <gallery refID="esri_mapping_previewBasemapGallery" size="large"/>          
-          <button refID="esri_core_previewCaptureThumbnail"/>          
+          <!--<button refID="esri_core_previewCaptureThumbnail"/>-->          
           <button refID="esri_core_previewShowBasemap"/>
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />
         </group>
@@ -1221,6 +1223,9 @@ limitations under the License.​
     </insertModule>
   </modules>
   <conditions>
+    <insertCondition id="eme_state_condition" caption="EME State">
+      <state id="preview_map_state"/>
+    </insertCondition>
     <!--update contacts button state-->
     <insertCondition id="SyncContactsCondition" caption="Sync Contacts State">
       <not>
