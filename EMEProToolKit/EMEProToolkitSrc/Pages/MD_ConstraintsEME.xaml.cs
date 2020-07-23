@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright 2019 Esri
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11,26 +11,19 @@ See the License for the specific language governing permissions and
 limitations under the License.​
 */
 
-using System.Diagnostics;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 using ArcGIS.Desktop.Metadata.Editor.Pages;
 
 namespace EMEProToolkit.Pages
 {
-    /// <summary>
-    /// Interaction logic for MTK_EX_Extent.xaml
-    /// </summary>
-    internal partial class MTK_EX_Extent : EditorPage
+  /// <summary>
+  /// Interaction logic for MTK_MD_Constraints.xaml
+  /// </summary>
+  internal partial class MD_ConstraintsEME : EditorPage
+  {
+    public MD_ConstraintsEME()
     {
-        public MTK_EX_Extent()
-        {
-            InitializeComponent();
-        }
-        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
-            e.Handled = true;
-        }
+      InitializeComponent();
     }
+  }
 }

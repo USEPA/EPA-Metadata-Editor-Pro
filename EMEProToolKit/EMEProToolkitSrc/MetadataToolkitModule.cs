@@ -29,6 +29,7 @@ using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Dialogs;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Mapping;
+using ArcGIS.Desktop.Core.Events;
 
 namespace EMEProToolkit
 {
@@ -58,7 +59,24 @@ namespace EMEProToolkit
             //return false to ~cancel~ Application close
             return true;
         }
+        protected override bool Initialize() //Called when the Module is initialized.      
+        {
+            ProjectOpenedEvent.Subscribe(OnProjectOpened); //subscribe to Project opened event          
+            return base.Initialize();
+        }
 
+        private void OnProjectOpened(ProjectEventArgs obj) //Project Opened event handler      
+        {
+            //do on open...
+            var AsyncContacts = new AsyncContacts();
+            AsyncContacts.LoadContactsAsync(checksyncage: true);
+        }
+
+        protected override void Uninitialize() //unsubscribe to the project opened event      
+        {
+            ProjectOpenedEvent.Unsubscribe(OnProjectOpened); //unsubscribe          
+            return;
+        }
         #endregion Overrides
     }
 }

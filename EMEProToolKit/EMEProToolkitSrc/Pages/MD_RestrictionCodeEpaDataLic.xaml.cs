@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright 2019 Esri
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11,26 +11,30 @@ See the License for the specific language governing permissions and
 limitations under the License.​
 */
 
-using System.Diagnostics;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 using ArcGIS.Desktop.Metadata.Editor.Pages;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
+
 
 namespace EMEProToolkit.Pages
 {
-    /// <summary>
-    /// Interaction logic for MTK_EX_Extent.xaml
-    /// </summary>
-    internal partial class MTK_EX_Extent : EditorPage
+  /// <summary>
+  /// Interaction logic for MTK_MD_RestrictionCodeEpaDataLic.xaml
+  /// </summary>
+  internal partial class MD_RestrictionCodeEpaDataLic : EditorPage
+  {
+    public MD_RestrictionCodeEpaDataLic()
     {
-        public MTK_EX_Extent()
-        {
-            InitializeComponent();
-        }
-        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
-            e.Handled = true;
-        }
+      InitializeComponent();
     }
+    private void lblRestrictCd_Loaded(object sender, RoutedEventArgs e)
+    {
+      tbkRestrictCd.Text = "009";
+      tbkRestrictName.Text = "Unrestricted License";
+      tbkRestrictUrl.Text = "https://edg.epa.gov/EPA_Data_License.html";
+    }
+  }
 }

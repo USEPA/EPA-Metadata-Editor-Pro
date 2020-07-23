@@ -1,4 +1,4 @@
-<!--
+﻿<!--
 Copyright 2019 Esri
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.​
 -->
 
-<p:EditorPage x:Class="EMEProToolkit.Pages.MTK_MD_RestrictionCode" x:ClassModifier="internal" 
+<p:EditorPage x:Class="EMEProToolkit.Pages.MD_RestrictionCodeEpaDataLic" x:ClassModifier="internal" 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -60,44 +60,14 @@ limitations under the License.​
     </Style>
   </UserControl.Resources>
 
-  <!--<Grid>
-    <StackPanel>
-      <ComboBox Loaded="PostProcessComboBoxValues" Style="{DynamicResource EditorHComboBoxStyle}" IsEditable="False"
-          ItemsSource="{Binding Source={StaticResource MD_RestrictionCode}, Path=List}"
-          DisplayMemberPath="."
-          v:Nav.AnchorName="RestrictCd,RestrictCd"
-          SelectedValuePath="@value"
-                AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=MD_RestrictionCode_Code}">
-        <ComboBox.SelectedValue>
-          <e:MetadataBinding XPath="RestrictCd/@value"/>
-        </ComboBox.SelectedValue>
-      </ComboBox>
-
-      --><!-- validate after all anchors are loaded --><!--
-      <v:PageValidateControl/>
-
-    </StackPanel>
-  </Grid>-->
   <Grid>
     <StackPanel>
-      <ComboBox Loaded="PostProcessComboBoxValues" Style="{DynamicResource EditorHComboBoxStyle}" IsEditable="False"
-                      ItemsSource="{Binding Source={StaticResource MD_RestrictionCode}}"
-                      v:Nav.AnchorName="RestrictCd,RestrictCd"
-                      SelectedValuePath="@value"
-                      x:Name="cboRestrictCd" SelectionChanged="cboRestrictCd_SelectionChanged" LostFocus="cboRestrictCd_LostFocus" LostMouseCapture="cboRestrictCd_LostMouseCapture" >
-        <ComboBox.SelectedValue>
-          <e:MetadataBinding XPath="RestrictCd/@value"/>
-        </ComboBox.SelectedValue>
-        <ComboBox.ItemTemplate>
-          <DataTemplate>
-            <DockPanel HorizontalAlignment="{Binding HorizontalAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Mode=OneWayToSource}" LastChildFill="True">
-              <TextBlock x:Name="tbkClassLabel" HorizontalAlignment="Left" Text="{Binding XPath=.}" />
-              <!--<TextBlock x:Name="tbkPODDomain" HorizontalAlignment="Right" Text="{Binding XPath=@podvalue}" FontStyle="Italic" Opacity="0.7" FontSize="10" />-->
-            </DockPanel>
-          </DataTemplate>
-        </ComboBox.ItemTemplate>
-      </ComboBox>
+
+      <Label x:Name="lblRestrictCd" Style="{DynamicResource EditorHLabelNoIdentStyle}" Loaded="lblRestrictCd_Loaded" Content="{e:MetadataBinding XPath=RestrictCd}"/>
+
       <TextBlock x:Name="tbkRestrictName" Style="{DynamicResource TbkHidden}" Text="{e:MetadataBinding XPath=RestrictCd}" />
+      <TextBlock x:Name="tbkRestrictCd" Style="{DynamicResource TbkHidden}" Text="{e:MetadataBinding XPath=RestrictCd/@value}" />
+      <TextBlock x:Name="tbkRestrictUrl" Style="{DynamicResource TbkHidden}" Text="{e:MetadataBinding XPath=othConsts}" />
 
       <!-- validate after all anchors are loaded -->
       <v:PageValidateControl/>

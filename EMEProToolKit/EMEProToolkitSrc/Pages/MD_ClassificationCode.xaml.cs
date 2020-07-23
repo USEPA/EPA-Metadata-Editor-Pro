@@ -13,6 +13,15 @@ limitations under the License.​
 
 using System.Windows.Controls;
 using ArcGIS.Desktop.Metadata.Editor.Pages;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace EMEProToolkit.Pages
 {
@@ -25,5 +34,74 @@ namespace EMEProToolkit.Pages
         {
             InitializeComponent();
         }
+
+    public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+    {
+      if (depObj != null)
+      {
+        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+        {
+          DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+          if (child != null && child is T)
+          {
+            yield return (T)child;
+          }
+
+          foreach (T childOfChild in FindVisualChildren<T>(child))
+          {
+            yield return childOfChild;
+          }
+        }
+      }
     }
+
+    public static childItem FindVisualChild<childItem>(DependencyObject obj)
+        where childItem : DependencyObject
+    {
+      foreach (childItem child in FindVisualChildren<childItem>(obj))
+      {
+        return child;
+      }
+
+      return null;
+    }
+
+    private void cboClassCd_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+      ComboBox cbo = (ComboBox)sender;
+      ContentPresenter contentPresenter = FindVisualChild<ContentPresenter>(cbo);
+      DataTemplate dTemplate = contentPresenter.ContentTemplate;
+      TextBlock textClassLbl = (TextBlock)dTemplate.FindName("tbkClassLabel", contentPresenter);
+      if (textClassLbl != null)
+      {
+        tbkClassName.Text = textClassLbl.Text;
+      }
+    }
+
+    private void cboClassCd_LostFocus(object sender, RoutedEventArgs e)
+    {
+      ComboBox cbo = (ComboBox)sender;
+      ContentPresenter contentPresenter = FindVisualChild<ContentPresenter>(cbo);
+      DataTemplate dTemplate = contentPresenter.ContentTemplate;
+      TextBlock textClassLbl = (TextBlock)dTemplate.FindName("tbkClassLabel", contentPresenter);
+      if (textClassLbl != null)
+      {
+        tbkClassName.Text = textClassLbl.Text;
+      }
+    }
+
+    private void cboClassCd_LostMouseCapture(object sender, MouseEventArgs e)
+    {
+      ComboBox cbo = (ComboBox)sender;
+      ContentPresenter contentPresenter = FindVisualChild<ContentPresenter>(cbo);
+      DataTemplate dTemplate = contentPresenter.ContentTemplate;
+      TextBlock textClassLbl = (TextBlock)dTemplate.FindName("tbkClassLabel", contentPresenter);
+      if (textClassLbl != null)
+      {
+        tbkClassName.Text = textClassLbl.Text;
+      }
+    }
+
+
+  }
 }

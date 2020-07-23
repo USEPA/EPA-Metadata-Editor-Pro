@@ -64,22 +64,26 @@ limitations under the License.​
   </UserControl.Resources>
 
   <Grid Style="{DynamicResource EditorFrontPageStyle}">
-    <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/distInfo}">
-      <ListBox.ItemsPanel>
-        <ItemsPanelTemplate>
-          <StackPanel/>
-        </ItemsPanelTemplate>
-      </ListBox.ItemsPanel>
-      <ListBox.ItemTemplate>
-        <DataTemplate>
-          <StackPanel>
-            <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.SEC_DISTRIBUTION}"/>
-            <!-- distribution section -->
-            <t:MTK_MD_Distribution/>
-          </StackPanel>
-        </DataTemplate>
-      </ListBox.ItemTemplate>
-    </ListBox>
+    <StackPanel>
+      <!-- org header -->
+      <t:EME_Header/>
+      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/distInfo}">
+        <ListBox.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel/>
+          </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel>
+              <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.SEC_DISTRIBUTION}"/>
+              <!-- distribution section -->
+              <t:MTK_MD_Distribution/>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </StackPanel>
   </Grid>
 
 </p:EditorPage>

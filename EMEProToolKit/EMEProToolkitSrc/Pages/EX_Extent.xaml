@@ -164,7 +164,7 @@ limitations under the License.​
         </ListBox.ItemsPanel>
         <ListBox.ItemTemplate>
           <DataTemplate>
-            <Border Style="{DynamicResource EditorBorder2LiteStyle}" >
+            <Border Style="{DynamicResource EditorBorder2LiteStyle}" Background="LemonChiffon">
               <Expander Style="{DynamicResource EditorExpander2Style}" 
                         AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=Ex_Extent_BoundingBoxGroup}">
                 <Expander.Header>
@@ -176,8 +176,18 @@ limitations under the License.​
                             Name="Ex_Extent_BoundingBoxDelete">
                       <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
                     </Button>
-                    <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_EXT_BOX}"/>
-                  </DockPanel>
+                    <!--<Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_EXT_BOX}"/>-->
+                    <Label Style="{DynamicResource EditorHExpanderLabel}">
+                        <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#spatial-extent" RequestNavigate="Hyperlink_RequestNavigate">
+                            <TextBlock Text="{x:Static r:Resources.LBL_EXT_BOX}" FontWeight="Bold"/>
+                        </Hyperlink>
+                    </Label>
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
+                        <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#spatial-extent" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                            <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
+                        </Hyperlink>
+                    </Label>
+                </DockPanel>
                 </Expander.Header>
                 <!-- geographic bounding box -->
                 <t:MTK_EX_GeographicBoundingBox x:Name="boundingBox"/>
@@ -241,8 +251,18 @@ limitations under the License.​
                             Name="EX_Extent_TemporalPeriodDelete">
                       <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
                     </Button>
-                    <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_EXT_TEMP}"/>
-                  </DockPanel>
+                    <!--<Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_EXT_TEMP}"/>-->
+                    <Label Style="{DynamicResource EditorHExpanderLabel}">
+                        <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#temporal-extent" RequestNavigate="Hyperlink_RequestNavigate">
+                            <TextBlock Text="{x:Static r:Resources.LBL_EXT_TEMP}" FontWeight="Bold"/>
+                        </Hyperlink>
+                    </Label>
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
+                        <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#temporal-extent" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                            <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
+                        </Hyperlink>
+                    </Label>
+                </DockPanel>
                 </Expander.Header>
                 <Border Style="{DynamicResource EditorBorderSubStyle}">
                   <t:MTK_TM_Period x:Name="tempExtent"/>

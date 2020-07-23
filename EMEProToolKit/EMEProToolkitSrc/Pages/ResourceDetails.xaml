@@ -209,7 +209,9 @@ limitations under the License.​
 
   <Grid Style="{DynamicResource EditorFrontPageStyle}">
     <StackPanel>
-      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/dataIdInfo[1]}">
+        <!--org header-->
+            <tp:EME_Header/>
+            <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/dataIdInfo[1]}">
         <ListBox.ItemTemplate>
           <DataTemplate>
 

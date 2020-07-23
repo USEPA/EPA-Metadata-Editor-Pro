@@ -63,6 +63,9 @@ limitations under the License.​
 
   <Grid Style="{DynamicResource EditorFrontPageStyle}">
     <StackPanel>
+      <!--org header-->
+      <t:EME_Header/>
+      
       <Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.LBL_RES_MAINT}"/>
       <!-- maintenance info -->
       <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=//dataIdInfo[1]/resMaint[1]}">
