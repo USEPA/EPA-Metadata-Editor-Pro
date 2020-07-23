@@ -1163,7 +1163,7 @@ limitations under the License.​
         <button id="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" caption="Update Thumbnail" className="EMEMenu_UpdateThumbnail" loadOnClick="true" 
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ItemThumbnailCreate16.png" 
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ItemThumbnailCreate32.png">
-          <tooltip heading="Update Thumbnail">Click to update the thumbnail for a feature class<disabledText />Disabled Text here</tooltip>
+          <tooltip heading="Update Thumbnail">Click to update the thumbnail one or many items<disabledText />Disabled Text here</tooltip>
         </button>
         <button id="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" caption="FGDC to ArcGIS" className="EMEMenu_upgradeFgdcMD" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUpgrade16.png"
@@ -1173,25 +1173,27 @@ limitations under the License.​
         <button id="EMEProToolkit_EMEMenu_Items_clearMD" caption="Clear Metadata" className="EMEMenu_clearMD" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/DeleteJob16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/DeleteJob32.png">
-          <tooltip heading="Something Here">ToolTip<disabledText /></tooltip>
+          <tooltip heading="Clear Metadata">Delete Metadata Reference<disabledText /></tooltip>
         </button>
          <button id="EMEProToolkit_EMEMenu_Items_importMD" caption="Import Metadata" className="EMEMenu_importMD" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobCreate16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobCreate32.png">
-          <tooltip heading="Something Here">ToolTip<disabledText /></tooltip>
+          <tooltip heading="Import Metadata">ToolTip<disabledText /></tooltip>
         </button>
         <button id="EMEProToolkit_EMEMenu_Items_exportMD" caption="Export Metadata" className="EMEMenu_exportMD" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport32.png">
-          <tooltip heading="Something Here">ToolTip<disabledText /></tooltip>
+          <tooltip heading="Export Metadata">Export Metadata to...<disabledText /></tooltip>
         </button>
         <button id="EMEProToolkit_EMEMenu_Items_test" caption="Export Metadata" className="EMEMenu_test" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport32.png">
-          <tooltip heading="Something Here">ToolTip<disabledText /></tooltip>
+          <tooltip heading="Export Metadata">ToolTip<disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_TestButton1" caption="TestButton 1" className="TestButton1" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue32.png">
-          <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
+        <button id="EMEProToolkit_TestButton1" caption="Easy Button" className="TestButton1" loadOnClick="true" 
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericNewSparkleLarge16.png" 
+          largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericNewSparkleLarge32.png">
+          <tooltip heading="Create Generic Metadata">Populates Defaults<disabledText /></tooltip>
         </button>
       </controls>
       <!--<menus>
@@ -1209,9 +1211,10 @@ limitations under the License.​
         <group id="EMEProToolkit_Group2" caption="EmeDb Tools" condition="esri_core_resourcesPane">          
           <!--<menu refID="EMEProToolkit_EMEMenu" size="middle" />-->          
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" size="large" />
-          <button refID="EMEProToolkit_TestButton1" size="large" />
+          
         </group>
         <group id="EMEProToolkit_Group3" caption="Metadata Tools" condition="esri_core_resourcesPane">
+          <button refID="EMEProToolkit_TestButton1" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_clearMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_importMD" size="large" />

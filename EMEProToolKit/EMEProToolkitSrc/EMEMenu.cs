@@ -85,7 +85,7 @@ namespace EMEProToolkit
 
             var window = FrameworkApplication.ActiveWindow as ArcGIS.Desktop.Core.IProjectWindow;
 
-            MessageBox.Show(window.SelectionCount.ToString());
+            //MessageBox.Show(window.SelectionCount.ToString());
 
             foreach (var pane in FrameworkApplication.Panes)
             {
@@ -118,7 +118,7 @@ namespace EMEProToolkit
                     var newLayout = LayoutFactory.Instance.CreateLayout(newPage);
                     newLayout.SetName(tempLayout);
 
-                    Map newMap = MapFactory.Instance.CreateMap(tempMap, MapType.Map, MapViewingMode.Map, Basemap.NationalGeographic);
+                    Map newMap = MapFactory.Instance.CreateMap(tempMap, MapType.Map, MapViewingMode.Map, Basemap.Gray);
                     //string url = @"http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer";
                     Uri uri = new Uri(item.Path);
                     var lyr = LayerFactory.Instance.CreateLayer(uri, newMap);
@@ -160,6 +160,7 @@ namespace EMEProToolkit
                     string xxml = item.GetXml();
                     XmlDocument xmldoc = new XmlDocument();
                     xmldoc.LoadXml(xxml);
+                    //todo create new xml if not exist
                     XmlNode root = xmldoc.DocumentElement;
                     XmlNode thumb = root.SelectSingleNode("descendant::Binary/Thumbnail/Data");
                     thumb.InnerText = b64string;
@@ -185,7 +186,7 @@ namespace EMEProToolkit
 
 
             string f = FrameworkApplication.State.ToString();
-            System.Windows.MessageBox.Show(s);
+            //System.Windows.MessageBox.Show(s);
             //System.Windows.MessageBox.Show(c.ToString());
 
         }
@@ -193,13 +194,14 @@ namespace EMEProToolkit
 
     internal class EMEMenu_clearMD : Button
     {
+        private string _pathEmeDb = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
         protected override void OnClick()
         {            
             try
             {                    
                 string j = "";
                 var arguments = Geoprocessing.MakeValueArray(j);
-                string toolpath = @"C:\EMESolutions\ProEmeTools\NotPyToolbox.tbx\Script";
+                string toolpath = @_pathEmeDb+"EPA Pro Metadata Toolbox.tbx\\EPAClearRecord";
                 Geoprocessing.OpenToolDialog(toolpath, null);
 
                 #region  Exmample for calling python
