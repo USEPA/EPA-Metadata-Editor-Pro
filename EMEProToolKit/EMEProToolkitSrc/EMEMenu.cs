@@ -24,6 +24,7 @@ using ArcGIS.Desktop.Layouts;
 using System.Xml;
 using ActiproSoftware.Windows.Controls;
 using System.IO;
+using System.Windows.Controls.Primitives;
 
 namespace EMEProToolkit
 {
@@ -82,112 +83,35 @@ namespace EMEProToolkit
         public const string MyStateID = "preview_map_state";
         protected override void OnClick()
         {
+            var thumbsup = new ThumbnailUpdater();
+            thumbsup.ExportFrameAsync();
 
-            var window = FrameworkApplication.ActiveWindow as ArcGIS.Desktop.Core.IProjectWindow;
+            //var window = FrameworkApplication.ActiveWindow as ArcGIS.Desktop.Core.IProjectWindow;
 
-            //MessageBox.Show(window.SelectionCount.ToString());
+            ////MessageBox.Show(window.SelectionCount.ToString());
 
-            foreach (var pane in FrameworkApplication.Panes)
-            {
-                string z = pane.GetType().ToString();
-            }
-
-            string s = FrameworkApplication.ActiveWindow.ToString();
-            // int c = Project.Current.SelectedItems.Count;
-            foreach (var item in Project.Current.SelectedItems)
-            {
-                QueuedTask.Run(() =>
-                {
-                    string tempLayout = "TempLayout";
-                    string tempMap = "TempMap";
-                    //var newmap = MapFactory.Instance.CreateMap("NewMap", basemap:Basemap.ProjectDefault);
-                    // Create a new CIM page
-                    CIMPage newPage = new CIMPage();
-
-                    // Add properties
-
-                    newPage.Width = 17;
-                    newPage.Height = 11;
-                    newPage.Units = LinearUnit.Inches;
-
-                    // Add rulers
-                    newPage.ShowRulers = true;
-                    newPage.SmallestRulerDivision = 0.5;
-
-                    // Apply the CIM page to a new layout and set name
-                    var newLayout = LayoutFactory.Instance.CreateLayout(newPage);
-                    newLayout.SetName(tempLayout);
-
-                    Map newMap = MapFactory.Instance.CreateMap(tempMap, MapType.Map, MapViewingMode.Map, Basemap.Gray);
-                    //string url = @"http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer";
-                    Uri uri = new Uri(item.Path);
-                    var lyr = LayerFactory.Instance.CreateLayer(uri, newMap);
-                    string thumbpath = String.Format("C:\\Users\\jmaxm\\Desktop\\{0}.jpg", lyr.Name);
-
-
-                    // Build a map frame geometry / envelope
-                    Coordinate2D ll = new Coordinate2D(1, 0.5);
-                    Coordinate2D ur = new Coordinate2D(13, 9);
-                    Envelope mapEnv = EnvelopeBuilder.CreateEnvelope(ll, ur);
-
-                    // Create a map frame and add it to the layout
-                    MapFrame newMapframe = LayoutElementFactory.Instance.CreateMapFrame(newLayout, mapEnv, newMap);
-                    newMapframe.SetName("Map Frame");
-
-                    // Create and set the camera
-                    //Camera camera = newMapframe.Camera;
-                    //camera.X = -118.465;
-                    //camera.Y = 33.988;
-                    //camera.Scale = 30000;
-                    newMapframe.SetCamera(lyr.QueryExtent());
-                    //newMapframe.ZoomTo(lyr.QueryExtent());
-
-                    //Create JPEG format with appropriate settings
-                    JPEGFormat JPEG = new JPEGFormat();
-                    JPEG.HasWorldFile = false;
-                    JPEG.Resolution = 300;
-                    JPEG.OutputFileName = thumbpath;
-                    //Export MapFrame
-                    //Layout lyt = layoutItem.GetLayout(); //Loads and returns the layout associated with a LayoutItem
-                    newMapframe.Export(JPEG);
-                    LayoutProjectItem layoutItem = Project.Current.GetItems<LayoutProjectItem>().FirstOrDefault(itm => itm.Name.Equals(tempLayout));
-                    Project.Current.RemoveItem(Project.Current.GetItems<LayoutProjectItem>().FirstOrDefault(itm => itm.Name.Equals(tempLayout)));
-                    Project.Current.RemoveItem(Project.Current.GetItems<MapProjectItem>().FirstOrDefault(itm => itm.Name.Equals(tempMap)));
-                    byte[] b = File.ReadAllBytes(thumbpath);
-                    //string utf8string = Encoding.UTF8.GetString(b, 0, b.Length);
-                    //string asciistring = Encoding.ASCII.GetString(b, 0, b.Length);
-                    string b64string = Convert.ToBase64String(b);
-                    string xxml = item.GetXml();
-                    XmlDocument xmldoc = new XmlDocument();
-                    xmldoc.LoadXml(xxml);
-                    //todo create new xml if not exist
-                    XmlNode root = xmldoc.DocumentElement;
-                    XmlNode thumb = root.SelectSingleNode("descendant::Binary/Thumbnail/Data");
-                    thumb.InnerText = b64string;
-                    //var thumb = xmldoc.GetElementsByTagName("Thumbnail")[0].SelectSingleNode("Data");
-                    //thumb.SelectSingleNode("Data")
-                    //MessageBox.Show(thumb.InnerXml.ToString());
-                    //xmldoc.Save("C:\\Users\\jmaxm\\Desktop\\expxml.xml");
-                    string newmeta = xmldoc.OuterXml;
-
-                    item.SetXml(newmeta);
-                    //MessageBox.Show(item.Type);
-                });
-            }
-                   
-            //IProjectWindow ipv = ArcGIS.Desktop.Core.IProjectWindow;
-            var commandId = @"esri_core_previewCaptureThumbnail";
-            var iCommand = FrameworkApplication.GetPlugInWrapper(commandId) as ICommand;
-            //if (iCommand != null)
+            //foreach (var pane in FrameworkApplication.Panes)
             //{
-            //    if (iCommand.CanExecute(null)) iCommand.Execute(null);
-            //    System.Windows.MessageBox.Show("it worked?");
+            //    string z = pane.GetType().ToString();
             //}
 
+            //string s = FrameworkApplication.ActiveWindow.ToString();
+            // int c = Project.Current.SelectedItems.Count;
+            
+                   
+            ////IProjectWindow ipv = ArcGIS.Desktop.Core.IProjectWindow;
+            //var commandId = @"esri_core_previewCaptureThumbnail";
+            //var iCommand = FrameworkApplication.GetPlugInWrapper(commandId) as ICommand;
+            ////if (iCommand != null)
+            ////{
+            ////    if (iCommand.CanExecute(null)) iCommand.Execute(null);
+            ////    System.Windows.MessageBox.Show("it worked?");
+            ////}
 
-            string f = FrameworkApplication.State.ToString();
-            //System.Windows.MessageBox.Show(s);
-            //System.Windows.MessageBox.Show(c.ToString());
+
+            //string f = FrameworkApplication.State.ToString();
+            ////System.Windows.MessageBox.Show(s);
+            ////System.Windows.MessageBox.Show(c.ToString());
 
         }
     }
@@ -281,74 +205,10 @@ namespace EMEProToolkit
     }
     internal class EMEMenu_TESTBUTTON : Button
     {
-        public static Task ExportFrameAsync()
-        {
-
-            return QueuedTask.Run(() =>
-            {
-                string tempLayout = "TempLayout";
-                string tempMap = "TempMap";
-                //var newmap = MapFactory.Instance.CreateMap("NewMap", basemap:Basemap.ProjectDefault);
-                // Create a new CIM page
-                CIMPage newPage = new CIMPage();
-
-                // Add properties
-               
-                newPage.Width = 17;
-                newPage.Height = 11;
-                newPage.Units = LinearUnit.Inches;
-
-                // Add rulers
-                newPage.ShowRulers = true;
-                newPage.SmallestRulerDivision = 0.5;
-
-                // Apply the CIM page to a new layout and set name
-                var newLayout = LayoutFactory.Instance.CreateLayout(newPage);
-                newLayout.SetName(tempLayout);
-
-                Map newMap = MapFactory.Instance.CreateMap(tempMap, MapType.Map, MapViewingMode.Map, Basemap.NationalGeographic);
-                string url = @"http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer";
-                Uri uri = new Uri(url);
-                LayerFactory.Instance.CreateLayer(uri, newMap);
-
-                // Build a map frame geometry / envelope
-                Coordinate2D ll = new Coordinate2D(1, 0.5);
-                Coordinate2D ur = new Coordinate2D(13, 9);
-                Envelope mapEnv = EnvelopeBuilder.CreateEnvelope(ll, ur);
-
-                // Create a map frame and add it to the layout
-                MapFrame newMapframe = LayoutElementFactory.Instance.CreateMapFrame(newLayout, mapEnv, newMap);
-                newMapframe.SetName("Map Frame");
-
-                // Create and set the camera
-                Camera camera = newMapframe.Camera;
-                camera.X = -118.465;
-                camera.Y = 33.988;
-                camera.Scale = 30000;
-                newMapframe.SetCamera(camera);
-
-                //Create JPEG format with appropriate settings
-                JPEGFormat JPEG = new JPEGFormat();
-                JPEG.HasWorldFile = false;
-                JPEG.Resolution = 300;
-                JPEG.OutputFileName = "C:\\Users\\jmaxm\\Desktop\\TestThumbs.jpg";
-                //Export MapFrame
-                //Layout lyt = layoutItem.GetLayout(); //Loads and returns the layout associated with a LayoutItem
-                newMapframe.Export(JPEG);
-                LayoutProjectItem layoutItem = Project.Current.GetItems<LayoutProjectItem>().FirstOrDefault(itm => itm.Name.Equals(tempLayout));
-                Project.Current.RemoveItem(Project.Current.GetItems<LayoutProjectItem>().FirstOrDefault(itm => itm.Name.Equals(tempLayout)));
-                Project.Current.RemoveItem(Project.Current.GetItems<MapProjectItem>().FirstOrDefault(itm => itm.Name.Equals(tempMap)));
-                //var lo = layoutItem.GetLayout();
-                //lo.Clone
-                //newLayout.Dispose();
-
-
-            });
-
-        }
+        
         protected override void OnClick()
         {
-            ExportFrameAsync();
+
             
         }
     }
