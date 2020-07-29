@@ -31,18 +31,18 @@ namespace EMEProToolkit
     
     public class EMEMenu_UpdateContacts : ArcGIS.Desktop.Framework.Contracts.Button
     {
-        protected override void OnClick()
+        protected override async void OnClick()
         {
             //TODO: Create/reference Async Process for updating contacts
             var AsyncContacts = new AsyncContacts();
-            AsyncContacts.LoadContactsAsync(checksyncage:false);
+            await AsyncContacts.LoadContactsAsync(checksyncage:false);
         }
     }
     internal class EMEMenu_test : Button
     {
-        protected override async void OnClick()
+        protected override void OnClick()
         {
-            await QueuedTask.Run(() =>
+            QueuedTask.Run(() =>
             {
                 var newMap = MapFactory.Instance.CreateMap("junk", basemap: Basemap.ProjectDefault);
                 //TODO: use the map...
@@ -81,10 +81,10 @@ namespace EMEProToolkit
     internal class EMEMenu_UpdateThumbnail : Button
     {
         public const string MyStateID = "preview_map_state";
-        protected override void OnClick()
+        protected override async void OnClick()
         {
             var thumbsup = new ThumbnailUpdater();
-            thumbsup.ExportFrameAsync();
+            await thumbsup.UpdateThumbsAsync();
 
             //var window = FrameworkApplication.ActiveWindow as ArcGIS.Desktop.Core.IProjectWindow;
 
