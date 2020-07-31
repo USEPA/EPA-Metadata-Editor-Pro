@@ -1,0 +1,47 @@
+<metadata xml:lang="en">
+    <Esri>
+        <CreaDate>20170310</CreaDate>
+        <CreaTime>14285500</CreaTime>
+        <ArcGISFormat>1.0</ArcGISFormat>
+        <SyncOnce>TRUE</SyncOnce>
+        <ModDate>20200110</ModDate>
+        <ModTime>19563000</ModTime>
+        <scaleRange>
+            <minScale>150000000</minScale>
+            <maxScale>5000</maxScale>
+        </scaleRange>
+        <ArcGISProfile>ItemDescription</ArcGISProfile>
+    </Esri>
+    <tool name="exportISOTool" displayname="Export ArcGIS Metadata to ISO" toolboxalias="" xmlns="">
+        <parameters>
+            <param name="Source_Metadata" displayname="Source Metadata" type="Required" direction="Input" datatype="Data Element" expression="Source_Metadata">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This should be the full path to a standalone XML metadata document or a dataset with an existing metadata document.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+            <param name="Output_Metadata" displayname="Output Metadata" type="Required" direction="Output" datatype="File" expression="Output_Metadata">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This should be the full path to the standalone XML metadata document that will be produced using this tool. Please review and verify the output before importing it to a dataset or harvesting to a metadata catalog.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+        </parameters>
+        <summary>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This tool streamlines exporting ArcGIS metadata to compliant ISO 19115. It is equivalent to using the Export Metadata tool with ArcGIS2ISO19139 as the translator.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</summary>
+        <arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.7\Help\gp</arcToolboxHelpPath>
+    </tool>
+    <dataIdInfo>
+        <idCitation>
+            <resTitle>Export ArcGIS Metadata to ISO</resTitle>
+        </idCitation>
+        <idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This tool streamlines exporting ArcGIS metadata to compliant ISO 19115. It is equivalent to using the Export Metadata tool with ArcGIS2ISO19139 as the translator.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs>
+        <idCredit>U.S. EPA Metadata Team (edg@epa.gov)</idCredit>
+        <searchKeys>
+            <keyword>EME</keyword>
+        </searchKeys>
+    </dataIdInfo>
+    <distInfo>
+        <distributor>
+            <distorFormat>
+                <formatName>ArcToolbox Tool</formatName>
+            </distorFormat>
+        </distributor>
+    </distInfo>
+    <mdHrLv>
+        <ScopeCd value="005"/>
+    </mdHrLv>
+</metadata>

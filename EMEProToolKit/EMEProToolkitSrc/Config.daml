@@ -16,12 +16,12 @@ limitations under the License.​
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
         xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
   
-  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="1.0" desktopVersion="2.5.22081">
+  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="1.0" desktopVersion="2.6.24783">
 	<Name>EMEProToolkit</Name>
 	<Description>EMEProToolkit Toolkit</Description>
 	<Image>Images\AddinDesktop32.png</Image>
 	<Author>dspinosa</Author>
-	<Company>Acme</Company>
+	<Company>US EPA</Company>
 	<Date>5/27/2020 3:45:00 PM, 2020</Date>
 	<Subject>Content</Subject>
   </AddInInfo>

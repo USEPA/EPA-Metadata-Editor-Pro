@@ -1,0 +1,45 @@
+<metadata xml:lang="en">
+	<Esri>
+		<CreaDate>20180112</CreaDate>
+		<CreaTime>15141900</CreaTime>
+		<ArcGISFormat>1.0</ArcGISFormat>
+		<ArcGISstyle>EPA Metadata Specification NAP ISO19115 2003</ArcGISstyle>
+		<SyncOnce>TRUE</SyncOnce>
+		<ModDate>20200110</ModDate>
+		<ModTime>19473400</ModTime>
+		<scaleRange>
+			<minScale>150000000</minScale>
+			<maxScale>5000</maxScale>
+		</scaleRange>
+		<ArcGISProfile>ItemDescription</ArcGISProfile>
+	</Esri>
+	<tool name="deleteTool" displayname="EPA Clear Record" toolboxalias="" xmlns="">
+		<arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.7\Help\gp</arcToolboxHelpPath>
+		<parameters>
+			<param name="Target_Metadata" displayname="Target Metadata" type="Required" direction="Input" datatype="Data Element" expression="Target_Metadata">
+				<dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This should be the full path to a standalone XML metadata document or a dataset with an existing metadata document. The metadata will be completely purged.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+			</param>
+		</parameters>
+		<summary>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;It is not unusual for the default Esri tools to merge and preserve legacy metadata sections when performing a standard import. This tool purges all metadata from the target (usually a feature class).&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</summary>
+	</tool>
+	<dataIdInfo>
+		<idCitation>
+			<resTitle>EPA Clear Record</resTitle>
+		</idCitation>
+		<idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;It is not unusual for the default Esri tools to merge and preserve legacy metadata sections when performing a standard import. This tool purges all metadata from the target (usually a feature class).&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs>
+		<idCredit>U.S. EPA Metadata Team (edg@epa.gov)</idCredit>
+		<searchKeys>
+			<keyword>EME</keyword>
+		</searchKeys>
+	</dataIdInfo>
+	<distInfo>
+		<distributor>
+			<distorFormat>
+				<formatName>ArcToolbox Tool</formatName>
+			</distorFormat>
+		</distributor>
+	</distInfo>
+	<mdHrLv>
+		<ScopeCd value="005"/>
+	</mdHrLv>
+</metadata>

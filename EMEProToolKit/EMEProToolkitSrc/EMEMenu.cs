@@ -195,13 +195,17 @@ namespace EMEProToolkit
     internal class EMEMenu_clearMD : Button
     {
         private string _pathEmeDb = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
+        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        
         protected override void OnClick()
         {            
             try
-            {                    
+            {
+                
+                //MessageBox.Show(Path.GetTempPath());
                 string j = "";
                 var arguments = Geoprocessing.MakeValueArray(j);
-                string toolpath = @_pathEmeDb+"EPA Pro Metadata Toolbox.tbx\\EPAClearRecord";
+                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.tbx\\EPAClearRecord";
                 Geoprocessing.OpenToolDialog(toolpath, null);
 
                 #region  Exmample for calling python

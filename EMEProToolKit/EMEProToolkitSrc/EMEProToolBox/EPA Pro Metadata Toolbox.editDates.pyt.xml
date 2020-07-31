@@ -1,0 +1,50 @@
+<metadata xml:lang="en">
+    <Esri>
+        <CreaDate>20200110</CreaDate>
+        <CreaTime>14033400</CreaTime>
+        <ArcGISFormat>1.0</ArcGISFormat>
+        <ArcGISstyle>EPA Metadata Specification NAP ISO19115 2003</ArcGISstyle>
+        <SyncOnce>TRUE</SyncOnce>
+        <ModDate>20200110</ModDate>
+        <ModTime>19503300</ModTime>
+        <scaleRange>
+            <minScale>150000000</minScale>
+            <maxScale>5000</maxScale>
+        </scaleRange>
+        <ArcGISProfile>ItemDescription</ArcGISProfile>
+    </Esri>
+    <tool name="editDates" displayname="EPA Edit Metadata Dates Tool" toolboxalias="" xmlns="">
+        <arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.7\Help\gp</arcToolboxHelpPath>
+        <parameters>
+            <param name="Target_Metadata" displayname="Target Metadata" type="Required" direction="Input" datatype="Data Element" expression="Target_Metadata">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This should be the full path to a standalone XML metadata document or a dataset with an existing metadata document.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+            <param name="Date_Label" displayname="Date Option" type="Required" direction="Input" datatype="String" expression="Revision Date | Publication Date | Creation Date">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Select from one of the three valid date types: Publication Date, Revision Date, or Creation Date.  &lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+            <param name="Date_Value" displayname="Date Value" type="Required" direction="Input" datatype="Date" expression="Date_Value">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Enter a valid date in the format YYYY-MM-DD.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+        </parameters>
+        <summary>&lt;DIV STYLE="text-align:Left;"&gt;&lt;P&gt;&lt;SPAN&gt;This tool assists with editing the citation date values in ArcGIS Metadata to ease automated refreshes.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;</summary>
+    </tool>
+    <dataIdInfo>
+        <idCitation>
+            <resTitle>EPA Edit Metadata Dates Tool</resTitle>
+        </idCitation>
+        <idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;P&gt;&lt;SPAN&gt;This tool assists with editing the citation date values in ArcGIS Metadata to ease automated refreshes.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;</idAbs>
+        <searchKeys>
+            <keyword>EME</keyword>
+        </searchKeys>
+    </dataIdInfo>
+    <distInfo>
+        <distributor>
+            <distorFormat>
+                <formatName>ArcToolbox Tool</formatName>
+            </distorFormat>
+        </distributor>
+    </distInfo>
+    <mdHrLv>
+        <ScopeCd value="005"/>
+    </mdHrLv>
+</metadata>

@@ -1111,6 +1111,20 @@
   <ItemGroup>
     <AddInContent Include="DarkImages\GenericButtonBlue32.png" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="EMEProToolBox\blankdoc.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\clearMd.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.tbx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PackageAction>BuildDefault</PackageAction>

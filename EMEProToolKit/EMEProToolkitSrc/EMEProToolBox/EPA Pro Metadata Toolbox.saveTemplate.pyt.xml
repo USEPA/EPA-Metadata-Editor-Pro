@@ -1,0 +1,48 @@
+<metadata xml:lang="en">
+    <Esri>
+        <CreaDate>20170310</CreaDate>
+        <CreaTime>14285500</CreaTime>
+        <ArcGISFormat>1.0</ArcGISFormat>
+        <SyncOnce>TRUE</SyncOnce>
+        <ModDate>20200110</ModDate>
+        <ModTime>19591000</ModTime>
+        <scaleRange>
+            <minScale>150000000</minScale>
+            <maxScale>5000</maxScale>
+        </scaleRange>
+        <ArcGISProfile>ItemDescription</ArcGISProfile>
+    </Esri>
+    <tool name="saveTemplate" displayname="Save record as metadata template" toolboxalias="" xmlns="">
+        <parameters>
+            <param name="Source_Metadata" displayname="Source Metadata" type="Required" direction="Input" datatype="Data Element" expression="Source_Metadata">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This should be the full path to a standalone XML metadata document or a dataset with an existing metadata document.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+            <param name="Output_Metadata" displayname="Output Metadata" type="Required" direction="Output" datatype="File" expression="Output_Metadata">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;P&gt;&lt;SPAN&gt;This should be the full path to the XML metadata document fragment that will be produced using this tool.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+        </parameters>
+        <summary>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This tool saves a metadata record as a reusable template by excluding those elements which must be unique in every metadata record, such as title, abstract, unique identifier, etc, leaving those elements that are common across many records.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</summary>
+        <usage>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This tool is designed to produce a metadata template fragment that can be merged into other metadata records via the "Merge a selected metadata record with a saved template" tool.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</usage>
+        <arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.7\Help\gp</arcToolboxHelpPath>
+    </tool>
+    <dataIdInfo>
+        <idCitation>
+            <resTitle>Save record as metadata template</resTitle>
+        </idCitation>
+        <idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This tool saves a metadata record as a reusable template by excluding those elements which must be unique in every metadata record, such as title, abstract, unique identifier, etc, leaving those elements that are common across many records.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs>
+        <idCredit>U.S. EPA Metadata Team (edg@epa.gov)</idCredit>
+        <searchKeys>
+            <keyword>EME</keyword>
+        </searchKeys>
+    </dataIdInfo>
+    <distInfo>
+        <distributor>
+            <distorFormat>
+                <formatName>ArcToolbox Tool</formatName>
+            </distorFormat>
+        </distributor>
+    </distInfo>
+    <mdHrLv>
+        <ScopeCd value="005"/>
+    </mdHrLv>
+</metadata>
