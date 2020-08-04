@@ -1,48 +1,48 @@
 <metadata xml:lang="en">
-    <Esri>
-        <CreaDate>20200110</CreaDate>
-        <CreaTime>11401200</CreaTime>
-        <ArcGISFormat>1.0</ArcGISFormat>
-        <ArcGISstyle>EPA Metadata Specification NAP ISO19115 2003</ArcGISstyle>
-        <SyncOnce>TRUE</SyncOnce>
-        <ModDate>20200110</ModDate>
-        <ModTime>19434000</ModTime>
-        <scaleRange>
-            <minScale>150000000</minScale>
-            <maxScale>5000</maxScale>
-        </scaleRange>
-        <ArcGISProfile>ItemDescription</ArcGISProfile>
-    </Esri>
-    <tool name="cleanExportTool" displayname="EPA Clean Export Tool" toolboxalias="" xmlns="">
-        <arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.7\Help\gp</arcToolboxHelpPath>
-        <parameters>
-            <param name="Source_Metadata" displayname="Source Metadata" type="Required" direction="Input" datatype="Data Element" expression="Source_Metadata">
-                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This should be the full path to a standalone XML metadata document or a dataset with an existing metadata document.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
-            </param>
-            <param name="Output_Metadata" displayname="Output Metadata" type="Required" direction="Output" datatype="File" expression="Output_Metadata">
-                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This should be the full path to the standalone XML metadata document that will be produced using this tool. Please review and verify the output before importing it to a dataset or harvesting to a metadata catalog.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
-            </param>
-        </parameters>
-        <summary>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Most Esri metadata tools perform some sort of transformation on a metadata record when exporting to a standalone XML document. This tool allows a metadata record to be exported as-is with no transformations.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</summary>
-    </tool>
-    <dataIdInfo>
-        <idCitation>
-            <resTitle>EPA Clean Export Tool</resTitle>
-        </idCitation>
-        <idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Most Esri metadata tools perform some sort of transformation on a metadata record when exporting to a standalone XML document. This tool allows a metadata record to be exported as-is with no transformations.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs>
-        <idCredit>U.S. EPA Metadata Team (edg@epa.gov)</idCredit>
-        <searchKeys>
-            <keyword>EME</keyword>
-        </searchKeys>
-    </dataIdInfo>
-    <distInfo>
-        <distributor>
-            <distorFormat>
-                <formatName>ArcToolbox Tool</formatName>
-            </distorFormat>
-        </distributor>
-    </distInfo>
-    <mdHrLv>
-        <ScopeCd value="005"/>
-    </mdHrLv>
+	<Esri>
+		<CreaDate>20200110</CreaDate>
+		<CreaTime>11401200</CreaTime>
+		<ArcGISFormat>1.0</ArcGISFormat>
+		<ArcGISstyle>EPA Metadata Specification NAP ISO19115 2003</ArcGISstyle>
+		<SyncOnce>TRUE</SyncOnce>
+		<ModDate>20200110</ModDate>
+		<ModTime>19434000</ModTime>
+		<scaleRange>
+			<minScale>150000000</minScale>
+			<maxScale>5000</maxScale>
+		</scaleRange>
+		<ArcGISProfile>ItemDescription</ArcGISProfile>
+	</Esri>
+	<tool name="cleanExportTool" displayname="EPA Clean Export Tool" toolboxalias="" xmlns="">
+		<arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.7\Help\gp</arcToolboxHelpPath>
+		<parameters>
+			<param name="Source_Metadata" displayname="Source Metadata" type="Required" direction="Input" datatype="Data Element" expression="Source_Metadata">
+				<dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This should be the full path to a standalone XML metadata document or a dataset with an existing metadata document.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+			</param>
+			<param name="Output_Metadata" displayname="Output Metadata" type="Required" direction="Output" datatype="File" expression="Output_Metadata">
+				<dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This should be the full path to the standalone XML metadata document that will be produced using this tool. Please review and verify the output before importing it to a dataset or harvesting to a metadata catalog.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+			</param>
+		</parameters>
+		<summary>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Most Esri metadata tools perform some sort of transformation on a metadata record when exporting to a standalone XML document. This tool allows a metadata record to be exported as-is with no transformations.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</summary>
+	</tool>
+	<dataIdInfo>
+		<idCitation>
+			<resTitle>EPA Clean Export Tool</resTitle>
+		</idCitation>
+		<idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Most Esri metadata tools perform some sort of transformation on a metadata record when exporting to a standalone XML document. This tool allows a metadata record to be exported as-is with no transformations.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs>
+		<idCredit>U.S. EPA Metadata Team (edg@epa.gov)</idCredit>
+		<searchKeys>
+			<keyword>EME</keyword>
+		</searchKeys>
+	</dataIdInfo>
+	<distInfo>
+		<distributor>
+			<distorFormat>
+				<formatName>ArcToolbox Tool</formatName>
+			</distorFormat>
+		</distributor>
+	</distInfo>
+	<mdHrLv>
+		<ScopeCd value="005"/>
+	</mdHrLv>
 </metadata>

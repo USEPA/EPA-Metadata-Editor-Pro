@@ -163,6 +163,7 @@ class cleanupTool(object):
             Source_Metadata = parameters[0].valueAsText
             Output_Metadata = parameters[1].valueAsText
 
+
             # Local variables:
             EPAUpgradeCleanup_xslt = "EPAUpgradeCleanup.xslt"
 
@@ -442,19 +443,19 @@ class deleteTool(object):
 
             # Local variables:
             blankDoc = "blankdoc.xml"
-            src_md = md.Metadata(blankDoc)
+            source_md = md.Metadata(blankDoc)
             # messages.addMessage("Got the blank")
 
-            for f in str(Target_Metadata).split(";"):
+            for t in str(Target_Metadata).split(";"):
 
                 messages.addMessage("Performing complete purge of existing metadata")
                 # Process: Purge
                 # arcpy.MetadataImporter_conversion(blankDoc, Target_Metadata)
-                target_md = md.Metadata(f)
+                target_md = md.Metadata(t)
 
                 if not target_md.isReadOnly:
                     # messages.addMessage(target_md.isReadOnly)
-                    target_md.copy(src_md)
+                    target_md.copy(source_md)
                     target_md.save()
                 # arcpy.AddMessage("Importing new metadata")
                     messages.addMessage("Process complete - please review the output carefully.")
@@ -494,7 +495,8 @@ class importTool(object):
             name="Target_Metadata",
             datatype="DEType",
             parameterType="Required",
-            direction="Input")
+            direction="Input",
+            multiValue=True)
 
         params = [param0, param1]
         return params
@@ -518,25 +520,37 @@ class importTool(object):
         try:
             """The source code of the tool."""
             Source_Metadata = parameters[0].valueAsText
-            src_md = md.Metadata(Source_Metadata)
             Target_Metadata = parameters[1].valueAsText
-            target_md = md.Metadata(Target_Metadata)
+            source_md = md.Metadata(Source_Metadata)
 
             # Local variables:
-            blankDoc = "blankdoc.xml"
-            blank_md = md.Metadata(blankDoc)
+            # blankDoc = "blankdoc.xml"
+            # blank_md = md.Metadata(blankDoc)
 
-            messages.addMessage("Performing complete purge of existing metadata")
-            # Process: Purge
+            for t in str(Target_Metadata).split(";"):
 
-            
+                target_md = md.Metadata(t)
 
-            arcpy.MetadataImporter_conversion(blankDoc, Target_Metadata)
-            messages.addMessage("Importing new metadata")
-            # Process: Import
-            arcpy.MetadataImporter_conversion(Source_Metadata, Target_Metadata)
+                if not target_md.isReadOnly:
 
-            messages.addMessage("Process complete - please review the output carefully.")
+                    # Process: Purge
+                    # messages.addMessage("Performing complete purge of existing metadata")
+                    # arcpy.MetadataImporter_conversion(blankDoc, Target_Metadata)
+
+                    messages.addMessage("Importing new metadata")
+                    # Process: Import
+                    target_md.copy(source_md)
+                    target_md.save()
+
+                    # TODO: Should probably sync if it is a feature class. Need to check if FC
+                    target_md.synchronize('SELECTIVE')
+
+                    # arcpy.MetadataImporter_conversion(Source_Metadata, Target_Metadata)
+
+                    messages.addMessage("Process complete - please review the output carefully.")
+                else:
+                    messages.addMessage("Unable to save. Metadata Is Read Only.")
+
         except:
             # Cycle through Geoprocessing tool specific errors
             for msg in range(0, arcpy.GetMessageCount()):
@@ -600,12 +614,20 @@ class cleanExportTool(object):
             Source_Metadata = parameters[0].valueAsText
             Output_Metadata = parameters[1].valueAsText
 
+            source_md = md.Metadata(Source_Metadata)
+            output_md = md.Metadata(Output_Metadata)
+
+
+
             # Local variables:
             EPACleanExport_xslt = "EPACleanExport.xslt"
 
+            messages.addMessage("output: " + Output_Metadata)
+            messages.addMessage("xslt: " + os.path.abspath(EPACleanExport_xslt))
             messages.addMessage("Exporting the metadata record...")
             # Process: EPA Cleanup
-            arcpy.XSLTransform_conversion(Source_Metadata, EPACleanExport_xslt, Output_Metadata, "")
+            source_md.saveAsUsingCustomXSLT(Output_Metadata, os.path.abspath(EPACleanExport_xslt))
+            # arcpy.XSLTransform_conversion(Source_Metadata, EPACleanExport_xslt, Output_Metadata, "")
 
             messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
         except:
