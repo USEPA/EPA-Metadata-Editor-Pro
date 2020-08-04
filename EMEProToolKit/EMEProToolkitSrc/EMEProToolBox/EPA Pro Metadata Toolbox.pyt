@@ -626,10 +626,18 @@ class cleanExportTool(object):
             messages.addMessage("xslt: " + os.path.abspath(EPACleanExport_xslt))
             messages.addMessage("Exporting the metadata record...")
             # Process: EPA Cleanup
+            # try:
             source_md.saveAsUsingCustomXSLT(Output_Metadata, os.path.abspath(EPACleanExport_xslt))
-            # arcpy.XSLTransform_conversion(Source_Metadata, EPACleanExport_xslt, Output_Metadata, "")
+            # except Exception as e:
+            #     messages.addMessage(e)
+            # # arcpy.XSLTransform_conversion(Source_Metadata, EPACleanExport_xslt, Output_Metadata, "")
 
-            messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+            if arcpy.exists(Output_Metadata):
+                messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+
+            else:
+                messages.addMessage("Error Creating file")
+
         except:
             # Cycle through Geoprocessing tool specific errors
             for msg in range(0, arcpy.GetMessageCount()):
