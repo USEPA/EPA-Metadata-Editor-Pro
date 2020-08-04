@@ -187,6 +187,7 @@ namespace EMEProToolkit.Pages
         /// <param name="e"></param>
         public void LoadContacts(object sender, RoutedEventArgs e)
         {
+            CommitChanges();
             ReloadContacts();
         }
 
@@ -252,7 +253,7 @@ namespace EMEProToolkit.Pages
             var syncDays = syncAge.ToString("d'd 'h'h 'm'm 's's'");
 
             // Check to see if local file is older than 12 hours:
-            bool dbExpired = syncAge > (new TimeSpan(0, 12, 0, 0));
+            //bool dbExpired = syncAge > (new TimeSpan(0, 12, 0, 0));
             // Check if contacts.bak exists
             // this is created during LoadList. If LoadList crashes, then contacts.xml will be corrupted
             // replace contacts.xml with contacts.bak

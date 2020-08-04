@@ -69,6 +69,7 @@ namespace EMEProToolkit
         {
             //do on open...
             var AsyncContacts = new AsyncContacts();
+            // check last sync
             AsyncContacts.LoadContactsAsync(checksyncage: true);
         }
 

@@ -319,10 +319,6 @@ namespace EMEProToolkit
             cloneMerge.Save(Utils.Utils.GetContactsFileLocation());
             //cloneMerge.Save(_filePathEsri + "contacts.cfg");
 
-
-            // generate contact list
-            //contactsListBox.ItemsSource = Utils.Utils.GenerateContactsList(_contactsDoc, this.DataContext);
-
             // restore contacts.xml to original state
             _contactsBAK.Save(Utils.Utils.GetContactsFileLocation());
 
@@ -332,12 +328,6 @@ namespace EMEProToolkit
                 File.Delete(_filePathEsri + "contacts.bak");
             }
 
-            //_contactsDoc = new XmlDocument();
-            //contactsListBox.ItemsSource = Utils.Utils.GenerateContactsList(_contactsDoc, this.DataContext);
-
-            //var mdModule = FrameworkApplication.FindModule("esri_metadata_module") as IMetadataEditorHost;
-            //if (mdModule != null)
-            //  mdModule.AddCommitPage(this);
 
             //done notification 
             Notification donenotification = new Notification();
