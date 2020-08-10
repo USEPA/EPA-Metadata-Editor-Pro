@@ -58,16 +58,16 @@ namespace EMEProToolkit.Pages
         {
             InitializeComponent();
 
-            LostFocus += ContactManager_LostFocus;
+            //LostFocus += ContactManager_LostFocus;
         }
 
         //bool _isContactsListDirty = false;
-        void ContactManager_LostFocus(object sender, RoutedEventArgs e)
-        {
-            CommitChanges();
-            ReloadContacts();
-            //_isContactsListDirty = false;
-        }
+        //void ContactManager_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    CommitChanges();
+        //    ReloadContacts();
+        //    //_isContactsListDirty = false;
+        //}
 
         /// <summary>
         /// unload form
@@ -76,8 +76,6 @@ namespace EMEProToolkit.Pages
         /// <param name="e"></param>
         override public void CommitChanges()
         {
-            //if (!_isContactsListDirty)
-            //    return;
 
             if (null == _contactsDoc)
                 return;
@@ -135,12 +133,7 @@ namespace EMEProToolkit.Pages
         }
 
 
-        public void OnCheck(object sender, RoutedEventArgs e)
-        {
-            //_isContactsListDirty = true;
-        }
-
-        public void OnUnCheck(object sender, RoutedEventArgs e)
+        public void UncheckBox(object sender, RoutedEventArgs e)
         {
             CheckBox cb = sender as CheckBox;
             if (null == cb)
@@ -183,12 +176,12 @@ namespace EMEProToolkit.Pages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void LoadContacts(object sender, RoutedEventArgs e)
-        {
-            ReloadContacts();
-        }
+        //public void LoadContacts(object sender, RoutedEventArgs e)
+        //{
+        //    ReloadContacts();
+        //}
 
-        private void ReloadContacts()
+        public void LoadContacts(object sender, RoutedEventArgs e)
         {
             #region Load EME Configuration File
             // Load emeConfig.xml
@@ -256,12 +249,13 @@ namespace EMEProToolkit.Pages
             // replace contacts.xml with contacts.bak
             if (File.Exists(_filePathEsri + "contacts.bak"))
             {
-                File.Delete(_filePathEsri + "contacts.bak");
+                File.Delete(_filePathEsri + "contacts.xml");
                 File.Copy(_filePathEsri + "contacts.bak", _filePathEsri + "contacts.xml");
-                File.Delete(_filePathEsri + "contacts.back");
+                File.Delete(_filePathEsri + "contacts.bak");
             }
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(directoryUrl);
-            request.Timeout = 15000;
+            //request.Timeout = 15000;
+            request.Timeout = 25000;
             request.Method = "HEAD"; //test URL without downloading the content
 
             if (syncAge > (new TimeSpan(0, 12, 0, 0)))
