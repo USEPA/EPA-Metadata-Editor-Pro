@@ -51,7 +51,6 @@ namespace EMEProToolkit.Pages
         XmlDocument _contactsWEB = new XmlDocument();
         string _filePathEsri = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ArcGIS\\Descriptions\\";
         string _filePathEme = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
-        
 
         public string partySource = null;
         //private XmlDocument _contactsDoc = null;
@@ -60,16 +59,16 @@ namespace EMEProToolkit.Pages
         {
             InitializeComponent();
 
-            LostFocus += ContactManager_LostFocus;
+            //LostFocus += ContactManager_LostFocus;
         }
 
         //bool _isContactsListDirty = false;
-        void ContactManager_LostFocus(object sender, RoutedEventArgs e)
-        {
-            CommitChanges();
-            ReloadContacts();
-            //_isContactsListDirty = false;
-        }
+        //void ContactManager_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    CommitChanges();
+        //    ReloadContacts();
+        //    //_isContactsListDirty = false;
+        //}
 
         /// <summary>
         /// unload form
@@ -78,8 +77,6 @@ namespace EMEProToolkit.Pages
         /// <param name="e"></param>
         override public void CommitChanges()
         {
-            //if (!_isContactsListDirty)
-            //    return;
 
             if (null == _contactsDoc)
                 return;
@@ -137,12 +134,7 @@ namespace EMEProToolkit.Pages
         }
 
 
-        public void OnCheck(object sender, RoutedEventArgs e)
-        {
-            //_isContactsListDirty = true;
-        }
-
-        public void OnUnCheck(object sender, RoutedEventArgs e)
+        public void UncheckBox(object sender, RoutedEventArgs e)
         {
             CheckBox cb = sender as CheckBox;
             if (null == cb)
@@ -185,13 +177,12 @@ namespace EMEProToolkit.Pages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void LoadContacts(object sender, RoutedEventArgs e)
-        {
-            CommitChanges();
-            ReloadContacts();
-        }
+        //public void LoadContacts(object sender, RoutedEventArgs e)
+        //{
+        //    ReloadContacts();
+        //}
 
-        private void ReloadContacts()
+        public void LoadContacts(object sender, RoutedEventArgs e)
         {
             #region Load EME Configuration File
             // Load emeConfig.xml
@@ -259,64 +250,64 @@ namespace EMEProToolkit.Pages
             // replace contacts.xml with contacts.bak
             if (File.Exists(_filePathEsri + "contacts.bak"))
             {
-                File.Delete(_filePathEsri + "contacts.bak");
+                File.Delete(_filePathEsri + "contacts.xml");
                 File.Copy(_filePathEsri + "contacts.bak", _filePathEsri + "contacts.xml");
-                File.Delete(_filePathEsri + "contacts.back");
+                File.Delete(_filePathEsri + "contacts.bak");
             }
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(directoryUrl);
-            request.Timeout = 25000;
-            //request.Timeout = 15000;
-            request.Method = "HEAD"; //test URL without downloading the content
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(directoryUrl);
+            ////request.Timeout = 15000;
+            //request.Timeout = 25000;
+            //request.Method = "HEAD"; //test URL without downloading the content
 
-            if (syncAge > (new TimeSpan(0, 12, 0, 0)))
-            {
-                //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nLoading contacts from \"" + directoryName + "\"\n (" + directoryUrl + ")", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
-                try
-                {
-                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                    {
-                        if (response.StatusCode.ToString() == "OK")
-                        {
-                            // Return contacts.xml Date Modified
-                            try { _contactsWEB.Load(directoryUrl); }
-                            catch (System.IO.FileNotFoundException)
-                            {
-                                _contactsWEB.LoadXml(
-                                "<contacts> \n" +
-                                "  <contact> \n" +
-                                "    <editorSource></editorSource> \n" +
-                                "    <editorDigest></editorDigest> \n" +
-                                "    <rpIndName></rpIndName> \n" +
-                                "    <rpOrgName></rpOrgName> \n" +
-                                "    <rpPosName></rpPosName> \n" +
-                                "    <editorSave></editorSave> \n" +
-                                "    <rpCntInfo></rpCntInfo> \n" +
-                                "  </contact> \n" +
-                                "</contacts>");
-                            }
-                            _contactsWEB.Save(_filePathEme + "contacts.xml");
+            //if (syncAge > (new TimeSpan(0, 12, 0, 0)))
+            //{
+            //    //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nLoading contacts from \"" + directoryName + "\"\n (" + directoryUrl + ")", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    try
+            //    {
+            //        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            //        {
+            //            if (response.StatusCode.ToString() == "OK")
+            //            {
+            //                // Return contacts.xml Date Modified
+            //                try { _contactsWEB.Load(directoryUrl); }
+            //                catch (System.IO.FileNotFoundException)
+            //                {
+            //                    _contactsWEB.LoadXml(
+            //                    "<contacts> \n" +
+            //                    "  <contact> \n" +
+            //                    "    <editorSource></editorSource> \n" +
+            //                    "    <editorDigest></editorDigest> \n" +
+            //                    "    <rpIndName></rpIndName> \n" +
+            //                    "    <rpOrgName></rpOrgName> \n" +
+            //                    "    <rpPosName></rpPosName> \n" +
+            //                    "    <editorSave></editorSave> \n" +
+            //                    "    <rpCntInfo></rpCntInfo> \n" +
+            //                    "  </contact> \n" +
+            //                    "</contacts>");
+            //                }
+            //                _contactsWEB.Save(_filePathEme + "contacts.xml");
 
-                            // Add timestamp to config file
-                            _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/date").InnerText = DateTime.Now.ToString("o");
-                            _emeConfig.Save(_filePathEme + "emeConfig.xml");
-                        }
-                        else
-                        {
-                            MessageBoxResult webResponse = MessageBox.Show("Error loading contacts from " + directoryUrl + "." + "\n" + "EME contacts will be loaded from local cache.", "EME 5.0 Web Request", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                    }
-                }
-                catch (Exception weberror)
-                {
-                    {
-                        MessageBoxResult result = MessageBox.Show(weberror.Message + "\n" + "EME contacts will be loaded from local cache.", "EME 5.0 Web Request", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                }
-            }
-            else
-            {
-                //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nContacts will be loaded from local cache.", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            //                // Add timestamp to config file
+            //                _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/date").InnerText = DateTime.Now.ToString("o");
+            //                _emeConfig.Save(_filePathEme + "emeConfig.xml");
+            //            }
+            //            else
+            //            {
+            //                MessageBoxResult webResponse = MessageBox.Show("Error loading contacts from " + directoryUrl + "." + "\n" + "EME contacts will be loaded from local cache.", "EME 5.0 Web Request", MessageBoxButton.OK, MessageBoxImage.Information);
+            //            }
+            //        }
+            //    }
+            //    catch (Exception weberror)
+            //    {
+            //        {
+            //            MessageBoxResult result = MessageBox.Show(weberror.Message + "\n" + "EME contacts will be loaded from local cache.", "EME 5.0 Web Request", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nContacts will be loaded from local cache.", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
+            //}
 
             try { _contactsBAK.Load(_filePathEsri + "contacts.xml"); }
             catch (System.IO.FileNotFoundException)
