@@ -543,7 +543,7 @@ class importTool(object):
                     target_md.save()
 
                     # TODO: Should probably sync if it is a feature class. Need to check if FC
-                    target_md.synchronize('SELECTIVE')
+                    # target_md.synchronize('SELECTIVE')
 
                     # arcpy.MetadataImporter_conversion(Source_Metadata, Target_Metadata)
 
@@ -611,6 +611,13 @@ class cleanExportTool(object):
     def execute(self, parameters, messages):
         try:
             """The source code of the tool."""
+            messages.addMessage("old cwd: {0}".format(os.getcwd()))
+            # os.chdir(os.path.dirname(os.path.realpath(__file__)))
+            messages.addMessage("new cwd: {0}".format(os.getcwd()))
+
+            cwd_file_path = os.path.dirname(os.path.realpath(__file__))
+            messages.addMessage("TestPath: " + cwd_file_path)
+
             Source_Metadata = parameters[0].valueAsText
             Output_Metadata = parameters[1].valueAsText
 
@@ -620,23 +627,23 @@ class cleanExportTool(object):
 
 
             # Local variables:
-            EPACleanExport_xslt = "EPACleanExport.xslt"
+            EPACleanExport_xslt = cwd_file_path + r"\EPACleanExport.xslt"
 
             messages.addMessage("output: " + Output_Metadata)
-            messages.addMessage("xslt: " + os.path.abspath(EPACleanExport_xslt))
+            messages.addMessage("xslt: {}".format(EPACleanExport_xslt))
             messages.addMessage("Exporting the metadata record...")
             # Process: EPA Cleanup
             # try:
-            source_md.saveAsUsingCustomXSLT(Output_Metadata, os.path.abspath(EPACleanExport_xslt))
+            source_md.saveAsUsingCustomXSLT(Output_Metadata, EPACleanExport_xslt)
             # except Exception as e:
             #     messages.addMessage(e)
             # # arcpy.XSLTransform_conversion(Source_Metadata, EPACleanExport_xslt, Output_Metadata, "")
 
-            if arcpy.exists(Output_Metadata):
-                messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+            # if arcpy.exists(Output_Metadata):
+            messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
 
-            else:
-                messages.addMessage("Error Creating file")
+            # else:
+            #     messages.addMessage("Error Creating file")
 
         except:
             # Cycle through Geoprocessing tool specific errors
