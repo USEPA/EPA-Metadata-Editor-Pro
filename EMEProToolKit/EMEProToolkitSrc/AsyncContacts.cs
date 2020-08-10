@@ -43,7 +43,6 @@ namespace EMEProToolkit
             return (Task)Task.Run(() =>
             {
                 FrameworkApplication.State.Activate("sync_contacts_state");
-                CommitChanges();
                 ReloadContacts(checksyncage);
                 FrameworkApplication.State.Deactivate("sync_contacts_state");
 
@@ -108,25 +107,26 @@ namespace EMEProToolkit
             var directoryUrl = _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/url").InnerText;
             DateTime lastSync = DateTime.Parse(_emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/date").InnerText);
             TimeSpan syncAge = ((DateTime.Now) - lastSync);
-            var syncDays = syncAge.ToString("d'd 'h'h 'm'm 's's'");
+            //var syncDays = syncAge.ToString("d'd 'h'h 'm'm 's's'");
 
 
-            // Check to see if local file is older than 12 hours:
-            bool dbExpired = syncAge > (new TimeSpan(0, 8, 0, 0));
+            // Check to see if local file is older than 8 hours:
+            //bool dbExpired = syncAge > (new TimeSpan(0, 8, 0, 0));
             // Check if contacts.bak exists
             // this is created during LoadList. If LoadList crashes, then contacts.xml will be corrupted
             // replace contacts.xml with contacts.bak
             if (File.Exists(_filePathEsri + "contacts.bak"))
             {
-                File.Delete(_filePathEsri + "contacts.bak");
+                File.Delete(_filePathEsri + "contacts.xml");
                 File.Copy(_filePathEsri + "contacts.bak", _filePathEsri + "contacts.xml");
-                File.Delete(_filePathEsri + "contacts.back");
+                File.Delete(_filePathEsri + "contacts.bak");
             }
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(directoryUrl);
             //one minute timeout
             request.Timeout = 60000;
             request.Method = "HEAD"; //test URL without downloading the content
-            if (!checkage | (checkage & (syncAge > (new TimeSpan(0, 8, 0, 0)))))
+            bool dosync = (!checkage | (checkage & (syncAge > (new TimeSpan(0, 8, 0, 0)))));
+            if (dosync)
 
             {
                 Notification syncnotification = new Notification();
@@ -185,7 +185,7 @@ namespace EMEProToolkit
                 //syncnotification.Title = FrameworkApplication.Title;
                 nosyncnotification.Title = "EPA Metadata Editor Pro";
                 nosyncnotification.Message = $"Loading local contacts from {lastSync.ToString()}";
-                nosyncnotification.ImageUrl = @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericRefresh32.png";
+                nosyncnotification.ImageUrl = @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericOptions32.png";
                 ArcGIS.Desktop.Framework.FrameworkApplication.AddNotification(nosyncnotification);
                 //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nContacts will be loaded from local cache.", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -319,10 +319,6 @@ namespace EMEProToolkit
             cloneMerge.Save(Utils.Utils.GetContactsFileLocation());
             //cloneMerge.Save(_filePathEsri + "contacts.cfg");
 
-
-            // generate contact list
-            //contactsListBox.ItemsSource = Utils.Utils.GenerateContactsList(_contactsDoc, this.DataContext);
-
             // restore contacts.xml to original state
             _contactsBAK.Save(Utils.Utils.GetContactsFileLocation());
 
@@ -332,13 +328,6 @@ namespace EMEProToolkit
                 File.Delete(_filePathEsri + "contacts.bak");
             }
 
-            //_contactsDoc = new XmlDocument();
-            //contactsListBox.ItemsSource = Utils.Utils.GenerateContactsList(_contactsDoc, this.DataContext);
-
-            //var mdModule = FrameworkApplication.FindModule("esri_metadata_module") as IMetadataEditorHost;
-            //if (mdModule != null)
-            //  mdModule.AddCommitPage(this);
-
             //done notification 
             Notification donenotification = new Notification();
             donenotification.Title = "EPA Metadata Editor Pro";
@@ -347,69 +336,7 @@ namespace EMEProToolkit
             ArcGIS.Desktop.Framework.FrameworkApplication.AddNotification(donenotification);
         }
 
-        protected void CommitChanges()
-        {
-            //if (!_isContactsListDirty)
-            //    return;
-
-            if (null == _contactsDoc)
-                return;
-
-            // new document
-            XmlDocument clone = new XmlDocument();
-            XmlNode contactsNode = clone.CreateElement("contacts");
-            clone.AppendChild(contactsNode);
-
-            // write back out the contacts marked saved
-            var list = _contactsDoc.SelectNodes("//contact[editorSave='True']");
-            StringBuilder sb = new StringBuilder();
-
-            foreach (XmlNode child in list)
-            {
-                // remove elements
-                //
-                XmlNode e = child.SelectSingleNode("editorSource");
-                if (null != e)
-                {
-                    child.RemoveChild(e);
-                }
-
-                e = child.SelectSingleNode("editorDigest");
-                if (null != e)
-                {
-                    child.RemoveChild(e);
-                }
-
-                // remove role
-                //
-                e = child.SelectSingleNode("role");
-                if (null != e)
-                {
-                    child.RemoveChild(e);
-                }
-
-                // save back unique key
-                string digest = Utils.Utils.GeneratePartyKey(child);
-
-                sb.Append("<contact>");
-                sb.Append("<editorSource>external</editorSource>");
-                sb.Append("<editorDigest>");
-                sb.Append(digest);
-                sb.Append("</editorDigest>");
-                sb.Append(child.InnerXml);
-                sb.Append("</contact>");
-            }
-
-            // append to clone
-            contactsNode.InnerXml = sb.ToString();
-
-            // save to file
-
-            string file = Utils.Utils.GetContactsFileLocation();
-            clone.Save(file);
-            Trace.WriteLine("saved contacts clone to: " + file);
-        }
-
+        
     }
 }
 

@@ -1143,7 +1143,7 @@ limitations under the License.​
 	</updateCategory>
   </categories>
   <modules>
-    <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="false" caption="Metadata Toolkit Module">
+    <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="true" caption="Metadata Toolkit Module">
       <tabs>
         <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">          
           <group refID="EMEProToolkit_Group1" />
