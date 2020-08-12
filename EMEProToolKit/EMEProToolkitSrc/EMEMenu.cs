@@ -195,13 +195,18 @@ namespace EMEProToolkit
     internal class EMEMenu_clearMD : Button
     {
         private string _pathEmeDb = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
+        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        
         protected override void OnClick()
         {            
             try
-            {                    
+            {
+
+                //MessageBox.Show(Path.GetTempPath());
+                MessageBox.Show(_installPath);
                 string j = "";
                 var arguments = Geoprocessing.MakeValueArray(j);
-                string toolpath = @_pathEmeDb+"EPA Pro Metadata Toolbox.tbx\\EPAClearRecord";
+                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\deleteTool";
                 Geoprocessing.OpenToolDialog(toolpath, null);
 
                 #region  Exmample for calling python
@@ -256,6 +261,7 @@ namespace EMEProToolkit
 
     internal class EMEMenu_upgradeFgdcMD : Button
     {
+        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         protected override void OnClick()
         {
 
@@ -265,17 +271,46 @@ namespace EMEProToolkit
 
     internal class EMEMenu_importMD : Button
     {
+        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         protected override void OnClick()
         {
+            try
+            {           
+             
+                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\importTool";
+                Geoprocessing.OpenToolDialog(toolpath, null);
+                
+            }
+
+            catch (Exception exc)
+            {
+                // Catch any exception found and display in a message box
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Exception caught while trying to run Python tool: " + exc.Message);
+                return;
+            }
 
         }
 
     }
     internal class EMEMenu_exportMD : Button
     {
+        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         protected override void OnClick()
         {
+            try
+            {
 
+                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\cleanExportTool";
+                Geoprocessing.OpenToolDialog(toolpath, null);
+
+            }
+
+            catch (Exception exc)
+            {
+                // Catch any exception found and display in a message box
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Exception caught while trying to run Python tool: " + exc.Message);
+                return;
+            }
 
         }
     }
