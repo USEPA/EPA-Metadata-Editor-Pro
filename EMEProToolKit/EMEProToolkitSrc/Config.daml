@@ -1195,6 +1195,13 @@ limitations under the License.​
           largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericNewSparkleLarge32.png">
           <tooltip heading="Create Generic Metadata">Populates Defaults<disabledText /></tooltip>
         </button>
+        <button id="EMEProToolkit_EMEMenu_Items_EMEdbButton" caption="EME Database Manager" className="EMEMenu_EMEdb" loadOnClick="true"
+        smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeodatabaseBeingEdited16.png"
+				largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeodatabaseBeingEdited32.png">
+          <tooltip heading="EMEdb Manager"> Open<disabledText />
+          </tooltip>
+        </button>
+
       </controls>
       <!--<menus>
         <menu id="EMEProToolkit_EMEMenu" caption="EMEMenu" smallImage="GenericButtonGreen16.png" largeImage="GenericButtonGreen32.png">
@@ -1211,6 +1218,7 @@ limitations under the License.​
         <group id="EMEProToolkit_Group2" caption="EmeDb Tools" condition="esri_core_resourcesPane">          
           <!--<menu refID="EMEProToolkit_EMEMenu" size="middle" />-->          
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_EMEdbButton" />
           
         </group>
         <group id="EMEProToolkit_Group3" caption="Metadata Tools" condition="esri_core_resourcesPane">

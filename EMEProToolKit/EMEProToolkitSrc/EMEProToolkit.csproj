@@ -1111,6 +1111,11 @@
   <ItemGroup>
     <AddInContent Include="DarkImages\GenericButtonBlue32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="EMEdbManager\EMEdbManager.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PackageAction>BuildDefault</PackageAction>
