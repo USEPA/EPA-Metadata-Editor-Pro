@@ -11,7 +11,8 @@ class Toolbox(object):
         self.alias = ""
 
         # List of tool classes associated with this toolbox
-        self.tools = [upgradeTool,cleanupTool,exportISOTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates]
+        self.tools = [upgradeTool,cleanupTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates]
+        # self.tools = [upgradeTool,cleanupTool,exportISOTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate]
 
 # class scratchCopy(object):
 #     def __init__(self,messages):
