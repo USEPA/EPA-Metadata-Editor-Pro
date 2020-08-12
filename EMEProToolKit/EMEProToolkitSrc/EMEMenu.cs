@@ -360,7 +360,7 @@ namespace EMEProToolkit
         protected override void OnClick()
         {
             Trace.WriteLine(Path.Combine(_installPath, "EMEdbManager", "EMEdbManager", "bin", "Debug", "EMEdbManager.exe"));
-            Process.Start(Path.Combine(_installPath, "EMEdbManager", "EMEdbManager", "bin", "Debug", "EMEdbManager.exe"));
+            Process.Start(Path.Combine(_installPath, "EMEdbManager", "EMEdbManager.exe"));
 
         }
     }
