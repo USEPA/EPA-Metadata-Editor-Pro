@@ -24,6 +24,7 @@ using ArcGIS.Desktop.Layouts;
 using System.Xml;
 using ActiproSoftware.Windows.Controls;
 using System.IO;
+using System.Diagnostics;
 
 namespace EMEProToolkit
 {
@@ -377,6 +378,7 @@ namespace EMEProToolkit
                 //lo.Clone
                 //newLayout.Dispose();
 
+                   
 
             });
 
@@ -385,6 +387,16 @@ namespace EMEProToolkit
         {
             ExportFrameAsync();
             
+        }
+    }
+    internal class EMEMenu_EMEdb : Button
+    {
+        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        protected override void OnClick()
+        {
+            Trace.WriteLine(Path.Combine(_installPath, "EMEdbManager", "EMEdbManager", "bin", "Debug", "EMEdbManager.exe"));
+            Process.Start(Path.Combine(_installPath, "EMEdbManager", "EMEdbManager.exe"));
+
         }
     }
 }
