@@ -1112,6 +1112,67 @@
   <ItemGroup>
     <AddInContent Include="DarkImages\GenericButtonBlue32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.cleanExportTool.pyt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.cleanupTool.pyt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.deleteTool.pyt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.editDates.pyt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.editElement.pyt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.exportISOTool.pyt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.importTool.pyt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.mergeTemplate.pyt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.pyt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.saveTemplate.pyt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.upgradeTool.pyt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\EPACleanExport.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\EPAUpgradeCleanup.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\mergeTemplate.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\saveTemplate.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EMEProToolBox\blankdoc.xml" />
+    <None Include="EMEProToolBox\EMEToolbox.pyproj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.pyt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EMEdbManager\EMEdbManager.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PackageAction>BuildDefault</PackageAction>

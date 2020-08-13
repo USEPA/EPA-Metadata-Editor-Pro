@@ -122,59 +122,59 @@ namespace EMEProToolkit.Pages
                 File.Delete(_filePathEsri + "contacts.bak");
             }
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://edg.epa.gov/EME/contacts.xml");
-            //request.Timeout = 15000;
-            request.Timeout = 25000;
-            request.Method = "HEAD"; //test URL without downloading the content
-            if (syncAge > (new TimeSpan(0, 12, 0, 0)))
-            {
-                //messageboxresult filecheck = messagebox.show("local cache is " + syncdays + " old.\nloading contacts from \"" + directoryname + "\"\n (" + directoryurl + ")", "eme contacts manager", messageboxbutton.ok, messageboximage.information);
-                try
-                {
-                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                    {
-                        if (response.StatusCode.ToString() == "OK")
-                        {
-                            // Return contacts.xml Date Modified
-                            try { _contactsWEB.Load(directoryUrl); }
-                            catch (System.IO.FileNotFoundException)
-                            {
-                                _contactsWEB.LoadXml(
-                                "<contacts> \n" +
-                                "  <contact> \n" +
-                                "    <editorSource></editorSource> \n" +
-                                "    <editorDigest></editorDigest> \n" +
-                                "    <rpIndName></rpIndName> \n" +
-                                "    <rpOrgName></rpOrgName> \n" +
-                                "    <rpPosName></rpPosName> \n" +
-                                "    <editorSave></editorSave> \n" +
-                                "    <rpCntInfo></rpCntInfo> \n" +
-                                "  </contact> \n" +
-                                "</contacts>");
-                            }
-                            _contactsWEB.Save(_filePathEme + "contacts.xml");
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://edg.epa.gov/EME/contacts.xml");
+            ////request.Timeout = 15000;
+            //request.Timeout = 25000;
+            //request.Method = "HEAD"; //test URL without downloading the content
+            //if (syncAge > (new TimeSpan(0, 12, 0, 0)))
+            //{
+            //    //messageboxresult filecheck = messagebox.show("local cache is " + syncdays + " old.\nloading contacts from \"" + directoryname + "\"\n (" + directoryurl + ")", "eme contacts manager", messageboxbutton.ok, messageboximage.information);
+            //    try
+            //    {
+            //        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            //        {
+            //            if (response.StatusCode.ToString() == "OK")
+            //            {
+            //                // Return contacts.xml Date Modified
+            //                try { _contactsWEB.Load(directoryUrl); }
+            //                catch (System.IO.FileNotFoundException)
+            //                {
+            //                    _contactsWEB.LoadXml(
+            //                    "<contacts> \n" +
+            //                    "  <contact> \n" +
+            //                    "    <editorSource></editorSource> \n" +
+            //                    "    <editorDigest></editorDigest> \n" +
+            //                    "    <rpIndName></rpIndName> \n" +
+            //                    "    <rpOrgName></rpOrgName> \n" +
+            //                    "    <rpPosName></rpPosName> \n" +
+            //                    "    <editorSave></editorSave> \n" +
+            //                    "    <rpCntInfo></rpCntInfo> \n" +
+            //                    "  </contact> \n" +
+            //                    "</contacts>");
+            //                }
+            //                _contactsWEB.Save(_filePathEme + "contacts.xml");
 
-                            // Add timestamp to config file
-                            _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/date").InnerText = DateTime.Now.ToString("o");
-                            _emeConfig.Save(_filePathEme + "emeConfig.xml");
-                        }
-                        else
-                        {
-                            MessageBoxResult webResponse = MessageBox.Show("Error loading contacts from " + directoryUrl + "." + "\n" + "EME contacts will be loaded from local cache.", "EME 5.0 Web Request", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                    }
-                }
-                catch (Exception weberror)
-                {
-                    {
-                        MessageBoxResult result = MessageBox.Show(weberror.Message + "\n" + "EME contacts will be loaded from local cache.", "EME 5.0 Web Request", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                }
-            }
-            else
-            {
-                //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nContacts will be loaded from local cache.", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            //                // Add timestamp to config file
+            //                _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/date").InnerText = DateTime.Now.ToString("o");
+            //                _emeConfig.Save(_filePathEme + "emeConfig.xml");
+            //            }
+            //            else
+            //            {
+            //                MessageBoxResult webResponse = MessageBox.Show("Error loading contacts from " + directoryUrl + "." + "\n" + "EME contacts will be loaded from local cache.", "EME 5.0 Web Request", MessageBoxButton.OK, MessageBoxImage.Information);
+            //            }
+            //        }
+            //    }
+            //    catch (Exception weberror)
+            //    {
+            //        {
+            //            MessageBoxResult result = MessageBox.Show(weberror.Message + "\n" + "EME contacts will be loaded from local cache.", "EME 5.0 Web Request", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nContacts will be loaded from local cache.", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
+            //}
 
             try { _contactsBAK.Load(_filePathEsri + "contacts.xml"); }
             catch (System.IO.FileNotFoundException)

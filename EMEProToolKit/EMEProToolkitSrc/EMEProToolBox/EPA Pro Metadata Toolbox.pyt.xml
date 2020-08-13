@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<metadata xml:lang="en">
+	<Esri>
+		<CreaDate>20170310</CreaDate>
+		<CreaTime>14285200</CreaTime>
+		<ArcGISFormat>1.0</ArcGISFormat>
+		<ArcGISstyle>EPA Metadata Specification NAP ISO19115 2003</ArcGISstyle>
+		<SyncOnce>TRUE</SyncOnce>
+		<ModDate>20200812</ModDate>
+		<ModTime>172811</ModTime>
+		<scaleRange>
+			<minScale>150000000</minScale>
+			<maxScale>5000</maxScale>
+		</scaleRange>
+		<ArcGISProfile>ItemDescription</ArcGISProfile>
+		<DataProperties><lineage></lineage></DataProperties></Esri>
+	<toolbox name="EPA Pro Metadata Toolbox" alias="">
+		<arcToolboxHelpPath>c:\program files\arcgis\pro\Resources\Help\gp</arcToolboxHelpPath>
+		<toolsets/></toolbox>
+	<dataIdInfo>
+		<idCitation>
+			<resTitle>EPA Pro Metadata Toolbox</resTitle>
+		</idCitation>
+		<idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This ArcGIS Pro toolbox contains a set of tools to assist in transitioning EPA metadata records from FGDC CSDGM format to ArcGIS Metadata that adheres to EPA's Metadata Technical Specification and ISO 19115 standards.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs>
+		<idPurp>This toolbox helps with ArcGIS and EPA metadata.</idPurp>
+		<searchKeys>
+			<keyword>EME</keyword>
+		</searchKeys>
+	</dataIdInfo>
+	<distInfo>
+		<distributor>
+			<distorFormat>
+				<formatName>ArcToolbox Toolbox</formatName>
+			</distorFormat>
+		</distributor>
+	</distInfo>
+	<mdHrLv>
+		<ScopeCd value="005"/>
+	</mdHrLv>
+</metadata>

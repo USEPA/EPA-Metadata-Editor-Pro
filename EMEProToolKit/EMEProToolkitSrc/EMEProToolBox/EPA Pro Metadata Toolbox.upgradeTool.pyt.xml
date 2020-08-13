@@ -1,0 +1,48 @@
+<metadata xml:lang="en">
+    <Esri>
+        <CreaDate>20170310</CreaDate>
+        <CreaTime>14285500</CreaTime>
+        <ArcGISFormat>1.0</ArcGISFormat>
+        <SyncOnce>TRUE</SyncOnce>
+        <ModDate>20200110</ModDate>
+        <ModTime>19554600</ModTime>
+        <scaleRange>
+            <minScale>150000000</minScale>
+            <maxScale>5000</maxScale>
+        </scaleRange>
+        <ArcGISProfile>ItemDescription</ArcGISProfile>
+    </Esri>
+    <tool name="upgradeTool" displayname="EPA Upgrade FGDC to ArcGIS" toolboxalias="" xmlns="">
+        <parameters>
+            <param name="Source_Metadata" displayname="Source Metadata" type="Required" direction="Input" datatype="Data Element" expression="Source_Metadata">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This should be the full path to a standalone XML metadata document or a dataset with an existing metadata document.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+            <param name="Output_Metadata" displayname="Output Metadata" type="Required" direction="Output" datatype="File" expression="Output_Metadata">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This should be the full path to the standalone XML metadata document that will be produced using this tool. Please review and verify the output before importing it to a dataset or harvesting to a metadata catalog.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+        </parameters>
+        <summary>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This tool creates a copy of the existing FGDC CSDGM metadata, performs the standard upgrade to ArcGIS Metadata, then adds several extra cleanup steps including copying legacy UUIDs to the ISO-Compliant element and cleaning up all legacy elements.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</summary>
+        <usage>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This tool is not recommended for records that have already been upgraded to ArcGIS Metadata.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</usage>
+        <arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.7\Help\gp</arcToolboxHelpPath>
+    </tool>
+    <dataIdInfo>
+        <idCitation>
+            <resTitle>EPA Upgrade FGDC to ArcGIS</resTitle>
+        </idCitation>
+        <idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;This tool creates a copy of the existing FGDC CSDGM metadata, performs the standard upgrade to ArcGIS Metadata, then adds several extra cleanup steps including copying legacy UUIDs to the ISO-Compliant element and cleaning up all legacy elements.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs>
+        <idCredit>U.S. EPA Metadata Team (edg@epa.gov)</idCredit>
+        <searchKeys>
+            <keyword>EME</keyword>
+        </searchKeys>
+    </dataIdInfo>
+    <distInfo>
+        <distributor>
+            <distorFormat>
+                <formatName>ArcToolbox Tool</formatName>
+            </distorFormat>
+        </distributor>
+    </distInfo>
+    <mdHrLv>
+        <ScopeCd value="005"/>
+    </mdHrLv>
+</metadata>

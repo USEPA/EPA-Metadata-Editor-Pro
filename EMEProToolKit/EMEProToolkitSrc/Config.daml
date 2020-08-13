@@ -16,19 +16,19 @@ limitations under the License.​
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
         xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
   
-  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="1.0" desktopVersion="2.5.22081">
+  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="Beta" desktopVersion="2.6.24783">
 	<Name>EMEProToolkit</Name>
 	<Description>EMEProToolkit Toolkit</Description>
 	<Image>Images\AddinDesktop32.png</Image>
-	<Author>dspinosa</Author>
-	<Company>Acme</Company>
+	<Author>Dan Spinosa Innovate! Inc</Author>
+	<Company>U.S. EPA Region 9 Technology and Data Solutions Center</Company>
 	<Date>5/27/2020 3:45:00 PM, 2020</Date>
 	<Subject>Content</Subject>
   </AddInInfo>
   <categories>
 	<updateCategory refID="esri_metadata_metadataEditors">
 	  <insertComponent id="EMEProToolkit_metadataEditor_toolkit" className="ToolkitMetadataEditor">
-		<content type="ToolkitEditor" displayName="EMEProToolkit Metadata Editor Dev" id="8328efcc-345c-4f6b-9b4a-918f9f443771">
+		<content type="ToolkitEditor" displayName="EPA Metadata Editor Pro" id="8328efcc-345c-4f6b-9b4a-918f9f443771">
 		  <metadataConfig ArcGISProfile="ISO19139" ValidatePages="True">
 			<validationNamespaceURI>http://www.isotc211.org/2005/gmd</validationNamespaceURI>
 			<validationSchemaURL>http://www.isotc211.org/schemas/2005/gmd/metadataEntity.xsd</validationSchemaURL>
@@ -1143,7 +1143,7 @@ limitations under the License.​
 	</updateCategory>
   </categories>
   <modules>
-    <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="false" caption="Metadata Toolkit Module">
+    <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="true" caption="Metadata Toolkit Module">
       <tabs>
         <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">          
           <group refID="EMEProToolkit_Group1" />
@@ -1155,8 +1155,8 @@ limitations under the License.​
       <controls>
         <button id="EMEProToolkit_EMEMenu_Items_UpdateContacts" caption="Update Contacts" 
                 className="EMEMenu_UpdateContacts" loadOnClick="false" 
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen16.png" 
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGreen32.png"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/ImagesUser16.png" 
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/User32.png"
                 condition="SyncContactsCondition">
           <tooltip heading="Update Contacts">Sync Online Contacts<disabledText /></tooltip>
         </button>
@@ -1165,36 +1165,92 @@ limitations under the License.​
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ItemThumbnailCreate32.png">
           <tooltip heading="Update Thumbnail">Click to update the thumbnail one or many items<disabledText />Disabled Text here</tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" caption="FGDC to ArcGIS" className="EMEMenu_upgradeFgdcMD" loadOnClick="true"
+        <button id="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" caption="EPA Upgrade FGDC to ArcGIS" className="EMEMenu_upgradeFgdcMD" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUpgrade16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUpgrade32.png">
-          <tooltip heading="Upgrade FGDC CSDGM to ArcGIS">ToolTip<disabledText /></tooltip>
+          <tooltip heading="Upgrade FGDC CSDGM to ArcGIS">This tool creates a copy of the existing FGDC CSDGM metadata, performs the standard upgrade to ArcGIS Metadata, 
+          then adds several extra cleanup steps including copying legacy UUIDs to the ISO-Compliant element and cleaning up all legacy elements. 
+          This tool is not recommended for records that have already been upgraded to ArcGIS Metadata.<disabledText /></tooltip>
         </button>
         <button id="EMEProToolkit_EMEMenu_Items_clearMD" caption="Clear Metadata" className="EMEMenu_clearMD" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/DeleteJob16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/DeleteJob32.png">
-          <tooltip heading="Clear Metadata">Delete Metadata Reference<disabledText /></tooltip>
+          <tooltip heading="Clear Metadata">
+            It is not unusual for the default Esri tools to merge and preserve legacy metadata sections when performing a standard import. 
+            This tool purges all metadata from the target (usually a feature class).<disabledText /></tooltip>
         </button>
          <button id="EMEProToolkit_EMEMenu_Items_importMD" caption="Import Metadata" className="EMEMenu_importMD" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobCreate16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobCreate32.png">
-          <tooltip heading="Import Metadata">ToolTip<disabledText /></tooltip>
+          <tooltip heading="Import Metadata">
+            It is not unusual for the default Esri tools to merge and preserve legacy metadata sections when performing a standard import. This tool first purges all metadata from the target (usually a feature class), then performs a clean import of the source. It does not perform the EPA upgrade or cleanup function, 
+            but rather is intended to supplement those tools and allow for a clean import of the output from those tools into a feature class.<disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_exportMD" caption="Export Metadata" className="EMEMenu_exportMD" loadOnClick="true"
+        <button id="EMEProToolkit_EMEMenu_Items_cleanexportMD" caption="Clean Export Metadata" className="EMEMenu_cleanexportMD" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport32.png">
-          <tooltip heading="Export Metadata">Export Metadata to...<disabledText /></tooltip>
+          <tooltip heading="Clean Export Metadata">Most Esri metadata tools perform some sort of transformation on a metadata record when
+          exporting to a standalone XML document. This tool allows a metadata record to be exported as-is with no transformations.<disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_test" caption="Export Metadata" className="EMEMenu_test" loadOnClick="true"
+        <button id="EMEProToolkit_EMEMenu_Items_cleanUpTool" caption="Clean Up Metadata" className="EMEMenu_cleanUpToolMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingTool16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingTool32.png">
+          <tooltip heading="Clean Up Tool">
+            This tool performs several extra cleanup steps including copying legacy UUIDs to the ISO-Compliant element and cleaning up all legacy elements. 
+            This tool is recommended for records that have already been upgraded to ArcGIS Metadata.<disabledText /></tooltip>
+        </button>
+        <button id="EMEProToolkit_EMEMenu_Items_saveTemplateMD" caption="Save Template Metadata" className="EMEMenu_saveTemplateMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/VersionCreate16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/VersionCreate32.png">
+          <tooltip heading="Save Metadata Template">
+            This tool saves a metadata record as a reusable template by excluding those elements which must be unique in every 
+            metadata record, such as title, abstract, unique identifier, etc, leaving those elements that are common across many records.<disabledText /></tooltip>
+        </button>
+        <button id="EMEProToolkit_EMEMenu_Items_editElementMD" caption="Edit Element" className="EMEMenu_editElementMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/EvilGenius16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/EvilGenius32.png">
+          <tooltip heading="Edit Metadata Element">
+            This tool accepts an XML XPath expression and a text value to update just a single element. If the element does not exist, it will be added. 
+            Please be aware that the source metadata will be changed - make a backup copy if necessary.<disabledText /></tooltip>
+        </button>
+        <button id="EMEProToolkit_EMEMenu_Items_editDatesMD" caption="Edit Dates" className="EMEMenu_editDatesMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/Add_Archive_Table16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/Add_Archive_Table32.png">
+          <tooltip heading="Edit Metadata Dates">
+            This tool assists with editing the citation date values in ArcGIS Metadata to ease automated refreshes<disabledText /></tooltip>
+        </button>
+        <!--<button id="EMEProToolkit_EMEMenu_Items_mergeMD" caption="Merge" className="EMEMenu_mergeMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ModelBuilderAddMergeBranch16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ModelBuilderAddMergeBranch32.png">
+          <tooltip heading="Merge Metadata">
+            <disabledText /></tooltip>
+        </button>-->
+        
+        <!--<button id="EMEProToolkit_EMEMenu_Items_test" caption="Export Metadata" className="EMEMenu_test" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport32.png">
           <tooltip heading="Export Metadata">ToolTip<disabledText /></tooltip>
-        </button>
-        <button id="EMEProToolkit_TestButton1" caption="Easy Button" className="TestButton1" loadOnClick="true" 
+        </button>-->
+        <!--<button id="EMEProToolkit_TestButton1" caption="Easy Button" className="TestButton1" loadOnClick="true" 
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericNewSparkleLarge16.png" 
           largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericNewSparkleLarge32.png">
           <tooltip heading="Create Generic Metadata">Populates Defaults<disabledText /></tooltip>
+        </button>-->
+        <button id="EMEProToolkit_EMEMenu_Items_EMEdbButton" caption="EME Database Manager" className="EMEMenu_EMEdb" loadOnClick="true"
+        smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeodatabaseBeingEdited16.png"
+				largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeodatabaseBeingEdited32.png">
+          <tooltip heading="EMEdb Manager"> Open<disabledText />
+          </tooltip>
         </button>
+        
+        <button id="EMEProToolkit_EMEMenu_Items_ShowToolbox" caption="Display EME Pro Toolbox Location" 
+                className="EMEMenu_ShowToolbox" loadOnClick="false" 
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/GenericButtonRed32.png" 
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonRed32.png">
+          <tooltip heading="Show Python Toolbox Dir">For Testing Purposes Only! 
+          Toolbox will be moved to AppData directory in future releases.<disabledText /></tooltip>
+        </button>
+
       </controls>
       <!--<menus>
         <menu id="EMEProToolkit_EMEMenu" caption="EMEMenu" smallImage="GenericButtonGreen16.png" largeImage="GenericButtonGreen32.png">
@@ -1206,27 +1262,34 @@ limitations under the License.​
       <groups>
         <group id="EMEProToolkit_Group1" caption="">
           <button refID="esri_core_showProjectView" />
-          <button refID="EMEProToolkit_EMEMenu_Items_test" />
+          <!--<button refID="EMEProToolkit_EMEMenu_Items_test" />-->
         </group>
         <group id="EMEProToolkit_Group2" caption="EmeDb Tools" condition="esri_core_resourcesPane">          
           <!--<menu refID="EMEProToolkit_EMEMenu" size="middle" />-->          
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_EMEdbButton" />
           
         </group>
         <group id="EMEProToolkit_Group3" caption="Metadata Tools" condition="esri_core_resourcesPane">
-          <button refID="EMEProToolkit_TestButton1" size="large" />
+          <!--<button refID="EMEProToolkit_TestButton1" size="large" />-->
+          <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_clearMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_importMD" size="large" />
-          <button refID="EMEProToolkit_EMEMenu_Items_exportMD" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_cleanexportMD" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_cleanUpTool" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_EMEMenu_saveTemplateMD" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_editElementMD" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_editDatesMD" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_ShowToolbox" size="large" />
+        </group>
         
-        </group>
-        <group id="EMEProToolkit_Group4" caption="Thumbnails" condition="esri_core_resourcesPane">          
-          <gallery refID="esri_mapping_previewBasemapGallery" size="large"/>          
-          <!--<button refID="esri_core_previewCaptureThumbnail"/>-->          
-          <button refID="esri_core_previewShowBasemap"/>
+        <!--<group id="EMEProToolkit_Group4" caption="Thumbnails" condition="esri_core_resourcesPane">          
+          --><!--<gallery refID="esri_mapping_previewBasemapGallery" size="large"/>--><!--          
+          --><!--<button refID="esri_core_previewCaptureThumbnail"/>--><!--          
+          --><!--<button refID="esri_core_previewShowBasemap"/>--><!--
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />
-        </group>
+        </group>-->
      
       </groups>
     </insertModule>
