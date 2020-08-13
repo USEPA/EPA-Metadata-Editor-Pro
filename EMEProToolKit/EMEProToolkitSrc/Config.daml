@@ -16,7 +16,7 @@ limitations under the License.​
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
         xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
   
-  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="1.0" desktopVersion="2.6.24783">
+  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="Beta" desktopVersion="2.6.24783">
 	<Name>EMEProToolkit</Name>
 	<Description>EMEProToolkit Toolkit</Description>
 	<Image>Images\AddinDesktop32.png</Image>
@@ -28,7 +28,7 @@ limitations under the License.​
   <categories>
 	<updateCategory refID="esri_metadata_metadataEditors">
 	  <insertComponent id="EMEProToolkit_metadataEditor_toolkit" className="ToolkitMetadataEditor">
-		<content type="ToolkitEditor" displayName="EMEProToolkit Metadata Editor Dev" id="8328efcc-345c-4f6b-9b4a-918f9f443771">
+		<content type="ToolkitEditor" displayName="EPA Metadata Editor Pro" id="8328efcc-345c-4f6b-9b4a-918f9f443771">
 		  <metadataConfig ArcGISProfile="ISO19139" ValidatePages="True">
 			<validationNamespaceURI>http://www.isotc211.org/2005/gmd</validationNamespaceURI>
 			<validationSchemaURL>http://www.isotc211.org/schemas/2005/gmd/metadataEntity.xsd</validationSchemaURL>
@@ -1242,6 +1242,14 @@ limitations under the License.​
           <tooltip heading="EMEdb Manager"> Open<disabledText />
           </tooltip>
         </button>
+        
+        <button id="EMEProToolkit_EMEMenu_Items_ShowToolbox" caption="Display EME Pro Toolbox Location" 
+                className="EMEMenu_ShowToolbox" loadOnClick="false" 
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/GenericButtonRed32.png" 
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonRed32.png">
+          <tooltip heading="Show Python Toolbox Dir">For Testing Purposes Only! 
+          Toolbox will be moved to AppData directory in future releases.<disabledText /></tooltip>
+        </button>
 
       </controls>
       <!--<menus>
@@ -1273,6 +1281,7 @@ limitations under the License.​
           <button refID="EMEProToolkit_EMEMenu_Items_EMEMenu_saveTemplateMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_editElementMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_editDatesMD" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_ShowToolbox" size="large" />
         </group>
         
         <!--<group id="EMEProToolkit_Group4" caption="Thumbnails" condition="esri_core_resourcesPane">          

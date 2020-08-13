@@ -487,4 +487,15 @@ namespace EMEProToolkit
 
         }
     }
+    internal class EMEMenu_ShowToolbox : Button
+    {
+        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        protected override void OnClick()
+        {
+            string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt";
+            MessageBox.Show(toolpath);
+
+        }
+    }
+    
 }

@@ -346,7 +346,11 @@ class saveTemplate(object):
             tool_file_path = os.path.dirname(os.path.realpath(__file__))
 
             Source_Metadata = parameters[0].valueAsText
+            messages.addMessage(f'param 0 {Source_Metadata}')
+
             Output_Metadata = parameters[1].valueAsText
+            messages.addMessage(f'param 1 {Output_Metadata}')
+
             source_md = md.Metadata(Source_Metadata)
 
             # Local variables:
@@ -721,7 +725,9 @@ class editElement(object):
             name="Target_Metadata",
             datatype="DEType",
             parameterType="Required",
-            direction="Input")
+            direction="Input",
+            multiValue=True
+            )
 
         # Third parameter
         param1 = arcpy.Parameter(
@@ -763,61 +769,63 @@ class editElement(object):
             Xpath_Expression = parameters[1].valueAsText
             New_Value = parameters[2].valueAsText
 
-            target_md = md.Metadata(Target_Metadata)
-            # scratch_md = md.Metadata()
-            # scratch_md.copy(target_md)
+            for t in str(Target_Metadata).split(";"):
 
-            # Use scratchCopy class to make a standalone XML doc to work with.
-            # scratchCopier = scratchCopy(messages)
-            # scratch_Metadata = scratchCopier.makeScratchCopy(Target_Metadata)
+                target_md = md.Metadata(t)
+                # scratch_md = md.Metadata()
+                # scratch_md.copy(target_md)
 
-            messages.addMessage("Editing the metadata record...")
-            # Process: EPA Cleanup
-            import xml.etree.ElementTree as ET
-            # tree = ET.parse(scratch_Metadata)
-            # root = tree.getroot()
-            # at the root when parsing from string
-            root = ET.fromstring(target_md.xml)
+                # Use scratchCopy class to make a standalone XML doc to work with.
+                # scratchCopier = scratchCopy(messages)
+                # scratch_Metadata = scratchCopier.makeScratchCopy(Target_Metadata)
 
-            # This section iterates through the xpath components, adding any missing SubElements so there's at least one element to populate.
-            xpathElements = Xpath_Expression.split("/")
-            xpathList = []
-            thisNode = root
-            for xpathElem in xpathElements:
-                xpathList.append(xpathElem)
-                buildXPath = "/".join(xpathList)
-                if len(root.findall(buildXPath)) == 0:
-                    ET.SubElement(thisNode,xpathElem)
-                thisNode = root.findall(buildXPath)[0]
+                messages.addMessage("Editing the metadata record...")
+                # Process: EPA Cleanup
+                import xml.etree.ElementTree as ET
+                # tree = ET.parse(scratch_Metadata)
+                # root = tree.getroot()
+                # at the root when parsing from string
+                root = ET.fromstring(target_md.xml)
 
-            # This section updates the values of any matching xpath expressions
-            elements = root.findall(Xpath_Expression)
-            for elem in elements:
-                elem.text = New_Value
-            # tree.write(scratch_Metadata)
-            messages.addMessage("writing back to xml object")
+                # This section iterates through the xpath components, adding any missing SubElements so there's at least one element to populate.
+                xpathElements = Xpath_Expression.split("/")
+                xpathList = []
+                thisNode = root
+                for xpathElem in xpathElements:
+                    xpathList.append(xpathElem)
+                    buildXPath = "/".join(xpathList)
+                    if len(root.findall(buildXPath)) == 0:
+                        ET.SubElement(thisNode,xpathElem)
+                    thisNode = root.findall(buildXPath)[0]
 
-            if not target_md.isReadOnly:
-                target_md.xml = ET.tostring(root)
-                target_md.save()
-                messages.addMessage("Process complete, element update count: {}.".format(str(len(elements))))
-            else:
-                messages.addMessage("Unable to save. Metadata Is Read Only.")
+                # This section updates the values of any matching xpath expressions
+                elements = root.findall(Xpath_Expression)
+                for elem in elements:
+                    elem.text = New_Value
+                # tree.write(scratch_Metadata)
+                messages.addMessage("writing back to xml object")
 
-            # If the target is a standalone XML doc, just copy the scratch over the source file.
-            # if Target_Metadata[-4:].lower() == ".xml":
-            #     import shutil
-            #     shutil.copy(scratch_Metadata,Target_Metadata)
-            # else:
-            #     # Otherwise import the scratch metadata back to the source data.
-            #     importer = importTool()
-            #     importParams = importer.getParameterInfo()
-            #     import_source = importParams[0]
-            #     import_source.value = scratch_Metadata
-            #     import_target = importParams[1]
-            #     import_target.value = Target_Metadata
-            #
-            #     importer.execute([import_source,import_target],messages)
+                if not target_md.isReadOnly:
+                    target_md.xml = ET.tostring(root)
+                    target_md.save()
+                    messages.addMessage("Process complete, element update count: {}.".format(str(len(elements))))
+                else:
+                    messages.addMessage("Unable to save. Metadata Is Read Only.")
+
+                # If the target is a standalone XML doc, just copy the scratch over the source file.
+                # if Target_Metadata[-4:].lower() == ".xml":
+                #     import shutil
+                #     shutil.copy(scratch_Metadata,Target_Metadata)
+                # else:
+                #     # Otherwise import the scratch metadata back to the source data.
+                #     importer = importTool()
+                #     importParams = importer.getParameterInfo()
+                #     import_source = importParams[0]
+                #     import_source.value = scratch_Metadata
+                #     import_target = importParams[1]
+                #     import_target.value = Target_Metadata
+                #
+                #     importer.execute([import_source,import_target],messages)
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -844,7 +852,8 @@ class editDates(object):
             name="Target_Metadata",
             datatype="DEType",
             parameterType="Required",
-            direction="Input")
+            direction="Input",
+            multiValue=True)
 
         # Third parameter
         param1 = arcpy.Parameter(
