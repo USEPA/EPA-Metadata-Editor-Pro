@@ -85,34 +85,9 @@ namespace EMEProToolkit
         protected override async void OnClick()
         {
             var thumbsup = new ThumbnailUpdater();
-            await thumbsup.UpdateThumbsAsync();
-
-            //var window = FrameworkApplication.ActiveWindow as ArcGIS.Desktop.Core.IProjectWindow;
-
-            ////MessageBox.Show(window.SelectionCount.ToString());
-
-            //foreach (var pane in FrameworkApplication.Panes)
-            //{
-            //    string z = pane.GetType().ToString();
-            //}
-
-            //string s = FrameworkApplication.ActiveWindow.ToString();
-            // int c = Project.Current.SelectedItems.Count;
-            
-                   
-            ////IProjectWindow ipv = ArcGIS.Desktop.Core.IProjectWindow;
-            //var commandId = @"esri_core_previewCaptureThumbnail";
-            //var iCommand = FrameworkApplication.GetPlugInWrapper(commandId) as ICommand;
-            ////if (iCommand != null)
-            ////{
-            ////    if (iCommand.CanExecute(null)) iCommand.Execute(null);
-            ////    System.Windows.MessageBox.Show("it worked?");
-            ////}
+            thumbsup.ExportFrameAsync();
 
 
-            //string f = FrameworkApplication.State.ToString();
-            ////System.Windows.MessageBox.Show(s);
-            ////System.Windows.MessageBox.Show(c.ToString());
 
         }
     }
