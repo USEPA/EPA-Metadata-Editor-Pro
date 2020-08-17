@@ -105,7 +105,7 @@ namespace EMEProToolkit
                     string xxml = iitem.GetXml();
                     XmlDocument xmldoc = new XmlDocument();
                     xmldoc.LoadXml(xxml);
-                    xmldoc.Save("C:\\Users\\jmaxm\\Desktop\\expxml.xml");
+                    //xmldoc.Save("C:\\Users\\jmaxm\\Desktop\\expxml.xml");
                     //todo create new xml if not exist
                     XmlNode root = xmldoc.DocumentElement;
                     XmlNode thumb = root.SelectSingleNode("descendant::Binary/Thumbnail/Data");
@@ -188,7 +188,7 @@ namespace EMEProToolkit
                     //string url = @"http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer";
                     Uri uri = new Uri(item.Path);
                     var lyr = LayerFactory.Instance.CreateLayer(uri, newMap);
-                    string thumbpath = String.Format(_temppathEme + "{0}_{1}.jpg", lyr.Name, g);
+                    string thumbpath = String.Format(_temppathEme + "{0}.jpg", g);
                     
                     
 
@@ -228,7 +228,7 @@ namespace EMEProToolkit
                     string xxml = item.GetXml();
                     XmlDocument xmldoc = new XmlDocument();
                     xmldoc.LoadXml(xxml);
-                    xmldoc.Save("C:\\Users\\jmaxm\\Desktop\\expxml.xml");
+                    //xmldoc.Save("C:\\Users\\jmaxm\\Desktop\\expxml.xml");
                     //todo create new xml if not exist
                     XmlNode root = xmldoc.DocumentElement;
                     XmlNode thumb = root.SelectSingleNode("descendant::Binary/Thumbnail/Data");
