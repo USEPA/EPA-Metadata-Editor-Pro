@@ -40,7 +40,7 @@ namespace EMEProToolkit
 
         public Task LoadContactsAsync(bool checksyncage)
         {
-            return (Task)Task.Run(() =>
+            return Task.Run(() =>
             {
                 FrameworkApplication.State.Activate("sync_contacts_state");
                 ReloadContacts(checksyncage);
