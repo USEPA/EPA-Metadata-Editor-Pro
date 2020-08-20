@@ -18,10 +18,10 @@ limitations under the License.​
   
   <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="Beta" desktopVersion="2.6.24783">
 	<Name>EMEProToolkit</Name>
-	<Description>EMEProToolkit Toolkit</Description>
+	<Description>US EPA Metadata Editor (EME) AddIn for ArcGIS Pro based off Esri's Metadata Toolkit</Description>
 	<Image>Images\AddinDesktop32.png</Image>
-	<Author>Dan Spinosa Innovate! Inc</Author>
-	<Company>U.S. EPA Region 9 Technology and Data Solutions Center</Company>
+	<Author>U.S. EPA Office of Information Management</Author>
+	<Company>U.S. EPA Metadata Editor for ArcGIS Pro</Company>
 	<Date>5/27/2020 3:45:00 PM, 2020</Date>
 	<Subject>Content</Subject>
   </AddInInfo>
