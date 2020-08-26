@@ -30,6 +30,8 @@ using ArcGIS.Desktop.Framework.Dialogs;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Mapping;
 using ArcGIS.Desktop.Core.Events;
+using System.Diagnostics;
+using ArcGIS.Core.Internal.CIM;
 
 namespace EMEProToolkit
 {
@@ -69,8 +71,10 @@ namespace EMEProToolkit
         {
             //do on open...
             var AsyncContacts = new AsyncContacts();
+            AsyncContacts.USEPADirAsync();
             // check last sync
             AsyncContacts.LoadContactsAsync(checksyncage: true);
+     
         }
 
         protected override void Uninitialize() //unsubscribe to the project opened event      

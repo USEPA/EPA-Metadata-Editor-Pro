@@ -37,6 +37,35 @@ namespace EMEProToolkit
         XmlDocument _contactsWEB = new XmlDocument();
         string _filePathEsri = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ArcGIS\\Descriptions\\";
         string _filePathEme = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
+        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+        public Task CopyContentsAsync(string srcDir, string targDir)
+        {
+            return Task.Run(() =>
+            {
+                if (!Directory.Exists(targDir))
+                {
+                    Directory.CreateDirectory(targDir);
+                    //Trace.WriteLine("Created target directory: "+targDir);
+                };
+                foreach (var f in Directory.GetFiles(srcDir))
+                {
+                    string fname = Path.GetFileName(f);
+                    //Trace.WriteLine("Copying " + fname);
+                    string dest = Path.Combine(targDir, fname);
+                    File.Copy(f, dest, overwrite: true);
+                }
+            });
+        }
+
+        public async void USEPADirAsync()
+        {
+            if (!Directory.Exists(_filePathEme))
+            {
+                string src = _installPath + "\\EMEdb\\";
+                CopyContentsAsync(srcDir: src, targDir: _filePathEme);
+            }
+        }
 
         public Task LoadContactsAsync(bool checksyncage)
         {
