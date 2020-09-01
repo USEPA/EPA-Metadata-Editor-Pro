@@ -1146,11 +1146,11 @@ limitations under the License.​
     <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="true" caption="Metadata Toolkit Module">
       <tabs>
         <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">          
-          <group refID="EMEProToolkit_Group1" />
-          <group refID="EMEProToolkit_Group2" />
-          <group refID="EMEProToolkit_Group4" />
-          <group refID="EMEProToolkit_Group3" />
+          <group refID="EMEProToolkit_Catalog_Group" />
           <group refID="Esri_Metadata_Edit_Group" />
+          <!--<group refID="EMEProToolkit_Group4" />-->
+          <group refID="EMEProToolkit_MetadataTools_Group" />
+          <group refID="EMEProToolkit_EMEDB_Group" />
         </tab>
       </tabs>
       <controls>
@@ -1261,17 +1261,17 @@ limitations under the License.​
         </menu>
       </menus>-->
       <groups>
-        <group id="EMEProToolkit_Group1" caption="">
+        <group id="EMEProToolkit_Catalog_Group" caption="">
           <button refID="esri_core_showProjectView" />
           <!--<button refID="EMEProToolkit_EMEMenu_Items_test" />-->
         </group>
-        <group id="EMEProToolkit_Group2" caption="EMEdb Tools">          
+        <group id="EMEProToolkit_EMEDB_Group" caption="EMEdb Tools">          
           <!--<menu refID="EMEProToolkit_EMEMenu" size="middle" />-->          
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_EMEdbButton" />
           
         </group>
-        <group id="EMEProToolkit_Group3" caption="Metadata Tools" >
+        <group id="EMEProToolkit_MetadataTools_Group" caption="Metadata Tools" >
           <!--<button refID="EMEProToolkit_TestButton1" size="large" />-->
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" size="large" />
