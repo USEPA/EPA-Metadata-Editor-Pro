@@ -164,6 +164,20 @@ namespace EMEProToolkit
         private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         protected override void OnClick()
         {
+            try
+            {
+
+                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\upgradeTool";
+                Geoprocessing.OpenToolDialog(toolpath, null);
+
+            }
+
+            catch (Exception exc)
+            {
+                // Catch any exception found and display in a message box
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Exception caught while trying to run Python tool: " + exc.Message);
+                return;
+            }
 
         }
 
@@ -291,6 +305,48 @@ namespace EMEProToolkit
                 string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\editDates";
                 Geoprocessing.OpenToolDialog(toolpath, null);
 
+            }
+
+            catch (Exception exc)
+            {
+                // Catch any exception found and display in a message box
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Exception caught while trying to run Python tool: " + exc.Message);
+                return;
+            }
+
+        }
+    }
+    internal class EMEMenu_exportISOToolMD : Button
+    {
+        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        protected override void OnClick()
+        {
+            try
+            {
+
+                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\exportISOTool";
+                Geoprocessing.OpenToolDialog(toolpath, null);
+            }
+
+            catch (Exception exc)
+            {
+                // Catch any exception found and display in a message box
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Exception caught while trying to run Python tool: " + exc.Message);
+                return;
+            }
+
+        }
+    }
+    internal class EMEMenu_mergeMD : Button
+    {
+        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        protected override void OnClick()
+        {
+            try
+            {
+
+                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\mergeTemplate";
+                Geoprocessing.OpenToolDialog(toolpath, null);
             }
 
             catch (Exception exc)

@@ -13,31 +13,7 @@ class Toolbox(object):
         self.alias = ""
 
         # List of tool classes associated with this toolbox
-<<<<<<< Updated upstream
-        self.tools = [upgradeTool,cleanupTool,exportISOTool,saveTemplate,mergeTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates]
-
-class scratchCopy(object):
-    def __init__(self,messages):
-        self.messages = messages
-        self.scratchXML = ""
-
-    def makeScratchCopy(self, Source_Metadata):
-        # Esri-provided standard stylesheet for copying metadata.
-        exact_copy_of_xslt = arcpy.GetInstallInfo()['InstallDir'] + "Metadata\\Stylesheets\\gpTools\exact Copy Of.xslt"
-        self.scratchWorkspace = arcpy.env.scratchFolder
-        self.scratchXML = arcpy.CreateScratchName(suffix=".xml", workspace=self.scratchWorkspace)
-
-        self.messages.addMessage("Making a temporary copy of the existing metadata...")
-        # Process: Copy Metadata for Upgrade
-        arcpy.XSLTransform_conversion(Source_Metadata, exact_copy_of_xslt, self.scratchXML, "")
-        return self.scratchXML
-
-    def cleanupScratchCopy(self):
-        self.messages.addMessage("Cleaning up scratch files...")
-        if arcpy.Exists(self.scratchXML):
-            arcpy.Delete_management(self.scratchXML)
-=======
-        self.tools = [upgradeTool,cleanupTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates,mergeTemplate]
+        self.tools = [upgradeTool,cleanupTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates,mergeTemplate, exportISOTool]
         # self.tools = [upgradeTool,cleanupTool,exportISOTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate]
 
 # class scratchCopy(object):
@@ -66,7 +42,6 @@ class scratchCopy(object):
 #         self.messages.addMessage("Cleaning up scratch files...")
 #         if arcpy.Exists(self.scratchXML):
 #             arcpy.Delete_management(self.scratchXML)
->>>>>>> Stashed changes
 
 class upgradeTool(object):
     def __init__(self):
@@ -299,18 +274,25 @@ class exportISOTool(object):
     def execute(self, parameters, messages):
         try:
             # TODO: Update this tool for Pro's Parameters since multiple ISO formats accepted
+            '''
+            https://pro.arcgis.com/en/pro-app/arcpy/metadata/migrating-from-arcmap-to-arcgis-pro.htm
+            '''
             """The source code of the tool."""
             Source_Metadata = parameters[0].valueAsText
             Output_Metadata = parameters[1].valueAsText
 
             # Local variables:
+            messages.addMessage('Install Dir: {}'.format(arcpy.GetInstallInfo()['InstallDir']))
             # translator = arcpy.GetInstallInfo()['InstallDir'] + "Metadata\\Translator\\ArcGIS2ISO19139.xml"
 
-            # Process: Export Metadata
-            # arcpy.ExportMetadata_conversion(Source_Metadata, translator, Output_Metadata)
+            src_md = md.Metadata(Source_Metadata)
+            # generate output path from input name
+            src_md.exportMetadata(outputPath=Output_Metadata, metadata_export_option="ISO19139")
 
-            # messages.addMessage("Process complete - please review the output carefully..")
-            messages.addMessage("Tool under review, nothing done yet. :-)")
+            if arcpy.Exists(Output_Metadata):
+                messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+            else:
+                messages.addMessage("Error Creating output.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -459,13 +441,11 @@ class mergeTemplate(object):
 
     def execute(self, parameters, messages):
         messages.addMessage("Merging...")
+        tool_file_path = os.path.dirname(os.path.realpath(__file__))
+        messages.addMessage('file path ' + tool_file_path)
+
         try:
             """The source code of the tool."""
-<<<<<<< Updated upstream
-            Source_Metadata = parameters[0].valueAsText
-            Template_Metadata = parameters[1].valueAsText
-            Output_Metadata = parameters[2].valueAsText
-=======
 
             tool_file_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -480,10 +460,10 @@ class mergeTemplate(object):
 
             # TODO:  Find equivalent xslt transform that takes an input
 
->>>>>>> Stashed changes
 
             # Local variables:
-            mergeTemplate_xslt = "mergeTemplate.xslt"
+            mergeTemplate_xslt = tool_file_path + r"\mergeTemplate.xslt"
+            messages.addMessage('merge template path '+ mergeTemplate_xslt)
 
             if not arcpy.Exists(mergeTemplate_xslt):
                 messages.addMessage(
@@ -491,19 +471,15 @@ class mergeTemplate(object):
                 raise Exception('merge template does not exist')
 
             # Process: EPA Cleanup
-<<<<<<< Updated upstream
-            arcpy.XSLTransform_conversion(Source_Metadata, mergeTemplate_xslt, Output_Metadata, Template_Metadata)
-=======
             # Source_Metadata
             # arcpy.XSLTransform_conversion(Source_Metadata, mergeTemplate_xslt, Output_Metadata, Template_Metadata)
->>>>>>> Stashed changes
 
             # Source_Metadata.saveAsUsingCustomXSLT(Output_Metadata, mergeTemplate_xslt, )
             try:
 
                 output_md.copy(template_md)
                 messages.addMessage("Output md Title "+ str(output_md.title))
-                output_md.importMetadata(Template_Metadata, metadata_import_option='CUSTOM', customStylesheetPath=mergeTemplate_xslt)
+                output_md.importMetadata(template_md, metadata_import_option='CUSTOM', customStylesheetPath=mergeTemplate_xslt)
                 output_md.saveAsXML(outputPath=Output_Metadata)
             except Exception as e:
                 messages.addMessage(e)
