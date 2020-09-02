@@ -1036,6 +1036,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestButton1.cs" />
+    <Compile Include="ThumbnailUpdater.cs" />
     <Compile Include="Utils\LanguageConverter.cs" />
     <Compile Include="Utils\MetadataException.cs" />
     <Compile Include="Utils\MetadataStyle.cs" />
@@ -1065,27 +1066,69 @@
     <Resource Include="Icons\info.rnd.white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="EMEdb\BoundingBox.xml" />
-    <Resource Include="EMEdb\Citation.xml" />
-    <Resource Include="EMEdb\contacts.xml" />
-    <Resource Include="EMEdb\Contact_Information.xml" />
-    <Resource Include="EMEdb\DistributionLiability.xml" />
-    <Resource Include="EMEdb\emeConfig.xml" />
-    <Resource Include="EMEdb\emeGUI.xml" />
-    <Resource Include="EMEdb\emeSettings.xml" />
-    <Resource Include="EMEdb\ISO19115MD_GenericMetadataTemplate.xml" />
-    <Resource Include="EMEdb\KeywordsEPA.xml" />
-    <Resource Include="EMEdb\KeywordsISO.xml" />
-    <Resource Include="EMEdb\KeywordsPlace.xml" />
-    <Resource Include="EMEdb\KeywordsUser.xml" />
-    <Resource Include="EMEdb\MDtemplate.xml" />
-    <Resource Include="EMEdb\MItemplate.xml" />
-    <Resource Include="EMEdb\OnlineLinkage.xml" />
-    <Resource Include="EMEdb\OnlineProtocol.xml" />
-    <Resource Include="EMEdb\ProgramCode.xml" />
-    <Resource Include="EMEdb\Publisher.xml" />
-    <Resource Include="EMEdb\SecurityConstraints.xml" />
-    <Resource Include="EMEdb\SystemofRecords.xml" />
+    <None Include="EMEdb\BoundingBox.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\Citation.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\contacts.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\Contact_Information.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\DistributionLiability.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\emeConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\emeGUI.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\emeSettings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\ISO19115MD_GenericMetadataTemplate.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\KeywordsEPA.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\KeywordsISO.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\KeywordsPlace.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\KeywordsUser.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\MDtemplate.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\MItemplate.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\OnlineLinkage.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\OnlineProtocol.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\ProgramCode.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\Publisher.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\SecurityConstraints.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EMEdb\SystemofRecords.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <AddInContent Include="Images\GenericButtonGreen16.png" />
@@ -1164,6 +1207,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.pyt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EMEdbManager\EMEdbManager.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -117,23 +117,42 @@ class upgradeTool(object):
 
     def execute(self, parameters, messages):
         try:
+            # TODO: Need to check the current metadata format? Pro's tool will check and not allow
+            # an upgrade depending on the format detected.
             """The source code of the tool."""
             Source_Metadata = parameters[0].valueAsText
             Output_Metadata = parameters[1].valueAsText
 
+            source_md = md.Metadata(Source_Metadata)
+            output_md = md.Metadata()
+            output_md.copy(source_md)
+
             # Use scratchCopy class to make a standalone XML doc to work with.
-            scratchCopier = scratchCopy(messages)
-            Copy_to_be_upgraded = scratchCopier.makeScratchCopy(Source_Metadata)
+            # scratchCopier = scratchCopy(messages)
+            # Copy_to_be_upgraded = scratchCopier.makeScratchCopy(Source_Metadata)
 
             messages.addMessage("Upgrading the metadata...")
             # Process: Upgrade Metadata
-            Upgraded_Metadata = arcpy.UpgradeMetadata_conversion(Copy_to_be_upgraded, "FGDC_TO_ARCGIS")
+            output_md.upgrade('FGDC_CSDGM')
+            # Upgraded_Metadata = arcpy.UpgradeMetadata_conversion(Copy_to_be_upgraded, "FGDC_TO_ARCGIS")
+
+            tool_file_path = os.path.dirname(os.path.realpath(__file__))
+            EPAUpgradeCleanup_xslt = tool_file_path + r'\EPAUpgradeCleanup.xslt'
 
             messages.addMessage("Preserving the UUID and cleaning up legacy elements...")
-            # Process: EPA Cleanup
-            arcpy.XSLTransform_conversion(Upgraded_Metadata, EPAUpgradeCleanup_xslt, Output_Metadata, "")
+            try:
+                output_md.saveAsUsingCustomXSLT(Output_Metadata, EPAUpgradeCleanup_xslt)
+                # Process: EPA Cleanup
+                # arcpy.XSLTransform_conversion(Upgraded_Metadata, EPAUpgradeCleanup_xslt, Output_Metadata, "")
+            except Exception as e:
+                messages.addMessage(e)
 
-            messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+            if arcpy.Exists(Output_Metadata):
+                messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+
+            else:
+                messages.addMessage("Error Creating file.")
+
         except:
             # Cycle through Geoprocessing tool specific errors
             for msg in range(0, arcpy.GetMessageCount()):
@@ -141,7 +160,8 @@ class upgradeTool(object):
                     arcpy.AddReturnMessage(msg)
         finally:
             # Regardless of errors, clean up intermediate products.
-            scratchCopier.cleanupScratchCopy()
+            # scratchCopier.cleanupScratchCopy()
+            pass
         return
 
 class cleanupTool(object):
@@ -197,15 +217,28 @@ class cleanupTool(object):
             Source_Metadata = parameters[0].valueAsText
             Output_Metadata = parameters[1].valueAsText
 
+            source_md = md.Metadata(Source_Metadata)
 
             # Local variables:
-            EPAUpgradeCleanup_xslt = "EPAUpgradeCleanup.xslt"
+            tool_file_path = os.path.dirname(os.path.realpath(__file__))
+            EPAUpgradeCleanup_xslt = tool_file_path + r"\EPAUpgradeCleanup.xslt"
 
             messages.addMessage("Preserving the UUID and cleaning up legacy elements...")
-            # Process: EPA Cleanup
-            arcpy.XSLTransform_conversion(Source_Metadata, EPAUpgradeCleanup_xslt, Output_Metadata, "")
 
-            messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+            # Process: EPA Cleanup
+            try:
+                source_md.saveAsUsingCustomXSLT(Output_Metadata, EPAUpgradeCleanup_xslt)
+                # Process: EPA Cleanup
+                # arcpy.XSLTransform_conversion(Upgraded_Metadata, EPAUpgradeCleanup_xslt, Output_Metadata, "")
+            except Exception as e:
+                messages.addMessage(e)
+
+            if arcpy.Exists(Output_Metadata):
+                messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+
+            else:
+                messages.addMessage("Error Creating file.")
+
         except:
             # Cycle through Geoprocessing tool specific errors
             for msg in range(0, arcpy.GetMessageCount()):
@@ -265,17 +298,20 @@ class exportISOTool(object):
 
     def execute(self, parameters, messages):
         try:
+            # TODO: Update this tool for Pro's Parameters since multiple ISO formats accepted
             """The source code of the tool."""
             Source_Metadata = parameters[0].valueAsText
             Output_Metadata = parameters[1].valueAsText
 
             # Local variables:
-            translator = arcpy.GetInstallInfo()['InstallDir'] + "Metadata\\Translator\\ArcGIS2ISO19139.xml"
+            # translator = arcpy.GetInstallInfo()['InstallDir'] + "Metadata\\Translator\\ArcGIS2ISO19139.xml"
 
             # Process: Export Metadata
-            arcpy.ExportMetadata_conversion(Source_Metadata, translator, Output_Metadata)
+            # arcpy.ExportMetadata_conversion(Source_Metadata, translator, Output_Metadata)
 
-            messages.addMessage("Process complete - please review the output carefully..")
+            # messages.addMessage("Process complete - please review the output carefully..")
+            messages.addMessage("Tool under review, nothing done yet. :-)")
+
         except:
             # Cycle through Geoprocessing tool specific errors
             for msg in range(0, arcpy.GetMessageCount()):
@@ -334,16 +370,31 @@ class saveTemplate(object):
     def execute(self, parameters, messages):
         try:
             """The source code of the tool."""
+            tool_file_path = os.path.dirname(os.path.realpath(__file__))
+
             Source_Metadata = parameters[0].valueAsText
+            messages.addMessage(f'param 0 {Source_Metadata}')
+
             Output_Metadata = parameters[1].valueAsText
+            messages.addMessage(f'param 1 {Output_Metadata}')
+
+            source_md = md.Metadata(Source_Metadata)
 
             # Local variables:
-            saveTemplate_xslt = "saveTemplate.xslt"
+            saveTemplate_xslt = tool_file_path + r"\saveTemplate.xslt"
 
             # Process: EPA Cleanup
-            arcpy.XSLTransform_conversion(Source_Metadata, saveTemplate_xslt, Output_Metadata, "")
+            try:
+                # arcpy.XSLTransform_conversion(Source_Metadata, saveTemplate_xslt, Output_Metadata, "")
+                source_md.saveAsUsingCustomXSLT(Output_Metadata, saveTemplate_xslt)
+            except Exception as e:
+                messages.addMessage(e)
 
-            messages.addMessage("Process complete - please review the output carefully before reusing as a template.")
+            if arcpy.Exists(Output_Metadata):
+                messages.addMessage("Process complete - please review the output carefully before reusing as a template.")
+            else:
+                messages.addMessage("Error Creating file.")
+
         except:
             # Cycle through Geoprocessing tool specific errors
             for msg in range(0, arcpy.GetMessageCount()):
@@ -623,7 +674,7 @@ class importTool(object):
                     target_md.save()
 
                     # TODO: Should probably sync if it is a feature class. Need to check if FC
-                    target_md.synchronize('SELECTIVE')
+                    # target_md.synchronize('SELECTIVE')
 
                     # arcpy.MetadataImporter_conversion(Source_Metadata, Target_Metadata)
 
@@ -691,32 +742,30 @@ class cleanExportTool(object):
     def execute(self, parameters, messages):
         try:
             """The source code of the tool."""
+
+            tool_file_path = os.path.dirname(os.path.realpath(__file__))
+
             Source_Metadata = parameters[0].valueAsText
             Output_Metadata = parameters[1].valueAsText
 
             source_md = md.Metadata(Source_Metadata)
-            output_md = md.Metadata(Output_Metadata)
-
-
 
             # Local variables:
-            EPACleanExport_xslt = "EPACleanExport.xslt"
+            EPACleanExport_xslt = tool_file_path + r"\EPACleanExport.xslt"
 
-            messages.addMessage("output: " + Output_Metadata)
-            messages.addMessage("xslt: " + os.path.abspath(EPACleanExport_xslt))
             messages.addMessage("Exporting the metadata record...")
             # Process: EPA Cleanup
-            # try:
-            source_md.saveAsUsingCustomXSLT(Output_Metadata, os.path.abspath(EPACleanExport_xslt))
-            # except Exception as e:
-            #     messages.addMessage(e)
+            try:
+                source_md.saveAsUsingCustomXSLT(Output_Metadata, EPACleanExport_xslt)
+            except Exception as e:
+                messages.addMessage(e)
             # # arcpy.XSLTransform_conversion(Source_Metadata, EPACleanExport_xslt, Output_Metadata, "")
 
-            if arcpy.exists(Output_Metadata):
+            if arcpy.Exists(Output_Metadata):
                 messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
 
             else:
-                messages.addMessage("Error Creating file")
+                messages.addMessage("Error Creating file.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -742,7 +791,9 @@ class editElement(object):
             name="Target_Metadata",
             datatype="DEType",
             parameterType="Required",
-            direction="Input")
+            direction="Input",
+            multiValue=True
+            )
 
         # Third parameter
         param1 = arcpy.Parameter(
@@ -784,49 +835,64 @@ class editElement(object):
             Xpath_Expression = parameters[1].valueAsText
             New_Value = parameters[2].valueAsText
 
-            # Use scratchCopy class to make a standalone XML doc to work with.
-            scratchCopier = scratchCopy(messages)
-            scratch_Metadata = scratchCopier.makeScratchCopy(Target_Metadata)
+            for t in str(Target_Metadata).split(";"):
 
-            messages.addMessage("Editing the metadata record...")
-            # Process: EPA Cleanup
-            import xml.etree.ElementTree as ET
-            tree = ET.parse(scratch_Metadata)
-            root = tree.getroot()
+                target_md = md.Metadata(t)
+                # scratch_md = md.Metadata()
+                # scratch_md.copy(target_md)
 
-            # This section iterates through the xpath components, adding any missing SubElements so there's at least one element to populate.
-            xpathElements = Xpath_Expression.split("/")
-            xpathList = []
-            thisNode = root
-            for xpathElem in xpathElements:
-                xpathList.append(xpathElem)
-                buildXPath = "/".join(xpathList)
-                if len(root.findall(buildXPath)) == 0:
-                    ET.SubElement(thisNode,xpathElem)
-                thisNode = root.findall(buildXPath)[0]
+                # Use scratchCopy class to make a standalone XML doc to work with.
+                # scratchCopier = scratchCopy(messages)
+                # scratch_Metadata = scratchCopier.makeScratchCopy(Target_Metadata)
 
-            # This section updates the values of any matching xpath expressions
-            elements = root.findall(Xpath_Expression)
-            for elem in elements:
-                elem.text = New_Value
-            tree.write(scratch_Metadata)
+                messages.addMessage("Editing the metadata record...")
+                # Process: EPA Cleanup
+                import xml.etree.ElementTree as ET
+                # tree = ET.parse(scratch_Metadata)
+                # root = tree.getroot()
+                # at the root when parsing from string
+                root = ET.fromstring(target_md.xml)
 
-            # If the target is a standalone XML doc, just copy the scratch over the source file.
-            if Target_Metadata[-4:].lower() == ".xml":
-                import shutil
-                shutil.copy(scratch_Metadata,Target_Metadata)
-            else:
-                # Otherwise import the scratch metadata back to the source data.
-                importer = importTool()
-                importParams = importer.getParameterInfo()
-                import_source = importParams[0]
-                import_source.value = scratch_Metadata
-                import_target = importParams[1]
-                import_target.value = Target_Metadata
+                # This section iterates through the xpath components, adding any missing SubElements so there's at least one element to populate.
+                xpathElements = Xpath_Expression.split("/")
+                xpathList = []
+                thisNode = root
+                for xpathElem in xpathElements:
+                    xpathList.append(xpathElem)
+                    buildXPath = "/".join(xpathList)
+                    if len(root.findall(buildXPath)) == 0:
+                        ET.SubElement(thisNode,xpathElem)
+                    thisNode = root.findall(buildXPath)[0]
 
-                importer.execute([import_source,import_target],messages)
+                # This section updates the values of any matching xpath expressions
+                elements = root.findall(Xpath_Expression)
+                for elem in elements:
+                    elem.text = New_Value
+                # tree.write(scratch_Metadata)
+                messages.addMessage("writing back to xml object")
 
-            messages.addMessage("Process complete, element update count: {}.".format(str(len(elements))))
+                if not target_md.isReadOnly:
+                    target_md.xml = ET.tostring(root)
+                    target_md.save()
+                    messages.addMessage("Process complete, element update count: {}.".format(str(len(elements))))
+                else:
+                    messages.addMessage("Unable to save. Metadata Is Read Only.")
+
+                # If the target is a standalone XML doc, just copy the scratch over the source file.
+                # if Target_Metadata[-4:].lower() == ".xml":
+                #     import shutil
+                #     shutil.copy(scratch_Metadata,Target_Metadata)
+                # else:
+                #     # Otherwise import the scratch metadata back to the source data.
+                #     importer = importTool()
+                #     importParams = importer.getParameterInfo()
+                #     import_source = importParams[0]
+                #     import_source.value = scratch_Metadata
+                #     import_target = importParams[1]
+                #     import_target.value = Target_Metadata
+                #
+                #     importer.execute([import_source,import_target],messages)
+
         except:
             # Cycle through Geoprocessing tool specific errors
             for msg in range(0, arcpy.GetMessageCount()):
@@ -834,7 +900,8 @@ class editElement(object):
                     arcpy.AddReturnMessage(msg)
         finally:
             # Regardless of errors, clean up intermediate products.
-            scratchCopier.cleanupScratchCopy()
+            # scratchCopier.cleanupScratchCopy()
+            pass
         return
 
 class editDates(object):
@@ -851,7 +918,8 @@ class editDates(object):
             name="Target_Metadata",
             datatype="DEType",
             parameterType="Required",
-            direction="Input")
+            direction="Input",
+            multiValue=True)
 
         # Third parameter
         param1 = arcpy.Parameter(
