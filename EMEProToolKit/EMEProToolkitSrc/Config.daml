@@ -1185,7 +1185,45 @@ limitations under the License.​
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport32.png">
           <tooltip heading="Export Metadata">Export Metadata to...<disabledText /></tooltip>
         </button>
+<<<<<<< Updated upstream
         <button id="EMEProToolkit_EMEMenu_Items_test" caption="Export Metadata" className="EMEMenu_test" loadOnClick="true"
+=======
+        <button id="EMEProToolkit_EMEMenu_Items_cleanUpTool" condition="esri_core_resourcesPane" caption="Clean Up Metadata" className="EMEMenu_cleanUpToolMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingTool16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingTool32.png">
+          <tooltip heading="Clean Up Tool">
+            This tool performs several extra cleanup steps including copying legacy UUIDs to the ISO-Compliant element and cleaning up all legacy elements. 
+            This tool is recommended for records that have already been upgraded to ArcGIS Metadata.<disabledText /></tooltip>
+        </button>
+        <button id="EMEProToolkit_EMEMenu_Items_saveTemplateMD" condition="esri_core_resourcesPane" caption="Save Template Metadata" className="EMEMenu_saveTemplateMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/VersionCreate16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/VersionCreate32.png">
+          <tooltip heading="Save Metadata Template">
+            This tool saves a metadata record as a reusable template by excluding those elements which must be unique in every 
+            metadata record, such as title, abstract, unique identifier, etc, leaving those elements that are common across many records.<disabledText /></tooltip>
+        </button>
+        <button id="EMEProToolkit_EMEMenu_Items_editElementMD" condition="esri_core_resourcesPane" caption="Edit Element" className="EMEMenu_editElementMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericPencil16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericPencil32.png">
+          <tooltip heading="Edit Metadata Element">
+            This tool accepts an XML XPath expression and a text value to update just a single element. If the element does not exist, it will be added. 
+            Please be aware that the source metadata will be changed - make a backup copy if necessary.<disabledText /></tooltip>
+        </button>
+        <button id="EMEProToolkit_EMEMenu_Items_editDatesMD" condition="esri_core_resourcesPane" caption="Edit Dates" className="EMEMenu_editDatesMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/Add_Archive_Table16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/Add_Archive_Table32.png">
+          <tooltip heading="Edit Metadata Dates">
+            This tool assists with editing the citation date values in ArcGIS Metadata to ease automated refreshes<disabledText /></tooltip>
+        </button>
+        <!--<button id="EMEProToolkit_EMEMenu_Items_mergeMD" caption="Merge" className="EMEMenu_mergeMD" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ModelBuilderAddMergeBranch16.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ModelBuilderAddMergeBranch32.png">
+          <tooltip heading="Merge Metadata">
+            <disabledText /></tooltip>
+        </button>-->
+        
+        <!--<button id="EMEProToolkit_EMEMenu_Items_test" caption="Export Metadata" className="EMEMenu_test" loadOnClick="true"
+>>>>>>> Stashed changes
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport32.png">
           <tooltip heading="Export Metadata">ToolTip<disabledText /></tooltip>
