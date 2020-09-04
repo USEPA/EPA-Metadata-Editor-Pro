@@ -1,3 +1,5 @@
+import os
+
 import arcpy
 from arcpy import metadata as md
 import sys
@@ -11,7 +13,7 @@ class Toolbox(object):
         self.alias = ""
 
         # List of tool classes associated with this toolbox
-        self.tools = [upgradeTool,cleanupTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates]
+        self.tools = [upgradeTool,cleanupTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates,mergeTemplate, exportISOTool]
         # self.tools = [upgradeTool,cleanupTool,exportISOTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate]
 
 # class scratchCopy(object):
@@ -272,18 +274,25 @@ class exportISOTool(object):
     def execute(self, parameters, messages):
         try:
             # TODO: Update this tool for Pro's Parameters since multiple ISO formats accepted
+            '''
+            https://pro.arcgis.com/en/pro-app/arcpy/metadata/migrating-from-arcmap-to-arcgis-pro.htm
+            '''
             """The source code of the tool."""
             Source_Metadata = parameters[0].valueAsText
             Output_Metadata = parameters[1].valueAsText
 
             # Local variables:
+            messages.addMessage('Install Dir: {}'.format(arcpy.GetInstallInfo()['InstallDir']))
             # translator = arcpy.GetInstallInfo()['InstallDir'] + "Metadata\\Translator\\ArcGIS2ISO19139.xml"
 
-            # Process: Export Metadata
-            # arcpy.ExportMetadata_conversion(Source_Metadata, translator, Output_Metadata)
+            src_md = md.Metadata(Source_Metadata)
+            # generate output path from input name
+            src_md.exportMetadata(outputPath=Output_Metadata, metadata_export_option="ISO19139")
 
-            # messages.addMessage("Process complete - please review the output carefully..")
-            messages.addMessage("Tool under review, nothing done yet. :-)")
+            if arcpy.Exists(Output_Metadata):
+                messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+            else:
+                messages.addMessage("Error Creating output.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -431,24 +440,56 @@ class mergeTemplate(object):
         return
 
     def execute(self, parameters, messages):
+        messages.addMessage("Merging...")
+        tool_file_path = os.path.dirname(os.path.realpath(__file__))
+        messages.addMessage('file path ' + tool_file_path)
+
         try:
             """The source code of the tool."""
+
             tool_file_path = os.path.dirname(os.path.realpath(__file__))
 
             Source_Metadata = parameters[0].valueAsText
             Template_Metadata = parameters[1].valueAsText
             Output_Metadata = parameters[2].valueAsText
+
             source_md = md.Metadata(Source_Metadata)
             template_md = md.Metadata(Template_Metadata)
+            source_md.saveAsXML(outputPath=Output_Metadata)
+            output_md = md.Metadata(Output_Metadata)
 
             # TODO:  Find equivalent xslt transform that takes an input
 
 
             # Local variables:
             mergeTemplate_xslt = tool_file_path + r"\mergeTemplate.xslt"
+            messages.addMessage('merge template path '+ mergeTemplate_xslt)
+
+            if not arcpy.Exists(mergeTemplate_xslt):
+                messages.addMessage(
+                    "Merge Template does not exist.")
+                raise Exception('merge template does not exist')
 
             # Process: EPA Cleanup
+            # Source_Metadata
             # arcpy.XSLTransform_conversion(Source_Metadata, mergeTemplate_xslt, Output_Metadata, Template_Metadata)
+
+            # Source_Metadata.saveAsUsingCustomXSLT(Output_Metadata, mergeTemplate_xslt, )
+            try:
+
+                output_md.copy(template_md)
+                messages.addMessage("Output md Title "+ str(output_md.title))
+                output_md.importMetadata(template_md, metadata_import_option='CUSTOM', customStylesheetPath=mergeTemplate_xslt)
+                output_md.saveAsXML(outputPath=Output_Metadata)
+            except Exception as e:
+                messages.addMessage(e)
+
+            if arcpy.Exists(Output_Metadata):
+                messages.addMessage(
+                    "Process complete - please review the output carefully before importing or harvesting.")
+
+            else:
+                messages.addMessage("Error Creating file.")
 
             messages.addMessage("Process complete - please review the output carefully.")
         except:
@@ -457,6 +498,7 @@ class mergeTemplate(object):
                 if arcpy.GetSeverity(msg) == 2:
                     arcpy.AddReturnMessage(msg)
         finally:
+            messages.addMessage("Finally.")
             # Regardless of errors, clean up intermediate products.
             pass
         return
