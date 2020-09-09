@@ -38,16 +38,23 @@ namespace EMEProToolkit
         string _filePathEsri = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ArcGIS\\Descriptions\\";
         string _filePathEme = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
         private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        
 
         public Task CopyContentsAsync(string srcDir, string targDir)
         {
+            Trace.WriteLine("_filePathEsri: "+_filePathEsri);
             return Task.Run(() =>
             {
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("CopyContentsAsync - copy contents task running");
                 if (!Directory.Exists(targDir))
                 {
+                    ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("CopyContentsAsync - creating target dir");
+
                     Directory.CreateDirectory(targDir);
                     //Trace.WriteLine("Created target directory: "+targDir);
                 };
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("CopyContentsAsync - copying contents");
+
                 foreach (var f in Directory.GetFiles(srcDir))
                 {
                     string fname = Path.GetFileName(f);
@@ -60,10 +67,13 @@ namespace EMEProToolkit
 
         public async void USEPADirAsync()
         {
+            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("USEPADirAsync - Check if Target US EPA dir: "+ _filePathEme);
+
             if (!Directory.Exists(_filePathEme))
             {
                 string src = _installPath + "\\EMEdb\\";
-                CopyContentsAsync(srcDir: src, targDir: _filePathEme);
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("USEPADirAsync - Creating US EPA db dir and copying contents from : " + src);
+                await CopyContentsAsync(srcDir: src, targDir: _filePathEme);
             }
         }
 
@@ -71,6 +81,7 @@ namespace EMEProToolkit
         {
             return Task.Run(() =>
             {
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("LoadContactsAsync Task started...");
                 FrameworkApplication.State.Activate("sync_contacts_state");
                 ReloadContacts(checksyncage);
                 FrameworkApplication.State.Deactivate("sync_contacts_state");
@@ -84,6 +95,7 @@ namespace EMEProToolkit
             try { _emeConfig.Load(_filePathEme + "emeConfig.xml"); }
             catch (System.IO.FileNotFoundException)
             {
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - emeConfig.xml does not exist, loading template...");
                 _emeConfig.LoadXml(
                 "<?xml version=\"1.0\" standalone=\"yes\"?> \n" +
                 "<emeConfig> \n" +
@@ -146,6 +158,8 @@ namespace EMEProToolkit
             // replace contacts.xml with contacts.bak
             if (File.Exists(_filePathEsri + "contacts.bak"))
             {
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - replace contacts.bak");
+
                 File.Delete(_filePathEsri + "contacts.xml");
                 File.Copy(_filePathEsri + "contacts.bak", _filePathEsri + "contacts.xml");
                 File.Delete(_filePathEsri + "contacts.bak");
@@ -167,10 +181,12 @@ namespace EMEProToolkit
                 //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nLoading contacts from \"" + directoryName + "\"\n (" + directoryUrl + ")", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
                 try
                 {
+                    ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - Testing HTTP request...");
                     using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                     {
                         if (response.StatusCode.ToString() == "OK")
                         {
+                            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - HTTP response OK...");
                             // Return contacts.xml Date Modified
                             try { _contactsWEB.Load(directoryUrl); }
                             catch (System.IO.FileNotFoundException)
@@ -188,6 +204,7 @@ namespace EMEProToolkit
                                 "  </contact> \n" +
                                 "</contacts>");
                             }
+                            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - saving contacts.xml");
                             _contactsWEB.Save(_filePathEme + "contacts.xml");
 
                             // Add timestamp to config file
@@ -218,7 +235,7 @@ namespace EMEProToolkit
                 ArcGIS.Desktop.Framework.FrameworkApplication.AddNotification(nosyncnotification);
                 //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nContacts will be loaded from local cache.", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
+            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - loading contacts.xml...");
             try { _contactsBAK.Load(_filePathEsri + "contacts.xml"); }
             catch (System.IO.FileNotFoundException)
             {
@@ -282,7 +299,7 @@ namespace EMEProToolkit
             //    MessageBoxResult contactsTest = MessageBox.Show("Could not load contacts.cfg", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
             //}
             #endregion
-
+            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - cloneMerge contacts...");
             #region This takes 8.00 seconds to load
             XmlNode contactsNodeMerge = cloneMerge.CreateElement("contacts");
             cloneMerge.AppendChild(contactsNodeMerge);
@@ -343,7 +360,7 @@ namespace EMEProToolkit
             // append to clone
             contactsNodeMerge.InnerXml = sb2.ToString();
             #endregion
-
+            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - merging contacts...");
             // save to file
             cloneMerge.Save(Utils.Utils.GetContactsFileLocation());
             //cloneMerge.Save(_filePathEsri + "contacts.cfg");
@@ -354,6 +371,7 @@ namespace EMEProToolkit
             // contacts.xml restored successfully. It is now safe to delete BAK file.
             if (File.Exists(_filePathEsri + "contacts.bak"))
             {
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - delete contacts.bak");
                 File.Delete(_filePathEsri + "contacts.bak");
             }
 

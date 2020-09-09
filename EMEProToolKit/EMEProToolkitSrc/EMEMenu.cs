@@ -222,7 +222,7 @@ namespace EMEProToolkit
             catch (Exception exc)
             {
                 // Catch any exception found and display in a message box
-                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Exception caught while trying to run Python tool: " + exc.Message);
+                MessageBox.Show("Exception caught while trying to run Python tool: " + exc.Message);
                 return;
             }
 

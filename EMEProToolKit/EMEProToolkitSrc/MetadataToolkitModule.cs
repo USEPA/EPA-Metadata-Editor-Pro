@@ -73,7 +73,7 @@ namespace EMEProToolkit
             var AsyncContacts = new AsyncContacts();
             AsyncContacts.USEPADirAsync();
             // check last sync
-            AsyncContacts.LoadContactsAsync(checksyncage: true);
+            //AsyncContacts.LoadContactsAsync(checksyncage: true);
      
         }
 
