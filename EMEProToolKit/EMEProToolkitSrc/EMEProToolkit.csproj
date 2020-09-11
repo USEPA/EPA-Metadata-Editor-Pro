@@ -102,6 +102,7 @@
     <Compile Include="AsyncContacts.cs" />
     <Compile Include="Daml.cs" />
     <Compile Include="EMEMenu.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Pages\BooleanValueSync.xaml.cs">
       <DependentUpon>BooleanValueSync.xaml</DependentUpon>
     </Compile>

@@ -1155,7 +1155,7 @@ limitations under the License.​
       </tabs>
       <controls>
         <button id="EMEProToolkit_EMEMenu_Items_UpdateContacts" caption="Update Contacts" 
-                className="EMEMenu_UpdateContacts" loadOnClick="false" 
+                className="EMEMenu_UpdateContacts" loadOnClick="true" 
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/ImagesUser16.png" 
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/User32.png"
                 condition="SyncContactsCondition">
@@ -1253,7 +1253,7 @@ limitations under the License.​
         </button>
         
         <button id="EMEProToolkit_EMEMenu_Items_ShowToolbox" caption="Display EME Pro Toolbox Location" 
-                className="EMEMenu_ShowToolbox" loadOnClick="false" 
+                className="EMEMenu_ShowToolbox" loadOnClick="true" 
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/GenericButtonRed32.png" 
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonRed32.png">
           <tooltip heading="Show Python Toolbox Dir">For Testing Purposes Only! 

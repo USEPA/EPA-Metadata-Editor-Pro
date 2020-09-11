@@ -42,18 +42,22 @@ namespace EMEProToolkit
 
         public Task CopyContentsAsync(string srcDir, string targDir)
         {
-            Trace.WriteLine("_filePathEsri: "+_filePathEsri);
+            //Log ouptut
+            var Log = new LogOutput();
+
             return Task.Run(() =>
             {
-                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("CopyContentsAsync - copy contents task running");
+                //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("CopyContentsAsync - copy contents task running");
+                LogOutput.Log("CopyContentsAsync - copy contents task running");
                 if (!Directory.Exists(targDir))
                 {
-                    ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("CopyContentsAsync - creating target dir");
+                    //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("CopyContentsAsync - creating target dir");
+                    LogOutput.Log("CopyContentsAsync - creating target dir:"+targDir);
 
                     Directory.CreateDirectory(targDir);
                     //Trace.WriteLine("Created target directory: "+targDir);
                 };
-                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("CopyContentsAsync - copying contents");
+                //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("CopyContentsAsync - copying contents");
 
                 foreach (var f in Directory.GetFiles(srcDir))
                 {
@@ -61,18 +65,22 @@ namespace EMEProToolkit
                     //Trace.WriteLine("Copying " + fname);
                     string dest = Path.Combine(targDir, fname);
                     File.Copy(f, dest, overwrite: true);
+                    LogOutput.Log("CopyContentsAsync - copied file : " + fname);
                 }
             });
         }
 
         public async void USEPADirAsync()
         {
-            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("USEPADirAsync - Check if Target US EPA dir: "+ _filePathEme);
+            //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("USEPADirAsync - Check if Target US EPA dir: "+ _filePathEme);
+            LogOutput.Log("USEPADirAsync - Check if Target US EPA dir: " + _filePathEme);
 
             if (!Directory.Exists(_filePathEme))
             {
                 string src = _installPath + "\\EMEdb\\";
-                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("USEPADirAsync - Creating US EPA db dir and copying contents from : " + src);
+                //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("USEPADirAsync - Creating US EPA db dir and copying contents from : " + src);
+                LogOutput.Log("USEPADirAsync - Creating U.S. EPA dir at: " + _filePathEme);
+                LogOutput.Log("USEPADirAsync - Source Dir: " + src);
                 await CopyContentsAsync(srcDir: src, targDir: _filePathEme);
             }
         }
@@ -81,7 +89,10 @@ namespace EMEProToolkit
         {
             return Task.Run(() =>
             {
-                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("LoadContactsAsync Task started...");
+                Trace.WriteLine("_filePathEsri: " + _filePathEsri);
+                LogOutput.Log("LoadContactsAsync - Task ");
+                LogOutput.Log("LoadContactsAsync - Esri file path : " + _filePathEsri);
+                //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("LoadContactsAsync Task started...");
                 FrameworkApplication.State.Activate("sync_contacts_state");
                 ReloadContacts(checksyncage);
                 FrameworkApplication.State.Deactivate("sync_contacts_state");
@@ -92,10 +103,12 @@ namespace EMEProToolkit
         {
             #region Load EME Configuration File
             // Load emeConfig.xml
+            LogOutput.Log("ReloadContacts - try load eme config:  "+ _filePathEme + "emeConfig.xml");
             try { _emeConfig.Load(_filePathEme + "emeConfig.xml"); }
             catch (System.IO.FileNotFoundException)
             {
-                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - emeConfig.xml does not exist, loading template...");
+                LogOutput.Log("ReloadContacts - emeConfig.xml not found, loading template");
+                //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - emeConfig.xml does not exist, loading template...");
                 _emeConfig.LoadXml(
                 "<?xml version=\"1.0\" standalone=\"yes\"?> \n" +
                 "<emeConfig> \n" +
@@ -158,7 +171,10 @@ namespace EMEProToolkit
             // replace contacts.xml with contacts.bak
             if (File.Exists(_filePathEsri + "contacts.bak"))
             {
-                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - replace contacts.bak");
+                LogOutput.Log("ReloadContacts - replace contacts.xml with contacts.bak");
+                LogOutput.Log("ReloadContacts - contacts.xml: "+ _filePathEsri + "contacts.xml");
+                LogOutput.Log("ReloadContacts - contacts.bak: " + _filePathEsri + "contacts.bak");
+                //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - replace contacts.bak");
 
                 File.Delete(_filePathEsri + "contacts.xml");
                 File.Copy(_filePathEsri + "contacts.bak", _filePathEsri + "contacts.xml");
@@ -172,6 +188,7 @@ namespace EMEProToolkit
             if (dosync)
 
             {
+                LogOutput.Log("ReloadContacts - syncing contacts... " );
                 Notification syncnotification = new Notification();
                 //syncnotification.Title = FrameworkApplication.Title;
                 syncnotification.Title = "EPA Metadata Editor Pro";
@@ -181,16 +198,21 @@ namespace EMEProToolkit
                 //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nLoading contacts from \"" + directoryName + "\"\n (" + directoryUrl + ")", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
                 try
                 {
-                    ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - Testing HTTP request...");
+                    LogOutput.Log("ReloadContacts - tyring http request... ");
+                    //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - Testing HTTP request...");
                     using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                     {
+
                         if (response.StatusCode.ToString() == "OK")
                         {
-                            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - HTTP response OK...");
+                            LogOutput.Log("ReloadContacts - HTTP status OK");
+                            //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - HTTP response OK...");
                             // Return contacts.xml Date Modified
+                            LogOutput.Log("ReloadContacts - load contacts web from :  "+directoryUrl);
                             try { _contactsWEB.Load(directoryUrl); }
                             catch (System.IO.FileNotFoundException)
                             {
+                                LogOutput.Log("ReloadContacts - _contactsWEB not found...");
                                 _contactsWEB.LoadXml(
                                 "<contacts> \n" +
                                 "  <contact> \n" +
@@ -204,10 +226,12 @@ namespace EMEProToolkit
                                 "  </contact> \n" +
                                 "</contacts>");
                             }
-                            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - saving contacts.xml");
+                            //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - saving contacts.xml");
+                            LogOutput.Log("ReloadContacts - saving _contactsWEB from template ");
                             _contactsWEB.Save(_filePathEme + "contacts.xml");
 
                             // Add timestamp to config file
+                            LogOutput.Log("ReloadContacts - add timestamp to eme config -  "+ _filePathEme + "emeConfig.xml");
                             _emeConfig.SelectSingleNode("//emeControl[controlName[contains(. , 'Contacts Manager')]]/date").InnerText = DateTime.Now.ToString("o");
                             _emeConfig.Save(_filePathEme + "emeConfig.xml");
                         }
@@ -226,6 +250,7 @@ namespace EMEProToolkit
             }
             else
             {
+                LogOutput.Log("ReloadContacts - loading contacts from local cache");
                 //load recent contacts from local cache notification
                 Notification nosyncnotification = new Notification();
                 //syncnotification.Title = FrameworkApplication.Title;
@@ -235,7 +260,8 @@ namespace EMEProToolkit
                 ArcGIS.Desktop.Framework.FrameworkApplication.AddNotification(nosyncnotification);
                 //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nContacts will be loaded from local cache.", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - loading contacts.xml...");
+            //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - loading contacts.xml...");
+            LogOutput.Log("ReloadContacts - load contactsBAK from contacts.xml: "+_filePathEsri + "contacts.xml");
             try { _contactsBAK.Load(_filePathEsri + "contacts.xml"); }
             catch (System.IO.FileNotFoundException)
             {
@@ -253,11 +279,14 @@ namespace EMEProToolkit
                 "</contacts>");
             }
             // save backup of user contacts.xml
+            LogOutput.Log("ReloadContacts - save contactsBAK: " + _filePathEsri + "contacts.bak");
             _contactsBAK.Save(_filePathEsri + "contacts.bak");
 
+            LogOutput.Log("ReloadContacts - load contacts.xml ");
             try { _contactsEsri.Load(_filePathEsri + "contacts.xml"); }
             catch (System.IO.FileNotFoundException)
             {
+                LogOutput.Log("ReloadContacts - contacts.xml not found, loading template xml ");
                 _contactsEsri.LoadXml(
                 "<contacts> \n" +
                 "  <contact> \n" +
@@ -271,10 +300,11 @@ namespace EMEProToolkit
                 "  </contact> \n" +
                 "</contacts>");
             }
-
+            LogOutput.Log("ReloadContacts - load epa comtacts:  "+ _filePathEme + "contacts.xml");
             try { _contactsEpa.Load(_filePathEme + "contacts.xml"); }
             catch (System.IO.FileNotFoundException)
             {
+                LogOutput.Log("ReloadContacts - epa comtacts not found loading from template xml ");
                 _contactsEpa.LoadXml(
                 "<contacts> \n" +
                 "  <contact> \n" +
@@ -288,7 +318,7 @@ namespace EMEProToolkit
                 "  </contact> \n" +
                 "</contacts>");
             }
-
+            LogOutput.Log("ReloadContacts - clone merge contacts...");
             // new document
             XmlDocument cloneMerge = new XmlDocument();
 
@@ -299,7 +329,7 @@ namespace EMEProToolkit
             //    MessageBoxResult contactsTest = MessageBox.Show("Could not load contacts.cfg", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
             //}
             #endregion
-            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - cloneMerge contacts...");
+            //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - cloneMerge contacts...");
             #region This takes 8.00 seconds to load
             XmlNode contactsNodeMerge = cloneMerge.CreateElement("contacts");
             cloneMerge.AppendChild(contactsNodeMerge);
@@ -358,23 +388,26 @@ namespace EMEProToolkit
             }
 
             // append to clone
+            LogOutput.Log("ReloadContacts - append to clone");
             contactsNodeMerge.InnerXml = sb2.ToString();
             #endregion
-            ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - merging contacts...");
+            //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - merging contacts...");
             // save to file
+            LogOutput.Log("ReloadContacts - save clone to file: "+ Utils.Utils.GetContactsFileLocation());
             cloneMerge.Save(Utils.Utils.GetContactsFileLocation());
             //cloneMerge.Save(_filePathEsri + "contacts.cfg");
-
+            LogOutput.Log("ReloadContacts - restore contacts.xml to og state...");
             // restore contacts.xml to original state
             _contactsBAK.Save(Utils.Utils.GetContactsFileLocation());
 
             // contacts.xml restored successfully. It is now safe to delete BAK file.
+            LogOutput.Log("ReloadContacts - contacts.xml restored successfully. It is now safe to delete BAK file.");
             if (File.Exists(_filePathEsri + "contacts.bak"))
             {
-                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - delete contacts.bak");
+                //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - delete contacts.bak");
                 File.Delete(_filePathEsri + "contacts.bak");
             }
-
+            LogOutput.Log("ReloadContacts - DONE");
             //done notification 
             Notification donenotification = new Notification();
             donenotification.Title = "EPA Metadata Editor Pro";
