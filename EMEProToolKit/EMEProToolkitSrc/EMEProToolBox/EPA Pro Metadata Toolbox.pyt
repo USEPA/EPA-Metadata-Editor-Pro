@@ -52,19 +52,33 @@ class upgradeTool(object):
 
     def getParameterInfo(self):
         """Define parameter definitions"""
-            # Second parameter
+            # first parameter
+        # param0 = arcpy.Parameter(
+        #     displayName="Source Metadata",
+        #     name="Source_Metadata",
+        #     datatype="DEType",
+        #     parameterType="Required",
+        #     direction="Input")
         param0 = arcpy.Parameter(
             displayName="Source Metadata",
             name="Source_Metadata",
             datatype="DEType",
             parameterType="Required",
-            direction="Input")
+            direction="Input",
+            multiValue=True)
 
-        # Third parameter
+        # output metadata parameter
+        # param1 = arcpy.Parameter(
+        #     displayName="Output Metadata",
+        #     name="Output_Metadata",
+        #     datatype="DEFile",
+        #     parameterType="Required",
+        #     direction="Output")
+
         param1 = arcpy.Parameter(
-            displayName="Output Metadata",
+            displayName="Output Directory",
             name="Output_Metadata",
-            datatype="DEFile",
+            datatype="DEFolder",
             parameterType="Required",
             direction="Output")
 
@@ -79,10 +93,10 @@ class upgradeTool(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        if parameters[1].valueAsText:
-            fileExtension = parameters[1].valueAsText[-4:].lower()
-            if fileExtension != ".xml":
-                parameters[1].value = parameters[1].valueAsText + ".xml"
+        # if parameters[1].valueAsText:
+        #     fileExtension = parameters[1].valueAsText[-4:].lower()
+        #     if fileExtension != ".xml":
+        #         parameters[1].value = parameters[1].valueAsText + ".xml"
         return
 
     def updateMessages(self, parameters):
@@ -91,14 +105,22 @@ class upgradeTool(object):
         return
 
     def execute(self, parameters, messages):
+        Target_Metadata = parameters[0].valueAsText
         try:
+            for t in str(Target_Metadata).split(";"):
+
+                target_md = md.Metadata(t)
             # TODO: Need to check the current metadata format? Pro's tool will check and not allow
             # an upgrade depending on the format detected.
             """The source code of the tool."""
-            Source_Metadata = parameters[0].valueAsText
-            Output_Metadata = parameters[1].valueAsText
+            # Source_Metadata = parameters[0].valueAsText
+            Output_Name = "_{}_upgrade.xml".format(os.path.basename(t))
+            Output_Dir = parameters[1].valueAsText
+            Output_Metadata = os.path.join(Output_Dir, Output_Name)
+            messages.addMessage(Output_Metadata)
 
-            source_md = md.Metadata(Source_Metadata)
+
+            source_md = md.Metadata(t)
             output_md = md.Metadata()
             output_md.copy(source_md)
 
@@ -148,19 +170,27 @@ class cleanupTool(object):
 
     def getParameterInfo(self):
         """Define parameter definitions"""
-            # Second parameter
+            # first parameter
         param0 = arcpy.Parameter(
             displayName="Source Metadata",
             name="Source_Metadata",
             datatype="DEType",
             parameterType="Required",
-            direction="Input")
+            direction="Input",
+            multiValue=True)
 
-        # Third parameter
+        # # second parameter
+        # param1 = arcpy.Parameter(
+        #     displayName="Output Metadata",
+        #     name="Output_Metadata",
+        #     datatype="DEFile",
+        #     parameterType="Required",
+        #     direction="Output")
+        # second parameter
         param1 = arcpy.Parameter(
-            displayName="Output Metadata",
-            name="Output_Metadata",
-            datatype="DEFile",
+            displayName="Output Directory",
+            name="Output_Directory",
+            datatype="DEFolder",
             parameterType="Required",
             direction="Output")
 
@@ -175,10 +205,10 @@ class cleanupTool(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        if parameters[1].valueAsText:
-            fileExtension = parameters[1].valueAsText[-4:].lower()
-            if fileExtension != ".xml":
-                parameters[1].value = parameters[1].valueAsText + ".xml"
+        # if parameters[1].valueAsText:
+        #     fileExtension = parameters[1].valueAsText[-4:].lower()
+        #     if fileExtension != ".xml":
+        #         parameters[1].value = parameters[1].valueAsText + ".xml"
         return
 
     def updateMessages(self, parameters):
@@ -189,30 +219,35 @@ class cleanupTool(object):
     def execute(self, parameters, messages):
         try:
             """The source code of the tool."""
-            Source_Metadata = parameters[0].valueAsText
-            Output_Metadata = parameters[1].valueAsText
+            Target_Metadata = parameters[0].valueAsText
+            Output_Dir = parameters[1].valueAsText
 
-            source_md = md.Metadata(Source_Metadata)
+            for t in str(Target_Metadata).split(";"):
+                Output_Name = "_{}_cleanup.".format(os.path.basename(t))
+                Output_Metadata = os.path.join(Output_Dir, Output_Name)
+                messages.addMessage(Output_Metadata)
 
-            # Local variables:
-            tool_file_path = os.path.dirname(os.path.realpath(__file__))
-            EPAUpgradeCleanup_xslt = tool_file_path + r"\EPAUpgradeCleanup.xslt"
+                source_md = md.Metadata(t)
 
-            messages.addMessage("Preserving the UUID and cleaning up legacy elements...")
+                # Local variables:
+                tool_file_path = os.path.dirname(os.path.realpath(__file__))
+                EPAUpgradeCleanup_xslt = tool_file_path + r"\EPAUpgradeCleanup.xslt"
 
-            # Process: EPA Cleanup
-            try:
-                source_md.saveAsUsingCustomXSLT(Output_Metadata, EPAUpgradeCleanup_xslt)
+                messages.addMessage("Preserving the UUID and cleaning up legacy elements...")
+
                 # Process: EPA Cleanup
-                # arcpy.XSLTransform_conversion(Upgraded_Metadata, EPAUpgradeCleanup_xslt, Output_Metadata, "")
-            except Exception as e:
-                messages.addMessage(e)
+                try:
+                    source_md.saveAsUsingCustomXSLT(Output_Metadata, EPAUpgradeCleanup_xslt)
+                    # Process: EPA Cleanup
+                    # arcpy.XSLTransform_conversion(Upgraded_Metadata, EPAUpgradeCleanup_xslt, Output_Metadata, "")
+                except Exception as e:
+                    messages.addMessage(e)
 
-            if arcpy.Exists(Output_Metadata):
-                messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+                if arcpy.Exists(Output_Metadata):
+                    messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
 
-            else:
-                messages.addMessage("Error Creating file.")
+                else:
+                    messages.addMessage("Error Creating file.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -233,23 +268,42 @@ class exportISOTool(object):
 
     def getParameterInfo(self):
         """Define parameter definitions"""
-            # Second parameter
+            # first parameter
         param0 = arcpy.Parameter(
             displayName="Source Metadata",
             name="Source_Metadata",
             datatype="DEType",
             parameterType="Required",
+            direction="Input",
+            multiValue=True)
+
+        # # second parameter
+        # param1 = arcpy.Parameter(
+        #     displayName="Output Metadata",
+        #     name="Output_Metadata",
+        #     datatype="DEFile",
+        #     parameterType="Required",
+        #     direction="Output")
+        # second parameter
+        param1 = arcpy.Parameter(
+            displayName="Output Directory",
+            name="Output_Dir",
+            datatype="DEFolder",
+            parameterType="Required",
             direction="Input")
 
-        # Third parameter
-        param1 = arcpy.Parameter(
-            displayName="Output Metadata",
-            name="Output_Metadata",
-            datatype="DEFile",
+        param2 = arcpy.Parameter(
+            displayName="ISO Format",
+            name="ISO_Format",
             parameterType="Required",
-            direction="Output")
+            direction="Input",
+            datatype="GPString"
+        )
 
-        params = [param0, param1]
+        param2.filter.type = "ValueList"
+        param2.filter.list = ["FGDC_CSDGM", "ISO19139", "ISO19139_GML32", "ISO19115_3"]
+        param2.value = ['ISO19139']
+        params = [param0, param1, param2]
         return params
 
     def isLicensed(self):
@@ -260,10 +314,10 @@ class exportISOTool(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        if parameters[1].valueAsText:
-            fileExtension = parameters[1].valueAsText[-4:].lower()
-            if fileExtension != ".xml":
-                parameters[1].value = parameters[1].valueAsText + ".xml"
+        # if parameters[1].valueAsText:
+        #     fileExtension = parameters[1].valueAsText[-4:].lower()
+        #     if fileExtension != ".xml":
+        #         parameters[1].value = parameters[1].valueAsText + ".xml"
         return
 
     def updateMessages(self, parameters):
@@ -278,21 +332,29 @@ class exportISOTool(object):
             https://pro.arcgis.com/en/pro-app/arcpy/metadata/migrating-from-arcmap-to-arcgis-pro.htm
             '''
             """The source code of the tool."""
-            Source_Metadata = parameters[0].valueAsText
-            Output_Metadata = parameters[1].valueAsText
+            Target_Metadata = parameters[0].valueAsText
+            messages.addMessage(Target_Metadata)
+            Output_Dir = parameters[1].valueAsText
+            ISO_format = parameters[2].valueAsText
 
-            # Local variables:
-            messages.addMessage('Install Dir: {}'.format(arcpy.GetInstallInfo()['InstallDir']))
-            # translator = arcpy.GetInstallInfo()['InstallDir'] + "Metadata\\Translator\\ArcGIS2ISO19139.xml"
+            for t in str(Target_Metadata).split(";"):
+                Output_Name = "_{}_ISO.xml".format(os.path.basename(t))
+                Output_Metadata = os.path.join(Output_Dir, Output_Name)
+                messages.addMessage(Output_Metadata)
+                messages.addMessage(ISO_format)
 
-            src_md = md.Metadata(Source_Metadata)
-            # generate output path from input name
-            src_md.exportMetadata(outputPath=Output_Metadata, metadata_export_option="ISO19139")
+                # Local variables:
+                messages.addMessage('Install Dir: {}'.format(arcpy.GetInstallInfo()['InstallDir']))
+                # translator = arcpy.GetInstallInfo()['InstallDir'] + "Metadata\\Translator\\ArcGIS2ISO19139.xml"
 
-            if arcpy.Exists(Output_Metadata):
-                messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
-            else:
-                messages.addMessage("Error Creating output.")
+                src_md = md.Metadata(t)
+                # generate output path from input name
+                src_md.exportMetadata(outputPath=Output_Metadata, metadata_export_option=ISO_format)
+
+                if arcpy.Exists(Output_Metadata):
+                    messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+                else:
+                    messages.addMessage("Error Creating output.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
