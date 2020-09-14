@@ -80,7 +80,7 @@ class upgradeTool(object):
             name="Output_Metadata",
             datatype="DEFolder",
             parameterType="Required",
-            direction="Output")
+            direction="Input")
 
         params = [param0, param1]
         return params
@@ -192,7 +192,7 @@ class cleanupTool(object):
             name="Output_Directory",
             datatype="DEFolder",
             parameterType="Required",
-            direction="Output")
+            direction="Input")
 
         params = [param0, param1]
         return params
@@ -382,14 +382,21 @@ class saveTemplate(object):
             name="Source_Metadata",
             datatype="DEType",
             parameterType="Required",
-            direction="Input")
+            direction="Input",
+            multiValue=True)
 
+        # param1 = arcpy.Parameter(
+        #     displayName="Output Metadata",
+        #     name="Output_Metadata",
+        #     datatype="DEFile",
+        #     parameterType="Required",
+        #     direction="Output")
         param1 = arcpy.Parameter(
-            displayName="Output Metadata",
-            name="Output_Metadata",
-            datatype="DEFile",
+            displayName="Output Directory",
+            name="Output_Dir",
+            datatype="DEFolder",
             parameterType="Required",
-            direction="Output")
+            direction="Input")
 
         params = [param0, param1]
         return params
@@ -402,10 +409,10 @@ class saveTemplate(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        if parameters[1].valueAsText:
-            fileExtension = parameters[1].valueAsText[-4:].lower()
-            if fileExtension != ".xml":
-                parameters[1].value = parameters[1].valueAsText + ".xml"
+        # if parameters[1].valueAsText:
+        #     fileExtension = parameters[1].valueAsText[-4:].lower()
+        #     if fileExtension != ".xml":
+        #         parameters[1].value = parameters[1].valueAsText + ".xml"
         return
 
     def updateMessages(self, parameters):
@@ -418,28 +425,31 @@ class saveTemplate(object):
             """The source code of the tool."""
             tool_file_path = os.path.dirname(os.path.realpath(__file__))
 
-            Source_Metadata = parameters[0].valueAsText
-            messages.addMessage(f'param 0 {Source_Metadata}')
+            Target_Metadata = parameters[0].valueAsText
+            messages.addMessage(Target_Metadata)
+            Output_Dir = parameters[1].valueAsText
 
-            Output_Metadata = parameters[1].valueAsText
-            messages.addMessage(f'param 1 {Output_Metadata}')
+            for t in str(Target_Metadata).split(";"):
+                Output_Name = "_{}_template.xml".format(os.path.basename(t))
+                Output_Metadata = os.path.join(Output_Dir, Output_Name)
+                messages.addMessage(f'param 1 {Output_Metadata}')
 
-            source_md = md.Metadata(Source_Metadata)
+                source_md = md.Metadata(t)
 
-            # Local variables:
-            saveTemplate_xslt = tool_file_path + r"\saveTemplate.xslt"
+                # Local variables:
+                saveTemplate_xslt = tool_file_path + r"\saveTemplate.xslt"
 
-            # Process: EPA Cleanup
-            try:
-                # arcpy.XSLTransform_conversion(Source_Metadata, saveTemplate_xslt, Output_Metadata, "")
-                source_md.saveAsUsingCustomXSLT(Output_Metadata, saveTemplate_xslt)
-            except Exception as e:
-                messages.addMessage(e)
+                # Process: EPA Cleanup
+                try:
+                    # arcpy.XSLTransform_conversion(Source_Metadata, saveTemplate_xslt, Output_Metadata, "")
+                    source_md.saveAsUsingCustomXSLT(Output_Metadata, saveTemplate_xslt)
+                except Exception as e:
+                    messages.addMessage(e)
 
-            if arcpy.Exists(Output_Metadata):
-                messages.addMessage("Process complete - please review the output carefully before reusing as a template.")
-            else:
-                messages.addMessage("Error Creating file.")
+                if arcpy.Exists(Output_Metadata):
+                    messages.addMessage("Process complete - please review the output carefully before reusing as a template.")
+                else:
+                    messages.addMessage("Error Creating file.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -741,21 +751,28 @@ class cleanExportTool(object):
 
     def getParameterInfo(self):
         """Define parameter definitions"""
-            # Second parameter
+            # first parameter
         param0 = arcpy.Parameter(
             displayName="Source Metadata",
             name="Source_Metadata",
             datatype="DEType",
             parameterType="Required",
-            direction="Input")
+            direction="Input",
+            multiValue=True)
 
-        # Third parameter
+        # second parameter
+        # param1 = arcpy.Parameter(
+        #     displayName="Output Metadata",
+        #     name="Output_Metadata",
+        #     datatype="DEFile",
+        #     parameterType="Required",
+        #     direction="Output")
         param1 = arcpy.Parameter(
-            displayName="Output Metadata",
-            name="Output_Metadata",
-            datatype="DEFile",
+            displayName="Output Directory",
+            name="Output_Dir",
+            datatype="DEFolder",
             parameterType="Required",
-            direction="Output")
+            direction="Input")
 
         params = [param0, param1]
         return params
@@ -768,10 +785,10 @@ class cleanExportTool(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        if parameters[1].valueAsText:
-            fileExtension = parameters[1].valueAsText[-4:].lower()
-            if fileExtension != ".xml":
-                parameters[1].value = parameters[1].valueAsText + ".xml"
+        # if parameters[1].valueAsText:
+        #     fileExtension = parameters[1].valueAsText[-4:].lower()
+        #     if fileExtension != ".xml":
+        #         parameters[1].value = parameters[1].valueAsText + ".xml"
         return
 
     def updateMessages(self, parameters):
@@ -785,27 +802,37 @@ class cleanExportTool(object):
 
             tool_file_path = os.path.dirname(os.path.realpath(__file__))
 
-            Source_Metadata = parameters[0].valueAsText
-            Output_Metadata = parameters[1].valueAsText
+            Target_Metadata = parameters[0].valueAsText
 
-            source_md = md.Metadata(Source_Metadata)
+            Output_Dir = parameters[1].valueAsText
+
 
             # Local variables:
-            EPACleanExport_xslt = tool_file_path + r"\EPACleanExport.xslt"
+            # blankDoc = "blankdoc.xml"
+            # blank_md = md.Metadata(blankDoc)
 
-            messages.addMessage("Exporting the metadata record...")
-            # Process: EPA Cleanup
-            try:
-                source_md.saveAsUsingCustomXSLT(Output_Metadata, EPACleanExport_xslt)
-            except Exception as e:
-                messages.addMessage(e)
-            # # arcpy.XSLTransform_conversion(Source_Metadata, EPACleanExport_xslt, Output_Metadata, "")
+            for t in str(Target_Metadata).split(";"):
+                Output_Name = "_{}_.xml".format(os.path.basename(t))
+                Output_Metadata = os.path.join(Output_Dir, Output_Name)
 
-            if arcpy.Exists(Output_Metadata):
-                messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+                source_md = md.Metadata(t)
 
-            else:
-                messages.addMessage("Error Creating file.")
+                # Local variables:
+                EPACleanExport_xslt = tool_file_path + r"\EPACleanExport.xslt"
+
+                messages.addMessage("Exporting the metadata record...")
+                # Process: EPA Cleanup
+                try:
+                    source_md.saveAsUsingCustomXSLT(Output_Metadata, EPACleanExport_xslt)
+                except Exception as e:
+                    messages.addMessage(e)
+                # # arcpy.XSLTransform_conversion(Source_Metadata, EPACleanExport_xslt, Output_Metadata, "")
+
+                if arcpy.Exists(Output_Metadata):
+                    messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+
+                else:
+                    messages.addMessage("Error Creating file.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
