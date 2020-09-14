@@ -263,7 +263,7 @@ class exportISOTool(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
         self.label = "Export ArcGIS Metadata to ISO"
-        self.description = "This tool streamlines exporting ArcGIS metadata to compliant ISO 19115. It is equivalent to using the Export Metadata tool with ArcGIS2ISO19139 as the translator."
+        self.description = "This tool streamlines exporting ArcGIS metadata to compliant ISO 19115, 19139. It is equivalent to using the Export Metadata tool yet allows for multiselect processing"
         self.canRunInBackground = False
 
     def getParameterInfo(self):
@@ -301,8 +301,9 @@ class exportISOTool(object):
         )
 
         param2.filter.type = "ValueList"
-        param2.filter.list = ["FGDC_CSDGM", "ISO19139", "ISO19139_GML32", "ISO19115_3"]
-        param2.value = ['ISO19139']
+        # param2.filter.list = ["FGDC_CSDGM", "ISO19139", "ISO19139_GML32", "ISO19115_3"]
+        param2.filter.list = ["ISO19139", "ISO19139_GML32", "ISO19115_3"]
+        param2.value = 'ISO19139'
         params = [param0, param1, param2]
         return params
 
@@ -338,8 +339,9 @@ class exportISOTool(object):
             ISO_format = parameters[2].valueAsText
 
             for t in str(Target_Metadata).split(";"):
-                Output_Name = "_{}_ISO.xml".format(os.path.basename(t))
+                Output_Name = "_{0}_{1}.xml".format(os.path.basename(t), ISO_format)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
+                messages.addMessage(t)
                 messages.addMessage(Output_Metadata)
                 messages.addMessage(ISO_format)
 
