@@ -35,8 +35,8 @@ namespace EMEProToolkit
         XmlDocument _contactsEpa = new XmlDocument();
         XmlDocument _contactsBAK = new XmlDocument();
         XmlDocument _contactsWEB = new XmlDocument();
-        string _filePathEsri = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ArcGIS\\Descriptions\\";
-        string _filePathEme = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
+        private string _filePathEsri = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ArcGIS\\Descriptions\\";
+        private string _filePathEme = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
         private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         
 
@@ -68,6 +68,14 @@ namespace EMEProToolkit
                     LogOutput.Log("CopyContentsAsync - copied file : " + fname);
                 }
             });
+        }
+        public void DirectionsDir()
+        {
+            if (!Directory.Exists(_filePathEsri))
+                {
+                LogOutput.Log("Creating Esri Contacts dir: " + _filePathEsri);
+                Directory.CreateDirectory(_filePathEsri);
+                }
         }
 
         public async void USEPADirAsync()
@@ -262,7 +270,7 @@ namespace EMEProToolkit
             }
             //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - loading contacts.xml...");
             LogOutput.Log("ReloadContacts - try load contactsBAK from contacts.xml: "+_filePathEsri + "contacts.xml");
-            if (!File.Exists(_filePathEsri + "contacts.bak"))
+            if (!File.Exists(_filePathEsri + "contacts.xml"))
             {
                 LogOutput.Log("ReloadContacts - loading contactsBAK from template XML ");
                 _contactsBAK.LoadXml(

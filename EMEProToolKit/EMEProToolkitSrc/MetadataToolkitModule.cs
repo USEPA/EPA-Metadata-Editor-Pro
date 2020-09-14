@@ -71,10 +71,11 @@ namespace EMEProToolkit
         {
             //do on open...
             var AsyncContacts = new AsyncContacts();
+            AsyncContacts.DirectionsDir();
             AsyncContacts.USEPADirAsync();
-            // check last sync
-            //AsyncContacts.LoadContactsAsync(checksyncage: true);
-     
+            // check last sync, sync with online if needed
+            AsyncContacts.LoadContactsAsync(checksyncage: true);
+
         }
 
         protected override void Uninitialize() //unsubscribe to the project opened event      
