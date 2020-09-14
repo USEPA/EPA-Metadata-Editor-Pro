@@ -198,7 +198,7 @@ namespace EMEProToolkit
                 //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nLoading contacts from \"" + directoryName + "\"\n (" + directoryUrl + ")", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
                 try
                 {
-                    LogOutput.Log("ReloadContacts - tyring http request... ");
+                    LogOutput.Log("ReloadContacts - trying http request... ");
                     //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - Testing HTTP request...");
                     using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                     {
@@ -212,7 +212,7 @@ namespace EMEProToolkit
                             try { _contactsWEB.Load(directoryUrl); }
                             catch (System.IO.FileNotFoundException)
                             {
-                                LogOutput.Log("ReloadContacts - _contactsWEB not found...");
+                                LogOutput.Log("ReloadContacts - _contactsWEB.Load(directoryUrl) not successful, loading from template...");
                                 _contactsWEB.LoadXml(
                                 "<contacts> \n" +
                                 "  <contact> \n" +
@@ -227,7 +227,7 @@ namespace EMEProToolkit
                                 "</contacts>");
                             }
                             //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - saving contacts.xml");
-                            LogOutput.Log("ReloadContacts - saving _contactsWEB from template ");
+                            LogOutput.Log("ReloadContacts - saving _contactsWEB to : "+ _filePathEme + "contacts.xml");
                             _contactsWEB.Save(_filePathEme + "contacts.xml");
 
                             // Add timestamp to config file
@@ -261,10 +261,10 @@ namespace EMEProToolkit
                 //MessageBoxResult fileCheck = MessageBox.Show("Local cache is " + syncDays + " old.\nContacts will be loaded from local cache.", "EME Contacts Manager", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - loading contacts.xml...");
-            LogOutput.Log("ReloadContacts - load contactsBAK from contacts.xml: "+_filePathEsri + "contacts.xml");
-            try { _contactsBAK.Load(_filePathEsri + "contacts.xml"); }
-            catch (System.IO.FileNotFoundException)
+            LogOutput.Log("ReloadContacts - try load contactsBAK from contacts.xml: "+_filePathEsri + "contacts.xml");
+            if (!File.Exists(_filePathEsri + "contacts.bak"))
             {
+                LogOutput.Log("ReloadContacts - loading contactsBAK from template XML ");
                 _contactsBAK.LoadXml(
                 "<contacts> \n" +
                 "  <contact> \n" +
@@ -278,6 +278,12 @@ namespace EMEProToolkit
                 "  </contact> \n" +
                 "</contacts>");
             }
+            else
+            {
+                LogOutput.Log("Reload Contacts - loading contacts.bak from contacts.xml");
+                _contactsBAK.Load(_filePathEsri + "contacts.xml");
+            }
+  
             // save backup of user contacts.xml
             LogOutput.Log("ReloadContacts - save contactsBAK: " + _filePathEsri + "contacts.bak");
             _contactsBAK.Save(_filePathEsri + "contacts.bak");
@@ -300,11 +306,11 @@ namespace EMEProToolkit
                 "  </contact> \n" +
                 "</contacts>");
             }
-            LogOutput.Log("ReloadContacts - load epa comtacts:  "+ _filePathEme + "contacts.xml");
+            LogOutput.Log("ReloadContacts - load epa contacts:  "+ _filePathEme + "contacts.xml");
             try { _contactsEpa.Load(_filePathEme + "contacts.xml"); }
             catch (System.IO.FileNotFoundException)
             {
-                LogOutput.Log("ReloadContacts - epa comtacts not found loading from template xml ");
+                LogOutput.Log("ReloadContacts - epa contacts not found loading from template xml ");
                 _contactsEpa.LoadXml(
                 "<contacts> \n" +
                 "  <contact> \n" +
