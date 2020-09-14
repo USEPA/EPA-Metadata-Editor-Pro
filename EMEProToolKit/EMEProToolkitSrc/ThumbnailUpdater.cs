@@ -197,7 +197,7 @@ namespace EMEProToolkit
                     var newLayout = LayoutFactory.Instance.CreateLayout(newPage);
                     newLayout.SetName(tempLayout);
 
-                    Map newMap = MapFactory.Instance.CreateMap(tempMap, MapType.Map, MapViewingMode.Map, Basemap.Hybrid);
+                    Map newMap = MapFactory.Instance.CreateMap(tempMap, MapType.Map, MapViewingMode.Map, Basemap.Streets);
                     //string url = @"http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer";
                     Uri uri = new Uri(item.Path);
                     var lyr = LayerFactory.Instance.CreateLayer(uri, newMap);
