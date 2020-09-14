@@ -527,14 +527,11 @@ class mergeTemplate(object):
             Template_Metadata = parameters[1].valueAsText
             Output_Metadata = parameters[2].valueAsText
 
-            source_md = md.Metadata(Source_Metadata)
             template_md = md.Metadata(Template_Metadata)
-            source_md.saveAsXML(outputPath=Output_Metadata)
-            output_md = md.Metadata(Output_Metadata)
+
+            output_md = md.Metadata(Source_Metadata)
 
             # TODO:  Find equivalent xslt transform that takes an input
-
-
             # Local variables:
             mergeTemplate_xslt = tool_file_path + r"\mergeTemplate.xslt"
             messages.addMessage('merge template path '+ mergeTemplate_xslt)
@@ -551,7 +548,7 @@ class mergeTemplate(object):
             # Source_Metadata.saveAsUsingCustomXSLT(Output_Metadata, mergeTemplate_xslt, )
             try:
 
-                output_md.copy(template_md)
+                output_md.copy(source_md)
                 messages.addMessage("Output md Title "+ str(output_md.title))
                 output_md.importMetadata(template_md, metadata_import_option='CUSTOM', customStylesheetPath=mergeTemplate_xslt)
                 output_md.saveAsXML(outputPath=Output_Metadata)
