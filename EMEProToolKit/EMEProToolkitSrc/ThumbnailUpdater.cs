@@ -160,8 +160,21 @@ namespace EMEProToolkit
             // int c = Project.Current.SelectedItems.Count;
             foreach (var item in Project.Current.SelectedItems)
             {
+                string[] arcData = { ".gdb", ".shp" };
+                if (!arcData.Any(item.Path.ToString().Contains)) 
+                {
+                    FrameworkApplication.AddNotification(new Notification()
+                    {
+                        Title = "Not a valid dataset, thumbnail not updated",
+                        Message = item.Path,
+                        ImageUrl = @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ErrorException32.png",
 
-                QueuedTask.Run(() =>
+                    });
+                    break;
+                }
+
+
+            QueuedTask.Run(() =>
                 {
                     Guid g = Guid.NewGuid();
                     string tempLayout = "TempLayout";
