@@ -809,7 +809,7 @@ class cleanExportTool(object):
             # blank_md = md.Metadata(blankDoc)
 
             for t in str(Target_Metadata).split(";"):
-                Output_Name = "_{}_.xml".format(os.path.basename(t))
+                Output_Name = "_{}_clean.xml".format(os.path.basename(t))
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
 
                 source_md = md.Metadata(t)
