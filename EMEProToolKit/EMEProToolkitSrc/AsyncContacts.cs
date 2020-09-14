@@ -38,21 +38,16 @@ namespace EMEProToolkit
         private string _filePathEsri = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ArcGIS\\Descriptions\\";
         private string _filePathEme = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
         private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        
 
         public Task CopyContentsAsync(string srcDir, string targDir)
         {
-            //Log ouptut
-            var Log = new LogOutput();
 
             return Task.Run(() =>
             {
                 //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("CopyContentsAsync - copy contents task running");
-                LogOutput.Log("CopyContentsAsync - copy contents task running");
                 if (!Directory.Exists(targDir))
                 {
                     //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("CopyContentsAsync - creating target dir");
-                    LogOutput.Log("CopyContentsAsync - creating target dir:"+targDir);
 
                     Directory.CreateDirectory(targDir);
                     //Trace.WriteLine("Created target directory: "+targDir);
@@ -65,7 +60,6 @@ namespace EMEProToolkit
                     //Trace.WriteLine("Copying " + fname);
                     string dest = Path.Combine(targDir, fname);
                     File.Copy(f, dest, overwrite: true);
-                    LogOutput.Log("CopyContentsAsync - copied file : " + fname);
                 }
             });
         }
@@ -73,7 +67,6 @@ namespace EMEProToolkit
         {
             if (!Directory.Exists(_filePathEsri))
                 {
-                LogOutput.Log("Creating Esri Contacts dir: " + _filePathEsri);
                 Directory.CreateDirectory(_filePathEsri);
                 }
         }
