@@ -1203,7 +1203,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="EMEProToolBox\blankdoc.xml" />
     <None Include="EMEProToolBox\EMEToolbox.pyproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
