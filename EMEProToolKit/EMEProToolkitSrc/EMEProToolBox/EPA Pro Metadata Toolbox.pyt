@@ -1,5 +1,5 @@
 import os
-
+import re
 import arcpy
 from arcpy import metadata as md
 import sys
@@ -106,14 +106,23 @@ class upgradeTool(object):
 
     def execute(self, parameters, messages):
         Target_Metadata = parameters[0].valueAsText
+
         try:
             for t in str(Target_Metadata).split(";"):
+
                 # target_md = md.Metadata(t)
                 # TODO: Need to check the current metadata format? Pro's tool will check and not allow
                 # an upgrade depending on the format detected.
                 """The source code of the tool."""
                 # Source_Metadata = parameters[0].valueAsText
-                Output_Name = "_{}_upgrade.xml".format(os.path.splitext(os.path.basename(t))[0])
+
+                if ' ' in t:
+                    messages.addWarningMessage('*Check results for {} due to space found in name'.format(t))
+                    continue
+
+                basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
+
+                Output_Name = "_{}_upgrade.xml".format(basename)
                 Output_Dir = parameters[1].valueAsText
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
                 messages.addMessage(Output_Metadata)
@@ -121,6 +130,7 @@ class upgradeTool(object):
 
                 # source_md = md.Metadata(t)
                 output_md = md.Metadata(t)
+                output_md.saveAsXML(r'C:\EMESolutions\TestMetadata\xx{}'.format(basename))
                 # output_md = md.Metadata()
                 # output_md.copy(source_md)
 
@@ -139,9 +149,9 @@ class upgradeTool(object):
                 messages.addMessage("Preserving the UUID and cleaning up legacy elements...")
                 try:
                     messages.addMessage("Save as XML")
-                    # output_md.saveAsUsingCustomXSLT(Output_Metadata, EPAUpgradeCleanup_xslt)
+                    output_md.saveAsUsingCustomXSLT(Output_Metadata, EPAUpgradeCleanup_xslt)
                     # output_md.save()
-                    output_md.saveAsXML(Output_Metadata)
+                    # output_md.saveAsXML(Output_Metadata)
                     messages.addMessage('name: ' + Output_Name)
                     messages.addMessage('fullpath: ' + Output_Metadata)
                     messages.addMessage("done with xslt")
@@ -230,7 +240,13 @@ class cleanupTool(object):
             Output_Dir = parameters[1].valueAsText
 
             for t in str(Target_Metadata).split(";"):
-                Output_Name = "_{}_cleanup.".format(os.path.splitext(os.path.basename(t)[0]))
+
+                if ' ' in t:
+                    messages.addWarningMessage('*Check results for {} due to space found in name'.format(t))
+                    continue
+
+                basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
+                Output_Name = "_{}_cleanup.".format(basename)
 
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
                 messages.addMessage(Output_Metadata)
@@ -347,7 +363,13 @@ class exportISOTool(object):
             ISO_format = parameters[2].valueAsText
 
             for t in str(Target_Metadata).split(";"):
-                Output_Name = "_{0}_{1}.xml".format(os.path.basename(t), ISO_format)
+
+                if ' ' in t:
+                    messages.addWarningMessage('*Check results for {} due to space found in name'.format(t))
+                    continue
+
+                basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
+                Output_Name = "_{0}_{1}.xml".format(basename, ISO_format)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
                 messages.addMessage(t)
                 messages.addMessage(Output_Metadata)
@@ -438,7 +460,12 @@ class saveTemplate(object):
             Output_Dir = parameters[1].valueAsText
 
             for t in str(Target_Metadata).split(";"):
-                Output_Name = "_{}_template.xml".format(os.path.basename(t))
+                if ' ' in t:
+                    messages.addWarningMessage('*Check results for {} due to space found in name'.format(t))
+                    continue
+
+                basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
+                Output_Name = "_{}_template.xml".format(basename)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
                 messages.addMessage(f'param 1 {Output_Metadata}')
 
@@ -817,7 +844,15 @@ class cleanExportTool(object):
             # blank_md = md.Metadata(blankDoc)
 
             for t in str(Target_Metadata).split(";"):
-                Output_Name = "_{}_clean.xml".format(os.path.basename(t))
+
+                if ' ' in t:
+                    messages.addWarningMessage('*Check results for {} due to space found in name'.format(t))
+                    continue
+
+                basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
+
+
+                Output_Name = "_{}_clean.xml".format(basename)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
 
                 source_md = md.Metadata(t)
