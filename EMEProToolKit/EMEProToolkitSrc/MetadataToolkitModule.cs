@@ -70,10 +70,11 @@ namespace EMEProToolkit
         private void OnProjectOpened(ProjectEventArgs obj) //Project Opened event handler      
         {
             //do on open...
-            var AsyncContacts = new AsyncContacts();
-            AsyncContacts.DirectionsDir();
-            AsyncContacts.USEPADirAsync();
+            var EMEInstall = new EMEInstall();
+            EMEInstall.DirectionsDir();
+            EMEInstall.CheckUSEPADir();
             // check last sync, sync with online if needed
+            var AsyncContacts = new AsyncContacts();
             AsyncContacts.LoadContactsAsync(checksyncage: true);
 
         }
