@@ -77,6 +77,8 @@ namespace EMEProToolkit
             var AsyncContacts = new AsyncContacts();
             AsyncContacts.LoadContactsAsync(checksyncage: true);
 
+            EMEInstall.CopyEMEToolbox();
+
         }
 
         protected override void Uninitialize() //unsubscribe to the project opened event      
