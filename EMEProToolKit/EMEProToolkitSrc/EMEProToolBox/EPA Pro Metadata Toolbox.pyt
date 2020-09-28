@@ -620,8 +620,8 @@ class deleteTool(object):
             # messages.addMessage("Parameter {}".format(parameters[0].value))
 
             # Local variables:
-            blankDoc = "blankdoc.xml"
-            source_md = md.Metadata(blankDoc)
+            # blankDoc = "blankdoc.xml" This no longer needed
+            source_md = md.Metadata()
             # messages.addMessage("Got the blank")
 
             for t in str(Target_Metadata).split(";"):
