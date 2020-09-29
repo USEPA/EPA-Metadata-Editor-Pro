@@ -1151,6 +1151,7 @@ limitations under the License.​
           <!--<group refID="EMEProToolkit_Group4" />-->
           <group refID="EMEProToolkit_MetadataTools_Group" />
           <group refID="EMEProToolkit_EMEDB_Group" />
+          <group refID="UpdateThumbnailsGroup"/>
         </tab>
       </tabs>
       <controls>
@@ -1260,6 +1261,17 @@ limitations under the License.​
           Toolbox will be moved to AppData directory in future releases.<disabledText /></tooltip>
         </button>
 
+        <!--<button id="EMEProToolkit_EMEMenu_Items_updateThumbnails2" caption="thumb" className="EMEMenu_updateThumbnails2" loadOnClick="true"
+        condition="esri_core_resourcesPane"
+        smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ModelBuilderAddMergeBranch16.png"
+        largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ModelBuilderAddMergeBranch32.png">
+          <tooltip heading="update thumbnails 2">
+            <disabledText />
+          </tooltip>
+        </button>-->
+
+
+      <comboBox id="update_thumbnails_basemap_combo" caption="Update thumbnails for selected items" className="EMEMenu_updateThumbnails2" itemWidth="142" extendedCaption="Specify the thumbnail basemap for the selected items" />
       </controls>
       <!--<menus>
         <menu id="EMEProToolkit_EMEMenu" caption="EMEMenu" smallImage="GenericButtonGreen16.png" largeImage="GenericButtonGreen32.png">
@@ -1293,6 +1305,11 @@ limitations under the License.​
           <button refID="EMEProToolkit_EMEMenu_Items_editDatesMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_exportISOToolMD" size="large"/>
           <!--<button refID ="EMEProToolkit_EMEMenu_Items_mergeMD" size="large"/>-->
+          
+        </group>
+        <group id="UpdateThumbnailsGroup" caption="Update Thumbnails">
+          <comboBox refID="update_thumbnails_basemap_combo"></comboBox>
+          
           
         </group>
         

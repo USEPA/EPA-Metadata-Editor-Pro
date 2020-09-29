@@ -170,7 +170,7 @@ namespace EMEProToolkit
                         ImageUrl = @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ErrorException32.png",
 
                     });
-                    break;
+                    continue;
                 }
 
 

@@ -387,5 +387,59 @@ namespace EMEProToolkit
 
         }
     }
+    internal class EMEMenu_updateThumbnails2 : ComboBox
+    {
+
+        private string[] _bmks = { "Imagery", "Hybrid", "OSM" };
+        private bool _isInitialized;
+        public EMEMenu_updateThumbnails2()
+        {
+            Initialize();
+        }
+        private async void getBasemaps()
+        {
+            //ArcGIS.Desktop.Mapping.Basemap
+            PropertyInfo[] myPropertyInfo;
+            // Get the properties of 'Type' class object.
+            myPropertyInfo = Type.GetType("ArcGIS.Desktop.Mapping.Basemap").GetProperties();
+            Console.WriteLine("Properties of System.Type are:");
+            for (int i = 0; i < myPropertyInfo.Length; i++)
+            {
+                Console.WriteLine(myPropertyInfo[i].ToString());
+            }
+
+        }
+        private async void Initialize()
+        {
+            if (_isInitialized)
+                return;
+            _isInitialized = true;
+            //Get the webmaps from ArcGIS Online
+
+            //Add the webmaps to the gallery 
+            foreach (var bmk in _bmks)
+            {
+                Add(bmk != null ? new ComboBoxItem(bmk) : new ComboBoxItem(string.Empty));
+            }
+
+        }
+
+        
+        protected override async void OnSelectionChange(ComboBoxItem item)
+        {
+            if (_bmks == null)
+                return;
+
+            if (string.IsNullOrEmpty(item.Text))
+                return;
+
+            string bmap = _bmks.FirstOrDefault(bk => bk == item.Text); //get the bookmark from the name in the combo box
+            MessageBox.Show(bmap);
+
+        }
+
+    }
+   
     
+
 }
