@@ -1147,11 +1147,13 @@ limitations under the License.​
       <tabs>
         <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">          
           <group refID="EMEProToolkit_Catalog_Group" />
+          
           <group refID="Esri_Metadata_Edit_Group" />
+          <group refID="UpdateThumbnailsGroup"/>
           <!--<group refID="EMEProToolkit_Group4" />-->
           <group refID="EMEProToolkit_MetadataTools_Group" />
           <group refID="EMEProToolkit_EMEDB_Group" />
-          <group refID="UpdateThumbnailsGroup"/>
+          
         </tab>
       </tabs>
       <controls>
@@ -1165,7 +1167,8 @@ limitations under the License.​
         <button id="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" condition="catalogview_selected_object" caption="Update Thumbnail" className="EMEMenu_UpdateThumbnail" loadOnClick="true" 
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ItemThumbnailCreate16.png" 
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ItemThumbnailCreate32.png">
-          <tooltip heading="Update Thumbnail">Click to update the thumbnail one or many items<disabledText />Disabled Text here</tooltip>
+          <tooltip heading="Update Thumbnail">Click to update the thumbnail one or many items. Items must be selected in catalog view
+          <disabledText />Disabled Text here</tooltip>
         </button>
         <button id="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" condition="esri_core_resourcesPane" caption="EPA Upgrade FGDC to ArcGIS" className="EMEMenu_upgradeFgdcMD" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUpgrade16.png"
@@ -1261,17 +1264,10 @@ limitations under the License.​
           Toolbox will be moved to AppData directory in future releases.<disabledText /></tooltip>
         </button>
 
-        <!--<button id="EMEProToolkit_EMEMenu_Items_updateThumbnails2" caption="thumb" className="EMEMenu_updateThumbnails2" loadOnClick="true"
-        condition="esri_core_resourcesPane"
-        smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ModelBuilderAddMergeBranch16.png"
-        largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ModelBuilderAddMergeBranch32.png">
-          <tooltip heading="update thumbnails 2">
-            <disabledText />
-          </tooltip>
-        </button>-->
 
-
-      <comboBox id="update_thumbnails_basemap_combo" caption="Update thumbnails for selected items" className="EMEMenu_updateThumbnails2" itemWidth="142" extendedCaption="Specify the thumbnail basemap for the selected items" />
+      <comboBox  id="update_thumbnails_basemap_combo" caption="Basemap" 
+                className="EMEMenu_thumbnailBasemap" itemWidth="142" 
+                extendedCaption="Specify the thumbnail basemap for the selected items" keytip="Select a basemap"/>
       </controls>
       <!--<menus>
         <menu id="EMEProToolkit_EMEMenu" caption="EMEMenu" smallImage="GenericButtonGreen16.png" largeImage="GenericButtonGreen32.png">
@@ -1294,7 +1290,7 @@ limitations under the License.​
         </group>
         <group id="EMEProToolkit_MetadataTools_Group" caption="Metadata Tools" >
           <!--<button refID="EMEProToolkit_TestButton1" size="large" />-->
-          <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />
+          
           <button refID="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_clearMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_importMD" size="large" />
@@ -1309,6 +1305,7 @@ limitations under the License.​
         </group>
         <group id="UpdateThumbnailsGroup" caption="Update Thumbnails">
           <comboBox refID="update_thumbnails_basemap_combo"></comboBox>
+          <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />
           
           
         </group>

@@ -358,15 +358,6 @@ namespace EMEProToolkit
 
         }
     }
-    internal class EMEMenu_TESTBUTTON : Button
-    {
-        
-        protected override void OnClick()
-        {
-
-            
-        }
-    }
     internal class EMEMenu_EMEdb : Button
     {
         private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
@@ -387,55 +378,38 @@ namespace EMEProToolkit
 
         }
     }
-    internal class EMEMenu_updateThumbnails2 : ComboBox
+    internal class EMEMenu_thumbnailBasemap : ComboBox
     {
-
-        private string[] _bmks = { "Imagery", "Hybrid", "OSM" };
         private bool _isInitialized;
-        public EMEMenu_updateThumbnails2()
+        public class thumbnailBasemap
         {
-            Initialize();
+            public static string selected;
+        }
+        public EMEMenu_thumbnailBasemap()
+        {
+            getBasemaps();
         }
         private async void getBasemaps()
         {
-            //ArcGIS.Desktop.Mapping.Basemap
-            PropertyInfo[] myPropertyInfo;
-            // Get the properties of 'Type' class object.
-            myPropertyInfo = Type.GetType("ArcGIS.Desktop.Mapping.Basemap").GetProperties();
-            Console.WriteLine("Properties of System.Type are:");
-            for (int i = 0; i < myPropertyInfo.Length; i++)
-            {
-                Console.WriteLine(myPropertyInfo[i].ToString());
-            }
-
-        }
-        private async void Initialize()
-        {
             if (_isInitialized)
-                return;
-            _isInitialized = true;
-            //Get the webmaps from ArcGIS Online
-
-            //Add the webmaps to the gallery 
-            foreach (var bmk in _bmks)
             {
-                Add(bmk != null ? new ComboBoxItem(bmk) : new ComboBoxItem(string.Empty));
+                return;
             }
+            _isInitialized = true;
 
+            var namesAsArray = Enum.GetNames(typeof(Basemap));
+            foreach(string nn in namesAsArray)
+            {
+                Add(nn.ToString() != null ? new ComboBoxItem(nn.ToString()) : new ComboBoxItem(string.Empty));
+            }
+            Enabled = true; //enables the ComboBox
+            // default
+            SelectedItem = ItemCollection[1];
+            
         }
-
-        
         protected override async void OnSelectionChange(ComboBoxItem item)
         {
-            if (_bmks == null)
-                return;
-
-            if (string.IsNullOrEmpty(item.Text))
-                return;
-
-            string bmap = _bmks.FirstOrDefault(bk => bk == item.Text); //get the bookmark from the name in the combo box
-            MessageBox.Show(bmap);
-
+            thumbnailBasemap.selected = item.Text;
         }
 
     }

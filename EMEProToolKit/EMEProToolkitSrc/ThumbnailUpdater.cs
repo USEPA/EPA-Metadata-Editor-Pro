@@ -196,9 +196,10 @@ namespace EMEProToolkit
                     // Apply the CIM page to a new layout and set name
                     var newLayout = LayoutFactory.Instance.CreateLayout(newPage);
                     newLayout.SetName(tempLayout);
+                    string bmap_string = EMEMenu_thumbnailBasemap.thumbnailBasemap.selected;
+                    Basemap bmap = (Basemap)Enum.Parse(typeof(Basemap), bmap_string);
+                    Map newMap = MapFactory.Instance.CreateMap(tempMap, MapType.Map, MapViewingMode.Map, bmap);
 
-                    Map newMap = MapFactory.Instance.CreateMap(tempMap, MapType.Map, MapViewingMode.Map, Basemap.Streets);
-                    //string url = @"http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer";
                     Uri uri = new Uri(item.Path);
                     var lyr = LayerFactory.Instance.CreateLayer(uri, newMap);
                     string thumbpath = String.Format(_temppathEme + "{0}.jpg", g);
