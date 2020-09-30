@@ -108,47 +108,54 @@ class upgradeTool(object):
         Target_Metadata = parameters[0].valueAsText
         try:
             for t in str(Target_Metadata).split(";"):
+                # target_md = md.Metadata(t)
+                # TODO: Need to check the current metadata format? Pro's tool will check and not allow
+                # an upgrade depending on the format detected.
+                """The source code of the tool."""
+                # Source_Metadata = parameters[0].valueAsText
+                Output_Name = "_{}_upgrade.xml".format(os.path.splitext(os.path.basename(t))[0])
+                Output_Dir = parameters[1].valueAsText
+                Output_Metadata = os.path.join(Output_Dir, Output_Name)
+                messages.addMessage(Output_Metadata)
 
-                target_md = md.Metadata(t)
-            # TODO: Need to check the current metadata format? Pro's tool will check and not allow
-            # an upgrade depending on the format detected.
-            """The source code of the tool."""
-            # Source_Metadata = parameters[0].valueAsText
-            Output_Name = "_{}_upgrade.xml".format(os.path.basename(t))
-            Output_Dir = parameters[1].valueAsText
-            Output_Metadata = os.path.join(Output_Dir, Output_Name)
-            messages.addMessage(Output_Metadata)
 
+                # source_md = md.Metadata(t)
+                output_md = md.Metadata(t)
+                # output_md = md.Metadata()
+                # output_md.copy(source_md)
 
-            source_md = md.Metadata(t)
-            output_md = md.Metadata()
-            output_md.copy(source_md)
+                # Use scratchCopy class to make a standalone XML doc to work with.
+                # scratchCopier = scratchCopy(messages)
+                # Copy_to_be_upgraded = scratchCopier.makeScratchCopy(Source_Metadata)
 
-            # Use scratchCopy class to make a standalone XML doc to work with.
-            # scratchCopier = scratchCopy(messages)
-            # Copy_to_be_upgraded = scratchCopier.makeScratchCopy(Source_Metadata)
+                messages.addMessage("Upgrading the metadata...")
+                # Process: Upgrade Metadata
+                output_md.upgrade('FGDC_CSDGM')
+                # Upgraded_Metadata = arcpy.UpgradeMetadata_conversion(Copy_to_be_upgraded, "FGDC_TO_ARCGIS")
 
-            messages.addMessage("Upgrading the metadata...")
-            # Process: Upgrade Metadata
-            output_md.upgrade('FGDC_CSDGM')
-            # Upgraded_Metadata = arcpy.UpgradeMetadata_conversion(Copy_to_be_upgraded, "FGDC_TO_ARCGIS")
+                tool_file_path = os.path.dirname(os.path.realpath(__file__))
+                EPAUpgradeCleanup_xslt = tool_file_path + r'\EPAUpgradeCleanup.xslt'
 
-            tool_file_path = os.path.dirname(os.path.realpath(__file__))
-            EPAUpgradeCleanup_xslt = tool_file_path + r'\EPAUpgradeCleanup.xslt'
+                messages.addMessage("Preserving the UUID and cleaning up legacy elements...")
+                try:
+                    messages.addMessage("Save as XML")
+                    # output_md.saveAsUsingCustomXSLT(Output_Metadata, EPAUpgradeCleanup_xslt)
+                    # output_md.save()
+                    output_md.saveAsXML(Output_Metadata)
+                    messages.addMessage('name: ' + Output_Name)
+                    messages.addMessage('fullpath: ' + Output_Metadata)
+                    messages.addMessage("done with xslt")
 
-            messages.addMessage("Preserving the UUID and cleaning up legacy elements...")
-            try:
-                output_md.saveAsUsingCustomXSLT(Output_Metadata, EPAUpgradeCleanup_xslt)
-                # Process: EPA Cleanup
-                # arcpy.XSLTransform_conversion(Upgraded_Metadata, EPAUpgradeCleanup_xslt, Output_Metadata, "")
-            except Exception as e:
-                messages.addMessage(e)
+                    # Process: EPA Cleanup
+                    # arcpy.XSLTransform_conversion(Upgraded_Metadata, EPAUpgradeCleanup_xslt, Output_Metadata, "")
+                except Exception as e:
+                    messages.addMessage(e)
 
-            if arcpy.Exists(Output_Metadata):
-                messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+                if arcpy.Exists(Output_Metadata):
+                    messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
 
-            else:
-                messages.addMessage("Error Creating file.")
+                else:
+                    messages.addMessage("Error Creating file.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -223,7 +230,8 @@ class cleanupTool(object):
             Output_Dir = parameters[1].valueAsText
 
             for t in str(Target_Metadata).split(";"):
-                Output_Name = "_{}_cleanup.".format(os.path.basename(t))
+                Output_Name = "_{}_cleanup.".format(os.path.splitext(os.path.basename(t)[0]))
+
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
                 messages.addMessage(Output_Metadata)
 

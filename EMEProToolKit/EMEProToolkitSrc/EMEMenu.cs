@@ -389,5 +389,42 @@ namespace EMEProToolkit
 
         }
     }
+    internal class EMEMenu_thumbnailBasemap : ComboBox
+    {
+        private bool _isInitialized;
+        public class thumbnailBasemap
+        {
+            public static string selected;
+        }
+        public EMEMenu_thumbnailBasemap()
+        {
+            getBasemaps();
+        }
+        private async void getBasemaps()
+        {
+            if (_isInitialized)
+            {
+                return;
+            }
+            _isInitialized = true;
+
+            var namesAsArray = Enum.GetNames(typeof(Basemap));
+            foreach(string nn in namesAsArray)
+            {
+                Add(nn.ToString() != null ? new ComboBoxItem(nn.ToString()) : new ComboBoxItem(string.Empty));
+            }
+            Enabled = true; //enables the ComboBox
+            // default
+            SelectedItem = ItemCollection[1];
+            
+        }
+        protected override async void OnSelectionChange(ComboBoxItem item)
+        {
+            thumbnailBasemap.selected = item.Text;
+        }
+
+    }
+   
     
+
 }
