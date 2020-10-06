@@ -93,8 +93,8 @@ namespace EMEProToolkit
 
     internal class EMEMenu_clearMD : Button
     {
-        private string _pathEmeDb = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
-        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
+        //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         
         protected override void OnClick()
         {            
@@ -105,7 +105,7 @@ namespace EMEProToolkit
                 //MessageBox.Show(_installPath);
                 string j = "";
                 var arguments = Geoprocessing.MakeValueArray(j);
-                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\deleteTool";
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\deleteTool";
                 Geoprocessing.OpenToolDialog(toolpath, null);
 
                 #region  Exmample for calling python
@@ -160,13 +160,14 @@ namespace EMEProToolkit
 
     internal class EMEMenu_upgradeFgdcMD : Button
     {
-        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
         protected override void OnClick()
         {
             try
             {
 
-                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\upgradeTool";
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\upgradeTool";
                 Geoprocessing.OpenToolDialog(toolpath, null);
 
             }
@@ -184,13 +185,14 @@ namespace EMEProToolkit
 
     internal class EMEMenu_importMD : Button
     {
-        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
         protected override void OnClick()
         {
             try
             {           
              
-                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\importTool";
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\importTool";
                 Geoprocessing.OpenToolDialog(toolpath, null);
                 
             }
@@ -207,13 +209,14 @@ namespace EMEProToolkit
     }
     internal class EMEMenu_cleanexportMD : Button
     {
-        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
         protected override void OnClick()
         {
             try
             {
 
-                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\cleanExportTool";
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\cleanExportTool";
                 Geoprocessing.OpenToolDialog(toolpath, null);
 
             }
@@ -229,13 +232,14 @@ namespace EMEProToolkit
     }
     internal class EMEMenu_cleanUpToolMD : Button
     {
-        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
         protected override void OnClick()
         {
             try
             {
 
-                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\cleanupTool";
+                string toolpath = _pathEmeToolbox + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\cleanupTool";
                 Geoprocessing.OpenToolDialog(toolpath, null);
 
             }
@@ -251,13 +255,14 @@ namespace EMEProToolkit
     }
     internal class EMEMenu_saveTemplateMD : Button
     {
-        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
         protected override void OnClick()
         {
             try
             {
 
-                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\saveTemplate";
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\saveTemplate";
                 Geoprocessing.OpenToolDialog(toolpath, null);
 
             }
@@ -273,13 +278,14 @@ namespace EMEProToolkit
     }
     internal class EMEMenu_editElementMD : Button
     {
-        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
         protected override void OnClick()
         {
             try
             {
 
-                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\editElement";
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\editElement";
                 Geoprocessing.OpenToolDialog(toolpath, null);
 
             }
@@ -295,13 +301,14 @@ namespace EMEProToolkit
     }
     internal class EMEMenu_editDatesMD : Button
     {
-        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
         protected override void OnClick()
         {
             try
             {
 
-                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\editDates";
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\editDates";
                 Geoprocessing.OpenToolDialog(toolpath, null);
 
             }
@@ -317,13 +324,14 @@ namespace EMEProToolkit
     }
     internal class EMEMenu_exportISOToolMD : Button
     {
-        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
         protected override void OnClick()
         {
             try
             {
 
-                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\exportISOTool";
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\exportISOTool";
                 Geoprocessing.OpenToolDialog(toolpath, null);
             }
 
@@ -338,13 +346,14 @@ namespace EMEProToolkit
     }
     internal class EMEMenu_mergeMD : Button
     {
-        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
         protected override void OnClick()
         {
             try
             {
 
-                string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\mergeTemplate";
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\mergeTemplate";
                 Geoprocessing.OpenToolDialog(toolpath, null);
             }
 
@@ -357,6 +366,7 @@ namespace EMEProToolkit
 
         }
     }
+
     internal class EMEMenu_EMEdb : Button
     {
         private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
@@ -369,10 +379,11 @@ namespace EMEProToolkit
     }
     internal class EMEMenu_ShowToolbox : Button
     {
-        private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
         protected override void OnClick()
         {
-            string toolpath = _installPath + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt";
+            string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt";
             MessageBox.Show(toolpath);
 
         }

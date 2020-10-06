@@ -1,5 +1,5 @@
 import os
-
+import re
 import arcpy
 from arcpy import metadata as md
 import sys
@@ -106,31 +106,46 @@ class upgradeTool(object):
 
     def execute(self, parameters, messages):
         Target_Metadata = parameters[0].valueAsText
+
+        import xml.etree.ElementTree as ET
+
         try:
             for t in str(Target_Metadata).split(";"):
+
                 # target_md = md.Metadata(t)
                 # TODO: Need to check the current metadata format? Pro's tool will check and not allow
                 # an upgrade depending on the format detected.
                 """The source code of the tool."""
                 # Source_Metadata = parameters[0].valueAsText
-                Output_Name = "_{}_upgrade.xml".format(os.path.splitext(os.path.basename(t))[0])
+
+                if ' ' in t:
+                    messages.addWarningMessage('*Upgrade process skipped for {} due to space found in name'.format(t))
+                    continue
+
+                basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
+
+                Output_Name = "_{}_upgrade.xml".format(basename)
                 Output_Dir = parameters[1].valueAsText
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
-                messages.addMessage(Output_Metadata)
+                # messages.addMessage(Output_Metadata)
 
+                source_md = md.Metadata(t)
 
-                # source_md = md.Metadata(t)
-                output_md = md.Metadata(t)
+                # Test that this metadata hasn't already been upgraded
+                root = ET.fromstring(source_md.xml)
+                xpath = 'mdStanName'
+                agsElement = root.findall(xpath)
+
+                if agsElement:
+                    messages.addWarningMessage('*Upgrade process skipped for {} since it is in ArcGIS 1.0 format'.format(t))
+                    continue
+
                 # output_md = md.Metadata()
                 # output_md.copy(source_md)
 
-                # Use scratchCopy class to make a standalone XML doc to work with.
-                # scratchCopier = scratchCopy(messages)
-                # Copy_to_be_upgraded = scratchCopier.makeScratchCopy(Source_Metadata)
-
-                messages.addMessage("Upgrading the metadata...")
+                messages.addMessage("Upgrading the metadata for {}".format(t))
                 # Process: Upgrade Metadata
-                output_md.upgrade('FGDC_CSDGM')
+                source_md.upgrade('FGDC_CSDGM')
                 # Upgraded_Metadata = arcpy.UpgradeMetadata_conversion(Copy_to_be_upgraded, "FGDC_TO_ARCGIS")
 
                 tool_file_path = os.path.dirname(os.path.realpath(__file__))
@@ -138,24 +153,18 @@ class upgradeTool(object):
 
                 messages.addMessage("Preserving the UUID and cleaning up legacy elements...")
                 try:
-                    messages.addMessage("Save as XML")
-                    # output_md.saveAsUsingCustomXSLT(Output_Metadata, EPAUpgradeCleanup_xslt)
-                    # output_md.save()
-                    output_md.saveAsXML(Output_Metadata)
-                    messages.addMessage('name: ' + Output_Name)
-                    messages.addMessage('fullpath: ' + Output_Metadata)
-                    messages.addMessage("done with xslt")
 
-                    # Process: EPA Cleanup
-                    # arcpy.XSLTransform_conversion(Upgraded_Metadata, EPAUpgradeCleanup_xslt, Output_Metadata, "")
+                    source_md.saveAsUsingCustomXSLT(Output_Metadata, EPAUpgradeCleanup_xslt)
+
                 except Exception as e:
-                    messages.addMessage(e)
+                    messages.addWarningMessage(e)
 
                 if arcpy.Exists(Output_Metadata):
                     messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+                    messages.addMessage("Output: {}".format(Output_Metadata))
 
                 else:
-                    messages.addMessage("Error Creating file.")
+                    messages.addWarningMessage("Error Creating file.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -230,7 +239,13 @@ class cleanupTool(object):
             Output_Dir = parameters[1].valueAsText
 
             for t in str(Target_Metadata).split(";"):
-                Output_Name = "_{}_cleanup.".format(os.path.splitext(os.path.basename(t)[0]))
+
+                if ' ' in t:
+                    messages.addWarningMessage('*Check results for {} due to space found in name'.format(t))
+                    continue
+
+                basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
+                Output_Name = "_{}_cleanup.".format(basename)
 
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
                 messages.addMessage(Output_Metadata)
@@ -249,13 +264,14 @@ class cleanupTool(object):
                     # Process: EPA Cleanup
                     # arcpy.XSLTransform_conversion(Upgraded_Metadata, EPAUpgradeCleanup_xslt, Output_Metadata, "")
                 except Exception as e:
-                    messages.addMessage(e)
+                    messages.addWarningMessage(e)
 
                 if arcpy.Exists(Output_Metadata):
                     messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+                    messages.addMessage("Output: {}".format(Output_Metadata))
 
                 else:
-                    messages.addMessage("Error Creating file.")
+                    messages.addWarningMessage("Error Creating file.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -342,19 +358,25 @@ class exportISOTool(object):
             '''
             """The source code of the tool."""
             Target_Metadata = parameters[0].valueAsText
-            messages.addMessage(Target_Metadata)
+            # messages.addMessage(Target_Metadata)
             Output_Dir = parameters[1].valueAsText
             ISO_format = parameters[2].valueAsText
 
             for t in str(Target_Metadata).split(";"):
-                Output_Name = "_{0}_{1}.xml".format(os.path.basename(t), ISO_format)
+
+                if ' ' in t:
+                    messages.addWarningMessage('*Export skipped for {} due to space found in name'.format(t))
+                    continue
+
+                basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
+                Output_Name = "_{0}_{1}.xml".format(basename, ISO_format)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
-                messages.addMessage(t)
+                # messages.addMessage(t)
                 messages.addMessage(Output_Metadata)
                 messages.addMessage(ISO_format)
 
                 # Local variables:
-                messages.addMessage('Install Dir: {}'.format(arcpy.GetInstallInfo()['InstallDir']))
+                # messages.addMessage('Install Dir: {}'.format(arcpy.GetInstallInfo()['InstallDir']))
                 # translator = arcpy.GetInstallInfo()['InstallDir'] + "Metadata\\Translator\\ArcGIS2ISO19139.xml"
 
                 src_md = md.Metadata(t)
@@ -363,8 +385,9 @@ class exportISOTool(object):
 
                 if arcpy.Exists(Output_Metadata):
                     messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+                    messages.addMessage("Output: {}".format(Output_Metadata))
                 else:
-                    messages.addMessage("Error Creating output.")
+                    messages.addWarningMessage("Error Creating output.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -438,9 +461,14 @@ class saveTemplate(object):
             Output_Dir = parameters[1].valueAsText
 
             for t in str(Target_Metadata).split(";"):
-                Output_Name = "_{}_template.xml".format(os.path.basename(t))
+                if ' ' in t:
+                    messages.addWarningMessage('*Check results for {} due to space found in name'.format(t))
+                    continue
+
+                basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
+                Output_Name = "_{}_template.xml".format(basename)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
-                messages.addMessage(f'param 1 {Output_Metadata}')
+                # messages.addMessage(f'param 1 {Output_Metadata}')
 
                 source_md = md.Metadata(t)
 
@@ -452,12 +480,13 @@ class saveTemplate(object):
                     # arcpy.XSLTransform_conversion(Source_Metadata, saveTemplate_xslt, Output_Metadata, "")
                     source_md.saveAsUsingCustomXSLT(Output_Metadata, saveTemplate_xslt)
                 except Exception as e:
-                    messages.addMessage(e)
+                    messages.addWarningMessage(e)
 
                 if arcpy.Exists(Output_Metadata):
                     messages.addMessage("Process complete - please review the output carefully before reusing as a template.")
+                    messages.addMessage("Output: {}".format(Output_Metadata))
                 else:
-                    messages.addMessage("Error Creating file.")
+                    messages.addWarningMessage("Error Creating file.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -561,14 +590,14 @@ class mergeTemplate(object):
                 output_md.importMetadata(template_md, metadata_import_option='CUSTOM', customStylesheetPath=mergeTemplate_xslt)
                 output_md.saveAsXML(outputPath=Output_Metadata)
             except Exception as e:
-                messages.addMessage(e)
+                messages.addWarningMessage(e)
 
             if arcpy.Exists(Output_Metadata):
                 messages.addMessage(
                     "Process complete - please review the output carefully before importing or harvesting.")
 
             else:
-                messages.addMessage("Error Creating file.")
+                messages.addWarningMessage("Error Creating file.")
 
             messages.addMessage("Process complete - please review the output carefully.")
         except:
@@ -624,7 +653,7 @@ class deleteTool(object):
             # Target_Metadata = sys.argv[1]
             Target_Metadata = parameters[0].valueAsText
             # messages.addMessage("Got the Target")
-            messages.addMessage("Target {}".format(Target_Metadata))
+            # messages.addMessage("Target {}".format(Target_Metadata))
             # messages.addMessage("Parameter {}".format(parameters[0].value))
 
             # Local variables:
@@ -634,7 +663,7 @@ class deleteTool(object):
 
             for t in str(Target_Metadata).split(";"):
 
-                messages.addMessage("Performing complete purge of existing metadata")
+                messages.addMessage("Performing complete purge of {}".format(t))
                 # Process: Purge
                 # arcpy.MetadataImporter_conversion(blankDoc, Target_Metadata)
                 target_md = md.Metadata(t)
@@ -646,7 +675,7 @@ class deleteTool(object):
                 # arcpy.AddMessage("Importing new metadata")
                     messages.addMessage("Process complete - please review the output carefully.")
                 else:
-                    messages.addMessage("Unable to save. Metadata Is Read Only.")
+                    messages.addWarningMessage("Unable to save. Metadata Is Read Only.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -734,8 +763,9 @@ class importTool(object):
                     # arcpy.MetadataImporter_conversion(Source_Metadata, Target_Metadata)
 
                     messages.addMessage("Process complete - please review the output carefully.")
+                    messages.addMessage("Output: {}".format(t))
                 else:
-                    messages.addMessage("Unable to save. Metadata Is Read Only.")
+                    messages.addWarningMessage("Unable to save. Metadata Is Read Only.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -806,18 +836,23 @@ class cleanExportTool(object):
             """The source code of the tool."""
 
             tool_file_path = os.path.dirname(os.path.realpath(__file__))
-
             Target_Metadata = parameters[0].valueAsText
-
             Output_Dir = parameters[1].valueAsText
-
 
             # Local variables:
             # blankDoc = "blankdoc.xml"
             # blank_md = md.Metadata(blankDoc)
 
             for t in str(Target_Metadata).split(";"):
-                Output_Name = "_{}_clean.xml".format(os.path.basename(t))
+
+                if ' ' in t:
+                    messages.addWarningMessage('*Check results for {} due to space found in name'.format(t))
+                    continue
+
+                basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
+
+
+                Output_Name = "_{}_clean.xml".format(basename)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
 
                 source_md = md.Metadata(t)
@@ -830,14 +865,15 @@ class cleanExportTool(object):
                 try:
                     source_md.saveAsUsingCustomXSLT(Output_Metadata, EPACleanExport_xslt)
                 except Exception as e:
-                    messages.addMessage(e)
+                    messages.addWarningMessage(e)
                 # # arcpy.XSLTransform_conversion(Source_Metadata, EPACleanExport_xslt, Output_Metadata, "")
 
                 if arcpy.Exists(Output_Metadata):
                     messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+                    messages.addMessage("Output: {}".format(Output_Metadata))
 
                 else:
-                    messages.addMessage("Error Creating file.")
+                    messages.addWarningMessage("Error Creating file.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -948,7 +984,7 @@ class editElement(object):
                     target_md.save()
                     messages.addMessage("Process complete, element update count: {}.".format(str(len(elements))))
                 else:
-                    messages.addMessage("Unable to save. Metadata Is Read Only.")
+                    messages.addWarningMessage("Unable to save. Metadata Is Read Only.")
 
                 # If the target is a standalone XML doc, just copy the scratch over the source file.
                 # if Target_Metadata[-4:].lower() == ".xml":
