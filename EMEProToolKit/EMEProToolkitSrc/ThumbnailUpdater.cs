@@ -153,7 +153,7 @@ namespace EMEProToolkit
             }
             
         }
-        public void ExportFrameAsync()
+        public void ExportFrameAsync(string basemap)
         {
             System.IO.Directory.CreateDirectory(_temppathEme);
             string s = FrameworkApplication.ActiveWindow.ToString();
@@ -161,7 +161,16 @@ namespace EMEProToolkit
             foreach (var item in Project.Current.SelectedItems)
             {
                 string[] arcData = { ".gdb", ".shp" };
-                if (!arcData.Any(item.Path.ToString().Contains)) 
+                string itemExt = Path.GetExtension(item.Path);
+
+                //var featLayer = item as FeatureLayer;
+                //if (featLayer == null)
+                //{
+                //    ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("A feature layer must be selected in the Contents pane. Exiting...", "Info");
+                //    return;
+                //}
+
+                if (!arcData.Any(item.Path.ToString().Contains) &&  itemExt != ".gdb") 
                 {
                     FrameworkApplication.AddNotification(new Notification()
                     {
@@ -196,8 +205,9 @@ namespace EMEProToolkit
                     // Apply the CIM page to a new layout and set name
                     var newLayout = LayoutFactory.Instance.CreateLayout(newPage);
                     newLayout.SetName(tempLayout);
-                    string bmap_string = EMEMenu_thumbnailBasemap.thumbnailBasemap.selected;
-                    Basemap bmap = (Basemap)Enum.Parse(typeof(Basemap), bmap_string);
+                    //string bmap_string = EMEMenu_thumbnailBasemap.thumbnailBasemap.selected;
+                    //Basemap bmap = (Basemap)Enum.Parse(typeof(Basemap), bmap_string);
+                    Basemap bmap = (Basemap)Enum.Parse(typeof(Basemap), basemap);
                     Map newMap = MapFactory.Instance.CreateMap(tempMap, MapType.Map, MapViewingMode.Map, bmap);
 
                     Uri uri = new Uri(item.Path);
