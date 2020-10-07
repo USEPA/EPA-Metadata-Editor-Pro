@@ -74,15 +74,32 @@ class upgradeTool(object):
         #     datatype="DEFile",
         #     parameterType="Required",
         #     direction="Output")
-
         param1 = arcpy.Parameter(
+            displayName="Overwrite Source Record?",
+            name="Overwrite",
+            datatype="GPBoolean",
+            parameterType="Required",
+            direction="Input"
+        )
+        param1.value = "True"
+
+        param2 = arcpy.Parameter(
             displayName="Output Directory",
             name="Output_Metadata",
             datatype="DEFolder",
-            parameterType="Required",
+            parameterType="Optional",
             direction="Input")
 
-        params = [param0, param1]
+        param3 = arcpy.Parameter(
+            displayName="File Prefix",
+            name="FilePrefix",
+            datatype="GPString",
+            parameterType="Optional",
+            direction="Input"
+        )
+        param3.value = "upgrade_"
+
+        params = [param0, param1, param2, param3]
         return params
 
     def isLicensed(self):
@@ -97,12 +114,28 @@ class upgradeTool(object):
         #     fileExtension = parameters[1].valueAsText[-4:].lower()
         #     if fileExtension != ".xml":
         #         parameters[1].value = parameters[1].valueAsText + ".xml"
+
+        if parameters[1].value is True:
+            parameters[2].enabled = 'False'
+            parameters[3].enabled = 'False'
+        else:
+            parameters[2].enabled = 'True'
+            parameters[3].enabled = 'True'
+
         return
 
     def updateMessages(self, parameters):
         """Modify the messages created by internal validation for each tool
         parameter.  This method is called after internal validation."""
+
+        if parameters[1].value is False and parameters[2].value is None:
+            parameters[2].setErrorMessage("Folder Required")
+
+        if parameters[1].value is False and parameters[3].value is None:
+            parameters[3].setErrorMessage("File Prefix Required")
+
         return
+
 
     def execute(self, parameters, messages):
         Target_Metadata = parameters[0].valueAsText
@@ -110,6 +143,15 @@ class upgradeTool(object):
         import xml.etree.ElementTree as ET
 
         try:
+
+            overwrite_md = parameters[1].valueAsText
+            messages.addMessage("overwrite_md: {}".format(overwrite_md))
+            # messages.addMessage("Scratch: {}".format(arcpy.env.scratchFolder))
+            # messages.addMessage("path {}".format(os.path.join(arcpy.env.scratchFolder, 'junk.xml')))
+
+            output_dir = parameters[2].valueAsText
+            output_prefix = parameters[3].valueAsText
+
             for t in str(Target_Metadata).split(";"):
 
                 # target_md = md.Metadata(t)
@@ -124,9 +166,9 @@ class upgradeTool(object):
 
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
 
-                Output_Name = "_{}_upgrade.xml".format(basename)
-                Output_Dir = parameters[1].valueAsText
-                Output_Metadata = os.path.join(Output_Dir, Output_Name)
+                output_name = "{}{}.xml".format(output_prefix, basename)
+                # Output_Dir = parameters[1].valueAsText
+                # output_metadata = os.path.join(output_dir, output_name)
                 # messages.addMessage(Output_Metadata)
 
                 source_md = md.Metadata(t)
@@ -138,33 +180,47 @@ class upgradeTool(object):
 
                 if agsElement:
                     messages.addWarningMessage('*Upgrade process skipped for {} since it is in ArcGIS 1.0 format'.format(t))
+                    # Skip Upgrade and Clean it.  Need to run on scratch folder
+                    temp_xml = os.path.join(arcpy.env.scratchFolder, output_name)
+                    messages.addMessage("Temp file: {}".format(temp_xml))
+                    messages.addMessage("Preserving the UUID and cleaning up legacy elements...")
+                    source_md.saveAsUsingCustomXSLT(temp_xml, EPAUpgradeCleanup_xslt)
+                    temp_xml_clean = md.Metadata(temp_xml)
+                    source_md.copy(temp_xml_clean)
+                    source_md.save()
                     continue
-
-                # output_md = md.Metadata()
-                # output_md.copy(source_md)
 
                 messages.addMessage("Upgrading the metadata for {}".format(t))
                 # Process: Upgrade Metadata
                 source_md.upgrade('FGDC_CSDGM')
-                # Upgraded_Metadata = arcpy.UpgradeMetadata_conversion(Copy_to_be_upgraded, "FGDC_TO_ARCGIS")
 
                 tool_file_path = os.path.dirname(os.path.realpath(__file__))
                 EPAUpgradeCleanup_xslt = tool_file_path + r'\EPAUpgradeCleanup.xslt'
-
                 messages.addMessage("Preserving the UUID and cleaning up legacy elements...")
-                try:
 
-                    source_md.saveAsUsingCustomXSLT(Output_Metadata, EPAUpgradeCleanup_xslt)
+                try:
+                    if overwrite_md == 'true':
+                        temp_xml = os.path.join(arcpy.env.scratchFolder, output_name)
+                        messages.addMessage("Temp file: {}".format(temp_xml))
+                        source_md.saveAsUsingCustomXSLT(temp_xml, EPAUpgradeCleanup_xslt)
+                        temp_xml_clean = md.Metadata(temp_xml)
+                        source_md.copy(temp_xml_clean)
+                        source_md.save()
+                        output_metadata = t
+
+                    else:
+                        output_metadata = os.path.join(output_dir, output_name)
+                        source_md.saveAsUsingCustomXSLT(output_metadata, EPAUpgradeCleanup_xslt)
 
                 except Exception as e:
                     messages.addWarningMessage(e)
 
-                if arcpy.Exists(Output_Metadata):
+                if arcpy.Exists(output_metadata):
                     messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
-                    messages.addMessage("Output: {}".format(Output_Metadata))
+                    messages.addMessage("Output: {}".format(output_metadata))
 
                 else:
-                    messages.addWarningMessage("Error Creating file.")
+                    messages.addWarningMessage("Error processing {}.".format(t))
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -245,7 +301,7 @@ class cleanupTool(object):
                     continue
 
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
-                Output_Name = "_{}_cleanup.".format(basename)
+                Output_Name = "_{}_cleanup.xml".format(basename)
 
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
                 messages.addMessage(Output_Metadata)
