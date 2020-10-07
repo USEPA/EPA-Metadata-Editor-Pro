@@ -13,7 +13,7 @@ class Toolbox(object):
         self.alias = ""
 
         # List of tool classes associated with this toolbox
-        self.tools = [upgradeTool,cleanupTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates,mergeTemplate, exportISOTool]
+        self.tools = [upgradeTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates,mergeTemplate, exportISOTool]
         # self.tools = [upgradeTool,cleanupTool,exportISOTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate]
 
 # class scratchCopy(object):
@@ -46,8 +46,8 @@ class Toolbox(object):
 class upgradeTool(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
-        self.label = "EPA Upgrade FGDC to ArcGIS"
-        self.description = "This tool creates a copy of the existing FGDC CSDGM metadata, performs the standard upgrade to ArcGIS Metadata, then adds several extra cleanup steps including copying legacy UUIDs to the ISO-Compliant element and cleaning up all legacy elements. This tool is not recommended for records that have already been upgraded to ArcGIS Metadata."
+        self.label = "EPA Upgrade FGDC to ArcGIS and Clean"
+        self.description = "Use this tool to upgrade FGDC CSDGM records or clean up ArcGIS format metadata. This tool will check the metadata format and perform a standard FGDC CSDGM-to-ArcGIS upgrade with additional cleanup steps. Cleanup includes copying legacy UUIDs to the ISO-Compliant element and removing all legacy elements. The cleanup process is also compatible with ArcGIS Format records. Metadata is considered upgraded to ArcGIS format if /metadata/mdStanName = ArcGIS Metadata. Users can run this multiple times on records if they are unsure of the format or if legacy elements are present."
         self.canRunInBackground = False
 
     def getParameterInfo(self):
@@ -75,7 +75,7 @@ class upgradeTool(object):
         #     parameterType="Required",
         #     direction="Output")
         param1 = arcpy.Parameter(
-            displayName="Overwrite Source Record?",
+            displayName="Overwrite Source Record",
             name="Overwrite",
             datatype="GPBoolean",
             parameterType="Required",
@@ -156,7 +156,7 @@ class upgradeTool(object):
             if not output_dir:
                 output_dir = arcpy.env.scratchFolder
 
-            messages.addMessage("outPrefix: {}, outdir: {}".format(output_prefix, output_dir))
+            # messages.addMessage("outPrefix: {}, outdir: {}".format(output_prefix, output_dir))
 
             for t in str(Target_Metadata).split(";"):
 
@@ -183,7 +183,7 @@ class upgradeTool(object):
                     messages.addWarningMessage('*Upgrade process skipped for {} since it is in ArcGIS 1.0 format. Cleaning up legacy elements and preserving the UUID...'.format(t))
                     # Skip Upgrade and Clean it.
                     temp_xml = os.path.join(output_dir, output_name)
-                    messages.addMessage("Temp file: {}".format(temp_xml))
+                    # messages.addMessage("Temp file: {}".format(temp_xml))
                     source_md.saveAsUsingCustomXSLT(temp_xml, EPAUpgradeCleanup_xslt)
 
                     if overwrite_md == 'true':
