@@ -151,14 +151,14 @@ class upgradeTool(object):
 
             output_dir = parameters[2].valueAsText
             output_prefix = parameters[3].valueAsText
+            if not output_prefix:
+                output_prefix = 'tmp_'
+            if not output_dir:
+                output_dir = arcpy.env.scratchFolder
+
+            messages.addMessage("outPrefix: {}, outdir: {}".format(output_prefix, output_dir))
 
             for t in str(Target_Metadata).split(";"):
-
-                # target_md = md.Metadata(t)
-                # TODO: Need to check the current metadata format? Pro's tool will check and not allow
-                # an upgrade depending on the format detected.
-                """The source code of the tool."""
-                # Source_Metadata = parameters[0].valueAsText
 
                 if ' ' in t:
                     messages.addWarningMessage('*Upgrade process skipped for {} due to space found in name'.format(t))
@@ -167,50 +167,54 @@ class upgradeTool(object):
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
 
                 output_name = "{}{}.xml".format(output_prefix, basename)
-                # Output_Dir = parameters[1].valueAsText
+                output_metadata = ""
                 # output_metadata = os.path.join(output_dir, output_name)
-                # messages.addMessage(Output_Metadata)
+
+                tool_file_path = os.path.dirname(os.path.realpath(__file__))
+                EPAUpgradeCleanup_xslt = tool_file_path + r'\EPAUpgradeCleanup.xslt'
 
                 source_md = md.Metadata(t)
-
                 # Test that this metadata hasn't already been upgraded
                 root = ET.fromstring(source_md.xml)
                 xpath = 'mdStanName'
                 agsElement = root.findall(xpath)
 
                 if agsElement:
-                    messages.addWarningMessage('*Upgrade process skipped for {} since it is in ArcGIS 1.0 format'.format(t))
-                    # Skip Upgrade and Clean it.  Need to run on scratch folder
-                    temp_xml = os.path.join(arcpy.env.scratchFolder, output_name)
+                    messages.addWarningMessage('*Upgrade process skipped for {} since it is in ArcGIS 1.0 format. Cleaning up legacy elements and preserving the UUID...'.format(t))
+                    # Skip Upgrade and Clean it.
+                    temp_xml = os.path.join(output_dir, output_name)
                     messages.addMessage("Temp file: {}".format(temp_xml))
-                    messages.addMessage("Preserving the UUID and cleaning up legacy elements...")
                     source_md.saveAsUsingCustomXSLT(temp_xml, EPAUpgradeCleanup_xslt)
-                    temp_xml_clean = md.Metadata(temp_xml)
-                    source_md.copy(temp_xml_clean)
-                    source_md.save()
+
+                    if overwrite_md == 'true':
+                        temp_xml_clean = md.Metadata(temp_xml)
+                        source_md.copy(temp_xml_clean)
+                        source_md.save()
+                    else:
+                        messages.addMessage('Output: {}'.format(temp_xml))
+
                     continue
 
                 messages.addMessage("Upgrading the metadata for {}".format(t))
                 # Process: Upgrade Metadata
                 source_md.upgrade('FGDC_CSDGM')
 
-                tool_file_path = os.path.dirname(os.path.realpath(__file__))
-                EPAUpgradeCleanup_xslt = tool_file_path + r'\EPAUpgradeCleanup.xslt'
-                messages.addMessage("Preserving the UUID and cleaning up legacy elements...")
+                messages.addMessage("Cleaning up legacy elements and preserving the UUID...")
 
                 try:
+
+                    temp_xml = os.path.join(output_dir, output_name)
+                    messages.addMessage("Temp file: {}".format(temp_xml))
+                    source_md.saveAsUsingCustomXSLT(temp_xml, EPAUpgradeCleanup_xslt)
+
                     if overwrite_md == 'true':
-                        temp_xml = os.path.join(arcpy.env.scratchFolder, output_name)
-                        messages.addMessage("Temp file: {}".format(temp_xml))
-                        source_md.saveAsUsingCustomXSLT(temp_xml, EPAUpgradeCleanup_xslt)
                         temp_xml_clean = md.Metadata(temp_xml)
                         source_md.copy(temp_xml_clean)
                         source_md.save()
                         output_metadata = t
 
                     else:
-                        output_metadata = os.path.join(output_dir, output_name)
-                        source_md.saveAsUsingCustomXSLT(output_metadata, EPAUpgradeCleanup_xslt)
+                        output_metadata = temp_xml
 
                 except Exception as e:
                     messages.addWarningMessage(e)
