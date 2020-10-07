@@ -1038,6 +1038,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThumbnailUpdater.cs" />
+    <Compile Include="ToolkitMetadataEditor.cs" />
     <Compile Include="Utils\LanguageConverter.cs" />
     <Compile Include="Utils\MetadataException.cs" />
     <Compile Include="Utils\MetadataStyle.cs" />
