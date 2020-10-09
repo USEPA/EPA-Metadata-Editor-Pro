@@ -32,13 +32,13 @@
          </xsl:choose>
       </xsl:copy>
    </xsl:template>
-   
+
    <xsl:template match="@*|node()[not(self::*)]">
       <xsl:copy>
          <xsl:apply-templates select="@*|node()"/>
       </xsl:copy>
    </xsl:template>
-   
+
    <!-- copy imported content as the target item's new metadata -->
 	<!-- add Esri section with ArcGISFormat if this sections doesn't already exist -->
 	<xsl:template match="metadata" priority="1" >
@@ -61,13 +61,13 @@
             </xsl:if>
             <xsl:if test="count (./mdContact) = 0">
                 <xsl:copy-of select="document($gpparam)/metadata/mdContact"/>
-            </xsl:if>            
+            </xsl:if>
             <xsl:if test="count (./mdStanName) = 0">
                 <xsl:copy-of select="document($gpparam)/metadata/mdStanName"/>
             </xsl:if>
             <xsl:if test="count (./mdStanVer) = 0">
                 <xsl:copy-of select="document($gpparam)/metadata/mdStanVer"/>
-            </xsl:if>			
+            </xsl:if>
             <xsl:if test="count (./dataIdInfo) = 0">
                 <xsl:copy-of select="document($gpparam)/metadata/dataIdInfo"/>
             </xsl:if>
@@ -85,7 +85,7 @@
             </xsl:if>
             <xsl:if test="count (./contInfo) = 0">
                 <xsl:copy-of select="document($gpparam)/metadata/contInfo"/>
-            </xsl:if>            
+            </xsl:if>
             <xsl:if test="count (./mdExtInfo) = 0">
                 <xsl:copy-of select="document($gpparam)/metadata/mdExtInfo"/>
             </xsl:if>

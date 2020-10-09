@@ -645,7 +645,7 @@ class mergeTemplate(object):
             # Source_Metadata.saveAsUsingCustomXSLT(Output_Metadata, mergeTemplate_xslt, )
             try:
 
-                output_md.copy(source_md)
+                # output_md.copy(source_md)
                 messages.addMessage("Output md Title "+ str(output_md.title))
                 output_md.importMetadata(template_md, metadata_import_option='CUSTOM', customStylesheetPath=mergeTemplate_xslt)
                 output_md.saveAsXML(outputPath=Output_Metadata)
