@@ -138,6 +138,7 @@ class upgradeTool(object):
 
 
     def execute(self, parameters, messages):
+
         Target_Metadata = parameters[0].valueAsText
 
         import xml.etree.ElementTree as ET
@@ -148,7 +149,7 @@ class upgradeTool(object):
             messages.addMessage("overwrite_md: {}".format(overwrite_md))
             # messages.addMessage("Scratch: {}".format(arcpy.env.scratchFolder))
             # messages.addMessage("path {}".format(os.path.join(arcpy.env.scratchFolder, 'junk.xml')))
-
+            scratch_folder = arcpy.env.scratchFolder
             output_dir = parameters[2].valueAsText
             output_prefix = parameters[3].valueAsText
             if not output_prefix:
@@ -175,46 +176,44 @@ class upgradeTool(object):
 
                 source_md = md.Metadata(t)
                 # Test that this metadata hasn't already been upgraded
+                # todo - need to check for ArcGISFormat 1.0 as well (mdStanName might be a legacy ISO element)
                 root = ET.fromstring(source_md.xml)
                 xpath = 'mdStanName'
                 agsElement = root.findall(xpath)
 
-                if agsElement:
+                # if not agsElement - metadata has not been upgraded yet
+                if not agsElement:
+                    messages.addMessage("Upgrading the metadata for {}".format(t))
+                    # Process: Upgrade Metadata
+                    source_md.upgrade('FGDC_CSDGM')
+
+                    messages.addMessage("Cleaning up legacy elements and preserving the UUID...")
+                else:
+                    backup_name = "{}{}.xml".format('backup_', basename)
+                    source_md.saveAsXML(os.path.join(scratch_folder, backup_name))
                     messages.addWarningMessage('*Upgrade process skipped for {} since it is in ArcGIS 1.0 format. Cleaning up legacy elements and preserving the UUID...'.format(t))
-                    # Skip Upgrade and Clean it.
-                    temp_xml = os.path.join(output_dir, output_name)
-                    # messages.addMessage("Temp file: {}".format(temp_xml))
-                    source_md.saveAsUsingCustomXSLT(temp_xml, EPAUpgradeCleanup_xslt)
-
-                    if overwrite_md == 'true':
-                        temp_xml_clean = md.Metadata(temp_xml)
-                        source_md.copy(temp_xml_clean)
-                        source_md.save()
-                    else:
-                        messages.addMessage('Output: {}'.format(temp_xml))
-
-                    continue
-
-                messages.addMessage("Upgrading the metadata for {}".format(t))
-                # Process: Upgrade Metadata
-                source_md.upgrade('FGDC_CSDGM')
-
-                messages.addMessage("Cleaning up legacy elements and preserving the UUID...")
+                    messages.addMessage('Backup of source metadata placed at: {}'.format(os.path.join(scratch_folder, backup_name)))
 
                 try:
-
-                    temp_xml = os.path.join(output_dir, output_name)
-                    messages.addMessage("Temp file: {}".format(temp_xml))
-                    source_md.saveAsUsingCustomXSLT(temp_xml, EPAUpgradeCleanup_xslt)
-
+                    final_xml = os.path.join(output_dir, output_name)
+                    messages.addMessage("Temp file: {}".format(final_xml))
+                    source_md.saveAsUsingCustomXSLT(final_xml, EPAUpgradeCleanup_xslt)
+                    # temp_temp = md.Metadata().importMetadata(source_md.uri, 'CUSTOM', EPAUpgradeCleanup_xslt)
+                    output_metadata = final_xml
+                    # if overwrite back to source :
                     if overwrite_md == 'true':
-                        temp_xml_clean = md.Metadata(temp_xml)
-                        source_md.copy(temp_xml_clean)
+                        source_md.copy(md.Metadata(final_xml))
+                        # if source is standalone .xml:
+                        fileExtension = t[-4:].lower()
+                        if fileExtension == ".xml":
+                            try:
+                                os.remove(source_md.uri)
+                            except Exception as ee:
+                                messages.addWarningMessage(ee)
+                            source_md.saveAsXML(source_md.uri)
+                        # otherwise if feature class:
                         source_md.save()
-                        output_metadata = t
-
-                    else:
-                        output_metadata = temp_xml
+                        output_metadata = source_md.uri
 
                 except Exception as e:
                     messages.addWarningMessage(e)
