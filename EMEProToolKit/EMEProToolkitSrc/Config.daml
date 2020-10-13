@@ -149,7 +149,8 @@ limitations under the License.​
 					  <!-- citation -->
 					  <!-- title and date required for main citation and identifier citation -->
 					  <for xpath="//idCitation[resTitle | date]">
-						<exists xpath="resTitle[. != '']" ref="resTitle" />
+						<!--<exists xpath="resTitle[. != '']" ref="resTitle" />-->
+            <exists xpath="resTitle[. != 'TEST']" ref="resTitle" />
 						<exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
 					  </for>
 					  <!--  linkage required for online resources for main citation and identifier citation -->
@@ -956,6 +957,7 @@ limitations under the License.​
 				  </page>
 				  <page class="EMEProToolkit.Pages.MTK_DistributionInfo">
 					<validation>
+
 					  <!-- format name and version -->
 					  <for xpath="//distFormat">
 						<exists xpath="formatName[. != '']" ref="formatName" />
@@ -981,6 +983,12 @@ limitations under the License.​
 					  <!-- linkage -->
 					  <for xpath="//distInfo//onLineSrc">
 						<exists xpath="linkage[. != '']" ref="linkage" />
+					  </for>
+            
+            <!--TESTing-->
+      		  <for xpath="//distributor">
+						<exists xpath="distributor[. == '']" ref="distributor" />
+
 					  </for>
 
             <!-- function --><!--
