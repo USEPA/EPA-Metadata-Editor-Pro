@@ -79,18 +79,17 @@ namespace EMEProToolkit
         }
     }
         
-    internal class EMEMenu_UpdateThumbnail : Button
-    {
-        public const string MyStateID = "preview_map_state";
-        protected override async void OnClick()
-        {
-            var thumbsup = new ThumbnailUpdater();
-            thumbsup.ExportFrameAsync();
+    //internal class EMEMenu_UpdateThumbnail : Button
+    //{
+    //    protected override async void OnClick()
+    //    {
+    //        var thumbsup = new ThumbnailUpdater();
+    //        thumbsup.ExportFrameAsync();
 
 
 
-        }
-    }
+    //    }
+    //}
 
     internal class EMEMenu_clearMD : Button
     {
@@ -240,7 +239,7 @@ namespace EMEProToolkit
             try
             {
 
-                string toolpath = _pathEmeToolbox + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\cleanupTool";
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\cleanupTool";
                 Geoprocessing.OpenToolDialog(toolpath, null);
 
             }
@@ -389,42 +388,128 @@ namespace EMEProToolkit
 
         }
     }
-    internal class EMEMenu_thumbnailBasemap : ComboBox
-    {
-        private bool _isInitialized;
-        public class thumbnailBasemap
-        {
-            public static string selected;
-        }
-        public EMEMenu_thumbnailBasemap()
-        {
-            getBasemaps();
-        }
-        private async void getBasemaps()
-        {
-            if (_isInitialized)
-            {
-                return;
-            }
-            _isInitialized = true;
+    //internal class EMEMenu_thumbnailBasemap : ComboBox
+    //{
+    //    private bool _isInitialized;
+    //    public class thumbnailBasemap
+    //    {
+    //        public static string selected;
+    //    }
+    //    public EMEMenu_thumbnailBasemap()
+    //    {
+    //        getBasemaps();
+    //    }
+    //    private async void getBasemaps()
+    //    {
+    //        if (_isInitialized)
+    //        {
+    //            return;
+    //        }
+    //        _isInitialized = true;
 
-            var namesAsArray = Enum.GetNames(typeof(Basemap));
-            foreach(string nn in namesAsArray)
-            {
-                Add(nn.ToString() != null ? new ComboBoxItem(nn.ToString()) : new ComboBoxItem(string.Empty));
-            }
-            Enabled = true; //enables the ComboBox
-            // default
-            SelectedItem = ItemCollection[1];
+    //        var namesAsArray = Enum.GetNames(typeof(Basemap));
+    //        foreach(string nn in namesAsArray)
+    //        {
+    //            Add(nn.ToString() != null ? new ComboBoxItem(nn.ToString()) : new ComboBoxItem(string.Empty));
+    //        }
+    //        Enabled = true; //enables the ComboBox
+    //        // default
+    //        SelectedItem = ItemCollection[1];
             
-        }
-        protected override async void OnSelectionChange(ComboBoxItem item)
+    //    }
+    //    protected override async void OnSelectionChange(ComboBoxItem item)
+    //    {
+    //        thumbnailBasemap.selected = item.Text;
+    //    }
+
+    //}
+
+    internal class EMEMenu_SplitBasemap_ProjectDefault : Button
+    {
+        protected override void OnClick()
         {
-            thumbnailBasemap.selected = item.Text;
+            var thumbsup = new ThumbnailUpdater();
+            thumbsup.ExportFrameAsync(basemap: "ProjectDefault");
         }
-
     }
-   
-    
-
+    internal class EMEMenu_SplitBasemap_None : Button
+    {
+        protected override void OnClick()
+        {
+            var thumbsup = new ThumbnailUpdater();
+            thumbsup.ExportFrameAsync(basemap: "None");
+        }
+    }
+    internal class EMEMenu_SplitBasemap_Satellite : Button
+    {
+        protected override void OnClick()
+        {
+            var thumbsup = new ThumbnailUpdater();
+            thumbsup.ExportFrameAsync(basemap: "Satellite");
+        }
+    }
+    internal class EMEMenu_SplitBasemap_Hybrid : Button
+    {
+        protected override void OnClick()
+        {
+            var thumbsup = new ThumbnailUpdater();
+            thumbsup.ExportFrameAsync(basemap: "Hybrid");
+        }
+    }
+    internal class EMEMenu_SplitBasemap_Streets : Button
+    {
+        protected override void OnClick()
+        {
+            var thumbsup = new ThumbnailUpdater();
+            thumbsup.ExportFrameAsync(basemap: "Streets");
+        }
+    }
+    internal class EMEMenu_SplitBasemap_Topographic : Button
+    {
+        protected override void OnClick()
+        {
+            var thumbsup = new ThumbnailUpdater();
+            thumbsup.ExportFrameAsync(basemap: "Topographic");
+        }
+    }
+    internal class EMEMenu_SplitBasemap_DarkGray : Button
+    {
+        protected override void OnClick()
+        {
+            var thumbsup = new ThumbnailUpdater();
+            thumbsup.ExportFrameAsync(basemap: "DarkGray");
+        }
+    }
+    internal class EMEMenu_SplitBasemap_Gray : Button
+    {
+        protected override void OnClick()
+        {
+            var thumbsup = new ThumbnailUpdater();
+            thumbsup.ExportFrameAsync(basemap: "Gray");
+        }
+    }
+    internal class EMEMenu_SplitBasemap_NationalGeographic : Button
+    {
+        protected override void OnClick()
+        {
+            var thumbsup = new ThumbnailUpdater();
+            thumbsup.ExportFrameAsync(basemap: "NationalGeographic");
+        }
+    }
+    internal class EMEMenu_SplitBasemap_Oceans : Button
+    {
+        protected override void OnClick()
+        {
+            var thumbsup = new ThumbnailUpdater();
+            thumbsup.ExportFrameAsync(basemap: "Oceans");
+        }
+    }
+    internal class EMEMenu_SplitBasemap_Terrain : Button
+    {
+        protected override void OnClick()
+        {
+            var thumbsup = new ThumbnailUpdater();
+            thumbsup.ExportFrameAsync(basemap: "Terrain");
+        }
+    }
 }

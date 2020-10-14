@@ -1171,18 +1171,19 @@ limitations under the License.​
                 condition="SyncContactsCondition">
           <tooltip heading="Update Contacts">Sync Online Contacts<disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" condition="catalogview_selected_object" caption="Update Thumbnail" className="EMEMenu_UpdateThumbnail" loadOnClick="true" 
+        <!--<button id="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" condition="catalogview_selected_object" caption="Update Thumbnail" className="EMEMenu_UpdateThumbnail" loadOnClick="true" 
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ItemThumbnailCreate16.png" 
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ItemThumbnailCreate32.png">
           <tooltip heading="Update Thumbnail">Click to update the thumbnail one or many items. Items must be selected in catalog view
           <disabledText />Disabled Text here</tooltip>
-        </button>
+        </button>-->
         <button id="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" condition="esri_core_resourcesPane" caption="EPA Upgrade FGDC to ArcGIS" className="EMEMenu_upgradeFgdcMD" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUpgrade16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUpgrade32.png">
-          <tooltip heading="Upgrade FGDC CSDGM to ArcGIS">This tool creates a copy of the existing FGDC CSDGM metadata, performs the standard upgrade to ArcGIS Metadata, 
-          then adds several extra cleanup steps including copying legacy UUIDs to the ISO-Compliant element and cleaning up all legacy elements. 
-          This tool is not recommended for records that have already been upgraded to ArcGIS Metadata.<disabledText /></tooltip>
+          <tooltip heading="Upgrade FGDC CSDGM to ArcGIS and Clean"> Use this tool to upgrade FGDC CSDGM records or clean up ArcGIS format metadata. This tool will check the metadata format and perform a standard FGDC CSDGM-to-ArcGIS upgrade with additional cleanup steps. 
+          Cleanup includes copying legacy UUIDs to the ISO-Compliant element and removing all legacy elements. 
+          The cleanup process is also compatible with ArcGIS Format records. Metadata is considered upgraded to ArcGIS format if /metadata/mdStanName = ArcGIS Metadata. 
+          Users can run this multiple times on records if they are unsure of the format or if legacy elements are present.<disabledText /></tooltip>          
         </button>
         <button id="EMEProToolkit_EMEMenu_Items_clearMD" condition="esri_core_resourcesPane" caption="Clear Metadata" className="EMEMenu_clearMD" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/DeleteJob16.png"
@@ -1204,13 +1205,13 @@ limitations under the License.​
           <tooltip heading="Clean Export Metadata">Most Esri metadata tools perform some sort of transformation on a metadata record when
           exporting to a standalone XML document. This tool allows a metadata record to be exported as-is with no transformations.<disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_cleanUpTool" condition="esri_core_resourcesPane" caption="Clean Up Metadata" className="EMEMenu_cleanUpToolMD" loadOnClick="true"
+        <!--<button id="EMEProToolkit_EMEMenu_Items_cleanUpTool" condition="esri_core_resourcesPane" caption="Clean Up Metadata" className="EMEMenu_cleanUpToolMD" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingTool16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingTool32.png">
           <tooltip heading="Clean Up Tool">
             This tool performs several extra cleanup steps including copying legacy UUIDs to the ISO-Compliant element and cleaning up all legacy elements. 
             This tool is recommended for records that have already been upgraded to ArcGIS Metadata.<disabledText /></tooltip>
-        </button>
+        </button>-->
         <button id="EMEProToolkit_EMEMenu_Items_saveTemplateMD" condition="esri_core_resourcesPane" caption="Save Metadata Template" className="EMEMenu_saveTemplateMD" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/VersionCreate16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/VersionCreate32.png">
@@ -1270,11 +1271,81 @@ limitations under the License.​
           <tooltip heading="Show Python Toolbox Dir">For Testing Purposes Only! 
           Toolbox will be moved to AppData directory in future releases.<disabledText /></tooltip>
         </button>
+        <!---->
+        <button id="EMEProToolkit_SplitBasemap_ProjectDefault" condition="catalogview_selected_object" caption="Project Default Basemap" className="EMEMenu_SplitBasemap_ProjectDefault" loadOnClick="true"
+        largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ItemThumbnailCreate32.png">
+          <tooltip heading="Project Default Basemap">
+            Click to update the thumbnail one or many items. Items must be selected in catalog view.
+            <disabledText />Disabled Text here
+          </tooltip>
+        </button>
+        <button id="EMEProToolkit_SplitBasemap_None" condition="catalogview_selected_object" caption="No Basemap" className="EMEMenu_SplitBasemap_None" loadOnClick="true">
+          <tooltip heading="No Basemap">
+            Click to update the thumbnail one or many items. Items must be selected in catalog view
+            <disabledText />Disabled Text here
+          </tooltip>
+        </button>
+        <button id="EMEProToolkit_SplitBasemap_Satellite" condition="catalogview_selected_object" caption="Satellite Basemap" className="EMEMenu_SplitBasemap_Satellite" loadOnClick="true">
+          <tooltip heading="Satellite Basemap">
+            Click to update the thumbnail one or many items. Items must be selected in catalog view
+            <disabledText />Disabled Text here
+          </tooltip>
+        </button>
+        <button id="EMEProToolkit_SplitBasemap_Hybrid" condition="catalogview_selected_object" caption="Hybrid Basemap" className="EMEMenu_SplitBasemap_Hybrid" loadOnClick="true">
+          <tooltip heading="Hybrid Basemap">
+            Click to update the thumbnail one or many items. Items must be selected in catalog view
+            <disabledText />Disabled Text here
+          </tooltip>
+        </button>
+        <button id="EMEProToolkit_SplitBasemap_Streets" condition="catalogview_selected_object" caption="Streets Basemap" className="EMEMenu_SplitBasemap_Streets" loadOnClick="true">
+          <tooltip heading="Streets Basemap">
+            Click to update the thumbnail one or many items. Items must be selected in catalog view
+            <disabledText />Disabled Text here
+          </tooltip>
+        </button>
+        <button id="EMEProToolkit_SplitBasemap_Topographic" condition="catalogview_selected_object" caption="Topographic Basemap" className="EMEMenu_SplitBasemap_Topographic" loadOnClick="true">
+          <tooltip heading="Topographic Basemap">
+            Click to update the thumbnail one or many items. Items must be selected in catalog view
+            <disabledText />Disabled Text here
+          </tooltip>
+        </button>
+        <button id="EMEProToolkit_SplitBasemap_DarkGray" condition="catalogview_selected_object" caption="Dark Gray Basemap" className="EMEMenu_SplitBasemap_DarkGray" loadOnClick="true">
+          <tooltip heading="Dark Gray Basemap">
+            Click to update the thumbnail one or many items. Items must be selected in catalog view
+            <disabledText />Disabled Text here
+          </tooltip>
+        </button>
+        <button id="EMEProToolkit_SplitBasemap_Gray" condition="catalogview_selected_object" caption="Gray Basemap" className="EMEMenu_SplitBasemap_Gray" loadOnClick="true">
+						<tooltip heading="Gray Basemap">
+            Click to update the thumbnail one or many items. Items must be selected in catalog view
+            <disabledText />Disabled Text here
+          </tooltip>
+        </button>
+        <button id="EMEProToolkit_SplitBasemap_NationalGeographic" condition="catalogview_selected_object" caption="National Geographic Basemap" className="EMEMenu_SplitBasemap_NationalGeographic" loadOnClick="true">
+          <tooltip heading="National Geographic Basemap">
+            Click to update the thumbnail one or many items. Items must be selected in catalog view
+            <disabledText />Disabled Text here
+          </tooltip>
+        </button>
+        <button id="EMEProToolkit_SplitBasemap_Oceans" condition="catalogview_selected_object" caption="Oceans Basemap" className="EMEMenu_SplitBasemap_Oceans" loadOnClick="true">
+          <tooltip heading="Oceans Basemap">
+            Click to update the thumbnail one or many items. Items must be selected in catalog view
+            <disabledText />Disabled Text here
+          </tooltip>
+        </button>
+        <button id="EMEProToolkit_SplitBasemap_Terrain" condition="catalogview_selected_object" caption="Terrain Basemap" className="EMEMenu_SplitBasemap_Terrain" loadOnClick="true">
+          <tooltip heading="Terrain Basemap">
+            Click to update the thumbnail one or many items. Items must be selected in catalog view
+            <disabledText />Disabled Text here
+          </tooltip>
+        </button>
+        
 
 
-      <comboBox  id="update_thumbnails_basemap_combo" caption="Basemap" 
-                className="EMEMenu_thumbnailBasemap" itemWidth="142" 
-                extendedCaption="Specify the thumbnail basemap for the selected items" keytip="Select a basemap"/>
+      <!--<comboBox  id="update_thumbnails_basemap_combo" caption="Basemap" 
+                className="EMEMenu_thumbnailBasemap" itemWidth="64" 
+                extendedCaption="Specify the thumbnail basemap for the selected items" keytip="Select a basemap"/>-->
+
       </controls>
       <!--<menus>
         <menu id="EMEProToolkit_EMEMenu" caption="EMEMenu" smallImage="GenericButtonGreen16.png" largeImage="GenericButtonGreen32.png">
@@ -1283,6 +1354,23 @@ limitations under the License.​
           <button refID="EMEProToolkit_EMEMenu_Items_Button3" />
         </menu>
       </menus>-->
+      <splitButtons>
+        <splitButton id="BasemapSplitButton">
+          <button refID="EMEProToolkit_SplitBasemap_ProjectDefault"/>
+          <button refID="EMEProToolkit_SplitBasemap_None"/>
+          <button refID="EMEProToolkit_SplitBasemap_Satellite"/>
+          <button refID="EMEProToolkit_SplitBasemap_Hybrid"/>
+          <button refID="EMEProToolkit_SplitBasemap_Streets"/>
+          <button refID="EMEProToolkit_SplitBasemap_Topographic"/>
+          <button refID="EMEProToolkit_SplitBasemap_DarkGray"/>
+          <button refID="EMEProToolkit_SplitBasemap_Gray"/>
+          <button refID="EMEProToolkit_SplitBasemap_NationalGeographic"/>
+          <button refID="EMEProToolkit_SplitBasemap_Oceans"/>
+          <button refID="EMEProToolkit_SplitBasemap_Terrain"/>
+          
+          
+        </splitButton>
+      </splitButtons>
       <groups>
         <group id="EMEProToolkit_Catalog_Group" caption="Navigation">
           <button refID="esri_core_showProjectView" />
@@ -1294,6 +1382,7 @@ limitations under the License.​
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_EMEdbButton" />
           
+          
         </group>
         <group id="EMEProToolkit_MetadataTools_Group" caption="Metadata Tools" >
           <!--<button refID="EMEProToolkit_TestButton1" size="large" />-->
@@ -1302,7 +1391,7 @@ limitations under the License.​
           <button refID="EMEProToolkit_EMEMenu_Items_clearMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_importMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_cleanexportMD" size="large" />
-          <button refID="EMEProToolkit_EMEMenu_Items_cleanUpTool" size="large" />
+          <!--<button refID="EMEProToolkit_EMEMenu_Items_cleanUpTool" size="large" />-->
           <button refID="EMEProToolkit_EMEMenu_Items_saveTemplateMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_editElementMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_editDatesMD" size="large" />
@@ -1311,10 +1400,9 @@ limitations under the License.​
           
         </group>
         <group id="UpdateThumbnailsGroup" caption="Update Thumbnails">
-          <comboBox refID="update_thumbnails_basemap_combo"></comboBox>
-          <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />
-          
-          
+          <!--<comboBox refID="update_thumbnails_basemap_combo"></comboBox>
+          <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />-->
+          <splitButton refID="BasemapSplitButton"/>     
         </group>
         
         <!--<group id="EMEProToolkit_Group4" caption="Thumbnails" condition="esri_core_resourcesPane">          
