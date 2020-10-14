@@ -430,7 +430,7 @@ class exportISOTool(object):
                     continue
 
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
-                Output_Name = "_{0}_{1}.xml".format(basename, ISO_format)
+                Output_Name = "export_{}_{}.xml".format(ISO_format, basename)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
                 # messages.addMessage(t)
                 messages.addMessage(Output_Metadata)
@@ -876,7 +876,16 @@ class cleanExportTool(object):
             parameterType="Required",
             direction="Input")
 
-        params = [param0, param1]
+        param2 = arcpy.Parameter(
+            displayName="File Prefix",
+            name="FilePrefix",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input"
+        )
+        param2.value = "clean_export_"
+
+        params = [param0, param1, param2]
         return params
 
     def isLicensed(self):
@@ -905,6 +914,7 @@ class cleanExportTool(object):
             tool_file_path = os.path.dirname(os.path.realpath(__file__))
             Target_Metadata = parameters[0].valueAsText
             Output_Dir = parameters[1].valueAsText
+            output_prefix = parameters[2].valueAsText
 
             # Local variables:
             # blankDoc = "blankdoc.xml"
@@ -919,7 +929,7 @@ class cleanExportTool(object):
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
 
 
-                Output_Name = "_{}_clean.xml".format(basename)
+                Output_Name = "{}{}.xml".format(output_prefix, basename)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
 
                 source_md = md.Metadata(t)
@@ -1093,7 +1103,7 @@ class editElement(object):
 class editDates(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
-        self.label = "EPA Edit Metadata Dates Tool"
+        self.label = "Edit Metadata Dates Tool"
         self.description = "This tool assists with editing the citation date values in ArcGIS Metadata to ease automated refreshes."
         self.canRunInBackground = False
 
