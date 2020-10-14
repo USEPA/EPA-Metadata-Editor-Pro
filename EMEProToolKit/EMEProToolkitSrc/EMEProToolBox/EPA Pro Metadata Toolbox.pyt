@@ -178,8 +178,9 @@ class upgradeTool(object):
                 # Test that this metadata hasn't already been upgraded
                 # todo - need to check for ArcGISFormat 1.0 as well (mdStanName might be a legacy ISO element)
                 root = ET.fromstring(source_md.xml)
-                xpath = 'mdStanName'
-                agsElement = root.findall(xpath)
+                xpath = 'mdStanName | Esri/ArcGISFormat'
+                # agsElement = root.findall(xpath)
+                agsElement = root.iter(xpath)
 
                 # if not agsElement - metadata has not been upgraded yet
                 if not agsElement:
@@ -196,7 +197,7 @@ class upgradeTool(object):
 
                 try:
                     final_xml = os.path.join(output_dir, output_name)
-                    messages.addMessage("Temp file: {}".format(final_xml))
+                    # messages.addMessage("Temp file: {}".format(final_xml))
                     source_md.saveAsUsingCustomXSLT(final_xml, EPAUpgradeCleanup_xslt)
                     # temp_temp = md.Metadata().importMetadata(source_md.uri, 'CUSTOM', EPAUpgradeCleanup_xslt)
                     output_metadata = final_xml
@@ -212,7 +213,8 @@ class upgradeTool(object):
                                 messages.addWarningMessage(ee)
                             source_md.saveAsXML(source_md.uri)
                         # otherwise if feature class:
-                        source_md.save()
+                        else:
+                            source_md.save()
                         output_metadata = source_md.uri
 
                 except Exception as e:
@@ -727,14 +729,21 @@ class deleteTool(object):
                 # arcpy.MetadataImporter_conversion(blankDoc, Target_Metadata)
                 target_md = md.Metadata(t)
 
-                if not target_md.isReadOnly:
-                    # messages.addMessage(target_md.isReadOnly)
-                    target_md.copy(source_md)
-                    target_md.save()
-                # arcpy.AddMessage("Importing new metadata")
-                    messages.addMessage("Process complete - please review the output carefully.")
+                fileExtension = t[-4:].lower()
+                if fileExtension == ".xml":
+                    try:
+                        os.remove(t)
+                    except Exception as ee:
+                        messages.addWarningMessage(ee)
+                    source_md.saveAsXML(target_md.uri)
                 else:
-                    messages.addWarningMessage("Unable to save. Metadata Is Read Only.")
+                    try:
+                        target_md.copy(source_md)
+                        target_md.save()
+                    except Exception as ee:
+                        messages.addWarningMessage(ee)
+
+                messages.addMessage("Process complete - please review the output carefully.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -801,30 +810,29 @@ class importTool(object):
             # blankDoc = "blankdoc.xml"
             # blank_md = md.Metadata(blankDoc)
 
+            messages.addMessage("Importing new metadata")
             for t in str(Target_Metadata).split(";"):
 
                 target_md = md.Metadata(t)
 
-                if not target_md.isReadOnly:
-
-                    # Process: Purge
-                    # messages.addMessage("Performing complete purge of existing metadata")
-                    # arcpy.MetadataImporter_conversion(blankDoc, Target_Metadata)
-
-                    messages.addMessage("Importing new metadata")
-                    # Process: Import
-                    target_md.copy(source_md)
-                    target_md.save()
-
-                    # TODO: Should probably sync if it is a feature class. Need to check if FC
-                    # target_md.synchronize('SELECTIVE')
-
-                    # arcpy.MetadataImporter_conversion(Source_Metadata, Target_Metadata)
-
-                    messages.addMessage("Process complete - please review the output carefully.")
-                    messages.addMessage("Output: {}".format(t))
+                fileExtension = t[-4:].lower()
+                if fileExtension == ".xml":
+                    try:
+                        os.remove(t)
+                    except Exception as ee:
+                        messages.addWarningMessage(ee)
+                    source_md.saveAsXML(target_md.uri)
                 else:
-                    messages.addWarningMessage("Unable to save. Metadata Is Read Only.")
+                    try:
+                        target_md.copy(source_md)
+                        target_md.save()
+                        # TODO: Should probably sync if it is a feature class. Need to check if FC
+                        # target_md.synchronize('SELECTIVE')
+                    except Exception as ee:
+                        messages.addWarningMessage(ee)
+
+                messages.addMessage("Process complete - please review the output carefully.")
+                messages.addMessage("Output: {}".format(t))
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -1036,14 +1044,25 @@ class editElement(object):
                 for elem in elements:
                     elem.text = New_Value
                 # tree.write(scratch_Metadata)
-                messages.addMessage("writing back to xml object")
+                # messages.addMessage("writing back to xml object")
 
-                if not target_md.isReadOnly:
-                    target_md.xml = ET.tostring(root)
-                    target_md.save()
-                    messages.addMessage("Process complete, element update count: {}.".format(str(len(elements))))
+                target_md.xml = ET.tostring(root)
+
+                fileExtension = t[-4:].lower()
+                if fileExtension == ".xml":
+                    try:
+                        os.remove(target_md.uri)
+                    except Exception as ee:
+                        messages.addWarningMessage(ee)
+                    target_md.saveAsXML(target_md.uri)
                 else:
-                    messages.addWarningMessage("Unable to save. Metadata Is Read Only.")
+                    try:
+                        target_md.save()
+                    except Exception as ee:
+                        messages.addWarningMessage(ee)
+
+                messages.addMessage("Process complete, element update count: {}.".format(str(len(elements))))
+                messages.addMessage("Output: {}".format(t))
 
                 # If the target is a standalone XML doc, just copy the scratch over the source file.
                 # if Target_Metadata[-4:].lower() == ".xml":
