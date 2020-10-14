@@ -41,7 +41,7 @@ limitations under the License.​
       </x:XData>
     </XmlDataProvider>
 
-    <!-- validation issues -->
+    <!-- validation issues --><!--
     <v:MetadataIssueInfo x:Key="formatName" Message="{x:Static r:Issues.formatName_REQ}" />
     <v:MetadataIssueInfo x:Key="formatVer" Message="{x:Static r:Issues.formatVer_REQ}" />
     <v:MetadataIssueInfo x:Key="medDenUnits" Message="{x:Static r:Issues.medDenUnits_REQ}" />
@@ -59,10 +59,33 @@ limitations under the License.​
     <v:MetadataIssueInfo x:Key="adminArea" Message="{x:Static r:Issues.adminArea_REQ}" />
     <v:MetadataIssueInfo x:Key="adminArea_FGDC" Name="adminArea_FGDC" Message="{x:Static r:Issues.adminArea_FGDC_REQ}" />
     <v:MetadataIssueInfo x:Key="city" Message="{x:Static r:Issues.city_REQ}" />
-    <v:MetadataIssueInfo x:Key="postCode" Message="{x:Static r:Issues.postCode_REQ}" />
+    <v:MetadataIssueInfo x:Key="postCode" Message="{x:Static r:Issues.postCode_REQ}" />-->
+    <!-- validation issues -->
+    <v:MetadataIssueInfo x:Key="formatName" Message="Distribution Format/Format Name - format name is required" />
+    <v:MetadataIssueInfo x:Key="formatVer" Message="Distribution Format/Format Version - format version is required" />
+    <v:MetadataIssueInfo x:Key="medDenUnits" Message="Digital Transfer Options/Offline Medium/Density Units - if a density value is provided, the density units is required" />
+
+    <v:MetadataIssueInfo x:Key="party" Message="Distributor/Contact/Name|Organization|Position - name, organization or position is required for the responsible party." />
+    <!--<v:MetadataIssueInfo x:Key="partyFgdc" Message="name or organization is required" />-->
+    <v:MetadataIssueInfo x:Key="role" Message="Distributor/Contact/Role - role is required" />
+    <v:MetadataIssueInfo x:Key="linkage" Message="Distributor/Contact/Contact Information/Online Resource/Linkage - linkage URL is required" />
+
+    <v:MetadataIssueInfo x:Key="digitaltransferlinkage" Message="Distributor/Contact/Contact Information/Online Resource/Linkage - linkage URL is required" />
     
+    <!--<v:MetadataIssueInfo x:Key="protocol" Message="protocol is required" />-->
+    <!--<v:MetadataIssueInfo x:Key="rpCntInfo_NAP_REQ" Message="{x:Static r:Issues.rpCntInfo_NAP_REQ}" />-->
+    
+    <!--<v:MetadataIssueInfo x:Key="voiceNum" Message="voice phone number is required" />
+
+    <v:MetadataIssueInfo x:Key="cntAddress" Message="address information is required" />
+    <v:MetadataIssueInfo x:Key="addressType" Message="address type is required" />
+    <v:MetadataIssueInfo x:Key="adminArea" Message="admin area is required" />
+    <v:MetadataIssueInfo x:Key="adminArea_FGDC" Name="adminArea_FGDC" Message="state is required" />
+    <v:MetadataIssueInfo x:Key="city" Message="city is required" />
+    <v:MetadataIssueInfo x:Key="postCode" Message="post code is required" />-->
+
     <!--TEST-->
-    <v:MetadataIssueInfo x:Key="distributor" Message="This must work junk junk junk" />
+    <!--<v:MetadataIssueInfo x:Key="TEST" Message=" junk junk junk" />-->
 
   </UserControl.Resources>
 

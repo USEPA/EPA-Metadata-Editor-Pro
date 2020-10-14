@@ -982,14 +982,13 @@ limitations under the License.​
 					  </for>
 					  <!-- linkage -->
 					  <for xpath="//distInfo//onLineSrc">
-						<exists xpath="linkage[. != '']" ref="linkage" />
+						<exists xpath="linkage[. != '']" ref="digitaltransferlinkage" />
 					  </for>
             
             <!--TESTing-->
-      		  <for xpath="//distributor">
-						<exists xpath="distributor[. == '']" ref="distributor" />
-
-					  </for>
+      		  <!--<for xpath="//distInfo">
+						<exists xpath="distributor[. != '']" ref="TEST" />
+					  </for>-->
 
             <!-- function --><!--
             <for xpath="//distInfo//onLineSrc">

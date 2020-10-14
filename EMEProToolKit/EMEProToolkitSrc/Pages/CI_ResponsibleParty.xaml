@@ -100,7 +100,7 @@ limitations under the License.​
 
         <!-- role -->
         <Label Style="{DynamicResource EditorHLabelStyle}" Grid.Row="3" Grid.Column="0" Content="{x:Static r:Resources.LBL_CI_Role}"/>
-                <ComboBox Loaded="PostProcessComboBoxValues" p:EditorPage.SourceXPath="role/RoleCd/@value" Grid.Row="3" Grid.Column="1" Style="{DynamicResource EditorHComboBoxStyle}" IsEditable="False"
+        <ComboBox Loaded="PostProcessComboBoxValues" p:EditorPage.SourceXPath="role/RoleCd/@value" Grid.Row="3" Grid.Column="1" Style="{DynamicResource EditorHComboBoxStyle}" IsEditable="False"
             v:Nav.AnchorName="role,role"
             ToolTip="{x:Static r:Definitions.CI_ResponsibleParty_role}"
             ItemsSource="{Binding Source={StaticResource CI_RoleCode}, Path=List}"
