@@ -179,6 +179,7 @@ class upgradeTool(object):
                 # todo - need to check for ArcGISFormat 1.0 as well (mdStanName might be a legacy ISO element)
                 root = ET.fromstring(source_md.xml)
 
+
                 # if not Esri Elements - metadata has not been upgraded yet
                 if not any((root.findall('Esri/ArcGISFormat'), root.findall('mdStanName'))):
                     messages.addMessage("Upgrading the metadata for {}".format(t))
