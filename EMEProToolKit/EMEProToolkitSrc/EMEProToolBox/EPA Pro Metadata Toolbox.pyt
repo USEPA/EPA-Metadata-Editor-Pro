@@ -178,12 +178,9 @@ class upgradeTool(object):
                 # Test that this metadata hasn't already been upgraded
                 # todo - need to check for ArcGISFormat 1.0 as well (mdStanName might be a legacy ISO element)
                 root = ET.fromstring(source_md.xml)
-                xpath = 'mdStanName | Esri/ArcGISFormat'
-                # agsElement = root.findall(xpath)
-                agsElement = root.iter(xpath)
 
-                # if not agsElement - metadata has not been upgraded yet
-                if not agsElement:
+                # if no ArcGIS Elements - metadata has not been upgraded yet
+                if not any((root.findall('Esri/ArcGISFormat'), root.findall('mdStanName'))):
                     messages.addMessage("Upgrading the metadata for {}".format(t))
                     # Process: Upgrade Metadata
                     source_md.upgrade('FGDC_CSDGM')
