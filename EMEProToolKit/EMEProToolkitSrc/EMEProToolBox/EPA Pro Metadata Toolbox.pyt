@@ -13,7 +13,7 @@ class Toolbox(object):
         self.alias = ""
 
         # List of tool classes associated with this toolbox
-        self.tools = [upgradeTool,cleanupTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates,mergeTemplate, exportISOTool]
+        self.tools = [upgradeTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates,mergeTemplate, exportISOTool]
         # self.tools = [upgradeTool,cleanupTool,exportISOTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate]
 
 # class scratchCopy(object):
@@ -46,8 +46,8 @@ class Toolbox(object):
 class upgradeTool(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
-        self.label = "EPA Upgrade FGDC to ArcGIS"
-        self.description = "This tool creates a copy of the existing FGDC CSDGM metadata, performs the standard upgrade to ArcGIS Metadata, then adds several extra cleanup steps including copying legacy UUIDs to the ISO-Compliant element and cleaning up all legacy elements. This tool is not recommended for records that have already been upgraded to ArcGIS Metadata."
+        self.label = "EPA Upgrade FGDC to ArcGIS and Clean"
+        self.description = "Use this tool to upgrade FGDC CSDGM records or clean up ArcGIS format metadata. This tool will check the metadata format and perform a standard FGDC CSDGM-to-ArcGIS upgrade with additional cleanup steps. Cleanup includes copying legacy UUIDs to the ISO-Compliant element and removing all legacy elements. The cleanup process is also compatible with ArcGIS Format records. Metadata is considered upgraded to ArcGIS format if /metadata/mdStanName = ArcGIS Metadata. Users can run this multiple times on records if they are unsure of the format or if legacy elements are present."
         self.canRunInBackground = False
 
     def getParameterInfo(self):
@@ -74,15 +74,32 @@ class upgradeTool(object):
         #     datatype="DEFile",
         #     parameterType="Required",
         #     direction="Output")
-
         param1 = arcpy.Parameter(
+            displayName="Overwrite Source Record",
+            name="Overwrite",
+            datatype="GPBoolean",
+            parameterType="Required",
+            direction="Input"
+        )
+        param1.value = "True"
+
+        param2 = arcpy.Parameter(
             displayName="Output Directory",
             name="Output_Metadata",
             datatype="DEFolder",
-            parameterType="Required",
+            parameterType="Optional",
             direction="Input")
 
-        params = [param0, param1]
+        param3 = arcpy.Parameter(
+            displayName="File Prefix",
+            name="FilePrefix",
+            datatype="GPString",
+            parameterType="Optional",
+            direction="Input"
+        )
+        param3.value = "upgrade_"
+
+        params = [param0, param1, param2, param3]
         return params
 
     def isLicensed(self):
@@ -97,26 +114,52 @@ class upgradeTool(object):
         #     fileExtension = parameters[1].valueAsText[-4:].lower()
         #     if fileExtension != ".xml":
         #         parameters[1].value = parameters[1].valueAsText + ".xml"
+
+        if parameters[1].value is True:
+            parameters[2].enabled = 'False'
+            parameters[3].enabled = 'False'
+        else:
+            parameters[2].enabled = 'True'
+            parameters[3].enabled = 'True'
+
         return
 
     def updateMessages(self, parameters):
         """Modify the messages created by internal validation for each tool
         parameter.  This method is called after internal validation."""
+
+        if parameters[1].value is False and parameters[2].value is None:
+            parameters[2].setErrorMessage("Folder Required")
+
+        if parameters[1].value is False and parameters[3].value is None:
+            parameters[3].setErrorMessage("File Prefix Required")
+
         return
 
+
     def execute(self, parameters, messages):
+
         Target_Metadata = parameters[0].valueAsText
 
         import xml.etree.ElementTree as ET
 
         try:
-            for t in str(Target_Metadata).split(";"):
 
-                # target_md = md.Metadata(t)
-                # TODO: Need to check the current metadata format? Pro's tool will check and not allow
-                # an upgrade depending on the format detected.
-                """The source code of the tool."""
-                # Source_Metadata = parameters[0].valueAsText
+            overwrite_md = parameters[1].valueAsText
+            messages.addMessage("overwrite_md: {}".format(overwrite_md))
+            # messages.addMessage("Scratch: {}".format(arcpy.env.scratchFolder))
+            # messages.addMessage("path {}".format(os.path.join(arcpy.env.scratchFolder, 'junk.xml')))
+            scratch_folder = arcpy.env.scratchFolder
+            output_dir = parameters[2].valueAsText
+            output_prefix = parameters[3].valueAsText
+            if not output_prefix:
+                output_prefix = 'tmp_'
+            if not output_dir:
+                output_dir = arcpy.env.scratchFolder
+
+            # messages.addMessage("outPrefix: {}, outdir: {}".format(output_prefix, output_dir))
+
+            for t in str(Target_Metadata).split(";"):
 
                 if ' ' in t:
                     messages.addWarningMessage('*Upgrade process skipped for {} due to space found in name'.format(t))
@@ -124,47 +167,62 @@ class upgradeTool(object):
 
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
 
-                Output_Name = "_{}_upgrade.xml".format(basename)
-                Output_Dir = parameters[1].valueAsText
-                Output_Metadata = os.path.join(Output_Dir, Output_Name)
-                # messages.addMessage(Output_Metadata)
-
-                source_md = md.Metadata(t)
-
-                # Test that this metadata hasn't already been upgraded
-                root = ET.fromstring(source_md.xml)
-                xpath = 'mdStanName'
-                agsElement = root.findall(xpath)
-
-                if agsElement:
-                    messages.addWarningMessage('*Upgrade process skipped for {} since it is in ArcGIS 1.0 format'.format(t))
-                    continue
-
-                # output_md = md.Metadata()
-                # output_md.copy(source_md)
-
-                messages.addMessage("Upgrading the metadata for {}".format(t))
-                # Process: Upgrade Metadata
-                source_md.upgrade('FGDC_CSDGM')
-                # Upgraded_Metadata = arcpy.UpgradeMetadata_conversion(Copy_to_be_upgraded, "FGDC_TO_ARCGIS")
+                output_name = "{}{}.xml".format(output_prefix, basename)
+                output_metadata = ""
+                # output_metadata = os.path.join(output_dir, output_name)
 
                 tool_file_path = os.path.dirname(os.path.realpath(__file__))
                 EPAUpgradeCleanup_xslt = tool_file_path + r'\EPAUpgradeCleanup.xslt'
 
-                messages.addMessage("Preserving the UUID and cleaning up legacy elements...")
-                try:
+                source_md = md.Metadata(t)
+                # Test that this metadata hasn't already been upgraded
+                # todo - need to check for ArcGISFormat 1.0 as well (mdStanName might be a legacy ISO element)
+                root = ET.fromstring(source_md.xml)
 
-                    source_md.saveAsUsingCustomXSLT(Output_Metadata, EPAUpgradeCleanup_xslt)
+                # if no ArcGIS Elements - metadata has not been upgraded yet
+                if not any((root.findall('Esri/ArcGISFormat'), root.findall('mdStanName'))):
+                    messages.addMessage("Upgrading the metadata for {}".format(t))
+                    # Process: Upgrade Metadata
+                    source_md.upgrade('FGDC_CSDGM')
+
+                    messages.addMessage("Cleaning up legacy elements and preserving the UUID...")
+                else:
+                    backup_name = "{}{}.xml".format('backup_', basename)
+                    source_md.saveAsXML(os.path.join(scratch_folder, backup_name))
+                    messages.addWarningMessage('*Upgrade process skipped for {} since it is in ArcGIS 1.0 format. Cleaning up legacy elements and preserving the UUID...'.format(t))
+                    messages.addMessage('Backup of source metadata placed at: {}'.format(os.path.join(scratch_folder, backup_name)))
+
+                try:
+                    final_xml = os.path.join(output_dir, output_name)
+                    # messages.addMessage("Temp file: {}".format(final_xml))
+                    source_md.saveAsUsingCustomXSLT(final_xml, EPAUpgradeCleanup_xslt)
+                    # temp_temp = md.Metadata().importMetadata(source_md.uri, 'CUSTOM', EPAUpgradeCleanup_xslt)
+                    output_metadata = final_xml
+                    # if overwrite back to source :
+                    if overwrite_md == 'true':
+                        source_md.copy(md.Metadata(final_xml))
+                        # if source is standalone .xml:
+                        fileExtension = t[-4:].lower()
+                        if fileExtension == ".xml":
+                            try:
+                                os.remove(source_md.uri)
+                            except Exception as ee:
+                                messages.addWarningMessage(ee)
+                            source_md.saveAsXML(source_md.uri)
+                        # otherwise if feature class:
+                        else:
+                            source_md.save()
+                        output_metadata = source_md.uri
 
                 except Exception as e:
                     messages.addWarningMessage(e)
 
-                if arcpy.Exists(Output_Metadata):
+                if arcpy.Exists(output_metadata):
                     messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
-                    messages.addMessage("Output: {}".format(Output_Metadata))
+                    messages.addMessage("Output: {}".format(output_metadata))
 
                 else:
-                    messages.addWarningMessage("Error Creating file.")
+                    messages.addWarningMessage("Error processing {}.".format(t))
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -245,7 +303,7 @@ class cleanupTool(object):
                     continue
 
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
-                Output_Name = "_{}_cleanup.".format(basename)
+                Output_Name = "_{}_cleanup.xml".format(basename)
 
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
                 messages.addMessage(Output_Metadata)
@@ -369,7 +427,7 @@ class exportISOTool(object):
                     continue
 
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
-                Output_Name = "_{0}_{1}.xml".format(basename, ISO_format)
+                Output_Name = "export_{}_{}.xml".format(ISO_format, basename)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
                 # messages.addMessage(t)
                 messages.addMessage(Output_Metadata)
@@ -585,7 +643,7 @@ class mergeTemplate(object):
             # Source_Metadata.saveAsUsingCustomXSLT(Output_Metadata, mergeTemplate_xslt, )
             try:
 
-                output_md.copy(source_md)
+                # output_md.copy(source_md)
                 messages.addMessage("Output md Title "+ str(output_md.title))
                 output_md.importMetadata(template_md, metadata_import_option='CUSTOM', customStylesheetPath=mergeTemplate_xslt)
                 output_md.saveAsXML(outputPath=Output_Metadata)
@@ -668,14 +726,21 @@ class deleteTool(object):
                 # arcpy.MetadataImporter_conversion(blankDoc, Target_Metadata)
                 target_md = md.Metadata(t)
 
-                if not target_md.isReadOnly:
-                    # messages.addMessage(target_md.isReadOnly)
-                    target_md.copy(source_md)
-                    target_md.save()
-                # arcpy.AddMessage("Importing new metadata")
-                    messages.addMessage("Process complete - please review the output carefully.")
+                fileExtension = t[-4:].lower()
+                if fileExtension == ".xml":
+                    try:
+                        os.remove(t)
+                    except Exception as ee:
+                        messages.addWarningMessage(ee)
+                    source_md.saveAsXML(target_md.uri)
                 else:
-                    messages.addWarningMessage("Unable to save. Metadata Is Read Only.")
+                    try:
+                        target_md.copy(source_md)
+                        target_md.save()
+                    except Exception as ee:
+                        messages.addWarningMessage(ee)
+
+                messages.addMessage("Process complete - please review the output carefully.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -742,30 +807,29 @@ class importTool(object):
             # blankDoc = "blankdoc.xml"
             # blank_md = md.Metadata(blankDoc)
 
+            messages.addMessage("Importing new metadata")
             for t in str(Target_Metadata).split(";"):
 
                 target_md = md.Metadata(t)
 
-                if not target_md.isReadOnly:
-
-                    # Process: Purge
-                    # messages.addMessage("Performing complete purge of existing metadata")
-                    # arcpy.MetadataImporter_conversion(blankDoc, Target_Metadata)
-
-                    messages.addMessage("Importing new metadata")
-                    # Process: Import
-                    target_md.copy(source_md)
-                    target_md.save()
-
-                    # TODO: Should probably sync if it is a feature class. Need to check if FC
-                    # target_md.synchronize('SELECTIVE')
-
-                    # arcpy.MetadataImporter_conversion(Source_Metadata, Target_Metadata)
-
-                    messages.addMessage("Process complete - please review the output carefully.")
-                    messages.addMessage("Output: {}".format(t))
+                fileExtension = t[-4:].lower()
+                if fileExtension == ".xml":
+                    try:
+                        os.remove(t)
+                    except Exception as ee:
+                        messages.addWarningMessage(ee)
+                    source_md.saveAsXML(target_md.uri)
                 else:
-                    messages.addWarningMessage("Unable to save. Metadata Is Read Only.")
+                    try:
+                        target_md.copy(source_md)
+                        target_md.save()
+                        # TODO: Should probably sync if it is a feature class. Need to check if FC
+                        # target_md.synchronize('SELECTIVE')
+                    except Exception as ee:
+                        messages.addWarningMessage(ee)
+
+                messages.addMessage("Process complete - please review the output carefully.")
+                messages.addMessage("Output: {}".format(t))
 
         except:
             # Cycle through Geoprocessing tool specific errors
@@ -809,7 +873,16 @@ class cleanExportTool(object):
             parameterType="Required",
             direction="Input")
 
-        params = [param0, param1]
+        param2 = arcpy.Parameter(
+            displayName="File Prefix",
+            name="FilePrefix",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input"
+        )
+        param2.value = "clean_export_"
+
+        params = [param0, param1, param2]
         return params
 
     def isLicensed(self):
@@ -838,6 +911,7 @@ class cleanExportTool(object):
             tool_file_path = os.path.dirname(os.path.realpath(__file__))
             Target_Metadata = parameters[0].valueAsText
             Output_Dir = parameters[1].valueAsText
+            output_prefix = parameters[2].valueAsText
 
             # Local variables:
             # blankDoc = "blankdoc.xml"
@@ -852,7 +926,7 @@ class cleanExportTool(object):
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
 
 
-                Output_Name = "_{}_clean.xml".format(basename)
+                Output_Name = "{}{}.xml".format(output_prefix, basename)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
 
                 source_md = md.Metadata(t)
@@ -977,14 +1051,25 @@ class editElement(object):
                 for elem in elements:
                     elem.text = New_Value
                 # tree.write(scratch_Metadata)
-                messages.addMessage("writing back to xml object")
+                # messages.addMessage("writing back to xml object")
 
-                if not target_md.isReadOnly:
-                    target_md.xml = ET.tostring(root)
-                    target_md.save()
-                    messages.addMessage("Process complete, element update count: {}.".format(str(len(elements))))
+                target_md.xml = ET.tostring(root)
+
+                fileExtension = t[-4:].lower()
+                if fileExtension == ".xml":
+                    try:
+                        os.remove(target_md.uri)
+                    except Exception as ee:
+                        messages.addWarningMessage(ee)
+                    target_md.saveAsXML(target_md.uri)
                 else:
-                    messages.addWarningMessage("Unable to save. Metadata Is Read Only.")
+                    try:
+                        target_md.save()
+                    except Exception as ee:
+                        messages.addWarningMessage(ee)
+
+                messages.addMessage("Process complete, element update count: {}.".format(str(len(elements))))
+                messages.addMessage("Output: {}".format(t))
 
                 # If the target is a standalone XML doc, just copy the scratch over the source file.
                 # if Target_Metadata[-4:].lower() == ".xml":
@@ -1015,7 +1100,7 @@ class editElement(object):
 class editDates(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
-        self.label = "EPA Edit Metadata Dates Tool"
+        self.label = "Edit Metadata Dates Tool"
         self.description = "This tool assists with editing the citation date values in ArcGIS Metadata to ease automated refreshes."
         self.canRunInBackground = False
 

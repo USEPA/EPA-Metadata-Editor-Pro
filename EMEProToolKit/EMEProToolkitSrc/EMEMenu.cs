@@ -239,7 +239,7 @@ namespace EMEProToolkit
             try
             {
 
-                string toolpath = _pathEmeToolbox + "\\EMEProToolBox\\EPA Pro Metadata Toolbox.pyt\\cleanupTool";
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\cleanupTool";
                 Geoprocessing.OpenToolDialog(toolpath, null);
 
             }
