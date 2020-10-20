@@ -187,10 +187,19 @@ class upgradeTool(object):
 
                     messages.addMessage("Cleaning up legacy elements and preserving the UUID...")
                 else:
-                    backup_name = "{}{}.xml".format('backup_', basename)
-                    source_md.saveAsXML(os.path.join(scratch_folder, backup_name))
+                    original_name = "{}{}.xml".format('_original_', basename)
+                    clean_name = "{}{}.xml".format('_cleanOnly_', basename)
+                    upgrade_name = "{}{}.xml".format('_upgradeClean_', basename)
+                    source_md.saveAsXML(os.path.join(scratch_folder, original_name))
+                    source_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, clean_name), EPAUpgradeCleanup_xslt)
+                    tmp_md = md.Metadata(source_md.uri)
+                    tmp_md.upgrade('FGDC_CSDGM')
+                    tmp_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, upgrade_name), EPAUpgradeCleanup_xslt)
+
+                    # source_md.saveAsXML(os.path.join(scratch_folder, backup_name))
                     messages.addWarningMessage('*Upgrade process skipped for {} since it is in ArcGIS 1.0 format. Cleaning up legacy elements and preserving the UUID...'.format(t))
-                    messages.addMessage('Backup of source metadata placed at: {}'.format(os.path.join(scratch_folder, backup_name)))
+                    messages.addMessage('Backups of the source metadata placed at: {} and named the following for additional review {} {} {}'\
+                                        .format(scratch_folder, clean_name, original_name, upgrade_name))
 
                 try:
                     final_xml = os.path.join(output_dir, output_name)
