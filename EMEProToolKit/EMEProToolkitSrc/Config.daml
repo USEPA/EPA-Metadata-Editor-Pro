@@ -74,6 +74,23 @@ limitations under the License.​
               <for xpath="/metadata/dataIdInfo/themeKeys">
                 <exists xpath="bag[. != '']" ref="bag,.,themeKeywords"/>
               </for>
+              
+              <!-- epa keywords -->
+              <for xpath="/metadata/dataIdInfo">
+                <exists xpath="//themeKeys/thesaName/resTitle[. = 'EPA GIS Keyword Thesaurus']" ref="themeKeywordsEpa"/>
+              </for>
+              <!--<for xpath="/metadata/dataIdInfo/themeKeys[thesaName/resTitle[contains(. , 'EPA GIS Keyword Thesaurus')]]">
+                <exists xpath="bag[. != '']" ref="bag,.,themeKeywords"/>
+              </for>-->
+
+              <!-- program code -->
+              <for xpath="/metadata/dataIdInfo">
+                <exists xpath="//themeKeys/thesaName/resTitle[. = 'Federal Program Inventory']" ref="themeKeywordsCd"/>
+              </for>
+              <!--<for xpath="/metadata/dataIdInfo/themeKeys[thesaName/resTitle[contains(. , 'Federal Program Inventory')]]">
+                <exists xpath="bag[. != '']" ref="bag,.,themeKeywords"/>
+              </for>-->
+              
               <!-- place keywords -->
               <for xpath="/metadata/dataIdInfo/placeKeys">
                 <exists xpath="bag[. != '']" ref="bag,.,placeKeywords"/>
@@ -340,10 +357,10 @@ limitations under the License.​
               </for>
             </validation>
 				  </page>
-					<page class="EMEProToolkit.Pages.ResourcePub">
+					<!--<page class="EMEProToolkit.Pages.ResourcePub">
 						<validation>
 
-							<!-- contact name, org or role -->
+							--><!-- contact name, org or role --><!--
 							<for xpath="/metadata/dataIdInfo">
 								<exists xpath="//idPoC/role[RoleCd/@value = '010']" ref="role"/>
 							</for>
@@ -354,12 +371,12 @@ limitations under the License.​
 								<exists xpath="rpCntInfo/cntAddress/eMailAdd[. != '']/.." ref="pubEmail"/>
 							</for>
 
-							<!-- linkage -->
+							--><!-- linkage --><!--
 							<for xpath="//dataIdInfo/idPoC/rpCntInfo/cntOnlineRes">
 								<exists xpath="linkage[. != '']" ref="linkage"/>
 							</for>
 
-							<!-- NAP: protocol --><!--
+							--><!-- NAP: protocol --><!--
 							<for xpath="//dataIdInfo/idPoC/rpCntInfo/cntOnlineRes">
 								<exists xpath="protocol[. != '']" ref="protocol"/>
 							</for>
@@ -367,10 +384,10 @@ limitations under the License.​
 							--><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
 							<for xpath="//dataIdInfo/idPoC/rpCntInfo">
 								<exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
-							</for>-->
+							</for>--><!--
 
 						</validation>
-					</page>
+					</page>-->
 
 				  <page class="EMEProToolkit.Pages.MTK_ResourceMaintenance">
             <validation>
@@ -401,6 +418,12 @@ limitations under the License.​
               <for xpath="//resConst/SecConsts">
                 <exists xpath="class/ClasscationCd[@value != '']" ref="ClasscationCd"/>
               </for>
+              
+              <!-- if classification is other than public require "EPA Classification: ..." -->
+              <for xpath="//resConst/SecConsts[not(class/ClasscationCd[@value = '001'])]">
+                <exists xpath="userNote[contains(. , 'EPA Category:')]" ref="userNote"/>
+              </for>
+              
               <!-- if the 'other contraints' code is used, then the other contraints tag is required -->
               <for xpath="//resConst/LegConsts[*/RestrictCd/@value = '008']">
                 <exists xpath="othConsts[. != '']" ref="othConsts"/>
