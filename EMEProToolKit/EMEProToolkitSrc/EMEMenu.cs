@@ -26,6 +26,9 @@ using ActiproSoftware.Windows.Controls;
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Controls.Primitives;
+using System.Xml.XPath;
+using System.Xml.Xsl;
+//using System.Web.UI.WebControls;
 
 namespace EMEProToolkit
 {
@@ -352,14 +355,43 @@ namespace EMEProToolkit
         {
             try
             {
+                XslCompiledTransform xslt = new XslCompiledTransform();
+                XsltSettings settings = new XsltSettings(true, true);
 
-                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\mergeTemplate";
-                Geoprocessing.OpenToolDialog(toolpath, null);
+                //xslt.Load("C:\\EMESolutions\\TestMerge\\ArcGISProFull.xsl");
+                xslt.Load("C:\\EMESolutions\\TestMerge\\mergeTemplate.xslt", settings, null);
+
+                //xslt.Transform("C:/EMESolutions/TestMerge/upgrade_csdgm.xml", "C:/EMESolutions/TestMerge/aaa_csdgm.html");
+                XsltArgumentList xslArg = new XsltArgumentList();
+
+                //string xmlString = System.IO.File.ReadAllText("C:\\EMESolutions\\TestMerge\\CsdgmSample_template.xml");
+                XmlDocument xdoc = new XmlDocument();
+                xdoc.Load("C:\\EMESolutions\\TestMerge\\CsdgmSample_template2.xml");                
+                //Debug.WriteLine(xdoc.OuterXml);
+                xslArg.AddParam("gpparam", "", xdoc.OuterXml);
+                //xslArg.AddParam("gpparam", "", "//C:/EMESolutions/TestMerge/CsdgmSample_template.xml");
+
+
+                XmlDocument sourceDoc = new XmlDocument();
+                sourceDoc.Load("C:\\EMESolutions\\TestMerge\\upgrade_csdgm.xml");
+
+                using (XmlWriter w = XmlWriter.Create("C:/EMESolutions/TestMerge/aaa_csdgmMerge.xml"))
+                {
+                    xslt.Transform("C:/EMESolutions/TestMerge/upgrade_csdgm.xml", xslArg, w);
+                    //xslt.Transform(sourceDoc.OuterXml, xslArg, w);
+                }
+                             
+                
+
+                //string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\mergeTemplate";
+                //Geoprocessing.OpenToolDialog(toolpath, null);
             }
 
             catch (Exception exc)
             {
                 // Catch any exception found and display in a message box
+                Debug.WriteLine(exc.Message);
+                Debug.WriteLine(exc.InnerException);
                 ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Exception caught while trying to run Python tool: " + exc.Message);
                 return;
             }

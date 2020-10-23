@@ -622,49 +622,55 @@ class mergeTemplate(object):
         tool_file_path = os.path.dirname(os.path.realpath(__file__))
         messages.addMessage('file path ' + tool_file_path)
 
+        import xml.etree.ElementTree as ET
+
         try:
             """The source code of the tool."""
 
-            tool_file_path = os.path.dirname(os.path.realpath(__file__))
-
+            # tool_file_path = os.path.dirname(os.path.realpath(__file__))
             Source_Metadata = parameters[0].valueAsText
             Template_Metadata = parameters[1].valueAsText
-            Output_Metadata = parameters[2].valueAsText
+            # Output_Metadata = parameters[2].valueAsText
+            scratch_folder = arcpy.env.scratchFolder
 
             template_md = md.Metadata(Template_Metadata)
+            source_md = md.Metadata(Source_Metadata)
+            # output_md = md.Metadata(Source_Metadata)
+            template_nm = '_{}.xml'.format(re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(template_md.uri))[0]))
+            source_nm = '_{}.xml'.format(re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(source_md.uri))[0]))
 
-            output_md = md.Metadata(Source_Metadata)
-
-            # TODO:  Find equivalent xslt transform that takes an input
-            # Local variables:
-            mergeTemplate_xslt = tool_file_path + r"\mergeTemplate.xslt"
-            messages.addMessage('merge template path '+ mergeTemplate_xslt)
-
-            if not arcpy.Exists(mergeTemplate_xslt):
-                messages.addMessage(
-                    "Merge Template does not exist.")
-                raise Exception('merge template does not exist')
-
-            # Process: EPA Cleanup
-            # Source_Metadata
-            # arcpy.XSLTransform_conversion(Source_Metadata, mergeTemplate_xslt, Output_Metadata, Template_Metadata)
-
-            # Source_Metadata.saveAsUsingCustomXSLT(Output_Metadata, mergeTemplate_xslt, )
             try:
+                # Template md should be processed through the save as template to be safe,
+                # process the result of save as template
+
+                saveTemplate_xslt = tool_file_path + r"\saveTemplate.xslt"
+                template_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, template_nm), saveTemplate_xslt)
+                source_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, source_nm), saveTemplate_xslt)
+                clean_template_md = md.Metadata(os.path.join(scratch_folder, template_nm))
+                # thinking we can run the save template on the source and then return the
+                # list of elements in og_source not in clean_source. Those will be the elements
+                # we want to bring into the template.
+                clean_source_md = md.Metadata(os.path.join(scratch_folder, source_nm))
+
+                source_root = ET.fromstring(source_md.xml)
+                clean_source_root = ET.fromstring(clean_source_md.xml)
+                s = ''
+                sc = ''
+                for e in source_root.getchildren():
+                    s = '{}{}{}'.format(s, ' | ', e.tag)
+
+                for e in clean_source_root.getchildren():
+                    sc = '{}{}{}'.format(sc, ' | ', e.tag)
+
+                messages.addMessage(s)
+                messages.addMessage(sc)
 
                 # output_md.copy(source_md)
-                messages.addMessage("Output md Title "+ str(output_md.title))
-                output_md.importMetadata(template_md, metadata_import_option='CUSTOM', customStylesheetPath=mergeTemplate_xslt)
-                output_md.saveAsXML(outputPath=Output_Metadata)
+                # messages.addMessage("Output md Title "+ str(output_md.title))
+                # output_md.importMetadata(template_md, metadata_import_option='CUSTOM', customStylesheetPath=mergeTemplate_xslt)
+                # output_md.saveAsXML(outputPath=Output_Metadata)
             except Exception as e:
                 messages.addWarningMessage(e)
-
-            if arcpy.Exists(Output_Metadata):
-                messages.addMessage(
-                    "Process complete - please review the output carefully before importing or harvesting.")
-
-            else:
-                messages.addWarningMessage("Error Creating file.")
 
             messages.addMessage("Process complete - please review the output carefully.")
         except:
@@ -1059,6 +1065,7 @@ class editElement(object):
                 elements = root.findall(Xpath_Expression)
                 for elem in elements:
                     elem.text = New_Value
+
                 # tree.write(scratch_Metadata)
                 # messages.addMessage("writing back to xml object")
 
