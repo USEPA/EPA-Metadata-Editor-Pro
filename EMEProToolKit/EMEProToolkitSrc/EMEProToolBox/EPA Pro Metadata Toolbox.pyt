@@ -711,6 +711,7 @@ class mergeTemplate(object):
                             # elements and then save again
                             source_md.save()
                             source_md.reload()
+                            source_md.synchronize(metadata_sync_option='OVERWRITE')
                             source_md.summary = source_copy_md.summary
                             source_md.title = source_copy_md.title
                             source_md.description = source_copy_md.description
