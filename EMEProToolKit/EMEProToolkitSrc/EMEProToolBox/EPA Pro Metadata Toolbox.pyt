@@ -2,6 +2,7 @@ import os
 import re
 import arcpy
 from arcpy import metadata as md
+import xml.etree.ElementTree as ET
 import sys
 
 
@@ -52,13 +53,8 @@ class upgradeTool(object):
 
     def getParameterInfo(self):
         """Define parameter definitions"""
-            # first parameter
-        # param0 = arcpy.Parameter(
-        #     displayName="Source Metadata",
-        #     name="Source_Metadata",
-        #     datatype="DEType",
-        #     parameterType="Required",
-        #     direction="Input")
+        # first parameter
+
         param0 = arcpy.Parameter(
             displayName="Source Metadata",
             name="Source_Metadata",
@@ -67,13 +63,6 @@ class upgradeTool(object):
             direction="Input",
             multiValue=True)
 
-        # output metadata parameter
-        # param1 = arcpy.Parameter(
-        #     displayName="Output Metadata",
-        #     name="Output_Metadata",
-        #     datatype="DEFile",
-        #     parameterType="Required",
-        #     direction="Output")
         param1 = arcpy.Parameter(
             displayName="Overwrite Source Record",
             name="Overwrite",
@@ -140,8 +129,6 @@ class upgradeTool(object):
     def execute(self, parameters, messages):
 
         Target_Metadata = parameters[0].valueAsText
-
-        import xml.etree.ElementTree as ET
 
         try:
 
@@ -574,28 +561,58 @@ class mergeTemplate(object):
 
     def getParameterInfo(self):
         """Define parameter definitions"""
-        param0 = arcpy.Parameter(
-            displayName="Source Metadata",
-            name="Source_Metadata",
-            datatype="DEType",
-            parameterType="Required",
-            direction="Input")
 
-        param1 = arcpy.Parameter(
+        param0 = arcpy.Parameter(
             displayName="Template Metadata",
             name="Template_Metadata",
             datatype="DEFile",
             parameterType="Required",
             direction="Input")
 
-        param2 = arcpy.Parameter(
-            displayName="Output Metadata",
-            name="Output_Metadata",
-            datatype="DEFile",
+        param1 = arcpy.Parameter(
+            displayName="Target Metadata",
+            name="Target_Metadata",
+            datatype="DEType",
             parameterType="Required",
-            direction="Output")
+            direction="Input",
+            multiValue=True)
 
-        params = [param0, param1, param2]
+        param2 = arcpy.Parameter(
+            displayName="Overwrite Source Record",
+            name="Overwrite",
+            datatype="GPBoolean",
+            parameterType="Required",
+            direction="Input"
+        )
+        param2.value = "True"
+
+        param3 = arcpy.Parameter(
+            displayName="Output Directory",
+            name="Output_Metadata",
+            datatype="DEFolder",
+            parameterType="Optional",
+            direction="Input")
+
+        param4 = arcpy.Parameter(
+            displayName="File Prefix",
+            name="FilePrefix",
+            datatype="GPString",
+            parameterType="Optional",
+            direction="Input"
+        )
+        param4.value = "merge_"
+
+        param5 = arcpy.Parameter(
+            displayName="Preserve Source Element",
+            name="Xpath_Expression",
+            datatype="GPString",
+            parameterType="Optional",
+            direction="Input",
+            multiValue=True
+        )
+        param5.value = ["dataIdInfo/idCitation/resTitle","dataIdInfo/idAbs","dataIdInfo/idPurp"]
+
+        params = [param0, param1, param2, param3, param4, param5]
         return params
 
     def isLicensed(self):
@@ -606,71 +623,197 @@ class mergeTemplate(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        if parameters[2].valueAsText:
-            fileExtension = parameters[2].valueAsText[-4:].lower()
-            if fileExtension != ".xml":
-                parameters[2].value = parameters[2].valueAsText + ".xml"
+        # if parameters[2].valueAsText:
+        #     fileExtension = parameters[2].valueAsText[-4:].lower()
+        #     if fileExtension != ".xml":
+        #         parameters[2].value = parameters[2].valueAsText + ".xml"
+
+        if parameters[2].value is True:
+            parameters[3].enabled = 'False'
+            parameters[4].enabled = 'False'
+        else:
+            parameters[3].enabled = 'True'
+            parameters[4].enabled = 'True'
+
+
         return
 
     def updateMessages(self, parameters):
         """Modify the messages created by internal validation for each tool
         parameter.  This method is called after internal validation."""
+
+        if parameters[2].value is False and parameters[3].value is None:
+            parameters[3].setErrorMessage("Folder Required")
+
+        if parameters[2].value is False and parameters[4].value is None:
+            parameters[4].setErrorMessage("File Prefix Required")
+
         return
 
     def execute(self, parameters, messages):
-        messages.addMessage("Merging...")
-        tool_file_path = os.path.dirname(os.path.realpath(__file__))
-        messages.addMessage('file path ' + tool_file_path)
 
-        import xml.etree.ElementTree as ET
+        messages.addMessage("Merging...")
+        # tool_file_path = os.path.dirname(os.path.realpath(__file__))
+        from copy import deepcopy
 
         try:
             """The source code of the tool."""
-
-            # tool_file_path = os.path.dirname(os.path.realpath(__file__))
-            Source_Metadata = parameters[0].valueAsText
-            Template_Metadata = parameters[1].valueAsText
-            # Output_Metadata = parameters[2].valueAsText
-            scratch_folder = arcpy.env.scratchFolder
-
+            Template_Metadata = parameters[0].valueAsText
             template_md = md.Metadata(Template_Metadata)
-            source_md = md.Metadata(Source_Metadata)
-            # output_md = md.Metadata(Source_Metadata)
-            template_nm = '_{}.xml'.format(re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(template_md.uri))[0]))
-            source_nm = '_{}.xml'.format(re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(source_md.uri))[0]))
+            Target_Metadata = parameters[1].valueAsText
+            overwrite_md = parameters[2].valueAsText
 
-            try:
-                # Template md should be processed through the save as template to be safe,
-                # process the result of save as template
+            scratch_folder = arcpy.env.scratchFolder
+            output_dir = parameters[3].valueAsText
+            output_prefix = parameters[4].valueAsText
+            if not output_prefix:
+                output_prefix = 'tmp_'
+            if not output_dir:
+                output_dir = arcpy.env.scratchFolder
 
-                saveTemplate_xslt = tool_file_path + r"\saveTemplate.xslt"
-                template_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, template_nm), saveTemplate_xslt)
-                source_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, source_nm), saveTemplate_xslt)
-                clean_template_md = md.Metadata(os.path.join(scratch_folder, template_nm))
-                # thinking we can run the save template on the source and then return the
-                # list of elements in og_source not in clean_source. Those will be the elements
-                # we want to bring into the template.
-                clean_source_md = md.Metadata(os.path.join(scratch_folder, source_nm))
+            xpath_list = parameters[5].valueAsText
 
-                source_root = ET.fromstring(source_md.xml)
-                clean_source_root = ET.fromstring(clean_source_md.xml)
-                s = ''
-                sc = ''
-                for e in source_root.getchildren():
-                    s = '{}{}{}'.format(s, ' | ', e.tag)
+            #ToDo: Start Loop here for multiple source MDs
+            for t in str(Target_Metadata).split(';'):
+                if ' ' in t:
+                    messages.addWarningMessage('*Merge process skipped for {} due to space found in name'.format(t))
+                    continue
 
-                for e in clean_source_root.getchildren():
-                    sc = '{}{}{}'.format(sc, ' | ', e.tag)
+                basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
 
-                messages.addMessage(s)
-                messages.addMessage(sc)
+                output_name = "{}{}.xml".format(output_prefix, basename)
+                output_metadata = ""
+                # messages.addMessage(t)
 
-                # output_md.copy(source_md)
-                # messages.addMessage("Output md Title "+ str(output_md.title))
-                # output_md.importMetadata(template_md, metadata_import_option='CUSTOM', customStylesheetPath=mergeTemplate_xslt)
-                # output_md.saveAsXML(outputPath=Output_Metadata)
-            except Exception as e:
-                messages.addWarningMessage(e)
+                # Set source so we have the URI, then can copy from template
+                source_md = md.Metadata(t)
+                source_copy_md = md.Metadata(t)
+                source_md.copy(template_md)
+
+
+                try:
+                    if overwrite_md == 'true':
+                        # if overwriting and FC then save>sync>preserve elements>save.
+                        fileExtension = t[-4:].lower()
+                        if fileExtension == ".xml":
+                            try:
+                                os.remove(source_md.uri)
+                            except Exception as ee:
+                                messages.addWarningMessage(ee)
+
+                            source_md.summary = source_copy_md.summary
+                            source_md.title = source_copy_md.title
+                            source_md.description = source_copy_md.description
+                            # Need to save UUID also, but this will be xpath
+                            source_md.saveAsXML(source_md.uri)
+                        else:
+                            # for feature classes, we have to save, sync, bring back the preserved
+                            # elements and then save again
+                            source_md.save()
+                            source_md.reload()
+                            source_md.summary = source_copy_md.summary
+                            source_md.title = source_copy_md.title
+                            source_md.description = source_copy_md.description
+                            # Need to save UUID also, but this will be xpath
+                            source_md.save()
+
+                        output_metadata = source_md.uri
+
+                    else:
+
+                        final_xml = os.path.join(output_dir, output_name)
+                        output_metadata = final_xml
+                        source_md.summary = source_copy_md.summary
+                        source_md.title = source_copy_md.title
+                        source_md.description = source_copy_md.description
+                        # Need to save UUID also, but this will be xpath
+                        source_md.saveAsXML(final_xml)
+
+
+                except Exception as e:
+                    messages.addMessage(e)
+
+                if arcpy.Exists(output_metadata):
+                    messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+                    messages.addMessage("Output: {}".format(output_metadata))
+
+                else:
+                    messages.addWarningMessage("Error processing {}.".format(t))
+
+                # can't save directly if xml and no need to sync
+
+                # source_md.save()
+                # messages.addMessage('Copied Template')
+                # # Only run this if a featureclass, skip for xml
+                # # source_md.synchronize(metadata_sync_option='SELECTIVE')
+                # messages.addMessage('Syncd')
+                # source_md.synchronize(metadata_sync_option='OVERWRITE')
+                #
+                # source_root = ET.fromstring(source_md.xml)
+                # source_copy_root = ET.fromstring(source_copy_md.xml)
+                # messages.addMessage('xml copied to ET')
+                # source_md.summary = source_copy_md.summary
+                # source_md.title = source_copy_md.title
+                # source_md.description = source_copy_md.description
+
+                # for xp in str(xpath_list).split(';'):
+                #     messages.addMessage(xp)
+                #     try:
+                #         for e in source_root.findall(xp):
+                #             messages.addMessage('find node')
+                #             source_root.remove(e)
+                #             messages.addMessage('nodes removed')
+                #             messages.addMessage(e)
+                #     except Exception as ee:
+                #         messages.addMessage(ee)
+                #     try:
+                #         for e in source_copy_root.findall(xp):
+                #             source_root.append(deepcopy(e))
+                #             messages.addMessage('nodes copied back in')
+                #     except Exception as ee:
+                #         messages.addMessage(ee)
+
+                # source_md.xml = ET.tostring(source_root)
+                # messages.addMessage('XML from ET back to MD')
+                # source_md.saveAsXML(Output_Metadata)
+                # messages.addMessage('save as xml to {}'.format(Output_Metadata))
+
+                # output_md = md.Metadata(Source_Metadata)
+                # template_nm = '_{}.xml'.format(re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(template_md.uri))[0]))
+                # source_nm = '_{}.xml'.format(re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(source_md.uri))[0]))
+
+                # try:
+                    # Template md should be processed through the save as template to be safe,
+                    # process the result of save as template
+
+                    # saveTemplate_xslt = tool_file_path + r"\saveTemplate.xslt"
+                    # template_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, template_nm), saveTemplate_xslt)
+                    # source_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, source_nm), saveTemplate_xslt)
+                    # clean_template_md = md.Metadata(os.path.join(scratch_folder, template_nm))
+                    # thinking we can run the save template on the source and then return the
+                    # list of elements in og_source not in clean_source. Those will be the elements
+                    # we want to bring into the template.
+                    # clean_source_md = md.Metadata(os.path.join(scratch_folder, source_nm))
+
+                    # source_root = ET.fromstring(source_md.xml)
+                    # clean_source_root = ET.fromstring(clean_source_md.xml)
+                    # s = ''
+                    # sc = ''
+                    # for e in source_root.getchildren():
+                    #     s = '{}{}{}'.format(s, ' | ', e.tag)
+                    #
+                    # for e in clean_source_root.getchildren():
+                    #     sc = '{}{}{}'.format(sc, ' | ', e.tag)
+                    #
+                    # messages.addMessage(s)
+                    # messages.addMessage(sc)
+
+                    # output_md.copy(source_md)
+                    # messages.addMessage("Output md Title "+ str(output_md.title))
+                    # output_md.importMetadata(template_md, metadata_import_option='CUSTOM', customStylesheetPath=mergeTemplate_xslt)
+                    # output_md.saveAsXML(outputPath=Output_Metadata)
+                # except Exception as e:
+                #     messages.addWarningMessage(e)
 
             messages.addMessage("Process complete - please review the output carefully.")
         except:
@@ -679,7 +822,7 @@ class mergeTemplate(object):
                 if arcpy.GetSeverity(msg) == 2:
                     arcpy.AddReturnMessage(msg)
         finally:
-            messages.addMessage("Finally.")
+            # messages.addMessage("Finally.")
             # Regardless of errors, clean up intermediate products.
             pass
         return
@@ -1044,7 +1187,6 @@ class editElement(object):
 
                 messages.addMessage("Editing the metadata record...")
                 # Process: EPA Cleanup
-                import xml.etree.ElementTree as ET
                 # tree = ET.parse(scratch_Metadata)
                 # root = tree.getroot()
                 # at the root when parsing from string

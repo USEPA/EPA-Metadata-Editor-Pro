@@ -355,36 +355,35 @@ namespace EMEProToolkit
         {
             try
             {
-                XslCompiledTransform xslt = new XslCompiledTransform();
-                XsltSettings settings = new XsltSettings(true, true);
+                //    XslCompiledTransform xslt = new XslCompiledTransform();
+                //    XsltSettings settings = new XsltSettings(true, true);
 
-                //xslt.Load("C:\\EMESolutions\\TestMerge\\ArcGISProFull.xsl");
-                xslt.Load("C:\\EMESolutions\\TestMerge\\mergeTemplate.xslt", settings, null);
+                //    //xslt.Load("C:\\EMESolutions\\TestMerge\\ArcGISProFull.xsl");
+                //    xslt.Load("C:\\EMESolutions\\TestMerge\\mergeTemplate.xslt", settings, null);
 
-                //xslt.Transform("C:/EMESolutions/TestMerge/upgrade_csdgm.xml", "C:/EMESolutions/TestMerge/aaa_csdgm.html");
-                XsltArgumentList xslArg = new XsltArgumentList();
+                //    //xslt.Transform("C:/EMESolutions/TestMerge/upgrade_csdgm.xml", "C:/EMESolutions/TestMerge/aaa_csdgm.html");
+                //    XsltArgumentList xslArg = new XsltArgumentList();
 
-                //string xmlString = System.IO.File.ReadAllText("C:\\EMESolutions\\TestMerge\\CsdgmSample_template.xml");
-                XmlDocument xdoc = new XmlDocument();
-                xdoc.Load("C:\\EMESolutions\\TestMerge\\CsdgmSample_template2.xml");                
-                //Debug.WriteLine(xdoc.OuterXml);
-                xslArg.AddParam("gpparam", "", xdoc.OuterXml);
-                //xslArg.AddParam("gpparam", "", "//C:/EMESolutions/TestMerge/CsdgmSample_template.xml");
+                //    //string xmlString = System.IO.File.ReadAllText("C:\\EMESolutions\\TestMerge\\CsdgmSample_template.xml");
+                //    XmlDocument xdoc = new XmlDocument();
+                //    xdoc.Load("C:\\EMESolutions\\TestMerge\\CsdgmSample_template2.xml");                
+                //    //Debug.WriteLine(xdoc.OuterXml);
+                //    xslArg.AddParam("gpparam", "", xdoc.OuterXml);
+                //    //xslArg.AddParam("gpparam", "", "//C:/EMESolutions/TestMerge/CsdgmSample_template.xml");
 
 
-                XmlDocument sourceDoc = new XmlDocument();
-                sourceDoc.Load("C:\\EMESolutions\\TestMerge\\upgrade_csdgm.xml");
+                //    XmlDocument sourceDoc = new XmlDocument();
+                //    sourceDoc.Load("C:\\EMESolutions\\TestMerge\\upgrade_csdgm.xml");
 
-                using (XmlWriter w = XmlWriter.Create("C:/EMESolutions/TestMerge/aaa_csdgmMerge.xml"))
-                {
-                    xslt.Transform("C:/EMESolutions/TestMerge/upgrade_csdgm.xml", xslArg, w);
-                    //xslt.Transform(sourceDoc.OuterXml, xslArg, w);
-                }
-                             
-                
+                //    using (XmlWriter w = XmlWriter.Create("C:/EMESolutions/TestMerge/aaa_csdgmMerge.xml"))
+                //    {
+                //        xslt.Transform("C:/EMESolutions/TestMerge/upgrade_csdgm.xml", xslArg, w);
+                //        //xslt.Transform(sourceDoc.OuterXml, xslArg, w);
+                //    }
 
-                //string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\mergeTemplate";
-                //Geoprocessing.OpenToolDialog(toolpath, null);
+
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\mergeTemplate";
+                Geoprocessing.OpenToolDialog(toolpath, null);
             }
 
             catch (Exception exc)
