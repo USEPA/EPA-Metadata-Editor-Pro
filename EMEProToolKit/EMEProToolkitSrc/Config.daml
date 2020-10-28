@@ -1175,7 +1175,7 @@ limitations under the License.​
           <button refID="EMEProToolkit_EMEMenu_Items_editElementMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_editDatesMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_exportISOToolMD" size="large"/>
-          <!--<button refID ="EMEProToolkit_EMEMenu_Items_mergeMD" size="large"/>-->
+          <button refID ="EMEProToolkit_EMEMenu_Items_mergeMD" size="large"/>
           
         </group>
         <group id="UpdateThumbnailsGroup" caption="Update Thumbnails">
