@@ -167,7 +167,8 @@ limitations under the License.​
     <e:Codelists x:Key="IMS_ContentType" CodelistName="IMS_ContentType"/>
 
     <!-- validation issues  -->
-    <v:MetadataIssueInfo x:Key="topics" Message="{x:Static r:Issues.topics_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="topics" Message="{x:Static r:Issues.topics_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="topics" Message="at least one Topic Category is required" />
     <!--<v:MetadataIssueInfo x:Key="themeKeywords" Name="themeKeywords" Message="{x:Static r:Issues.themeKeywords_REQ}" />-->
     <v:MetadataIssueInfo x:Key="themeKeywords" Name="themeKeywords" Message="please select at least one keyword per section" />
     <v:MetadataIssueInfo x:Key="themeKeywordsCd" Message="program code section required" />
@@ -180,10 +181,14 @@ limitations under the License.​
     <v:MetadataIssueInfo x:Key="otherKeywords" Name="otherKeywords" Message="{x:Static r:Issues.otherKeywords_REQ}" />
     <v:MetadataIssueInfo x:Key="productKeywords" Name="productKeywords" Message="{x:Static r:Issues.productKeywords_REQ}" />
 
-    <v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="party" Message="Contact - Name or Organzation or Position required" />
     <v:MetadataIssueInfo x:Key="partyFgdc" Message="{x:Static r:Issues.partyFgdc_FGDC_REQ}" />
-    <v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />
-    <v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="role" Message="Thesaurus/Responsible Party - role is required" />
+    <!--<v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="linkage" Message="Thesaurus Citation/Contact/Contact Information/Online Resource - Linkage URL is required" />
+    <v:MetadataIssueInfo x:Key="thesaName//citOnlineReslinkage" Message="Thesaurus Citation/Online Resource - Linkage URL is required" />
     <v:MetadataIssueInfo x:Key="protocol" Message="{x:Static r:Issues.protocol_REQ}" />
     <v:MetadataIssueInfo x:Key="rpCntInfo_NAP_REQ" Message="{x:Static r:Issues.rpCntInfo_NAP_REQ}" />
     <v:MetadataIssueInfo x:Key="tagTopicKeyword" Message="{x:Static r:Issues.tagTopicKeyword_REQ}" />
@@ -197,9 +202,12 @@ limitations under the License.​
     <v:MetadataIssueInfo x:Key="postCode" Message="{x:Static r:Issues.postCode_REQ}" />
 
     <!-- id and citation -->
-    <v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="resTitle" Message="Thesaurus Citation/ - Title is required" />
     <v:MetadataIssueInfo x:Key="dates" Message="{x:Static r:Issues.dates_REQ}" />
-    <v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="identCode" Message="Thesaurus Citation/Identifier - Identifier Code is required" />
+    
 
   </UserControl.Resources>
 

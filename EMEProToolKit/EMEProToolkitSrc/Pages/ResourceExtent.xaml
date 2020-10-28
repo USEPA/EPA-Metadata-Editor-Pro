@@ -80,16 +80,22 @@ limitations under the License.​
     <v:MetadataIssueInfo x:Key="dataExt_NAP_REQ" Message="{x:Static r:Issues.extent_dataExt_NAP_REQ}" />
     <v:MetadataIssueInfo x:Key="dataExtGeoBndBoxReq" Message="{x:Static r:Issues.extent_dataExtGeoBndBoxReq}" />
 
-    <v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="party" Message="Geographic Description/Contact - Name or Organzation or Position required" />
     <v:MetadataIssueInfo x:Key="partyFgdc" Message="{x:Static r:Issues.partyFgdc_FGDC_REQ}" />
-    <v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />
-    <v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="role" Message="Geographic Description/Contact - Role is required" />
+    <!--<v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="linkage" Message="Geographic Description/Authority Citation/Contact/Contact Information/Online Resource - Linkage is required" />
+    <v:MetadataIssueInfo x:Key="//dataExt//citOnlineRes/linkage" Message="Geographic Description/Authority Citation/Contact/Contact Information/Online Resource - Linkage is required" />
     <v:MetadataIssueInfo x:Key="protocol" Message="{x:Static r:Issues.protocol_REQ}" />
     <v:MetadataIssueInfo x:Key="rpCntInfo_NAP_REQ" Message="{x:Static r:Issues.rpCntInfo_NAP_REQ}" />
 
-    <v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="resTitle" Message="Geographic Description - Title is required" />
     <v:MetadataIssueInfo x:Key="dates" Message="{x:Static r:Issues.dates_REQ}" />
-    <v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="identCode" Message="Geographic Description - Identifier Code is required" />
     <v:MetadataIssueInfo x:Key="voiceNum" Message="{x:Static r:Issues.voiceNum_FGDC_REQ}" />
 
     <v:MetadataIssueInfo x:Key="cntAddress" Message="{x:Static r:Issues.cntAddress_FGDC_REQ}" />

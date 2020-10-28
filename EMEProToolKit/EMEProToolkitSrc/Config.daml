@@ -132,7 +132,7 @@ limitations under the License.​
                 <exists xpath="resTitle[. != '']" ref="resTitle"/>
               </for>
               <for xpath="//thesaName//citOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
+                <exists xpath="linkage[. != '']" ref="thesaName//citOnlineReslinkage"/>
               </for>
               <for xpath="//thesaName//*[resTitle]">
                 <exists xpath="resTitle[. != '']" ref="resTitle"/>
@@ -157,7 +157,7 @@ limitations under the License.​
               </for>
               <!-- citation identifier authority citation -->
               <for xpath="//idCitation/citId/identAuth[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
+                <exists xpath="resTitle[. != '']" ref="//idCitation/citId/identAuth[resTitle]"/>
               </for>
               <!-- identifier citation contacts -->
               <!-- contact name, org or role -->
@@ -167,7 +167,7 @@ limitations under the License.​
               </for>
               <!-- linkage -->
               <for xpath="//idCitation/citId/identAuth/citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
+                <exists xpath="linkage[. != '']" ref="//idCitation/citId/identAuth/citRespParty/rpCntInfo/cntOnlineRes/linkage"/>
               </for>
             </validation>
 				  </page>

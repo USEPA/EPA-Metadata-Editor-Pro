@@ -79,17 +79,20 @@ limitations under the License.​
       </x:XData>
     </XmlDataProvider>
 
-    <v:MetadataIssueInfo x:Key="ClasscationCd" Message="{x:Static r:Issues.ClasscationCd_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="ClasscationCd" Message="{x:Static r:Issues.ClasscationCd_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="ClasscationCd" Message="Security Constraints - Classification Code is required" />
     <v:MetadataIssueInfo x:Key="classSys" Message="{x:Static r:Issues.classSys_REQ}" />
     <v:MetadataIssueInfo x:Key="handDesc" Message="{x:Static r:Issues.handDesc_REQ}" />
 
     <!--<v:MetadataIssueInfo x:Key="userNote" Message="non-public access level requires user note chosen from list of Controlled Unclassified Information (CUI) categories" />-->
     <!--<v:MetadataIssueInfo x:Key="userNote" Message="User Note required if Access Level is not public [choose from list of Controlled Unclassified Information (CUI) categories]" />-->
-    <v:MetadataIssueInfo x:Key="userNote" Message="EPA User Note required if Access Level is not Unclassified" />
+    <v:MetadataIssueInfo x:Key="userNote" Message="Security Constraints - EPA User Note required if Access Level is not Unclassified" />
 
-    <v:MetadataIssueInfo x:Key="othConsts" Message="{x:Static r:Issues.othConsts_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="othConsts" Message="{x:Static r:Issues.othConsts_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="othConsts" Message="Legal Constraint - Other Constraints tag is required" />
     <v:MetadataIssueInfo x:Key="resConst" Message="{x:Static r:Issues.resConst_REQ}" />
-    <v:MetadataIssueInfo x:Key="useLimit" Message="{x:Static r:Issues.useLimit_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="useLimit" Message="{x:Static r:Issues.useLimit_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="useLimit" Message="General Constraints - Use Limitation is required" />
     <!--<v:MetadataIssueInfo x:Key="useLimitDist" Name="useLimitDist" Message="{x:Static r:Issues.useLimitDist_REQ}" />-->
 
     <v:MetadataIssueInfo x:Key="sornURL" Message="please select system of records url" />
