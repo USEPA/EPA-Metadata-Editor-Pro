@@ -110,27 +110,45 @@ limitations under the License.​
     </XmlDataProvider>
 
     <!-- validation issues -->
-    <v:MetadataIssueInfo x:Key="DimType" Message="{x:Static r:Issues.DimType_REQ}" />
-    <v:MetadataIssueInfo x:Key="ptInPixel" Message="{x:Static r:Issues.ptInPixel_REQ}" />
-    <v:MetadataIssueInfo x:Key="cellGeo" Message="{x:Static r:Issues.cellGeo_REQ}" />
-    <v:MetadataIssueInfo x:Key="GeoObjTypCd" Message="{x:Static r:Issues.GeoObjTypCd_REQ}" />
-    <v:MetadataIssueInfo x:Key="dimSize" Message="{x:Static r:Issues.dimSize_REQ}" />
-    <v:MetadataIssueInfo x:Key="numDims" Message="{x:Static r:Issues.numDims_REQ}" />
-    <v:MetadataIssueInfo x:Key="ValueUoMUnits" Message="{x:Static r:Issues.ValueUoMUnits_REQ}" />
-    <v:MetadataIssueInfo x:Key="geoObjCnt" Message="{x:Static r:Issues.geoObjCnt_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="DimType" Message="{x:Static r:Issues.DimType_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="DimType" Message="*Representation/Dimension - axis dimension type is required" />
+    <!--<v:MetadataIssueInfo x:Key="ptInPixel" Message="{x:Static r:Issues.ptInPixel_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="ptInPixel" Message="Georectified Representation/Center Point/Point In Pixel - pixel orientation is required" />
+    <!--<v:MetadataIssueInfo x:Key="cellGeo" Message="{x:Static r:Issues.cellGeo_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="cellGeo" Message="*Representation - Cell Geometry code is required" />
+    <!--<v:MetadataIssueInfo x:Key="GeoObjTypCd" Message="{x:Static r:Issues.GeoObjTypCd_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="GeoObjTypCd" Message="Vector Representation - Geometric object type is required" />
+    <!--<v:MetadataIssueInfo x:Key="dimSize" Message="{x:Static r:Issues.dimSize_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="dimSize" Message="*Representation/Dimension - dimension size is required" />
+    <!--<v:MetadataIssueInfo x:Key="numDims" Message="{x:Static r:Issues.numDims_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="//GridSpatRep/numDims" Message="Grid Spatial Representation - Number of dimensions is required" />
+    <v:MetadataIssueInfo x:Key="//Georect/numDims" Message="Georectified Representation - Number of dimensions is required" />
+    <v:MetadataIssueInfo x:Key="//Georef/numDims" Message="Georeferenceable Representation - Number of dimensions is required" />
+    <!--<v:MetadataIssueInfo x:Key="ValueUoMUnits" Message="{x:Static r:Issues.ValueUoMUnits_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="ValueUoMUnits" Message="*Representation/Dimension - Resolution Units are required for measures" />
+    <!--<v:MetadataIssueInfo x:Key="geoObjCnt" Message="{x:Static r:Issues.geoObjCnt_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="geoObjCnt" Message="Vector Representation - Geometric object count is required" />
 
-    <v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="party" Message="Georeferenceable Representation/Parameter Citation/Contact - Name or Organzation or Position required" />
     <v:MetadataIssueInfo x:Key="partyFgdc" Message="{x:Static r:Issues.partyFgdc_FGDC_REQ}" />
-    <v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />
-    <v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="role" Message="Georeferenceable Representation/Parameter Citation/Contact - Role is required" />
+    
+    <!--<v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="linkage" Message="Georeferenceable Representation/Parameter Citation/Contact/Contact Information/Online Resource - Linkage URL is required" />
     <v:MetadataIssueInfo x:Key="protocol" Message="{x:Static r:Issues.protocol_REQ}" />
     <v:MetadataIssueInfo x:Key="rpCntInfo_NAP_REQ" Message="{x:Static r:Issues.rpCntInfo_NAP_REQ}" />
-    <v:MetadataIssueInfo x:Key="chkPtDesc" Message="{x:Static r:Issues.chkPtDesc_REQ}" />
-    <v:MetadataIssueInfo x:Key="georefPars" Message="{x:Static r:Issues.georefPars_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="chkPtDesc" Message="{x:Static r:Issues.chkPtDesc_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="chkPtDesc" Message="Georectified Representation - Check Point description is required" />
+    <!--<v:MetadataIssueInfo x:Key="georefPars" Message="{x:Static r:Issues.georefPars_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="georefPars" Message="Georeferenceable Representation - Georeferenced Parameters are required" />
 
-    <v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="resTitle" Message="Georeferenceable Representation/Parameter Citation - Title is required" />
     <v:MetadataIssueInfo x:Key="dates" Message="{x:Static r:Issues.dates_REQ}" />
-    <v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="identCode" Message="Georeferenceable Representation/Parameter Citation/Identifier - Identifier Code is required" />
     <v:MetadataIssueInfo x:Key="voiceNum" Message="{x:Static r:Issues.voiceNum_FGDC_REQ}" />
 
     <v:MetadataIssueInfo x:Key="cntAddress" Message="{x:Static r:Issues.cntAddress_FGDC_REQ}" />
