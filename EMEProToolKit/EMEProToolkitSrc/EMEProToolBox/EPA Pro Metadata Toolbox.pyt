@@ -529,7 +529,7 @@ class saveTemplate(object):
 class copyFromTemplate(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
-        self.label = "Merge a selected metadata record with a saved template"
+        self.label = "Copy Metadata From Template"
         self.description = "This tool merges a selected metadata record with elements from a saved template record. Elements from the template record will overwrite their equivalents in the selected record, but by design it will exclude those elements which must be unique in every metadata record, such as title, abstract, unique identifier, etc, replacing only those elements that are common across many records. Still, caution is urged when using this tool."
         self.canRunInBackground = False
 
@@ -551,18 +551,18 @@ class copyFromTemplate(object):
             parameterType="Required",
             direction="Input")
 
-        param2 = arcpy.Parameter(
-            displayName="Update Elements",
-            name="Xpath_Expression",
-            datatype="GPString",
-            parameterType="Optional",
-            direction="Input",
-            multiValue=True
-        )
-        param2.value = ["dataIdInfo/idCitation/resTitle","dataIdInfo/idAbs","dataIdInfo/idPurp"]
-        # param2.value = ["mdLang/languageCode"]
+        # param2 = arcpy.Parameter(
+        #     displayName="Update Elements",
+        #     name="Xpath_Expression",
+        #     datatype="GPString",
+        #     parameterType="Optional",
+        #     direction="Input",
+        #     multiValue=True
+        # )
+        # # param2.value = ["dataIdInfo/idCitation/resTitle","dataIdInfo/idAbs","dataIdInfo/idPurp"]
+        # param2.value = [".//dataIdInfo/resConst", ".//dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/..", "mdLang"]
 
-        params = [param0, param1, param2]
+        params = [param0, param1]
         return params
 
     def isLicensed(self):
@@ -598,7 +598,8 @@ class copyFromTemplate(object):
             template_md = md.Metadata(Template_Metadata)
             Target_Metadata = parameters[0].valueAsText
 
-            xpath_list = parameters[2].valueAsText
+            # xpath_list = parameters[2].valueAsText
+            xpath_list = ["dataIdInfo/idPoC/role/RoleCd[@value='010']/../..","dataIdInfo/resConst", ".//dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/..", "mdLang"]
 
             for t in str(Target_Metadata).split(';'):
                 if ' ' in t:
@@ -609,45 +610,63 @@ class copyFromTemplate(object):
                 source_root = ET.fromstring(source_md.xml)
                 template_root = ET.fromstring(template_md.xml)
 
-                for xp in str(xpath_list).split(';'):
+                for xp in xpath_list:
                     messages.addMessage(xp)
-                    if len(template_root.findall(xp)) > 0:
-                        messages.addMessage('found in template {}'.format(xp))
-                        # Remove source data
-                        if len(source_root.findall(xp)) > 0:
-                            parent = source_root
-                            parent_list = []
-                            node_split = xp.split("/")
-                            for n in node_split[:-1]:
-                                parent_list.append(n)
-                                parent_xpath = '/'.join(parent_list)
-                                parent = source_root.findall(parent_xpath)[0]
-                            messages.addMessage('removing source node')
-                            try:
-                                for e in source_root.findall(xp):
-                                    messages.addMessage('find node')
-                                    parent.remove(e)
-                                    messages.addMessage('node removed')
-                            except Exception as ee:
-                                messages.addMessage(ee)
-                        # Add template data into source
-                        # This section iterates through the xpath components, adding any missing SubElements so there's at least one element to populate.
-                        xpathElements = xp.split("/")
-                        xpathList = []
-                        thisNode = source_root
-                        for xpathElem in xpathElements[:-1]:
-                            xpathList.append(xpathElem)
-                            buildXPath = "/".join(xpathList)
-                            if len(source_root.findall(buildXPath)) == 0:
-                                ET.SubElement(thisNode, xpathElem)
-                            thisNode = source_root.findall(buildXPath)[0]
+                    try:
+                        messages.addMessage('line 615')
+                        if len(template_root.findall(xp)) > 0:
+                            messages.addMessage('found in template {}'.format(xp))
+                            # Remove source data
+                            if len(source_root.findall(xp)) > 0:
+                                parent = source_root.findall(xp + "/..")[0]
+                                try:
+                                    for e in source_root.findall(xp):
+                                        messages.addMessage('find node')
+                                        parent.remove(e)
+                                        messages.addMessage('node removed')
+                                except Exception as ee:
+                                    messages.addMessage(ee)
 
-                        for template_element in template_root.findall(xp):
-                            try:
-                                thisNode.append(deepcopy(template_element))
-                                messages.addMessage('nodes copied back in')
-                            except Exception as ee:
-                                messages.addMessage(ee)
+                            # Build out the list of req'd nodes leading up to the parent. Use template_md
+                            node_list = []
+                            current_node_path = xp
+                            current_node_tag = template_root.findall(xp)[0].tag
+                            parent_node_path = ""
+                            while current_node_tag != 'metadata':
+                                current_node_path += "/.."
+                                parent = template_root.findall(current_node_path)
+                                if parent:
+                                    if not parent[0].tag == 'metadata':
+                                        node_list.insert(0, parent[0].tag)
+                                    current_node_tag = parent[0].tag
+                                else:
+                                    #this should never happend, but just in case
+                                    current_node_tag = 'metadata'
+                                    messages.addMessage('This should not happen')
+
+                            # node_list does not include root node, since that should always exist
+                            source_parent_node = source_root
+                            if node_list:
+                                parent_node_path = "/".join(node_list)
+                                messages.addMessage('Parent Xpath: {}'.format(parent_node_path))
+                                xpathList = []
+                                thisNode = source_root
+                                for xpathElem in node_list:
+                                    xpathList.append(xpathElem)
+                                    buildXPath = "/".join(xpathList)
+                                    if len(source_root.findall(buildXPath)) == 0:
+                                        ET.SubElement(thisNode, xpathElem)
+                                    thisNode = source_root.findall(buildXPath)[0]
+                                source_parent_node = source_root.findall(parent_node_path)[0]
+
+                            for template_element in template_root.findall(xp):
+                                try:
+                                    source_parent_node.append(deepcopy(template_element))
+                                    messages.addMessage('nodes copied back in')
+                                except Exception as ee:
+                                    messages.addWarningMessage(ee)
+                    except Exception as err:
+                        messages.addWarningMessage("something: {}".format(err))
 
                 messages.addMessage('saving xml string back to md')
                 source_md.xml = ET.tostring(source_root)
@@ -673,81 +692,6 @@ class copyFromTemplate(object):
 
                 else:
                     messages.addWarningMessage("Error processing {}.".format(t))
-
-                # can't save directly if xml and no need to sync
-
-                # source_md.save()
-                # messages.addMessage('Copied Template')
-                # # Only run this if a featureclass, skip for xml
-                # # source_md.synchronize(metadata_sync_option='SELECTIVE')
-                # messages.addMessage('Syncd')
-                # source_md.synchronize(metadata_sync_option='OVERWRITE')
-                #
-                # source_root = ET.fromstring(source_md.xml)
-                # source_copy_root = ET.fromstring(source_copy_md.xml)
-                # messages.addMessage('xml copied to ET')
-                # source_md.summary = source_copy_md.summary
-                # source_md.title = source_copy_md.title
-                # source_md.description = source_copy_md.description
-
-                # for xp in str(xpath_list).split(';'):
-                #     messages.addMessage(xp)
-                #     try:
-                #         for e in source_root.findall(xp):
-                #             messages.addMessage('find node')
-                #             source_root.remove(e)
-                #             messages.addMessage('nodes removed')
-                #             messages.addMessage(e)
-                #     except Exception as ee:
-                #         messages.addMessage(ee)
-                #     try:
-                #         for e in source_copy_root.findall(xp):
-                #             source_root.append(deepcopy(e))
-                #             messages.addMessage('nodes copied back in')
-                #     except Exception as ee:
-                #         messages.addMessage(ee)
-
-                # source_md.xml = ET.tostring(source_root)
-                # messages.addMessage('XML from ET back to MD')
-                # source_md.saveAsXML(Output_Metadata)
-                # messages.addMessage('save as xml to {}'.format(Output_Metadata))
-
-                # output_md = md.Metadata(Source_Metadata)
-                # template_nm = '_{}.xml'.format(re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(template_md.uri))[0]))
-                # source_nm = '_{}.xml'.format(re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(source_md.uri))[0]))
-
-                # try:
-                    # Template md should be processed through the save as template to be safe,
-                    # process the result of save as template
-
-                    # saveTemplate_xslt = tool_file_path + r"\saveTemplate.xslt"
-                    # template_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, template_nm), saveTemplate_xslt)
-                    # source_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, source_nm), saveTemplate_xslt)
-                    # clean_template_md = md.Metadata(os.path.join(scratch_folder, template_nm))
-                    # thinking we can run the save template on the source and then return the
-                    # list of elements in og_source not in clean_source. Those will be the elements
-                    # we want to bring into the template.
-                    # clean_source_md = md.Metadata(os.path.join(scratch_folder, source_nm))
-
-                    # source_root = ET.fromstring(source_md.xml)
-                    # clean_source_root = ET.fromstring(clean_source_md.xml)
-                    # s = ''
-                    # sc = ''
-                    # for e in source_root.getchildren():
-                    #     s = '{}{}{}'.format(s, ' | ', e.tag)
-                    #
-                    # for e in clean_source_root.getchildren():
-                    #     sc = '{}{}{}'.format(sc, ' | ', e.tag)
-                    #
-                    # messages.addMessage(s)
-                    # messages.addMessage(sc)
-
-                    # output_md.copy(source_md)
-                    # messages.addMessage("Output md Title "+ str(output_md.title))
-                    # output_md.importMetadata(template_md, metadata_import_option='CUSTOM', customStylesheetPath=mergeTemplate_xslt)
-                    # output_md.saveAsXML(outputPath=Output_Metadata)
-                # except Exception as e:
-                #     messages.addWarningMessage(e)
 
             messages.addMessage("Process complete - please review the output carefully.")
         except:

@@ -11,8 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.​
 */
 
+using ArcGIS.Desktop.Framework.Dialogs;
 using ArcGIS.Desktop.Metadata;
 using ArcGIS.Desktop.Metadata.Editor.Pages;
+using System.Collections.Generic;
+using System.Windows.Controls;
 
 namespace EMEProToolkit.Pages
 {
@@ -36,6 +39,7 @@ namespace EMEProToolkit.Pages
         public MTK_DistributionInfo()
         {
             InitializeComponent();
+           
         }
 
         public override string SidebarLabel
