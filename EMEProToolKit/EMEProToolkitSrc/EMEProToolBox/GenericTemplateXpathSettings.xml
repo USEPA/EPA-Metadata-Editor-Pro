@@ -1,0 +1,112 @@
+<?xml version="1.0" standalone="yes"?>
+<emeData>
+  <xs:schema id="emeData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="ElementName">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="Xpath">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="Label">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="255" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="IsDefault" default="true">
+            <xs:simpleType>
+              <xs:restriction base="xs:boolean" />
+            </xs:simpleType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="emeData" msdata:IsDataSet="true" msdata:MainDataTable="ElementName" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="ElementName" />
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <ElementName>
+    <Xpath>mdContact</Xpath>
+    <Label>Metadata Contact</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>mdMaint</Xpath>
+    <Label>Metadata Maintenance Frequency</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>mdLang</Xpath>
+    <Label>Metadata Language</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>mdChar</Xpath>
+    <Label>Metadata Character Set</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>mdHrLv</Xpath>
+    <Label>Metadata Hierarchy Level</Label>
+    <IsDefault>false</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>dataIdInfo/dataLang</Xpath>
+    <Label>Data Language</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>dataIdInfo/dataLang</Xpath>
+    <Label>Data Character Set</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>dataIdInfo/idPoC/role/RoleCd[@value='010']/../..</Xpath>
+    <Label>POC (Publisher)</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>dataIdInfo/idPoC/role/RoleCd[@value='007']/../..</Xpath>
+    <Label>POC (POC)</Label>
+    <IsDefault>false</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>dataIdInfo/resConst/Consts</Xpath>
+    <Label>Constraints (Use Limitations)</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>dataIdInfo/idCredit</Xpath>
+    <Label>Resource Credits</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/..</Xpath>
+    <Label>EPA GIS Keywords</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>dataIdInfo/tpCat</Xpath>
+    <Label>Topic Categories</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>dataIdInfo/placeKeys/thesaName/[resTitle='EPA Place Names']/..</Xpath>
+    <Label>EPA Place Names</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>mdLang</Xpath>
+    <Label>Metadata Language</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+</emeData>

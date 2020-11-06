@@ -530,7 +530,7 @@ class copyFromTemplate(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
         self.label = "Copy Metadata From Template"
-        self.description = "This tool merges a selected metadata record with elements from a saved template record. Elements from the template record will overwrite their equivalents in the selected record, but by design it will exclude those elements which must be unique in every metadata record, such as title, abstract, unique identifier, etc, replacing only those elements that are common across many records. Still, caution is urged when using this tool."
+        self.description = "This tool replaces the elements in a metadata record with elements from a saved template record. Elements from the template record will overwrite their equivalents in the selected record, but by design it will exclude those elements which must be unique in every metadata record, such as title, abstract, unique identifier, etc, replacing only those elements that are common across many records. Still, caution is urged when using this tool."
         self.canRunInBackground = False
 
     def getParameterInfo(self):
@@ -550,6 +550,7 @@ class copyFromTemplate(object):
             datatype="DEFile",
             parameterType="Required",
             direction="Input")
+        param1.value = os.path.dirname(os.path.realpath(__file__)) + r"\GenericMetadataTemplate_EMEPro.xml"
 
         # param2 = arcpy.Parameter(
         #     displayName="Update Elements",
@@ -589,17 +590,22 @@ class copyFromTemplate(object):
     def execute(self, parameters, messages):
 
         messages.addMessage("Setting Defaults...")
-        # tool_file_path = os.path.dirname(os.path.realpath(__file__))
+        tool_file_path = os.path.dirname(os.path.realpath(__file__))
         from copy import deepcopy
 
         try:
             """The source code of the tool."""
+            # messages.addMessage("get params")
             Template_Metadata = parameters[1].valueAsText
             template_md = md.Metadata(Template_Metadata)
             Target_Metadata = parameters[0].valueAsText
 
+            defaults_xpath = ET.parse(tool_file_path + r"\GenericTemplateXpathSettings.xml")
+            defaults_xpath_list = defaults_xpath.getroot().findall("ElementName[IsDefault='true']")
+            messages.addMessage("parsed Settings xml params")
+
             # xpath_list = parameters[2].valueAsText
-            xpath_list = ["dataIdInfo/idPoC/role/RoleCd[@value='010']/../..","dataIdInfo/resConst", ".//dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/..", "mdLang"]
+            # xpath_list = ["dataIdInfo/idPoC/role/RoleCd[@value='010']/../..","dataIdInfo/resConst", ".//dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/..", "mdLang"]
 
             for t in str(Target_Metadata).split(';'):
                 if ' ' in t:
@@ -609,28 +615,26 @@ class copyFromTemplate(object):
                 source_md = md.Metadata(t)
                 source_root = ET.fromstring(source_md.xml)
                 template_root = ET.fromstring(template_md.xml)
-
-                for xp in xpath_list:
-                    messages.addMessage(xp)
+                # messages.addMessage("starting xpath loop")
+                for xp in defaults_xpath_list:
                     try:
-                        messages.addMessage('line 615')
-                        if len(template_root.findall(xp)) > 0:
-                            messages.addMessage('found in template {}'.format(xp))
+                        # messages.addMessage("First one {}".format(xp[0].text))
+                        if len(template_root.findall(xp[0].text)) > 0:
+                            messages.addMessage('Found in template {} {}'.format(xp[1].text, xp[0].text))
                             # Remove source data
-                            if len(source_root.findall(xp)) > 0:
-                                parent = source_root.findall(xp + "/..")[0]
+                            if len(source_root.findall(xp[0].text)) > 0:
+                                parent = source_root.findall(xp[0].text + "/..")[0]
                                 try:
-                                    for e in source_root.findall(xp):
-                                        messages.addMessage('find node')
+                                    for e in source_root.findall(xp[0].text):
                                         parent.remove(e)
-                                        messages.addMessage('node removed')
+                                        messages.addMessage('Removed {} {}'.format(xp[1].text, xp[0].text))
                                 except Exception as ee:
                                     messages.addMessage(ee)
 
                             # Build out the list of req'd nodes leading up to the parent. Use template_md
                             node_list = []
-                            current_node_path = xp
-                            current_node_tag = template_root.findall(xp)[0].tag
+                            current_node_path = xp[0].text
+                            current_node_tag = template_root.findall(xp[0].text)[0].tag
                             parent_node_path = ""
                             while current_node_tag != 'metadata':
                                 current_node_path += "/.."
@@ -659,10 +663,10 @@ class copyFromTemplate(object):
                                     thisNode = source_root.findall(buildXPath)[0]
                                 source_parent_node = source_root.findall(parent_node_path)[0]
 
-                            for template_element in template_root.findall(xp):
+                            for template_element in template_root.findall(xp[0].text):
                                 try:
                                     source_parent_node.append(deepcopy(template_element))
-                                    messages.addMessage('nodes copied back in')
+                                    messages.addMessage('Copied to target: {} {}'.format(xp[1].text, xp[0].text))
                                 except Exception as ee:
                                     messages.addWarningMessage(ee)
                     except Exception as err:
