@@ -525,6 +525,9 @@ class saveTemplate(object):
             # Regardless of errors, clean up intermediate products.
             pass
         return
+# For sync tool, might need to look at a handful of elements that need to have the sync attribute
+# set to true, or remove the tag. e.g., Data Quality Bounding Box (might not even get sync'd)
+# or other nested elements
 
 class copyFromTemplate(object):
     def __init__(self):
@@ -589,20 +592,21 @@ class copyFromTemplate(object):
 
     def execute(self, parameters, messages):
 
-        messages.addMessage("Setting Defaults...")
+        # messages.addMessage("Setting Defaults...")
         tool_file_path = os.path.dirname(os.path.realpath(__file__))
         from copy import deepcopy
 
         try:
             """The source code of the tool."""
-            # messages.addMessage("get params")
             Template_Metadata = parameters[1].valueAsText
             template_md = md.Metadata(Template_Metadata)
             Target_Metadata = parameters[0].valueAsText
 
-            defaults_xpath = ET.parse(tool_file_path + r"\GenericTemplateXpathSettings.xml")
-            defaults_xpath_list = defaults_xpath.getroot().findall("ElementName[IsDefault='true']")
-            messages.addMessage("parsed Settings xml params")
+            try:
+                defaults_xpath = ET.parse(tool_file_path + r"\GenericTemplateXpathSettings.xml")
+                defaults_xpath_list = defaults_xpath.getroot().findall("ElementName[IsDefault='true']")
+            except Exception as parse_error:
+                messages.addWarningMessage("Error Parsing GenericTemplateXpathSettings.xml {}".format(parse_error))
 
             # xpath_list = parameters[2].valueAsText
             # xpath_list = ["dataIdInfo/idPoC/role/RoleCd[@value='010']/../..","dataIdInfo/resConst", ".//dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/..", "mdLang"]
@@ -612,6 +616,8 @@ class copyFromTemplate(object):
                     messages.addWarningMessage('*Merge process skipped for {} due to space found in name'.format(t))
                     continue
 
+                messages.addMessage("Processing Target {}".format(t))
+
                 source_md = md.Metadata(t)
                 source_root = ET.fromstring(source_md.xml)
                 template_root = ET.fromstring(template_md.xml)
@@ -620,14 +626,14 @@ class copyFromTemplate(object):
                     try:
                         # messages.addMessage("First one {}".format(xp[0].text))
                         if len(template_root.findall(xp[0].text)) > 0:
-                            messages.addMessage('Found in template {} {}'.format(xp[1].text, xp[0].text))
+                            messages.addMessage('- Found in template {}: {}'.format(xp[1].text, xp[0].text))
                             # Remove source data
                             if len(source_root.findall(xp[0].text)) > 0:
                                 parent = source_root.findall(xp[0].text + "/..")[0]
                                 try:
                                     for e in source_root.findall(xp[0].text):
                                         parent.remove(e)
-                                        messages.addMessage('Removed {} {}'.format(xp[1].text, xp[0].text))
+                                        messages.addMessage('- Removed old target element: {}: {}'.format(xp[1].text, xp[0].text))
                                 except Exception as ee:
                                     messages.addMessage(ee)
 
@@ -652,7 +658,7 @@ class copyFromTemplate(object):
                             source_parent_node = source_root
                             if node_list:
                                 parent_node_path = "/".join(node_list)
-                                messages.addMessage('Parent Xpath: {}'.format(parent_node_path))
+                                # messages.addMessage('Parent Xpath: {}'.format(parent_node_path))
                                 xpathList = []
                                 thisNode = source_root
                                 for xpathElem in node_list:
@@ -666,15 +672,14 @@ class copyFromTemplate(object):
                             for template_element in template_root.findall(xp[0].text):
                                 try:
                                     source_parent_node.append(deepcopy(template_element))
-                                    messages.addMessage('Copied to target: {} {}'.format(xp[1].text, xp[0].text))
+                                    messages.addMessage('- Copied to target: {}: {}'.format(xp[1].text, xp[0].text))
                                 except Exception as ee:
                                     messages.addWarningMessage(ee)
                     except Exception as err:
-                        messages.addWarningMessage("something: {}".format(err))
+                        messages.addWarningMessage("Error: {}".format(err))
 
-                messages.addMessage('saving xml string back to md')
                 source_md.xml = ET.tostring(source_root)
-                messages.addMessage('saving string worked')
+
                 try:
                     fileExtension = t[-4:].lower()
                     if fileExtension == ".xml":
@@ -691,13 +696,13 @@ class copyFromTemplate(object):
                     messages.addMessage(e)
 
                 if arcpy.Exists(t):
-                    messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
-                    messages.addMessage("Output: {}".format(t))
+                    messages.addMessage("- Process complete - please review the output carefully.")
+                    messages.addMessage("- Output: {}".format(t))
 
                 else:
                     messages.addWarningMessage("Error processing {}.".format(t))
 
-            messages.addMessage("Process complete - please review the output carefully.")
+            messages.addMessage("Copy From Template Complete.")
         except:
             # Cycle through Geoprocessing tool specific errors
             for msg in range(0, arcpy.GetMessageCount()):

@@ -80,8 +80,8 @@
     <IsDefault>false</IsDefault>
   </ElementName>
   <ElementName>
-    <Xpath>dataIdInfo/resConst/Consts</Xpath>
-    <Label>Constraints (Use Limitations)</Label>
+    <Xpath>dataIdInfo/resConst</Xpath>
+    <Label>Constraints: EPA Use Limitations | Legal Constraints</Label>
     <IsDefault>true</IsDefault>
   </ElementName>
   <ElementName>
@@ -92,6 +92,11 @@
   <ElementName>
     <Xpath>dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/..</Xpath>
     <Label>EPA GIS Keywords</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>
+  <ElementName>
+    <Xpath>dataIdInfo/themeKeys/thesaName/[resTitle='Federal Program Inventory']/..</Xpath>
+    <Label>Federal Program Inventory Keywords</Label>
     <IsDefault>true</IsDefault>
   </ElementName>
   <ElementName>
