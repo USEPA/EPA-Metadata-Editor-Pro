@@ -624,91 +624,91 @@ limitations under the License.​
             </validation>
 				  </page>
 				  <page class="EMEProToolkit.Pages.MTK_DataQuality">
-            <validation>
-              <!-- data quality report required in data quality (separate from lineage) -->
-              <for xpath="//dqInfo">
-                <exists xpath="report//*[. != '']" ref="DQReportRequired" />
-              </for>
-              <!-- data quality report type -->
-              <for xpath="//dqInfo/report">
-                <exists xpath=".[@type != '']" ref="ReportType"/>
-              </for>
-              <!-- scope level is required -->
-              <for xpath="//dqInfo/report">
-                <exists xpath="../dqScope/scpLvl/ScopeCd[@value != '']" ref="scopeCd"/>
-              </for>
-              <!-- within the report section, either a conformance result or a quantitative result must be provided -->
-              <for xpath="//dqInfo/report">
-                <or ref="reportReq">
-                  <exists xpath="measResult/ConResult//*[ . != '']"/>
-                  <exists xpath="measResult/QuanResult//*[ . != '']"/>
-                </or>
-              </for>
-              <!-- within the conformance result section, all of its elements are mandatory -->
-              <for xpath="//dqInfo/report/measResult/ConResult">
-                <exists xpath="conSpec[ descendant::* != '']" ref="conSpec"/>
-                <exists xpath="conPass[ . != '']" ref="conPass"/>
-              </for>
-              <!-- within the Quantitative Result section, a value and a unit of measure are required. -->
-              <for xpath="//dqInfo/report/measResult/QuanResult">
-                <exists xpath="quanValUnit/UOM/unitSymbol[ .!= '']" ref="uom"/>
-              </for>
-              <for xpath="//dqInfo/report/measResult/QuanResult/quanVal">
-                <exists xpath="self::*[ . != '']" ref="quanVal"/>
-              </for>
-              <!-- contact name, org or role -->
-              <for xpath="//report//citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//report//citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-              </for>
-              <!-- citation -->
-              <for xpath="//dqInfo/report//*[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-              </for>
-              <for xpath="//dqInfo/report//citOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-              </for>
-              <for xpath="//dqInfo/scpExt//*[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-              </for>
-              <for xpath="//dqInfo/scpExt//citOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-              </for>
-              <!-- identifier -->
-              <for xpath="//dqInfo/report//*[identCode]">
-                <exists xpath="identCode[. != '']" ref="identCode"/>
-              </for>
-              <for xpath="//dqInfo/scpExt//*[identCode]">
-                <exists xpath="identCode[. != '']" ref="identCode"/>
-              </for>
-              <!-- bounding box -->
-              <for xpath="//scpExt//GeoBndBox[*]">
-                <exists xpath="westBL[. != '']" ref="westBL,.,westBL"/>
-                <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL"/>
-                <exists xpath="northBL[. != '']" ref="northBL,.,northBL"/>
-                <exists xpath="southBL[. != '']" ref="southBL,.,southBL"/>
-                <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range"/>
-                <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range"/>
-              </for>
-              <!-- vertical max and min -->
-              <for xpath="//scpExt//vertEle[*]">
-                <exists xpath="vertMinVal[. != '']" ref="vertMinVal"/>
-                <exists xpath="vertMaxVal[. != '']" ref="vertMaxVal"/>
-              </for>
-              <!-- contact name, org or role -->
-              <for xpath="//scpExt//citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//scpExt//citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-              </for>
-            </validation>
+           <validation>
+             <!-- data quality report required in data quality (separate from lineage) -->
+            <for xpath="//dqInfo">
+              <exists xpath="report//*[. != '']" ref="DQReportRequired" />
+            </for>
+            <!-- data quality report type -->
+            <for xpath="//dqInfo/report">
+              <exists xpath=".[@type != '']" ref="ReportType"/>
+            </for>
+            <!-- scope level is required -->
+            <for xpath="//dqInfo/report">
+              <exists xpath="../dqScope/scpLvl/ScopeCd[@value != '']" ref="scopeCd"/>
+            </for>
+            <!-- within the report section, either a conformance result or a quantitative result must be provided -->
+            <for xpath="//dqInfo/report">
+              <or ref="reportReq">
+                <exists xpath="measResult/ConResult//*[ . != '']"/>
+                <exists xpath="measResult/QuanResult//*[ . != '']"/>
+              </or>
+            </for>
+            <!-- within the conformance result section, all of its elements are mandatory -->
+            <for xpath="//dqInfo/report/measResult/ConResult">
+              <exists xpath="conSpec[ descendant::* != '']" ref="conSpec"/>
+              <exists xpath="conPass[ . != '']" ref="conPass"/>
+            </for>
+            <!-- within the Quantitative Result section, a value and a unit of measure are required. -->
+            <for xpath="//dqInfo/report/measResult/QuanResult">
+              <exists xpath="quanValUnit/UOM/unitSymbol[ .!= '']" ref="uom"/>
+            </for>
+            <for xpath="//dqInfo/report/measResult/QuanResult/quanVal">
+              <exists xpath="self::*[ . != '']" ref="quanVal"/>
+            </for>
+            <!-- contact name, org or role -->
+            <for xpath="//report//citRespParty">
+              <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
+              <exists xpath="role[RoleCd/@value != '']" ref="role"/>
+            </for>
+            <!-- linkage -->
+            <for xpath="//report//citRespParty/rpCntInfo/cntOnlineRes">
+              <exists xpath="linkage[. != '']" ref="linkage"/>
+            </for>
+            <!-- citation -->
+            <for xpath="//dqInfo/report//*[resTitle]">
+              <exists xpath="resTitle[. != '']" ref="resTitle"/>
+            </for>
+            <for xpath="//dqInfo/report//citOnlineRes">
+              <exists xpath="linkage[. != '']" ref="linkage"/>
+            </for>
+            <for xpath="//dqInfo/scpExt//*[resTitle]">
+              <exists xpath="resTitle[. != '']" ref="resTitle"/>
+            </for>
+            <for xpath="//dqInfo/scpExt//citOnlineRes">
+              <exists xpath="linkage[. != '']" ref="linkage"/>
+            </for>
+            <!-- identifier -->
+            <for xpath="//dqInfo/report//*[identCode]">
+              <exists xpath="identCode[. != '']" ref="identCode"/>
+            </for>
+            <for xpath="//dqInfo/scpExt//*[identCode]">
+              <exists xpath="identCode[. != '']" ref="identCode"/>
+            </for>
+            <!-- bounding box -->
+            <for xpath="//scpExt//GeoBndBox[*]">
+              <exists xpath="westBL[. != '']" ref="westBL,.,westBL"/>
+              <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL"/>
+              <exists xpath="northBL[. != '']" ref="northBL,.,northBL"/>
+              <exists xpath="southBL[. != '']" ref="southBL,.,southBL"/>
+              <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range"/>
+              <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range"/>
+            </for>
+            <!-- vertical max and min -->
+            <for xpath="//scpExt//vertEle[*]">
+              <exists xpath="vertMinVal[. != '']" ref="vertMinVal"/>
+              <exists xpath="vertMaxVal[. != '']" ref="vertMaxVal"/>
+            </for>
+            <!-- contact name, org or role -->
+            <for xpath="//scpExt//citRespParty">
+              <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
+              <exists xpath="role[RoleCd/@value != '']" ref="role"/>
+            </for>
+            <!-- linkage -->
+            <for xpath="//scpExt//citRespParty/rpCntInfo/cntOnlineRes">
+              <exists xpath="linkage[. != '']" ref="linkage"/>
+            </for>
+          </validation>
 				  </page>
 				  <page class="EMEProToolkit.Pages.MTK_LI_Lineage">
             <validation>
@@ -734,22 +734,26 @@ limitations under the License.​
               <!-- contact name, org or role -->
               <for xpath="//prcStep/stepProc">
                 <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
+                <exists xpath="role[RoleCd/@value != '']" ref="//prcStep/stepProc/role"/>
               </for>
               <!-- linkage -->
               <for xpath="//prcStep/stepProc/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
+                <exists xpath="linkage[. != '']" ref="//prcStep/stepProc/rpCntInfo/cntOnlineRes/linkage"/>
               </for>
               <!-- contact name, org or role -->
               <for xpath="//dataLineage//citRespParty">
                 <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
+                <exists xpath="role[RoleCd/@value != '']" ref="//dataLineage//citRespParty/role"/>
+              </for>
+              <!-- linkage -->
+              <for xpath="//dataLineage//citRespParty/rpCntInfo/cntOnlineRes">
+                <exists xpath="linkage[. != '']" ref="//dataLineage//citRespParty/rpCntInfo/cntOnlineRes/linkage,linkage"/>
               </for>
               <!-- linkage -->
               <for xpath="//dataLineage//citRespParty/rpCntInfo/cntOnlineRes">
                 <exists xpath="linkage[. != '']" ref="linkage"/>
               </for>
-              <!-- bounding box -->
+              <!-- bounding box --><!--
               <for xpath="//srcExt//GeoBndBox[*]">
                 <exists xpath="westBL[. != '']" ref="westBL,.,westBL"/>
                 <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL"/>
@@ -758,6 +762,30 @@ limitations under the License.​
                 <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range"/>
                 <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range"/>
               </for>
+              --><!-- vertical max and min --><!--
+              <for xpath="//srcExt//vertEle[*]">
+                <exists xpath="vertMinVal[. != '']" ref="vertMinVal"/>
+                <exists xpath="vertMaxVal[. != '']" ref="vertMaxVal"/>
+              </for>-->
+              
+              <!-- Data Source/Source Extent/Bounding Box -->
+              <for xpath="//dqInfo/dataLineage//dataSource//srcExt//GeoBndBox[*]">
+                <exists xpath="westBL[. != '']" ref="westBL,.,westBL"/>
+                <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL"/>
+                <exists xpath="northBL[. != '']" ref="northBL,.,northBL"/>
+                <exists xpath="southBL[. != '']" ref="southBL,.,southBL"/>
+                <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range"/>
+                <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range"/>
+              </for>
+              <!-- Process Step/Data Source/Source Extent/Bounding Box -->
+              <!--<for xpath="//prcStep//srcExt//GeoBndBox[*]">
+                <exists xpath="westBL[. != '']" ref="westBL,.,westBL"/>
+                <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL"/>
+                <exists xpath="northBL[. != '']" ref="northBL,.,northBL"/>
+                <exists xpath="southBL[. != '']" ref="southBL,.,southBL"/>
+                <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range"/>
+                <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range"/>
+              </for>-->
               <!-- vertical max and min -->
               <for xpath="//srcExt//vertEle[*]">
                 <exists xpath="vertMinVal[. != '']" ref="vertMinVal"/>
@@ -765,14 +793,16 @@ limitations under the License.​
               </for>
               <!-- data source reference system -->
               <for xpath="//dataLineage//srcRefSys[identCode]">
-                <exists xpath="identCode[@code != '']" ref="identCode"/>
+                <!--<exists xpath="identCode[@code != '']" ref="identCode"/>-->
+                <exists xpath="identCode[@code != '']" ref="//dataLineage//srcRefSys[identCode]"/>
               </for>
               <!-- citations -->
               <for xpath="//dataLineage//*[resTitle]">
                 <exists xpath="resTitle[. != '']" ref="resTitle"/>
               </for>
               <for xpath="//dataLineage//citOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
+                <!--<exists xpath="linkage[. != '']" ref="linkage"/>-->
+                <exists xpath="linkage[. != '']" ref="//dataLineage//citOnlineRes/linkage"/>
               </for>
               <!-- identifiers -->
               <for xpath="//dataLineage//*[identCode and not(identCode/@code)]">

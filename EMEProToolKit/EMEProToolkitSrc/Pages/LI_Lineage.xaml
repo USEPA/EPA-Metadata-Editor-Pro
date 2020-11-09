@@ -68,39 +68,59 @@ limitations under the License.​
       </x:XData>
     </XmlDataProvider>
 
-    <!-- validation issues -->
+    <!-- validation issues -->    
     <v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />
     <v:MetadataIssueInfo x:Key="partyFgdc" Message="{x:Static r:Issues.partyFgdc_FGDC_REQ}" />
     <v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />
+    <v:MetadataIssueInfo x:Key="//dataLineage//citRespParty/role" Message="*Data Source/Source Citation/Contact/ - Role is required" />
+    <v:MetadataIssueInfo x:Key="//prcStep/stepProc/role" Message="*Process Step/Processor/ - Role is required" />
     <v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />
+    <v:MetadataIssueInfo x:Key="//dataLineage//citRespParty/rpCntInfo/cntOnlineRes/linkage" Message="*Data Source/Source Citation/Contact/Contact Information/Online Resource/ - Linkage URL is required" />
+    <v:MetadataIssueInfo x:Key="//prcStep/stepProc/rpCntInfo/cntOnlineRes/linkage" Message="*Process Step/Processor/Contact Information/Online Resource/ - Linkage URL is required" />
+    <v:MetadataIssueInfo x:Key="//dataLineage//citOnlineRes/linkage" Message="*Data Source/Source Citation/Online Resource/ - Linkage URL is required" />
     <v:MetadataIssueInfo x:Key="protocol" Message="{x:Static r:Issues.protocol_REQ}" />
     <v:MetadataIssueInfo x:Key="rpCntInfo_NAP_REQ" Message="{x:Static r:Issues.rpCntInfo_NAP_REQ}" />
     <v:MetadataIssueInfo x:Key="datasetReq" Message="{x:Static r:Issues.dq_dataset_REQ}" />
 
     <v:MetadataIssueInfo x:Key="dataLineage" Message="{x:Static r:Issues.dataLineage_REQ}" />
     <v:MetadataIssueInfo x:Key="dataLineage_FGDC" Message="{x:Static r:Issues.dataLineage_FGDC_REQ}" />
+    <v:MetadataIssueInfo x:Key="lineageContentReqd" Message="{x:Static r:Issues.lineageContentReqd_191153_REQ}" />
 
     <v:MetadataIssueInfo x:Key="dqInfo" Message="{x:Static r:Issues.dqInfo_REQ}" />
-    <v:MetadataIssueInfo x:Key="dataSource" Message="{x:Static r:Issues.dataSource_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="dataSource" Message="{x:Static r:Issues.dataSource_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="dataSource" Message="*Data Source/ - within data source, either an extent or a description must be provided." />
     <v:MetadataIssueInfo x:Key="dqStatement" Message="{x:Static r:Issues.dqStatement_INSPIRE_REQ}" />
 
     <v:MetadataIssueInfo x:Key="dataSource_nap" Message="{x:Static r:Issues.dataSource_NAP_REQ}" />
     <v:MetadataIssueInfo x:Key="srcDesc" Message="{x:Static r:Issues.srcDesc_REQ}" />
 
-    <v:MetadataIssueInfo x:Key="stepDesc" Message="{x:Static r:Issues.stepDesc_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="stepDesc" Message="{x:Static r:Issues.stepDesc_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="stepDesc" Message="*Process Step/ - process step description is required" />
     <v:MetadataIssueInfo x:Key="stepDateTm" Message="{x:Static r:Issues.stepDateTm_REQ}" />
 
-    <v:MetadataIssueInfo x:Key="west_exists" Name="westBL" Message="{x:Static r:Issues.extent_coord_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="west_exists" Name="westBL" Message="{x:Static r:Issues.extent_coord_REQ}" />
     <v:MetadataIssueInfo x:Key="north_exists" Name="northBL" Message="{x:Static r:Issues.extent_coord_REQ}" />
     <v:MetadataIssueInfo x:Key="east_exists" Name="eastBL" Message="{x:Static r:Issues.extent_coord_REQ}" />
     <v:MetadataIssueInfo x:Key="south_exists" Name="southBL" Message="{x:Static r:Issues.extent_coord_REQ}" />
 
     <v:MetadataIssueInfo x:Key="lonBoundsError1" Name="westBL_range" Message="{x:Static r:Issues.extent_lonBoundsError}" />
+    <v:MetadataIssueInfo x:Key="latBoundsError1" Name="northBL_range" Message="{x:Static r:Issues.extent_latBoundsError}" />-->
+
+    <!-- Data Source/Source Extent/Bounding Box -->
+    <v:MetadataIssueInfo x:Key="west_existsXXX" Name="westBL" Message="*Data Source/Source Extent/Bounding Box - West coordinate is required" />
+    <v:MetadataIssueInfo x:Key="north_existsXXX" Name="northBL" Message="*Data Source/Source Extent/Bounding Box - North coordinate is required" />
+    <v:MetadataIssueInfo x:Key="east_existsXXX" Name="eastBL" Message="*Data Source/Source Extent/Bounding Box - East coordinate is required" />
+    <v:MetadataIssueInfo x:Key="south_existsXXX" Name="southBL" Message="*Data Source/Source Extent/Bounding Box - South  coordinate is required" />
+
+    <v:MetadataIssueInfo x:Key="lonBoundsError1" Name="westBL_range" Message="{x:Static r:Issues.extent_lonBoundsError}" />
     <v:MetadataIssueInfo x:Key="latBoundsError1" Name="northBL_range" Message="{x:Static r:Issues.extent_latBoundsError}" />
 
-    <v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="resTitle" Message="*Data Source/Source Citation/Titles/Titles/ - Title is required" />
+
     <v:MetadataIssueInfo x:Key="dates" Message="{x:Static r:Issues.dates_REQ}" />
-    <v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />
+    <v:MetadataIssueInfo x:Key="identCode" Message="**Citation/Identifier - Identifier Code is required" />
+    <v:MetadataIssueInfo x:Key="//dataLineage//srcRefSys[identCode]" Message="*Data Source/Reference System/Authority Citation/Identifier/ - Identifier Code is required" />
     <v:MetadataIssueInfo x:Key="voiceNum" Message="{x:Static r:Issues.voiceNum_FGDC_REQ}" />
 
     <v:MetadataIssueInfo x:Key="cntAddress" Message="{x:Static r:Issues.cntAddress_FGDC_REQ}" />
@@ -124,7 +144,7 @@ limitations under the License.​
                 v:Nav.AnchorName="dataLineage" />
 
             <!-- statement -->
-            <Border Style="{DynamicResource EditorBorder2Style}">
+            <Border Style="{DynamicResource EditorBorder2Style}" v:Nav.AnchorName="lineageContentReqd,.">
               <StackPanel>
                 <Label Style="{DynamicResource EditorVLabelNoIdentStyle}" Content="{x:Static r:Resources.LBL_LI_STATEMENT}"/>
                 <controls:Resizer>
@@ -225,6 +245,9 @@ limitations under the License.​
         </DataTemplate>
       </ListBox.ItemTemplate>
     </ListBox>
+    
+    <!-- validate after all anchors are loaded -->
+    <v:PageValidateControl/>
   </Grid>
 
 </p:EditorPage>
