@@ -27,17 +27,37 @@ limitations under the License.​
              Loaded="EditorPage_Loaded">
 
   <UserControl.Resources>
-    <converters:ListBoxItemToAutomationIdConverter x:Key="_lbiToAutoIdConverter" />
-
-    <!--    
+    <!-- 
+    
+    mdConst
     <!ELEMENT mdConst %ConstsTypes;>
-    <!ENTITY % ConstsTypes '(Consts | LegConsts | SecConsts)'>    
-    <!ENTITY % Consts '(useLimit*)'>   
-    <!ELEMENT useLimit (#PCDATA)>   
+    <!ENTITY % ConstsTypes '(Consts | LegConsts | SecConsts)'>
+    
+    <!ENTITY % SecConsts '(useLimit*, class, userNote?, classSys?, handDesc?)'>
+  
+    <!ELEMENT SecConsts %SecConsts;>
+    <!ELEMENT class (ClasscationCd)>
+
+    <!ELEMENT ClasscationCd EMPTY>
+    <!ATTLIST ClasscationCd
+	    value (001 | 002 | 003 | 004 | 005) #REQUIRED>
+     001-005 (unclassified | restricted | confidential | secret | topSecret) from ISO 19115 
+    <!ELEMENT userNote (#PCDATA)>
+    <!ELEMENT classSys (#PCDATA)>
+    <!ELEMENT handDesc (#PCDATA)>
+     
     -->
+
     <XmlDataProvider x:Key="XmlRecord" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
       <x:XData>
         <ANY xmlns="">
+          <!--<useLimit/>-->
+          <class>
+            <ClasscationCd value=""></ClasscationCd>
+          </class>
+          <userNote/>
+          <classSys/>
+          <handDesc/>
         </ANY>
       </x:XData>
     </XmlDataProvider>
@@ -49,6 +69,7 @@ limitations under the License.​
         </ANY>
       </x:XData>
     </XmlDataProvider>
+
     <XmlDataProvider x:Key="EPAData"
                          Source="SecurityConstraints.xml"
                          XPath="emeData/SecurityConstraints"
@@ -71,22 +92,13 @@ limitations under the License.​
         <ListBox.ItemTemplate>
           <DataTemplate>
             <StackPanel>
-              <DockPanel Style="{DynamicResource EditorDockPanelStyle}" HorizontalAlignment="{Binding HorizontalAlignment,
-                  RelativeSource={RelativeSource FindAncestor,
-                  AncestorType={x:Type ContentPresenter}},
-                  Mode=OneWayToSource}" LastChildFill="True">
-                <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}"
-                        AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=MetadataConstraints_UseLimitationDelete}">
+              <DockPanel Style="{DynamicResource EditorDockPanelStyle}" HorizontalAlignment="{Binding HorizontalAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Mode=OneWayToSource}" LastChildFill="True">
+                <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}">
                   <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
                 </Button>
                 <Label Style="{DynamicResource EditorHLabelNoIdentStyle}" Content="{x:Static r:Resources.LBL_CONSTS_USELIMIT}"/>
               </DockPanel>
               <!-- use limitations -->
-              <!--<Border Style="{DynamicResource EditorRichTextBoxContainerNoIndentStyle}">
-                <t:MTK_EditorRichTextBox
-                    v:Nav.AnchorName="useLimit"
-                    ToolTip="{x:Static r:Definitions.MD_Constraints_useLimitation}" />
-              </Border>-->
               <controls:Resizer>
                 <TextBox Style="{DynamicResource EditorTextAreaResizeStyle}" Text="{e:MetadataBinding XPath=.}" ToolTip="{x:Static r:Definitions.MD_Constraints_useLimitation}"/>
               </controls:Resizer>
@@ -94,14 +106,15 @@ limitations under the License.​
           </DataTemplate>
         </ListBox.ItemTemplate>
       </ListBox>
+
       <!-- ADD use limitation -->
-      <Button Tag="UseLimit" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}"
-              Name="MetadataConstraints_UseLimitationAdd">
+      <Button Tag="UseLimit" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}">
         <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
           <Image Style="{DynamicResource AddImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericAddGreen16.png"/>
           <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_CONSTS_NEW_USELIMIT}"/>
         </StackPanel>
       </Button>
+
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="Auto" />
@@ -132,7 +145,7 @@ limitations under the License.​
         <ListBox Grid.Row="0" Grid.Column="1" Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=class}">
           <ListBox.ItemTemplate>
             <DataTemplate>
-              <t:MTK_MD_ClassificationCode  />
+              <t:MTK_MD_ClassificationCode/>
             </DataTemplate>
           </ListBox.ItemTemplate>
         </ListBox>
