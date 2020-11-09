@@ -156,7 +156,7 @@ limitations under the License.​
           </DataTemplate>
         </ListBox.ItemTemplate>
       </ListBox>
-      
+
       <!--legal constraints SOR-->
       <ListBox Style="{DynamicResource EditornoScrollListBoxStyle}">
         <ListBox.ItemsSource>
@@ -195,7 +195,7 @@ limitations under the License.​
         </ListBox.ItemsPanel>
         <ListBox.ItemTemplate>
           <DataTemplate>
-            <Border Style="{DynamicResource EditorBorder2Style}">
+            <Border Style="{DynamicResource EditorBorder2Style}" Background="LemonChiffon">
               <Expander Style="{DynamicResource EditorExpander2Style}" 
                         AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=MetadataConstraints_SecurityConstraintsGroup}">
                 <Expander.Header>
