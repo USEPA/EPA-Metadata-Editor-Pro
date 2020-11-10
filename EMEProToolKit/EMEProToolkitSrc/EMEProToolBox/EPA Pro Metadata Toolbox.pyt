@@ -137,7 +137,6 @@ class upgradeTool(object):
 
                 source_md = md.Metadata(t)
                 # Test that this metadata hasn't already been upgraded
-                # todo - need to check for ArcGISFormat 1.0 as well (mdStanName might be a legacy ISO element)
                 root = ET.fromstring(source_md.xml)
 
                 # if no ArcGIS Elements - metadata has not been upgraded yet
@@ -146,7 +145,6 @@ class upgradeTool(object):
                     # Process: Upgrade Metadata
                     source_md.upgrade('FGDC_CSDGM')
 
-                    messages.addMessage("Cleaning up legacy elements and preserving the UUID...")
                 else:
                     original_name = "{}{}.xml".format('_original_', basename)
                     clean_name = "{}{}.xml".format('_cleanOnly_', basename)
@@ -165,6 +163,22 @@ class upgradeTool(object):
                 try:
                     final_xml = os.path.join(output_dir, output_name)
                     # messages.addMessage("Temp file: {}".format(final_xml))
+                    messages.addMessage("Cleaning up legacy elements and preserving the UUID...")
+
+                    root_temp = ET.fromstring(source_md.xml)
+                    old_keywords = "dataIdInfo/themeKeys/thesaName/[resTitle='ISO 19115 Topic Category']/.."
+                    if len(root_temp.findall(old_keywords)) > 0:
+                        messages.addMessage("Removing Legacy Keywords")
+                        try:
+                            parent = root_temp.findall(old_keywords + "/..")[0]
+                            for e in root_temp.findall(old_keywords):
+                                parent.remove(e)
+                        except Exception as remove_error:
+                            messages.addWarningMessage('Error Removing Legacy Keywords: {}'.format(remove_error))
+                        source_md.xml = ET.tostring(root_temp)
+
+                    # ToDo: Fix for EPA Keywords Section
+
                     source_md.saveAsUsingCustomXSLT(final_xml, EPAUpgradeCleanup_xslt)
                     # temp_temp = md.Metadata().importMetadata(source_md.uri, 'CUSTOM', EPAUpgradeCleanup_xslt)
                     output_metadata = final_xml
@@ -635,7 +649,7 @@ class copyFromTemplate(object):
                                         parent.remove(e)
                                         messages.addMessage('- Removed old target element: {}: {}'.format(xp[1].text, xp[0].text))
                                 except Exception as ee:
-                                    messages.addMessage(ee)
+                                    messages.addWarningMessage(ee)
 
                             # Build out the list of req'd nodes leading up to the parent. Use template_md
                             node_list = []
