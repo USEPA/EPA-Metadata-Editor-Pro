@@ -2,6 +2,7 @@ import os
 import re
 import arcpy
 from arcpy import metadata as md
+import xml.etree.ElementTree as ET
 import sys
 
 
@@ -13,35 +14,9 @@ class Toolbox(object):
         self.alias = ""
 
         # List of tool classes associated with this toolbox
-        self.tools = [upgradeTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates,mergeTemplate, exportISOTool]
+        self.tools = [upgradeTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate, exportISOTool, esriSync]
         # self.tools = [upgradeTool,cleanupTool,exportISOTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate]
 
-# class scratchCopy(object):
-#     def __init__(self,messages):
-#         self.messages = messages
-#         self.scratchXML = ""
-#
-#     def makeScratchCopy(self, Source_Metadata):
-#
-#         # Esri-provided standard stylesheet for copying metadata.
-#
-#         tool_file_path = os.path.dirname(os.path.realpath(__file__))
-#         EPACleanExport_xslt = tool_file_path + r"\EPACleanExport.xslt"
-#
-#         # exact_copy_of_xslt = arcpy.GetInstallInfo()['InstallDir'] + "Metadata\\Stylesheets\\gpTools\exact Copy Of.xslt"
-#         self.scratchWorkspace = arcpy.env.scratchFolder
-#         self.scratchXML = arcpy.CreateScratchName(suffix=".xml", workspace=self.scratchWorkspace)
-#
-#
-#         self.messages.addMessage("Making a temporary copy of the existing metadata...")
-#         # Process: Copy Metadata for Upgrade
-#         arcpy.XSLTransform_conversion(Source_Metadata, exact_copy_of_xslt, self.scratchXML, "")
-#         return self.scratchXML
-#
-#     def cleanupScratchCopy(self):
-#         self.messages.addMessage("Cleaning up scratch files...")
-#         if arcpy.Exists(self.scratchXML):
-#             arcpy.Delete_management(self.scratchXML)
 
 class upgradeTool(object):
     def __init__(self):
@@ -52,13 +27,8 @@ class upgradeTool(object):
 
     def getParameterInfo(self):
         """Define parameter definitions"""
-            # first parameter
-        # param0 = arcpy.Parameter(
-        #     displayName="Source Metadata",
-        #     name="Source_Metadata",
-        #     datatype="DEType",
-        #     parameterType="Required",
-        #     direction="Input")
+        # first parameter
+
         param0 = arcpy.Parameter(
             displayName="Source Metadata",
             name="Source_Metadata",
@@ -67,13 +37,6 @@ class upgradeTool(object):
             direction="Input",
             multiValue=True)
 
-        # output metadata parameter
-        # param1 = arcpy.Parameter(
-        #     displayName="Output Metadata",
-        #     name="Output_Metadata",
-        #     datatype="DEFile",
-        #     parameterType="Required",
-        #     direction="Output")
         param1 = arcpy.Parameter(
             displayName="Overwrite Source Record",
             name="Overwrite",
@@ -136,12 +99,9 @@ class upgradeTool(object):
 
         return
 
-
     def execute(self, parameters, messages):
 
         Target_Metadata = parameters[0].valueAsText
-
-        import xml.etree.ElementTree as ET
 
         try:
 
@@ -176,7 +136,6 @@ class upgradeTool(object):
 
                 source_md = md.Metadata(t)
                 # Test that this metadata hasn't already been upgraded
-                # todo - need to check for ArcGISFormat 1.0 as well (mdStanName might be a legacy ISO element)
                 root = ET.fromstring(source_md.xml)
 
                 # if no ArcGIS Elements - metadata has not been upgraded yet
@@ -185,16 +144,40 @@ class upgradeTool(object):
                     # Process: Upgrade Metadata
                     source_md.upgrade('FGDC_CSDGM')
 
-                    messages.addMessage("Cleaning up legacy elements and preserving the UUID...")
                 else:
-                    backup_name = "{}{}.xml".format('backup_', basename)
-                    source_md.saveAsXML(os.path.join(scratch_folder, backup_name))
+                    original_name = "{}{}.xml".format('_original_', basename)
+                    clean_name = "{}{}.xml".format('_cleanOnly_', basename)
+                    upgrade_name = "{}{}.xml".format('_upgradeClean_', basename)
+                    source_md.saveAsXML(os.path.join(scratch_folder, original_name))
+                    source_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, clean_name), EPAUpgradeCleanup_xslt)
+                    tmp_md = md.Metadata(source_md.uri)
+                    tmp_md.upgrade('FGDC_CSDGM')
+                    tmp_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, upgrade_name), EPAUpgradeCleanup_xslt)
+
+                    # source_md.saveAsXML(os.path.join(scratch_folder, backup_name))
                     messages.addWarningMessage('*Upgrade process skipped for {} since it is in ArcGIS 1.0 format. Cleaning up legacy elements and preserving the UUID...'.format(t))
-                    messages.addMessage('Backup of source metadata placed at: {}'.format(os.path.join(scratch_folder, backup_name)))
+                    messages.addMessage('Backups of the source metadata placed at: {} and named the following for additional review {} {} {}'\
+                                        .format(scratch_folder, clean_name, original_name, upgrade_name))
 
                 try:
                     final_xml = os.path.join(output_dir, output_name)
                     # messages.addMessage("Temp file: {}".format(final_xml))
+                    messages.addMessage("Cleaning up legacy elements and preserving the UUID...")
+
+                    root_temp = ET.fromstring(source_md.xml)
+                    old_keywords = "dataIdInfo/themeKeys/thesaName/[resTitle='ISO 19115 Topic Category']/.."
+                    if len(root_temp.findall(old_keywords)) > 0:
+                        messages.addMessage("Removing Legacy Keywords")
+                        try:
+                            parent = root_temp.findall(old_keywords + "/..")[0]
+                            for e in root_temp.findall(old_keywords):
+                                parent.remove(e)
+                        except Exception as remove_error:
+                            messages.addWarningMessage('Error Removing Legacy Keywords: {}'.format(remove_error))
+                        source_md.xml = ET.tostring(root_temp)
+
+                    # ToDo: Fix for EPA Keywords Section
+
                     source_md.saveAsUsingCustomXSLT(final_xml, EPAUpgradeCleanup_xslt)
                     # temp_temp = md.Metadata().importMetadata(source_md.uri, 'CUSTOM', EPAUpgradeCleanup_xslt)
                     output_metadata = final_xml
@@ -555,22 +538,27 @@ class saveTemplate(object):
             # Regardless of errors, clean up intermediate products.
             pass
         return
+# For sync tool, might need to look at a handful of elements that need to have the sync attribute
+# set to true, or remove the tag. e.g., Data Quality Bounding Box (might not even get sync'd)
+# or other nested elements
 
 class mergeTemplate(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
         self.label = "Merge a selected metadata record with a saved template"
-        self.description = "This tool merges a selected metadata record with elements from a saved template record. Elements from the template record will overwrite their equivalents in the selected record, but by design it will exclude those elements which must be unique in every metadata record, such as title, abstract, unique identifier, etc, replacing only those elements that are common across many records. Still, caution is urged when using this tool."
+        self.description = "This tool replaces the elements in a metadata record with elements from a saved template record. Elements from the template will overwrite their equivalents in the selected record based on the xpath rules provided in GenericTemplateXpathSettings.xml. The provided template (GenericMetadataTemplate_EMEPro.xml) can be used as a custom Set-To-Default tool. Both files are deployed with the python tool. Caution is urged when using this tool."
         self.canRunInBackground = False
 
     def getParameterInfo(self):
         """Define parameter definitions"""
+
         param0 = arcpy.Parameter(
-            displayName="Source Metadata",
-            name="Source_Metadata",
+            displayName="Target Metadata",
+            name="Target_Metadata",
             datatype="DEType",
             parameterType="Required",
-            direction="Input")
+            direction="Input",
+            multiValue=True)
 
         param1 = arcpy.Parameter(
             displayName="Template Metadata",
@@ -578,15 +566,20 @@ class mergeTemplate(object):
             datatype="DEFile",
             parameterType="Required",
             direction="Input")
+        param1.value = os.path.dirname(os.path.realpath(__file__)) + r"\GenericMetadataTemplate_EMEPro.xml"
 
-        param2 = arcpy.Parameter(
-            displayName="Output Metadata",
-            name="Output_Metadata",
-            datatype="DEFile",
-            parameterType="Required",
-            direction="Output")
+        # param2 = arcpy.Parameter(
+        #     displayName="Update Elements",
+        #     name="Xpath_Expression",
+        #     datatype="GPString",
+        #     parameterType="Optional",
+        #     direction="Input",
+        #     multiValue=True
+        # )
+        # # param2.value = ["dataIdInfo/idCitation/resTitle","dataIdInfo/idAbs","dataIdInfo/idPurp"]
+        # param2.value = [".//dataIdInfo/resConst", ".//dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/..", "mdLang"]
 
-        params = [param0, param1, param2]
+        params = [param0, param1]
         return params
 
     def isLicensed(self):
@@ -597,65 +590,223 @@ class mergeTemplate(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        if parameters[2].valueAsText:
-            fileExtension = parameters[2].valueAsText[-4:].lower()
-            if fileExtension != ".xml":
-                parameters[2].value = parameters[2].valueAsText + ".xml"
+        # if parameters[2].valueAsText:
+        #     fileExtension = parameters[2].valueAsText[-4:].lower()
+        #     if fileExtension != ".xml":
+        #         parameters[2].value = parameters[2].valueAsText + ".xml"
+
         return
 
     def updateMessages(self, parameters):
         """Modify the messages created by internal validation for each tool
         parameter.  This method is called after internal validation."""
+
         return
 
     def execute(self, parameters, messages):
-        messages.addMessage("Merging...")
+
+        # messages.addMessage("Setting Defaults...")
         tool_file_path = os.path.dirname(os.path.realpath(__file__))
-        messages.addMessage('file path ' + tool_file_path)
+        from copy import deepcopy
+
+        try:
+            """The source code of the tool."""
+            Template_Metadata = parameters[1].valueAsText
+            template_md = md.Metadata(Template_Metadata)
+            Target_Metadata = parameters[0].valueAsText
+
+            try:
+                defaults_xpath = ET.parse(tool_file_path + r"\GenericTemplateXpathSettings.xml")
+                defaults_xpath_list = defaults_xpath.getroot().findall("ElementName[IsDefault='true']")
+            except Exception as parse_error:
+                messages.addWarningMessage("Error Parsing GenericTemplateXpathSettings.xml {}".format(parse_error))
+
+            # xpath_list = parameters[2].valueAsText
+            # xpath_list = ["dataIdInfo/idPoC/role/RoleCd[@value='010']/../..","dataIdInfo/resConst", ".//dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/..", "mdLang"]
+
+            for t in str(Target_Metadata).split(';'):
+                if ' ' in t:
+                    messages.addWarningMessage('*Merge process skipped for {} due to space found in name'.format(t))
+                    continue
+
+                messages.addMessage("Processing Target {}".format(t))
+
+                source_md = md.Metadata(t)
+                source_root = ET.fromstring(source_md.xml)
+                template_root = ET.fromstring(template_md.xml)
+                # messages.addMessage("starting xpath loop")
+                for xp in defaults_xpath_list:
+                    try:
+                        # messages.addMessage("First one {}".format(xp[0].text))
+                        if len(template_root.findall(xp[0].text)) > 0:
+                            messages.addMessage('- Found in template {}: {}'.format(xp[1].text, xp[0].text))
+                            # Remove source data
+                            if len(source_root.findall(xp[0].text)) > 0:
+                                parent = source_root.findall(xp[0].text + "/..")[0]
+                                try:
+                                    for e in source_root.findall(xp[0].text):
+                                        parent.remove(e)
+                                        messages.addMessage('- Removed old target element: {}: {}'.format(xp[1].text, xp[0].text))
+                                except Exception as ee:
+                                    messages.addWarningMessage(ee)
+
+                            # Build out the list of req'd nodes leading up to the parent. Use template_md
+                            node_list = []
+                            current_node_path = xp[0].text
+                            current_node_tag = template_root.findall(xp[0].text)[0].tag
+                            parent_node_path = ""
+                            while current_node_tag != 'metadata':
+                                current_node_path += "/.."
+                                parent = template_root.findall(current_node_path)
+                                if parent:
+                                    if not parent[0].tag == 'metadata':
+                                        node_list.insert(0, parent[0].tag)
+                                    current_node_tag = parent[0].tag
+                                else:
+                                    #this should never happend, but just in case
+                                    current_node_tag = 'metadata'
+                                    messages.addMessage('This should not happen')
+
+                            # node_list does not include root node, since that should always exist
+                            source_parent_node = source_root
+                            if node_list:
+                                parent_node_path = "/".join(node_list)
+                                # messages.addMessage('Parent Xpath: {}'.format(parent_node_path))
+                                xpathList = []
+                                thisNode = source_root
+                                for xpathElem in node_list:
+                                    xpathList.append(xpathElem)
+                                    buildXPath = "/".join(xpathList)
+                                    if len(source_root.findall(buildXPath)) == 0:
+                                        ET.SubElement(thisNode, xpathElem)
+                                    thisNode = source_root.findall(buildXPath)[0]
+                                source_parent_node = source_root.findall(parent_node_path)[0]
+
+                            for template_element in template_root.findall(xp[0].text):
+                                try:
+                                    source_parent_node.append(deepcopy(template_element))
+                                    messages.addMessage('- Copied to target: {}: {}'.format(xp[1].text, xp[0].text))
+                                except Exception as ee:
+                                    messages.addWarningMessage(ee)
+                    except Exception as err:
+                        messages.addWarningMessage("Error: {}".format(err))
+
+                source_md.xml = ET.tostring(source_root)
+
+                try:
+                    fileExtension = t[-4:].lower()
+                    if fileExtension == ".xml":
+                        try:
+                            os.remove(source_md.uri)
+                        except Exception as ee:
+                            messages.addWarningMessage(ee)
+
+                        source_md.saveAsXML(source_md.uri)
+                    else:
+                        source_md.save()
+
+                except Exception as e:
+                    messages.addMessage(e)
+
+                if arcpy.Exists(t):
+                    messages.addMessage("- Process complete - please review the output carefully.")
+                    messages.addMessage("- Output: {}".format(t))
+
+                else:
+                    messages.addWarningMessage("Error processing {}.".format(t))
+
+            messages.addMessage("Copy From Template Complete.")
+        except:
+            # Cycle through Geoprocessing tool specific errors
+            for msg in range(0, arcpy.GetMessageCount()):
+                if arcpy.GetSeverity(msg) == 2:
+                    arcpy.AddReturnMessage(msg)
+        finally:
+            # messages.addMessage("Finally.")
+            # Regardless of errors, clean up intermediate products.
+            pass
+        return
+
+
+class esriSync(object):
+    def __init__(self):
+        """Define the tool (tool name is the name of the class)."""
+        self.label = "Esri Synchronize"
+        self.description = "This tool uses Esri's Metadata Synchronizer with additional options availble only via python. Please refer to Esri's tool documentation for details."
+        self.canRunInBackground = False
+
+    def getParameterInfo(self):
+        """Define parameter definitions"""
+
+        param0 = arcpy.Parameter(
+            displayName="Target Feature Class",
+            name="Target_Metadata",
+            datatype="DEFeatureClass",
+            parameterType="Required",
+            direction="Input",
+            multiValue=True)
+
+        param1 = arcpy.Parameter(
+            displayName="Synchronize Option",
+            name="SyncOption",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input"
+        )
+        param1.filter.type = "ValueList"
+        param1.filter.list = ["SELECTIVE", "OVERWRITE"]
+        param1.value = "SELECTIVE"
+
+        params = [param0, param1]
+        return params
+
+    def isLicensed(self):
+        """Set whether tool is licensed to execute."""
+        return True
+
+    def updateParameters(self, parameters):
+        """Modify the values and properties of parameters before internal
+        validation is performed.  This method is called whenever a parameter
+        has been changed."""
+        # if parameters[2].valueAsText:
+        #     fileExtension = parameters[2].valueAsText[-4:].lower()
+        #     if fileExtension != ".xml":
+        #         parameters[2].value = parameters[2].valueAsText + ".xml"
+
+        return
+
+    def updateMessages(self, parameters):
+        """Modify the messages created by internal validation for each tool
+           parameter.  This method is called after internal validation."""
+
+        return
+
+    def execute(self, parameters, messages):
+
+        messages.addMessage("Synchronizing Metadata...")
 
         try:
             """The source code of the tool."""
 
-            tool_file_path = os.path.dirname(os.path.realpath(__file__))
+            Target_Metadata = parameters[0].valueAsText
+            sync_option = parameters[1].valueAsText
 
-            Source_Metadata = parameters[0].valueAsText
-            Template_Metadata = parameters[1].valueAsText
-            Output_Metadata = parameters[2].valueAsText
+            #ToDo: Start Loop here for multiple source MDs
+            for t in str(Target_Metadata).split(';'):
+                if ' ' in t:
+                    messages.addWarningMessage('*Sync process skipped for {} due to space found in name'.format(t))
+                    continue
 
-            template_md = md.Metadata(Template_Metadata)
-
-            output_md = md.Metadata(Source_Metadata)
-
-            # TODO:  Find equivalent xslt transform that takes an input
-            # Local variables:
-            mergeTemplate_xslt = tool_file_path + r"\mergeTemplate.xslt"
-            messages.addMessage('merge template path '+ mergeTemplate_xslt)
-
-            if not arcpy.Exists(mergeTemplate_xslt):
-                messages.addMessage(
-                    "Merge Template does not exist.")
-                raise Exception('merge template does not exist')
-
-            # Process: EPA Cleanup
-            # Source_Metadata
-            # arcpy.XSLTransform_conversion(Source_Metadata, mergeTemplate_xslt, Output_Metadata, Template_Metadata)
-
-            # Source_Metadata.saveAsUsingCustomXSLT(Output_Metadata, mergeTemplate_xslt, )
-            try:
-
-                # output_md.copy(source_md)
-                messages.addMessage("Output md Title "+ str(output_md.title))
-                output_md.importMetadata(template_md, metadata_import_option='CUSTOM', customStylesheetPath=mergeTemplate_xslt)
-                output_md.saveAsXML(outputPath=Output_Metadata)
-            except Exception as e:
-                messages.addWarningMessage(e)
-
-            if arcpy.Exists(Output_Metadata):
-                messages.addMessage(
-                    "Process complete - please review the output carefully before importing or harvesting.")
-
-            else:
-                messages.addWarningMessage("Error Creating file.")
+                target_md = md.Metadata(t)
+                try:
+                    target_md.synchronize(metadata_sync_option=sync_option)
+                except Exception as syncError:
+                    messages.addWarningMessage(syncError)
+                try:
+                    target_md.save()
+                    messages.addMessage("-  {} Synchronize complete for {}.".format(sync_option, t))
+                except Exception as saveError:
+                    messages.addWarningMessage(saveError)
 
             messages.addMessage("Process complete - please review the output carefully.")
         except:
@@ -664,7 +815,7 @@ class mergeTemplate(object):
                 if arcpy.GetSeverity(msg) == 2:
                     arcpy.AddReturnMessage(msg)
         finally:
-            messages.addMessage("Finally.")
+            # messages.addMessage("Finally.")
             # Regardless of errors, clean up intermediate products.
             pass
         return
@@ -1029,7 +1180,6 @@ class editElement(object):
 
                 messages.addMessage("Editing the metadata record...")
                 # Process: EPA Cleanup
-                import xml.etree.ElementTree as ET
                 # tree = ET.parse(scratch_Metadata)
                 # root = tree.getroot()
                 # at the root when parsing from string
@@ -1050,6 +1200,7 @@ class editElement(object):
                 elements = root.findall(Xpath_Expression)
                 for elem in elements:
                     elem.text = New_Value
+
                 # tree.write(scratch_Metadata)
                 # messages.addMessage("writing back to xml object")
 

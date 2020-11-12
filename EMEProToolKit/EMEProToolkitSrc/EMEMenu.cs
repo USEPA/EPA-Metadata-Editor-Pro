@@ -26,6 +26,9 @@ using ActiproSoftware.Windows.Controls;
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Controls.Primitives;
+using System.Xml.XPath;
+using System.Xml.Xsl;
+//using System.Web.UI.WebControls;
 
 namespace EMEProToolkit
 {
@@ -344,7 +347,7 @@ namespace EMEProToolkit
 
         }
     }
-    internal class EMEMenu_mergeMD : Button
+    internal class EMEMenu_mergeTemplateMD : Button
     {
         //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
@@ -355,11 +358,40 @@ namespace EMEProToolkit
 
                 string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\mergeTemplate";
                 Geoprocessing.OpenToolDialog(toolpath, null);
+
             }
 
             catch (Exception exc)
             {
                 // Catch any exception found and display in a message box
+                Debug.WriteLine(exc.Message);
+                Debug.WriteLine(exc.InnerException);
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Exception caught while trying to run Python tool: " + exc.Message);
+                return;
+            }
+
+        }
+    }
+
+    internal class EMEMenu_esriSyncMD : Button
+    {
+        //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
+        protected override void OnClick()
+        {
+            try
+            {
+
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\esriSync";
+                Geoprocessing.OpenToolDialog(toolpath, null);
+
+            }
+
+            catch (Exception exc)
+            {
+                // Catch any exception found and display in a message box
+                Debug.WriteLine(exc.Message);
+                Debug.WriteLine(exc.InnerException);
                 ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Exception caught while trying to run Python tool: " + exc.Message);
                 return;
             }
