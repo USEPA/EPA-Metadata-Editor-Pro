@@ -358,7 +358,7 @@ namespace EMEProToolkit
 
                 string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\mergeTemplate";
                 Geoprocessing.OpenToolDialog(toolpath, null);
-
+                
             }
 
             catch (Exception exc)
