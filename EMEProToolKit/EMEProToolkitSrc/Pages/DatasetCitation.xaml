@@ -38,14 +38,20 @@ limitations under the License.​
     </XmlDataProvider>
 
     <!-- validation issues -->
-    <v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="resTitle" Message="Title required for main citation and identifier citation" />
+    <v:MetadataIssueInfo x:Key="//idCitation/citId/identAuth[resTitle]_hint" Message="   > validation hint > //Citation/Identifier/Authority Citation[Title] - (// matches any descendant)" />
     <!--<v:MetadataIssueInfo x:Key="dates" Message="{x:Static r:Issues.dates_REQ}" />-->
     <v:MetadataIssueInfo x:Key="dates" Message="date published is required" />
     <v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />
+    <v:MetadataIssueInfo x:Key="identCode_hint" Message="   > validation hint > //Citation/[Identifier Code] - (// matches any descendant)" />
     <v:MetadataIssueInfo x:Key="pubDate" Message="{x:Static r:Issues.pubDate_FGDC_REQ}" />
     <v:MetadataIssueInfo x:Key="datasetSeries" Message="{x:Static r:Issues.datasetSeries_FGDC_REQ}" />
     <v:MetadataIssueInfo x:Key="voiceNum" Message="{x:Static r:Issues.voiceNum_FGDC_REQ}" />
-    <v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />
+    <!--<v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />-->
+    <v:MetadataIssueInfo x:Key="linkage" Message="Linkage required for online resources for main citation and identifier citation" />
+    <v:MetadataIssueInfo x:Key="linkage_hint"
+                         Message="   > validation hint > //Citation/Identifier/Authority Citation/Contact/Contact Information/Online Resource[Linkage URL] - (// matches any descendant)" />
 
     <v:MetadataIssueInfo x:Key="cntAddress" Message="{x:Static r:Issues.cntAddress_FGDC_REQ}" />
     <v:MetadataIssueInfo x:Key="addressType" Message="{x:Static r:Issues.addressType_REQ}" />
@@ -53,6 +59,12 @@ limitations under the License.​
     <v:MetadataIssueInfo x:Key="adminArea_FGDC" Name="adminArea_FGDC" Message="{x:Static r:Issues.adminArea_FGDC_REQ}" />
     <v:MetadataIssueInfo x:Key="city" Message="{x:Static r:Issues.city_REQ}" />
     <v:MetadataIssueInfo x:Key="postCode" Message="{x:Static r:Issues.postCode_REQ}" />
+    <!--role and party were not in 'stock' config-->
+    <v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />
+    <v:MetadataIssueInfo x:Key="party_hint" Message="//Citation/Identifier/Authority Citation/Contact(Name | Organization | Position) - (// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />
+    <v:MetadataIssueInfo x:Key="role_hint" Message="//Citation/Identifier/Authority Citation/Contact[Role] - (// matches any descendant)" />
+
 
   </UserControl.Resources>
   <Grid Style="{DynamicResource EditorFrontPageStyle}">

@@ -38,24 +38,39 @@ limitations under the License.​
 
     <!-- validation issues -->
     <v:MetadataIssueInfo x:Key="ReportType" Message="{x:Static r:Issues.ReportType_REQ}" />
+    <v:MetadataIssueInfo x:Key="ReportType_hint" Message="   > validation hint > /Report[Type]" />
     <v:MetadataIssueInfo x:Key="scpLvlDesc" Message="{x:Static r:Issues.scpLvlDesc_REQ}" />
     <v:MetadataIssueInfo x:Key="datasetReq" Message="{x:Static r:Issues.dq_dataset_REQ}" />
     <v:MetadataIssueInfo x:Key="reportReq" Message="{x:Static r:Issues.dq_report_REQ}" />
+    <v:MetadataIssueInfo x:Key="reportReq_hint" Message="   > validation hint > /Report[Conformance Result | Quantitative Result]" />
+    <v:MetadataIssueInfo x:Key="DQReportRequired" Message="{x:Static r:Issues.dq_ReportRequired_191153_REQ}" />
 
     <v:MetadataIssueInfo x:Key="conPass" Message="{x:Static r:Issues.conPass_REQ}" />
+    <v:MetadataIssueInfo x:Key="conPass_hint" Message="   >validation hint > /Report/Conformance Result[Pass]" />
     <v:MetadataIssueInfo x:Key="conExpl" Message="{x:Static r:Issues.conExpl_REQ}" />
     <v:MetadataIssueInfo x:Key="conSpec" Message="{x:Static r:Issues.conSpec_REQ}" />
+    <v:MetadataIssueInfo x:Key="conSpec_hint" Message="   > validation hint > /Report/Conformance Result/Speculation[Title]" />
 
     <v:MetadataIssueInfo x:Key="quanVal" Message="{x:Static r:Issues.quanVal_REQ}" />
+    <v:MetadataIssueInfo x:Key="quanVal_hint" Message="   > validation hint > /Report/Quantitative Result[Value]" />
     <v:MetadataIssueInfo x:Key="uom" Message="{x:Static r:Issues.UOM_REQ}" />
+    <v:MetadataIssueInfo x:Key="uom_quan_result_hint" Message="   > validation hint > /Report/Quantitative Result[Value Unit]" />
 
     <v:MetadataIssueInfo x:Key="DQDomConsis" Name="DQDomConsis" Message="{x:Static r:Issues.DQDomConsis_REQ}" />
     <v:MetadataIssueInfo x:Key="DQDomConsis_Report" Name="DQDomConsis_Report" Message="{x:Static r:Issues.DQDomConsis_Report_REQ}" />
 
     <v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />
+    <v:MetadataIssueInfo x:Key="//report//citRespParty/party_hint" Message="   > validation hint > /Report//Contact[Name | Organization | Position] - {// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="//scpExt//citRespParty/party_hint" Message="   > validation hint > /Extent//Contact[Name | Organization | Position] - {// matches any descendant)" />
     <v:MetadataIssueInfo x:Key="partyFgdc" Message="{x:Static r:Issues.partyFgdc_FGDC_REQ}" />
     <v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />
+    <v:MetadataIssueInfo x:Key="//report//citRespParty/role_hint" Message="   > validation hint > /Report//Contact[Role] - {// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="//scpExt//citRespParty/role_hint" Message="   > validation hint > /Extent//Contact[Role] - {// matches any descendant)" />
     <v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />
+    <v:MetadataIssueInfo x:Key="//report//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" Message="   > validation hint > /Report//Contact/Contact Information/Online Resource[Linkage URL] - {// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="//dqInfo/report//citOnlineRes/linkage_hint" Message="   > validation hint > /Report//Online Resource[Linkage URL] - {// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="//dqInfo/scpExt//citOnlineRes/linkage_hint" Message="   > validation hint > /Extent//Online Resource[Linkage URL] - (* matches any child, // matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="//scpExt//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" Message="   > validation hint > /Extent//Contact/Contact Information/Online Resource[Linkage URL] - (* matches any child, // matches any descendant)" />
     <v:MetadataIssueInfo x:Key="protocol" Message="{x:Static r:Issues.protocol_REQ}" />
     <v:MetadataIssueInfo x:Key="rpCntInfo_NAP_REQ" Message="{x:Static r:Issues.rpCntInfo_NAP_REQ}" />
 
@@ -66,13 +81,23 @@ limitations under the License.​
     <v:MetadataIssueInfo x:Key="north_exists" Name="northBL" Message="{x:Static r:Issues.extent_coord_REQ}" />
     <v:MetadataIssueInfo x:Key="east_exists" Name="eastBL" Message="{x:Static r:Issues.extent_coord_REQ}" />
     <v:MetadataIssueInfo x:Key="south_exists" Name="southBL" Message="{x:Static r:Issues.extent_coord_REQ}" />
+    <v:MetadataIssueInfo x:Key="west_exists_hint" Name="westBL_hint" Message="   > validation hint > /Extent//Bounding Box[West] - (// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="north_exists_hint" Name="northBL_hint" Message="   > validation hint > /Extent//Bounding Box[North] - (// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="east_exists_hint" Name="eastBL_hint" Message="   > validation hint > /Extent//Bounding Box[East] - (// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="south_exists_hint" Name="southBL_hint" Message="   > validation hint > /Extent//Bounding Box[South] - (// matches any descendant)" />
 
     <v:MetadataIssueInfo x:Key="lonBoundsError1" Name="westBL_range" Message="{x:Static r:Issues.extent_lonBoundsError}" />
     <v:MetadataIssueInfo x:Key="latBoundsError1" Name="northBL_range" Message="{x:Static r:Issues.extent_latBoundsError}" />
+    <v:MetadataIssueInfo x:Key="westBL_range_hint" Name="westBL_range_hint" Message="   > validation hint > /Extent//Bounding Box[West lt East] - (// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="northBL_range_hint" Name="northBL_range_hint" Message="   > validation hint > /Extent//Bounding Box[South lt North] - (// matches any descendant)" />
 
     <v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />
+    <v:MetadataIssueInfo x:Key="//dqInfo/report//*[resTitle]_hint" Message="   > validation hint > /Report//*[Title] - (* matches any child, // matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="//dqInfo/scpExt//*[resTitle]_hint" Message="   > validation hint > /Extent//*[Title] - (* matches any child, // matches any descendant)" />
     <v:MetadataIssueInfo x:Key="dates" Message="{x:Static r:Issues.dates_REQ}" />
     <v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />
+    <v:MetadataIssueInfo x:Key="//dqInfo/report//*[identCode]_hint" Message="   > validation hint > /Report//*[Identifier Code] - (* matches any child, // matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="//dqInfo/scpExt//*[identCode]_hint" Message="   > validation hint > /Extent//*[Identifier Code] - (* matches any child, // matches any descendant)" />
     <v:MetadataIssueInfo x:Key="voiceNum" Message="{x:Static r:Issues.voiceNum_FGDC_REQ}" />
 
     <v:MetadataIssueInfo x:Key="cntAddress" Message="{x:Static r:Issues.cntAddress_FGDC_REQ}" />
@@ -94,7 +119,7 @@ limitations under the License.​
     <StackPanel>
       <!--org header-->
       <t:EME_Header/>
-      
+
       <!-- page title -->
       <!--<Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.SEC_DATAQUAL}"/>-->
       <DockPanel>
@@ -105,7 +130,8 @@ limitations under the License.​
           </Hyperlink>
         </Label>
       </DockPanel>
-      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/dqInfo}">
+      <!--<Label Style="{DynamicResource EditorPageTitle}" Content="{x:Static r:Resources.SEC_DATAQUAL}"/>-->
+      <ListBox Style="{DynamicResource EditorNoScrollListBoxStyle}" ItemsSource="{Binding XPath=/metadata/dqInfo}" v:Nav.AnchorName="DQReportRequired,/metadata/dqInfo">
         <ListBox.ItemsPanel>
           <ItemsPanelTemplate>
             <StackPanel/>
