@@ -26,9 +26,6 @@ using ActiproSoftware.Windows.Controls;
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Controls.Primitives;
-using System.Xml.XPath;
-using System.Xml.Xsl;
-//using System.Web.UI.WebControls;
 
 namespace EMEProToolkit
 {

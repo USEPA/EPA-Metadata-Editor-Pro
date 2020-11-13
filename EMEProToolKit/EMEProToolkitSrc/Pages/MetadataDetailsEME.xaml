@@ -102,7 +102,8 @@
         </Style>
 
         <v:MetadataIssueInfo x:Key="scopeCd" Message="{x:Static r:Issues.mdHrLv_REQ}" />
-        <v:MetadataIssueInfo x:Key="mdHrLvName" Message="{x:Static r:Issues.mdHrLvName_REQ}" />
+        <!--<v:MetadataIssueInfo x:Key="mdHrLvName" Message="{x:Static r:Issues.mdHrLvName_REQ}" />-->
+        <v:MetadataIssueInfo x:Key="mdHrLvName" Message="Hierarchy Level Name is required if Hierarchy Level is not 'Dataset'" />
         <v:MetadataIssueInfo x:Key="languageCode" Message="{x:Static r:Issues.languageCode_REQ}" />
         <v:MetadataIssueInfo x:Key="countryCode" Message="{x:Static r:Issues.countryCode_REQ}" />
         <v:MetadataIssueInfo x:Key="mdFileID" Message="{x:Static r:Issues.mdFileID_REQ}" />

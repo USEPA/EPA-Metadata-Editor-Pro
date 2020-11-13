@@ -178,6 +178,7 @@ limitations under the License.​
 
     <!-- validation issues -->
     <v:MetadataIssueInfo x:Key="bgFileName" Message="{x:Static r:Issues.bgFileName_REQ}" />
+    <v:MetadataIssueInfo x:Key="bgFileName_hint" Message="   > validation hint > //Browse Graphic[File Name] - (// matches any descendant)" />
     <v:MetadataIssueInfo x:Key="bgFileDesc" Message="{x:Static r:Issues.bgFileDesc_REQ}" />
     <v:MetadataIssueInfo x:Key="bgFileType" Message="{x:Static r:Issues.bgFileType_REQ}" />
 

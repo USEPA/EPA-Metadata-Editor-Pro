@@ -68,26 +68,36 @@ limitations under the License.​
       </x:XData>
     </XmlDataProvider>
 
-    <!-- validation issues -->
+    <!-- validation issues -->    
     <v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />
+    <v:MetadataIssueInfo x:Key="//prcStep/stepProc/party_hint" Message="   > validation hint > //Process Step/Processor[Name | Organization | Position]" />
+    <v:MetadataIssueInfo x:Key="//dataLineage//citRespParty/party_hint" Message="   > validation hint > //Contact[Name | Organization | Position] - (// matches any descendant)" />
     <v:MetadataIssueInfo x:Key="partyFgdc" Message="{x:Static r:Issues.partyFgdc_FGDC_REQ}" />
     <v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />
+    <v:MetadataIssueInfo x:Key="//dataLineage//citRespParty/role_hint" Message="   >validation hint > //Contact[Role] - (// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="//prcStep/stepProc/role_hint" Message="   > validation hint > //Process Step/Processor[Role]" />
     <v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />
+    <v:MetadataIssueInfo x:Key="//dataLineage//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" Message="   > validation hint > /Data Source//Source Citation//Contact/Contact Information/Online Resource[Linkage URL] - (// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="//prcStep/stepProc/rpCntInfo/cntOnlineRes/linkage_hint" Message="   > validation hint > /Process Step/Processor/Contact Information/Online Resource[Linkage URL]" />
+    <v:MetadataIssueInfo x:Key="//dataLineage//citOnlineRes/linkage_hint" Message="   > validation hint > /Data Source/Source Citation/Online Resource[Linkage URL] - (// matches any descendant)" />
     <v:MetadataIssueInfo x:Key="protocol" Message="{x:Static r:Issues.protocol_REQ}" />
     <v:MetadataIssueInfo x:Key="rpCntInfo_NAP_REQ" Message="{x:Static r:Issues.rpCntInfo_NAP_REQ}" />
     <v:MetadataIssueInfo x:Key="datasetReq" Message="{x:Static r:Issues.dq_dataset_REQ}" />
 
     <v:MetadataIssueInfo x:Key="dataLineage" Message="{x:Static r:Issues.dataLineage_REQ}" />
     <v:MetadataIssueInfo x:Key="dataLineage_FGDC" Message="{x:Static r:Issues.dataLineage_FGDC_REQ}" />
+    <v:MetadataIssueInfo x:Key="lineageContentReqd" Message="{x:Static r:Issues.lineageContentReqd_191153_REQ}" />
 
     <v:MetadataIssueInfo x:Key="dqInfo" Message="{x:Static r:Issues.dqInfo_REQ}" />
     <v:MetadataIssueInfo x:Key="dataSource" Message="{x:Static r:Issues.dataSource_REQ}" />
+    <v:MetadataIssueInfo x:Key="dataSource_hint" Message="   > validation hint > /Data Source[Extent | Description]" />
     <v:MetadataIssueInfo x:Key="dqStatement" Message="{x:Static r:Issues.dqStatement_INSPIRE_REQ}" />
 
     <v:MetadataIssueInfo x:Key="dataSource_nap" Message="{x:Static r:Issues.dataSource_NAP_REQ}" />
     <v:MetadataIssueInfo x:Key="srcDesc" Message="{x:Static r:Issues.srcDesc_REQ}" />
 
     <v:MetadataIssueInfo x:Key="stepDesc" Message="{x:Static r:Issues.stepDesc_REQ}" />
+    <v:MetadataIssueInfo x:Key="stepDesc_hint" Message="   > validation hint > /Process Step[Process Description]" />
     <v:MetadataIssueInfo x:Key="stepDateTm" Message="{x:Static r:Issues.stepDateTm_REQ}" />
 
     <v:MetadataIssueInfo x:Key="west_exists" Name="westBL" Message="{x:Static r:Issues.extent_coord_REQ}" />
@@ -98,9 +108,22 @@ limitations under the License.​
     <v:MetadataIssueInfo x:Key="lonBoundsError1" Name="westBL_range" Message="{x:Static r:Issues.extent_lonBoundsError}" />
     <v:MetadataIssueInfo x:Key="latBoundsError1" Name="northBL_range" Message="{x:Static r:Issues.extent_latBoundsError}" />
 
+    <!-- Data Source/Source Extent/Bounding Box -->
+    <v:MetadataIssueInfo x:Key="westBL_hint" Name="westBL_hint" Message="   > validation hint > /Data Source/Source Extent/Bounding Box[West] - (// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="eastBL_hint" Name="eastBL_hint" Message="   > validation hint > /Data Source/Source Extent/Bounding Box[East] - (// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="northBL_hint" Name="northBL_hint" Message="   > validation hint > /Data Source/Source Extent/Bounding Box[North] - (// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="southBL_hint" Name="southBL_hint" Message="   > validation hint > /Data Source/Source Extent/Bounding Box[South] - (// matches any descendant)" />
+
+    <v:MetadataIssueInfo x:Key="westBL_range_hint" Name="westBL_range_hint" Message="   > validation hint > /Data Source/Source Extent/Bounding Box[West lt East] - (// matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="northBL_range_hint" Name="northBL_range_hint" Message="   > validation hint > /Data Source/Source Extent/Bounding Box[South lt North] - (// matches any descendant)" />
+
     <v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />
+    <v:MetadataIssueInfo x:Key="resTitle_hint" Message="   > validation hint > //Data Lineage//*[Title] - (* matches any child, // matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="dataSource_resTitle_hint" Message="   > validation hint > /Data Source//*[Title] - (* matches any child, // matches any descendant)" />
+
     <v:MetadataIssueInfo x:Key="dates" Message="{x:Static r:Issues.dates_REQ}" />
     <v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />
+    <v:MetadataIssueInfo x:Key="//dataLineage//srcRefSys[identCode]_hint" Message="   > validation hint > //Reference System/Authority Citation/Identifier[Identifier Code]d" />
     <v:MetadataIssueInfo x:Key="voiceNum" Message="{x:Static r:Issues.voiceNum_FGDC_REQ}" />
 
     <v:MetadataIssueInfo x:Key="cntAddress" Message="{x:Static r:Issues.cntAddress_FGDC_REQ}" />
@@ -124,7 +147,7 @@ limitations under the License.​
                 v:Nav.AnchorName="dataLineage" />
 
             <!-- statement -->
-            <Border Style="{DynamicResource EditorBorder2Style}">
+            <Border Style="{DynamicResource EditorBorder2Style}" v:Nav.AnchorName="lineageContentReqd,.">
               <StackPanel>
                 <Label Style="{DynamicResource EditorVLabelNoIdentStyle}" Content="{x:Static r:Resources.LBL_LI_STATEMENT}"/>
                 <controls:Resizer>
@@ -225,6 +248,9 @@ limitations under the License.​
         </DataTemplate>
       </ListBox.ItemTemplate>
     </ListBox>
+    
+    <!-- validate after all anchors are loaded -->
+    <v:PageValidateControl/>
   </Grid>
 
 </p:EditorPage>
