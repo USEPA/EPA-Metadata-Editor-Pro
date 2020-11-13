@@ -43,9 +43,12 @@ limitations under the License.​
 
     <!-- validation issues -->
     <v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />
+    <v:MetadataIssueInfo x:Key="party_hint" Message="   > validation hint > //Metadata Maintenance/Contact(Name | Organization | Position) - (//matches any descendant)" />
     <v:MetadataIssueInfo x:Key="partyFgdc" Message="{x:Static r:Issues.partyFgdc_FGDC_REQ}" />
     <v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />
+    <v:MetadataIssueInfo x:Key="role_hint" Message="   > validation hint > //Metadata Maintenance/Contact[Role] - (//matches any descendant)" />
     <v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />
+    <v:MetadataIssueInfo x:Key="linkage_hint" Message="   > validation hint > //Metadata Maintenance/Contact/Contact Information/Online Resource[Linkage URL] - (//matches any descendant)" />
     <v:MetadataIssueInfo x:Key="protocol" Message="{x:Static r:Issues.protocol_REQ}" />
     <v:MetadataIssueInfo x:Key="rpCntInfo_NAP_REQ" Message="{x:Static r:Issues.rpCntInfo_NAP_REQ}" />
     <v:MetadataIssueInfo x:Key="voiceNum" Message="{x:Static r:Issues.voiceNum_FGDC_REQ}" />

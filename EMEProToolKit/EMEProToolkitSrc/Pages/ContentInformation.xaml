@@ -78,23 +78,43 @@ limitations under the License.​
 
     <!-- validation issues -->
     <v:MetadataIssueInfo x:Key="attDesc" Message="{x:Static r:Issues.attDesc_REQ}" />
+    <v:MetadataIssueInfo x:Key="//CovDesc/attDesc_hint" Message="   > validation /Coverage Description[Attribute Description]" />
+    <v:MetadataIssueInfo x:Key="//ImgDesc/attDesc_hint" Message="   > validation hint > /Image Description[Attribute Description]" />
     <v:MetadataIssueInfo x:Key="ContentTypCd" Message="{x:Static r:Issues.ContentTypCd_REQ}" />
+    <v:MetadataIssueInfo x:Key="ContentTypCd_hint" Message="   > validatino hint > /Descrption[Content Type]" />
     <v:MetadataIssueInfo x:Key="MinMaxVal" Message="{x:Static r:Issues.MinMaxVal_REQ}" />
     <v:MetadataIssueInfo x:Key="uom" Message="{x:Static r:Issues.valUnit_REQ}" />
+    <v:MetadataIssueInfo x:Key="uom_hint" Message="   > validation hint > /Description/Band[Units]" />
     <v:MetadataIssueInfo x:Key="bandMinMax" Name="bandMinMax" Message="{x:Static r:Issues.band_minMaxBoundsError}" />
+    <v:MetadataIssueInfo x:Key="bandMinMax_hint" Name="bandMinMax_hint" Message="   > validation hint > /Description/Band[Min lt Max] " />
 
     <v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />
+    <v:MetadataIssueInfo x:Key="party_hint" Message="   > validation hint > /Feature Catalogue//Feature Catalogue Citation//Contact[Name | Organzation | Position] - (// mathches any child)" />
+    <v:MetadataIssueInfo x:Key="//ImgDesc//citRespParty/party_hint" Message="   > validation hint > //Image Description//Authority Citation/Contact[Name | Organzation | Position) - (// matches any descendant)" />
     <v:MetadataIssueInfo x:Key="partyFgdc" Message="{x:Static r:Issues.partyFgdc_FGDC_REQ}" />
     <v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />
+    <v:MetadataIssueInfo x:Key="//catCitation//citRespParty/role" Message="Feature Catalogue/Feature Catalogue Citation/Contact - Role is required" />
+    <v:MetadataIssueInfo x:Key="//ImgDesc//citRespParty/role_hint" Message="   > validation hint > //Image Description//Authority Citation/Online Resource[Role] - (// matches any descendant)" />
     <v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />
+    <v:MetadataIssueInfo x:Key="linkage_hint" Message="   > validation hint > /Feature Catalogue/Feature Catalogue Citation/Online Resource[Linkage URL]" />
+    <v:MetadataIssueInfo x:Key="//catCitation//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" Message="   > validation hint > Feature Catalogue/Feature Catalogue Citation/Contact/Contact Information/Online Resource[Linkage URL]" />
+    <v:MetadataIssueInfo x:Key="//ImgDesc//citRespParty/rpCntInfo/cntOnlineReslinkage_hint" Message="   > validation hint > /Image Description/Citation/Contact/Contact Information/Online Resource[Linkage URL]" />
     <v:MetadataIssueInfo x:Key="protocol" Message="{x:Static r:Issues.protocol_REQ}" />
     <v:MetadataIssueInfo x:Key="rpCntInfo_NAP_REQ" Message="{x:Static r:Issues.rpCntInfo_NAP_REQ}" />
     <v:MetadataIssueInfo x:Key="incWithDS" Message="{x:Static r:Issues.rpCntInfo_incWithDS}" />
+    <v:MetadataIssueInfo x:Key="incWithDS_hint" Message="   > validation hint > /Feature Catalogue[Included with Dataset]" />
+    
     <v:MetadataIssueInfo x:Key="seqID" Message="{x:Static r:Issues.seqID_REQ}" />
+    <v:MetadataIssueInfo x:Key="//CovDesc//RangeDim/seqID_hint" Message="   > validation hint > /Coverage Description/Range Dimension[Sequence Identifier]" />
+    <v:MetadataIssueInfo x:Key="//CovDesc//Band/seqID_hint" Message="   > validation hint > /Coverage Description/Band[Sequence Identifier]" />
+    <v:MetadataIssueInfo x:Key="//ImgDesc//RangeDim/seqID_hint" Message="   > validation hint > /Image Description/Range Dimension[Sequence Identifier]" />
+    <v:MetadataIssueInfo x:Key="//ImgDesc//Band/seqID_hint" Message="   > validation hint > /Image Description/Band[Sequence Identifier]" />
 
     <v:MetadataIssueInfo x:Key="resTitle" Message="{x:Static r:Issues.resTitle_REQ}" />
+    <v:MetadataIssueInfo x:Key="resTitle_hint" Message="   > validation hint > /Feature Catalogue/Feature Catalogue Citation[Title]" />
     <v:MetadataIssueInfo x:Key="dates" Message="{x:Static r:Issues.dates_REQ}" />
     <v:MetadataIssueInfo x:Key="identCode" Message="{x:Static r:Issues.identCode_REQ}" />
+    <v:MetadataIssueInfo x:Key="identCode_hint" Message="   > validation hint > /Feature Catalogue/Feature Catalogue Citation/Identifier[Identifier Code]" />
     <v:MetadataIssueInfo x:Key="voiceNum" Message="{x:Static r:Issues.voiceNum_FGDC_REQ}" />
 
     <v:MetadataIssueInfo x:Key="cntAddress" Message="{x:Static r:Issues.cntAddress_FGDC_REQ}" />
