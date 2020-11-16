@@ -61,19 +61,14 @@ limitations under the License.​
     <!ELEMENT handDesc (#PCDATA)>
      
     -->
-
+    
     <converters:ListBoxItemToAutomationIdConverter x:Key="_lbiToAutoIdConverter" />
     <XmlDataProvider x:Key="XmlRecord" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
       <x:XData>
         <ANY xmlns="">
-          <!--<useLimit/>-->
           <accessConsts>
-            <!--<RestrictCd value=""/>-->
-            <RestrictCd value="009"/>
+            <RestrictCd value="009"></RestrictCd>
           </accessConsts>
-          <!--<useConsts>
-            <RestrictCd value=""/>
-          </useConsts>-->
         </ANY>
       </x:XData>
     </XmlDataProvider>
@@ -104,15 +99,17 @@ limitations under the License.​
       </x:XData>
     </XmlDataProvider>
 
-    <XmlDataProvider x:Key="XmlRecord_UseConsts" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
-      <x:XData>
-        <ANY xmlns="">
-          <useConsts editorAppend="True">
-            <RestrictCd value=""/>
-          </useConsts>
-        </ANY>
-      </x:XData>
-    </XmlDataProvider>
+    <XmlDataProvider x:Key="EPAData"
+                         Source="SystemofRecords.xml"
+                         XPath="emeData/SystemOfRecord"
+                         IsInitialLoadEnabled="True"/>
+
+    <Style x:Key="TbxHidden" TargetType="{x:Type TextBox}">
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="FontSize" Value="0.125"/>
+      <Setter Property="Height" Value="0"/>
+      <Setter Property="Width" Value="0"/>
+    </Style>
 
   </UserControl.Resources>
 
