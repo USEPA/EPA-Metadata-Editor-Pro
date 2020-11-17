@@ -3,6 +3,7 @@ import re
 import arcpy
 from arcpy import metadata as md
 import xml.etree.ElementTree as ET
+from copy import deepcopy
 import sys
 
 
@@ -607,7 +608,6 @@ class mergeTemplate(object):
 
         # messages.addMessage("Setting Defaults...")
         tool_file_path = os.path.dirname(os.path.realpath(__file__))
-        from copy import deepcopy
 
         try:
             """The source code of the tool."""
@@ -1323,6 +1323,94 @@ class editDates(object):
             New_Value.value = Date_Value
 
             editElem.execute([this_Metadata,Xpath_Expression,New_Value],messages)
+
+        except:
+            # Cycle through Geoprocessing tool specific errors
+            for msg in range(0, arcpy.GetMessageCount()):
+                if arcpy.GetSeverity(msg) == 2:
+                    arcpy.AddReturnMessage(msg)
+        finally:
+            # Regardless of errors, clean up intermediate products.
+            pass
+        return
+
+class keywords2tags(object):
+    def __init__(self):
+        """Define the tool (tool name is the name of the class)."""
+        self.label = "Copy Keywords to Tags"
+        self.description = "This tool copies ALL keywords present in the metadata to the Tags section. The tool does not alter the keywords, and any existing 'tags' will be preserved but not duplicated. For use prior to sharing as a web layer."
+        self.canRunInBackground = False
+
+    def getParameterInfo(self):
+        """Define parameter definitions"""
+        # Second parameter
+        param0 = arcpy.Parameter(
+            displayName="Target Metadata",
+            name="Target_Metadata",
+            datatype="DEType",
+            parameterType="Required",
+            direction="Input",
+            multiValue=True)
+
+        params = [param0]
+        return params
+
+    def isLicensed(self):
+        """Set whether tool is licensed to execute."""
+        return True
+
+    def updateParameters(self, parameters):
+        """Modify the values and properties of parameters before internal
+        validation is performed.  This method is called whenever a parameter
+        has been changed."""
+        return
+
+    def updateMessages(self, parameters):
+        """Modify the messages created by internal validation for each tool
+        parameter.  This method is called after internal validation."""
+        return
+
+    def execute(self, parameters, messages):
+        try:
+            """The source code of the tool."""
+            Metadata_Inputs = parameters[0].valueAsText
+
+            # topic categories labels:
+            # C:\Data\R9\EPA - Metadata - Editor - Pro\EMEProToolKit\EMEProToolkitSrc\Properties\Resources.resx
+
+            for t in str(Metadata_Inputs).split(";"):
+
+                messages.addMessage("Copying keywords to tags for {}".format(t))
+
+                target_md = md.Metadata(t)
+                target_root = ET.fromstring(target_md.xml)
+                searchKeys_xp = "dataIdInfo/searchKeys"
+                existingTags_xp = [t.text for t in target_root.findall(searchKeys_xp + "/keyword")]
+                tags_parent_node = target_root.findall(searchKeys_xp)[0]
+
+                tpCat_xp = "//dataIdInfo/tpCat/TopicCatCd/@value"
+                epaKeywords_xp = "//themeKeys/thesaName/resTitle[. = 'EPA GIS Keyword Thesaurus'][1]/../../keyword"
+                placeKeywords_xp = "//resTitle[. = 'EPA Place Names'][1]/../../keyword"
+                programKeywords_xp = "//resTitle[. = 'Federal Program Inventory'][1]/../../keyword"
+                searchKeys_xp = "//dataIdInfo/searchKeys"
+                tags_parent_node = target_root.findall(searchKeys_xp)[0]
+                try:
+                    if len(target_root.findall(epaKeywords_xp)) > 0:
+                        messages.addMessage('- Found {}'.format(epaKeywords_xp))
+                    for kw in target_root.findall(epaKeywords_xp):
+                        if kw.text in existingTags_xp:
+                            print('{} already exists as Tag'.format(kw.text))
+                            messages.addMessage('{} already exists as Tag'.format(kw.text))
+                            continue
+                        try:
+                            tags_parent_node.append(deepcopy(kw))
+                            messages.addMessage('{} added to Tags'.format(kw.text))
+                        except Exception as ee:
+                            messages.addWarningMessage(ee)
+                except Exception as ee:
+                    messages.addWarningMessage(ee)
+
+                messages.addMessage("Process complete - please review the output carefully.")
 
         except:
             # Cycle through Geoprocessing tool specific errors
