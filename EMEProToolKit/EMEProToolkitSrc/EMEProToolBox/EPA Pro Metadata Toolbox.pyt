@@ -15,7 +15,7 @@ class Toolbox(object):
         self.alias = ""
 
         # List of tool classes associated with this toolbox
-        self.tools = [upgradeTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate, exportISOTool, esriSync]
+        self.tools = [upgradeTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate, exportISOTool, esriSync, keywords2tags]
         # self.tools = [upgradeTool,cleanupTool,exportISOTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate]
 
 
@@ -1374,44 +1374,111 @@ class keywords2tags(object):
         try:
             """The source code of the tool."""
             Metadata_Inputs = parameters[0].valueAsText
-
-            # topic categories labels:
-            # C:\Data\R9\EPA - Metadata - Editor - Pro\EMEProToolKit\EMEProToolkitSrc\Properties\Resources.resx
+            # emeDB path
+            emeDB_path = os.path.join(os.getenv('APPDATA'), 'U.S. EPA', 'EME Toolkit', 'EMEdb')
+            messages.addMessage(emeDB_path)
 
             for t in str(Metadata_Inputs).split(";"):
 
                 messages.addMessage("Copying keywords to tags for {}".format(t))
 
+                emeDB_path = os.path.join(os.getenv('APPDATA'), 'U.S. EPA', 'EME Toolkit', 'EMEdb')
+                messages.addMessage(emeDB_path)
+
                 target_md = md.Metadata(t)
                 target_root = ET.fromstring(target_md.xml)
                 searchKeys_xp = "dataIdInfo/searchKeys"
-                existingTags_xp = [t.text for t in target_root.findall(searchKeys_xp + "/keyword")]
-                tags_parent_node = target_root.findall(searchKeys_xp)[0]
+                existingTags = [t.text for t in target_root.findall(searchKeys_xp + "/keyword")]
+                # print('existing tags: '+ existingTags)
+                messages.addMessage('existing searchKeys: '+", ".join(existingTags))
 
-                tpCat_xp = "//dataIdInfo/tpCat/TopicCatCd/@value"
-                epaKeywords_xp = "//themeKeys/thesaName/resTitle[. = 'EPA GIS Keyword Thesaurus'][1]/../../keyword"
-                placeKeywords_xp = "//resTitle[. = 'EPA Place Names'][1]/../../keyword"
-                programKeywords_xp = "//resTitle[. = 'Federal Program Inventory'][1]/../../keyword"
-                searchKeys_xp = "//dataIdInfo/searchKeys"
-                tags_parent_node = target_root.findall(searchKeys_xp)[0]
+                tpCat_lookup = {'001': 'Farming',
+                                '002': 'Biota',
+                                '003': 'Boundaries',
+                                '004': 'Atmospheric Science',
+                                '005': 'Economy',
+                                '006': 'Elevation',
+                                '007': 'Environment',
+                                '008': 'Geoscientific',
+                                '009': 'Health',
+                                '010': 'Imagery & Basemaps',
+                                '011': 'Military & Intelligence',
+                                '012': 'Inland Waters',
+                                '013': 'Location',
+                                '014': 'Oceans',
+                                '015': 'Planning & Cadastral',
+                                '016': 'Society',
+                                '017': 'Structure',
+                                '018': 'Transportation',
+                                '019': 'Utilities & Communication'}
+
+                # ISO 19115-3 Topic Categories
+                tpCat_xp = "dataIdInfo/tpCat/TopicCatCd[@value]"
+                tpCat_values = [tpCat_lookup[x.attrib['value']] for x in target_root.findall(tpCat_xp)]
+                tpCat_keywords = [create_keyword(kw) for kw in tpCat_values]
+
+                # EPA Keywords
+                epaKeywords_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus'][1]/../keyword"
+                epaKeywords_keywords = [kw for kw in target_root.findall(epaKeywords_xp)]
+
+                # Place Keywords
+                placeKeywords_xp = "dataIdInfo/placeKeys/thesaName/[resTitle='EPA Place Names'][1]/../keyword"
+                placeKeywords_keywords = [kw for kw in target_root.findall(placeKeywords_xp)]
+
+                # Program Codes
+                programCodes_path = os.path.join(emeDB_path, 'ProgramCode.xml')
+                programCodes_root = ET.parse(programCodes_path).getroot()
+                programCodes_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='Federal Program Inventory'][1]/../keyword"
+                programCodes_values = [getPcode(v.text, programCodes_root) for v in
+                                       target_root.findall(programCodes_xp)]
+                programCodes_keywords = [create_keyword(kw) for kw in programCodes_values]
+
+                # Parent searchKeys component
+                searchKeys_xp = "dataIdInfo/searchKeys"
+                tags_parent_node = target_root.findall(searchKeys_xp)
+                if not tags_parent_node:
+                    messages.addMessage('Creating searchKeys component...')
+                    # Then need to create searchKeys
+                    dataIdInfo = target_root.find('dataIdInfo')
+                    sK = ET.TreeBuilder()
+                    sK.start('searchKeys')
+                    sK.end('searchKeys')
+                    md_component = sK.close()
+                    dataIdInfo.append(deepcopy(md_component))
+                tags_parent_node = target_root.find(searchKeys_xp)
+
+                for keys in [tpCat_keywords, epaKeywords_keywords, placeKeywords_keywords, programCodes_keywords]:
+                    try:
+                        for kw in keys:
+                            if kw.text in existingTags:
+                                print('{} already exists as Tag'.format(kw.text))
+                                messages.addMessage('{} already exists as Tag'.format(kw.text))
+                                continue
+                            try:
+                                tags_parent_node.append(deepcopy(kw))
+                                existingTags.append(kw.text)
+                                messages.addMessage('{} added to Tags'.format(kw.text))
+                            except Exception as ee:
+                                print(ee)
+                                messages.addWarningMessage(ee)
+                    except Exception as ee:
+                        print(ee)
+                        messages.addWarningMessage(ee)
+                messages.addMessage("Process complete - please review the output carefully.")
+                # Save
+                target_md.xml = ET.tostring(target_root)
                 try:
-                    if len(target_root.findall(epaKeywords_xp)) > 0:
-                        messages.addMessage('- Found {}'.format(epaKeywords_xp))
-                    for kw in target_root.findall(epaKeywords_xp):
-                        if kw.text in existingTags_xp:
-                            print('{} already exists as Tag'.format(kw.text))
-                            messages.addMessage('{} already exists as Tag'.format(kw.text))
-                            continue
+                    fileExtension = t[-4:].lower()
+                    if fileExtension == ".xml":
                         try:
-                            tags_parent_node.append(deepcopy(kw))
-                            messages.addMessage('{} added to Tags'.format(kw.text))
+                            os.remove(target_md.uri)
+                            target_md.saveAsXML(target_md.uri)
                         except Exception as ee:
                             messages.addWarningMessage(ee)
+                    target_md.save()
                 except Exception as ee:
+                    print(ee)
                     messages.addWarningMessage(ee)
-
-                messages.addMessage("Process complete - please review the output carefully.")
-
         except:
             # Cycle through Geoprocessing tool specific errors
             for msg in range(0, arcpy.GetMessageCount()):
@@ -1421,3 +1488,18 @@ class keywords2tags(object):
             # Regardless of errors, clean up intermediate products.
             pass
         return
+def create_keyword(string_value):
+    keyW = ET.TreeBuilder()
+    keyW.start('keyword')
+    keyW.data(string_value)
+    keyW.end('keyword')
+    keywordComponent = keyW.close()
+    return keywordComponent
+
+def getPcode(pCode, root):
+    progCodes_xp = "./ProgramCode/[pCode='{}']/programName".format(pCode)
+    ProgramCodes = root.findall(progCodes_xp)
+    if ProgramCodes:
+        return ProgramCodes[0].text
+    else:
+        return None
