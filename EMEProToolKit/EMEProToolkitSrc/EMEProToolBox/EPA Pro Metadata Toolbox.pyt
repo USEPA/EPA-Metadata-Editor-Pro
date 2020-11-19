@@ -1575,9 +1575,8 @@ class keywords2tags(object):
                 searchKeys_xp = "dataIdInfo/searchKeys"
                 existingTags = [t.text for t in target_root.findall(searchKeys_xp + "/keyword")]
                 messages.addMessage(existingTags)
-                # print('existing tags: '+ existingTags)
-                # messages.addMessage('existing searchKeys: '+", ".join(existingTags))
 
+                # ISO 19115-3 Topic Categories
                 tpCat_lookup = {'001': 'Farming',
                                 '002': 'Biota',
                                 '003': 'Boundaries',
@@ -1597,29 +1596,33 @@ class keywords2tags(object):
                                 '017': 'Structure',
                                 '018': 'Transportation',
                                 '019': 'Utilities & Communication'}
-
-                # ISO 19115-3 Topic Categories
                 tpCat_xp = "dataIdInfo/tpCat/TopicCatCd[@value]"
                 tpCat_values = [tpCat_lookup[x.attrib['value']] for x in target_root.findall(tpCat_xp)]
                 tpCat_keywords = [create_keyword(kw) for kw in tpCat_values]
 
-                # EPA Keywords
-                epaKeywords_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus'][1]/../keyword"
-                epaKeywords_keywords = [kw for kw in target_root.findall(epaKeywords_xp)]
-
-                # Place Keywords
-                placeKeywords_xp = "dataIdInfo/placeKeys/thesaName/[resTitle='EPA Place Names'][1]/../keyword"
-                placeKeywords_keywords = [kw for kw in target_root.findall(placeKeywords_xp)]
+                # # EPA Keywords
+                # epaKeywords_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus'][1]/../keyword"
+                # epaKeywords_keywords = [kw for kw in target_root.findall(epaKeywords_xp)]
+                #
+                # # Place Keywords
+                # placeKeywords_xp = "dataIdInfo/placeKeys/thesaName/[resTitle='EPA Place Names'][1]/../keyword"
+                # placeKeywords_keywords = [kw for kw in target_root.findall(placeKeywords_xp)]
 
                 # Program Codes
                 programCodes_path = os.path.join(emeDB_path, 'ProgramCode.xml')
                 programCodes_root = ET.parse(programCodes_path).getroot()
                 programCodes_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='Federal Program Inventory'][1]/../keyword"
-                messages.addMessage([x.text for x in target_root.findall(programCodes_xp)])
+                programCodes_code_keyw = target_root.findall(programCodes_xp)
+
                 programCodes_values = [getPcode(v.text, programCodes_root) for v in
                                        target_root.findall(programCodes_xp)]
                 programCodes_keywords = [create_keyword(kw) for kw in programCodes_values]
                 messages.addMessage(programCodes_values)
+
+                # All keywords (includes user, epa, place, custom, and program code keywords
+                gen_keywords_xp = './/keyword'
+                gen_keywords_all = target_root.findall(gen_keywords_xp)
+                gen_keywords = [x for x in gen_keywords_all if x not in programCodes_code_keyw]
 
                 # Parent searchKeys component
                 searchKeys_xp = "dataIdInfo/searchKeys"
@@ -1635,7 +1638,7 @@ class keywords2tags(object):
                     dataIdInfo.append(deepcopy(md_component))
                 tags_parent_node = target_root.find(searchKeys_xp)
 
-                for keys in [tpCat_keywords, epaKeywords_keywords, placeKeywords_keywords, programCodes_keywords]:
+                for keys in [tpCat_keywords, gen_keywords, programCodes_keywords]:
                     try:
                         for kw in keys:
                             if kw.text in existingTags:

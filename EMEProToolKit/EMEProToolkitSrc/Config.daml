@@ -1254,11 +1254,11 @@ limitations under the License.​
           </tooltip>
         </button>
         
-        <button id="EMEProToolkit_EMEMenu_Items_ShowToolbox" caption="Display Toolbox Path" 
+        <button id="EMEProToolkit_EMEMenu_Items_ShowToolbox" caption="Toolbox Path" 
                 className="EMEMenu_ShowToolbox" loadOnClick="true" 
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/GeoprocessingToolboxPythonNew16.png" 
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingToolboxPythonNew32.png">
-          <tooltip heading="Show Python Toolbox Dir">
+          <tooltip heading="Show Python Toolbox Path">
           This displays the path the underlying python toolbox that many of the EME tools use<disabledText /></tooltip>
         </button>
         <!---->
@@ -1358,7 +1358,7 @@ limitations under the License.​
         
         <group id="EMEProToolkit_Catalog_Group" caption="Navigation">
           <button refID="esri_core_showProjectView" />
-          <button refID="EMEProToolkit_EMEMenu_Items_ShowToolbox" size="small" />
+          <button refID="EMEProToolkit_EMEMenu_Items_ShowToolbox" size="large" />
           <!--<button refID="EMEProToolkit_EMEMenu_Items_test" />-->
         </group>
         
