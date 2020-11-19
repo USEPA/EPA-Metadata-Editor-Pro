@@ -16,7 +16,7 @@ limitations under the License.​
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
         xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
   
-  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="Beta" desktopVersion="2.6.24783">
+  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="1.0" desktopVersion="2.6.24783">
 	<Name>EMEProToolkit</Name>
 	<Description>US EPA Metadata Editor (EME) AddIn for ArcGIS Pro based off Esri's Metadata Toolkit</Description>
 	<Image>Images\AddinDesktop32.png</Image>
