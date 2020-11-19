@@ -1540,6 +1540,21 @@ class keywords2tags(object):
         return
 
     def execute(self, parameters, messages):
+        # for keywords2tags
+        def create_keyword(string_value):
+            keyW = ET.TreeBuilder()
+            keyW.start('keyword')
+            keyW.data(string_value)
+            keyW.end('keyword')
+            keywordComponent = keyW.close()
+            return keywordComponent
+
+        # for keywords2tags
+        def getPcode(pCode, Progroot):
+            progcodes_xp = "ProgramCode/[pCode='{}']/programName".format(pCode)
+            programcode = Progroot.find(progcodes_xp)
+            pc = programcode.text
+            return pc
         try:
             """The source code of the tool."""
             Metadata_Inputs = parameters[0].valueAsText
@@ -1555,11 +1570,13 @@ class keywords2tags(object):
                 messages.addMessage(emeDB_path)
 
                 target_md = md.Metadata(t)
+                messages.addMessage(target_md.title)
                 target_root = ET.fromstring(target_md.xml)
                 searchKeys_xp = "dataIdInfo/searchKeys"
                 existingTags = [t.text for t in target_root.findall(searchKeys_xp + "/keyword")]
+                messages.addMessage(existingTags)
                 # print('existing tags: '+ existingTags)
-                messages.addMessage('existing searchKeys: '+", ".join(existingTags))
+                # messages.addMessage('existing searchKeys: '+", ".join(existingTags))
 
                 tpCat_lookup = {'001': 'Farming',
                                 '002': 'Biota',
@@ -1598,9 +1615,11 @@ class keywords2tags(object):
                 programCodes_path = os.path.join(emeDB_path, 'ProgramCode.xml')
                 programCodes_root = ET.parse(programCodes_path).getroot()
                 programCodes_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='Federal Program Inventory'][1]/../keyword"
+                messages.addMessage([x.text for x in target_root.findall(programCodes_xp)])
                 programCodes_values = [getPcode(v.text, programCodes_root) for v in
                                        target_root.findall(programCodes_xp)]
                 programCodes_keywords = [create_keyword(kw) for kw in programCodes_values]
+                messages.addMessage(programCodes_values)
 
                 # Parent searchKeys component
                 searchKeys_xp = "dataIdInfo/searchKeys"
@@ -1658,20 +1677,4 @@ class keywords2tags(object):
             pass
         return
 
-# for keywords2tags
-def create_keyword(string_value):
-    keyW = ET.TreeBuilder()
-    keyW.start('keyword')
-    keyW.data(string_value)
-    keyW.end('keyword')
-    keywordComponent = keyW.close()
-    return keywordComponent
 
-# for keywords2tags
-def getPcode(pCode, root):
-    progCodes_xp = "./ProgramCode/[pCode='{}']/programName".format(pCode)
-    ProgramCodes = root.find(progCodes_xp)
-    if ProgramCodes:
-        return ProgramCodes.text
-    else:
-        return None
