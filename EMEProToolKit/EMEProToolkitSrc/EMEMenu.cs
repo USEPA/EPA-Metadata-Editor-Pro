@@ -396,6 +396,29 @@ namespace EMEProToolkit
         }
     }
 
+    internal class EMEMenu_keywords2tags : Button
+    {
+        //private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private string _pathEmeToolbox = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolBox\\";
+        protected override void OnClick()
+        {
+            try
+            {
+                string toolpath = _pathEmeToolbox + "\\EPA Pro Metadata Toolbox.pyt\\keywords2tags";
+                Geoprocessing.OpenToolDialog(toolpath, null);
+            }
+
+            catch (Exception exc)
+            {
+                // Catch any exception found and display in a message box
+                Debug.WriteLine(exc.Message);
+                Debug.WriteLine(exc.InnerException);
+                ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Exception caught while trying to run Python tool: " + exc.Message);
+                return;
+            }
+        }
+    }
+
     internal class EMEMenu_EMEdb : Button
     {
         private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);

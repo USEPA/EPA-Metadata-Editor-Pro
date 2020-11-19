@@ -1134,13 +1134,14 @@ limitations under the License.​
     <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="true" caption="Metadata Toolkit Module">
       <tabs>
         <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">          
-          <group refID="EMEProToolkit_Catalog_Group" />
+          
           
           <group refID="Esri_Metadata_Edit_Group" />
           <group refID="UpdateThumbnailsGroup"/>
           <!--<group refID="EMEProToolkit_Group4" />-->
           <group refID="EMEProToolkit_MetadataTools_Group" />
           <group refID="EMEProToolkit_EMEDB_Group" />
+          <group refID="EMEProToolkit_Catalog_Group" />
           
         </tab>
       </tabs>
@@ -1237,16 +1238,15 @@ limitations under the License.​
             <disabledText /></tooltip>
         </button>
         
-        <!--<button id="EMEProToolkit_EMEMenu_Items_test" caption="Export Metadata" className="EMEMenu_test" loadOnClick="true"
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport16.png"
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport32.png">
-          <tooltip heading="Export Metadata">ToolTip<disabledText /></tooltip>
-        </button>-->
-        <!--<button id="EMEProToolkit_TestButton1" caption="Easy Button" className="TestButton1" loadOnClick="true" 
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericNewSparkleLarge16.png" 
-          largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericNewSparkleLarge32.png">
-          <tooltip heading="Create Generic Metadata">Populates Defaults<disabledText /></tooltip>
-        </button>-->
+        <button id="EMEProToolkit_EMEMenu_Items_keywords2tags" caption="Copy Keywords to Tags" className="EMEMenu_keywords2tags" loadOnClick="true"
+                condition="esri_core_resourcesPane"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/LabelingOnOff32.png"
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/LabelingOnOff32.png">
+          <tooltip heading="Copy Keywords to Tags">
+            This tool copies ALL keywords present in the metadata to the Tags section. The tool does not alter the keywords, and any existing 'tags' will be preserved but not duplicated. Note that 'tags' should be empty when creating compliant metadata, but this utility is useful prior to sharing as a web layer
+            <disabledText /></tooltip>
+        </button>
+
         <button id="EMEProToolkit_EMEMenu_Items_EMEdbButton" caption="EME Database Manager" className="EMEMenu_EMEdb" loadOnClick="true"
         smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeodatabaseBeingEdited16.png"
 				largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeodatabaseBeingEdited32.png">
@@ -1254,12 +1254,12 @@ limitations under the License.​
           </tooltip>
         </button>
         
-        <button id="EMEProToolkit_EMEMenu_Items_ShowToolbox" caption="Display EME Pro Toolbox Location" 
+        <button id="EMEProToolkit_EMEMenu_Items_ShowToolbox" caption="Toolbox Path" 
                 className="EMEMenu_ShowToolbox" loadOnClick="true" 
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/GenericButtonRed32.png" 
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonRed32.png">
-          <tooltip heading="Show Python Toolbox Dir">For Testing Purposes Only! 
-          Toolbox will be moved to AppData directory in future releases.<disabledText /></tooltip>
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/GeoprocessingToolboxPythonNew16.png" 
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingToolboxPythonNew32.png">
+          <tooltip heading="Show Python Toolbox Path">
+          This displays the path the underlying python toolbox that many of the EME tools use<disabledText /></tooltip>
         </button>
         <!---->
         <button id="EMEProToolkit_SplitBasemap_ProjectDefault" condition="catalogview_selected_object" caption="Project Default Basemap" className="EMEMenu_SplitBasemap_ProjectDefault" loadOnClick="true"
@@ -1329,12 +1329,6 @@ limitations under the License.​
             <disabledText />Disabled Text here
           </tooltip>
         </button>
-        
-
-
-      <!--<comboBox  id="update_thumbnails_basemap_combo" caption="Basemap" 
-                className="EMEMenu_thumbnailBasemap" itemWidth="64" 
-                extendedCaption="Specify the thumbnail basemap for the selected items" keytip="Select a basemap"/>-->
 
       </controls>
       <!--<menus>
@@ -1358,22 +1352,22 @@ limitations under the License.​
           <button refID="EMEProToolkit_SplitBasemap_Oceans"/>
           <button refID="EMEProToolkit_SplitBasemap_Terrain"/>
           
-          
         </splitButton>
       </splitButtons>
       <groups>
+        
         <group id="EMEProToolkit_Catalog_Group" caption="Navigation">
           <button refID="esri_core_showProjectView" />
           <button refID="EMEProToolkit_EMEMenu_Items_ShowToolbox" size="large" />
           <!--<button refID="EMEProToolkit_EMEMenu_Items_test" />-->
         </group>
+        
         <group id="EMEProToolkit_EMEDB_Group" caption="EMEdb Tools">          
           <!--<menu refID="EMEProToolkit_EMEMenu" size="middle" />-->          
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_EMEdbButton" />
-          
-          
         </group>
+        
         <group id="EMEProToolkit_MetadataTools_Group" caption="Metadata Tools" >
           <!--<button refID="EMEProToolkit_TestButton1" size="large" />-->          
           <button refID="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" size="large" />
@@ -1386,13 +1380,13 @@ limitations under the License.​
           <button refID="EMEProToolkit_EMEMenu_Items_cleanexportMD" size="large" />
           <!--<button refID="EMEProToolkit_EMEMenu_Items_cleanUpTool" size="large" />-->              
           <button refID="EMEProToolkit_EMEMenu_Items_exportISOToolMD" size="large"/>
-          
-          
         </group>
-        <group id="UpdateThumbnailsGroup" caption="Update Thumbnails">
+        
+        <group id="UpdateThumbnailsGroup" caption="Utilities">
           <!--<comboBox refID="update_thumbnails_basemap_combo"></comboBox>
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />-->
-          <splitButton refID="BasemapSplitButton"/>     
+          <splitButton refID="BasemapSplitButton"/> 
+          <button refID="EMEProToolkit_EMEMenu_Items_keywords2tags" size="large"/>  
         </group>
         
         <!--<group id="EMEProToolkit_Group4" caption="Thumbnails" condition="esri_core_resourcesPane">          

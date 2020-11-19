@@ -3,6 +3,7 @@ import re
 import arcpy
 from arcpy import metadata as md
 import xml.etree.ElementTree as ET
+from copy import deepcopy
 import sys
 
 
@@ -14,7 +15,7 @@ class Toolbox(object):
         self.alias = ""
 
         # List of tool classes associated with this toolbox
-        self.tools = [upgradeTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate, exportISOTool, esriSync]
+        self.tools = [upgradeTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate, exportISOTool, esriSync, keywords2tags]
         # self.tools = [upgradeTool,cleanupTool,exportISOTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate]
 
 
@@ -176,7 +177,176 @@ class upgradeTool(object):
                             messages.addWarningMessage('Error Removing Legacy Keywords: {}'.format(remove_error))
                         source_md.xml = ET.tostring(root_temp)
 
-                    # ToDo: Fix for EPA Keywords Section
+                    #Fix for EPA Keywords Section
+                    messages.addMessage('fixing epa keywords section')
+                    try:
+                        # delete thesaName, thesaLang replace with complete components below
+                        # old EPA keywords parent (themeKeys) component
+                        epa_keys_parent_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/.."
+                        epa_keys_thesaLang_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/../thesaLang"
+                        epa_keys_parent = root_temp.find(epa_keys_parent_xp)
+                        old_epa_keys_thesaLang = root_temp.find(epa_keys_thesaLang_xp)
+                        epa_keys_thesaName_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']"
+                        old_thesaName = root_temp.find(epa_keys_thesaName_xp)
+                        if old_thesaName:
+                            messages.addMessage('removing old thesaName')
+                            messages.addMessage(old_thesaName)
+                            epa_keys_parent.remove(old_thesaName)
+                        if old_epa_keys_thesaLang:
+                            messages.addMessage('removing old thesaLang')
+                            epa_keys_parent.remove(old_epa_keys_thesaLang)
+                        static_epa_keys_thesaName = '''
+                        <thesaName xmlns="">
+                            <resTitle>EPA GIS Keyword Thesaurus</resTitle>
+                            <date>
+                                <pubDate>2007-11-02</pubDate>
+                            </date>
+                            <citOnlineRes xmlns="">
+                                <linkage>https://ofmpub.epa.gov/sor_internet/registry/termreg/searchandretrieve/taxonomies/search.do?search=&amp;searchString=&amp;taxonomyName=WBT%20-%20Geographic%20Locations</linkage>
+                                <orFunct>
+                                    <OnFunctCd value="002"/>
+                                </orFunct>
+                                <orName>EPA Metadata Technical Specification</orName>
+                            </citOnlineRes>
+                        </thesaName>
+                        '''
+                        static_epa_keys_thesaLang = '''
+                        <thesaLang>
+                            <languageCode value="eng"/>
+                            <countryCode value="US"/>
+                        </thesaLang>
+                        '''
+                        static_epa_keys_thesaName_element = ET.fromstring(static_epa_keys_thesaName)
+                        static_epa_keys_thesaLang_element = ET.fromstring(static_epa_keys_thesaLang)
+                        epa_keys_parent.append(deepcopy(static_epa_keys_thesaName_element))
+                        epa_keys_parent.append(deepcopy(static_epa_keys_thesaLang_element))
+
+                        # Fix Place Keywords
+                        messages.addMessage('fixing place keywords section')
+                        place_keys_parent_xp = "dataIdInfo/placeKeys/thesaName/[resTitle='EPA Place Names']/.."
+                        place_keys_thesaLang_xp = "dataIdInfo/placeKeys/thesaName/[resTitle='EPA Place Names']/../thesaLang"
+                        place_keys_parent = root_temp.find(place_keys_parent_xp)
+                        old_place_keys_thesaLang = root_temp.find(place_keys_thesaLang_xp)
+                        place_keys_thesaName_xp = "dataIdInfo/placeKeys/thesaName/[resTitle='EPA Place Names']"
+                        old_thesaName = root_temp.find(place_keys_thesaName_xp)
+                        if old_thesaName:
+                            messages.addMessage('removing old thesaName')
+                            messages.addMessage(old_thesaName)
+                            place_keys_parent.remove(old_thesaName)
+                        if old_place_keys_thesaLang:
+                            messages.addMessage('removing old thesaLang')
+                            place_keys_parent.remove(old_epa_keys_thesaLang)
+                        static_place_keys_thesaName = '''
+                        <thesaName xmlns="">
+                            <resTitle>EPA Place Names</resTitle>
+                            <date>
+                                <pubDate>2015-01-31T00:00:00</pubDate>
+                            </date>
+                            <citOnlineRes xmlns="">
+                                <linkage>https://ofmpub.epa.gov/sor_internet/registry/termreg/searchandretrieve/taxonomies/search.do?search=&amp;searchString=&amp;taxonomyName=WBT%20-%20Geographic%20Locations</linkage>
+                                <orFunct>
+                                    <OnFunctCd value="002"/>
+                                </orFunct>
+                                <orName>Web Taxonomy - Geographic Locations</orName>
+                            </citOnlineRes>
+                        </thesaName>
+                        '''
+                        static_place_keys_thesaLang = '''
+                        <thesaLang>
+                            <languageCode value="eng"/>
+                            <countryCode value="US"/>
+                        </thesaLang>
+                        '''
+                        static_place_keys_thesaName_element = ET.fromstring(static_place_keys_thesaName)
+                        static_place_keys_thesaLang_element = ET.fromstring(static_place_keys_thesaLang)
+                        if place_keys_parent:
+                            place_keys_parent.append(deepcopy(static_place_keys_thesaName_element))
+                            place_keys_parent.append(deepcopy(static_place_keys_thesaLang_element))
+
+                        # Fix for User Keywords Section
+                        messages.addMessage('fixing User keywords section')
+
+                        user_keys_parent_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='User']/.."
+                        user_keys_thesaLang_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='User']/../thesaLang"
+                        user_keys_parent = root_temp.find(user_keys_parent_xp)
+                        old_user_keys_thesaLang = root_temp.find(user_keys_thesaLang_xp)
+                        user_keys_thesaName_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='User']"
+                        old_thesaName = root_temp.find(user_keys_thesaName_xp)
+                        if old_thesaName:
+                            messages.addMessage('removing old thesaName')
+                            messages.addMessage(old_thesaName)
+                            user_keys_parent.remove(old_thesaName)
+                        if old_user_keys_thesaLang:
+                            messages.addMessage('removing old thesaLang')
+                            user_keys_parent.remove(old_user_keys_thesaLang)
+                        static_user_keys_thesaName = '''
+                        <thesaName>
+                            <resTitle>User</resTitle>
+                            <date>
+                                <pubDate>2020-11-18</pubDate>
+                            </date>
+                        </thesaName>
+                        '''
+                        static_user_keys_thesaLang = '''
+                        <thesaLang>
+                            <languageCode value="eng"/>
+                            <countryCode value="US"/>
+                        </thesaLang>
+                        '''
+                        static_user_keys_thesaName_element = ET.fromstring(static_user_keys_thesaName)
+                        static_user_keys_thesaLang_element = ET.fromstring(static_user_keys_thesaLang)
+                        if user_keys_parent:
+                            user_keys_parent.append(deepcopy(static_user_keys_thesaName_element))
+                            user_keys_parent.append(deepcopy(static_user_keys_thesaLang_element))
+
+                        # Fix for Program Codes Section
+                        messages.addMessage('fixing Federal Program Code keywords section')
+
+                        pcode_keys_parent_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='Federal Program Inventory']/.."
+                        pcode_keys_thesaLang_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='Federal Program Inventory']/../thesaLang"
+                        pcode_keys_parent = root_temp.find(pcode_keys_parent_xp)
+                        old_pcode_keys_thesaLang = root_temp.find(pcode_keys_thesaLang_xp)
+                        pcode_keys_thesaName_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='Federal Program Inventory']"
+                        old_thesaName = root_temp.find(pcode_keys_thesaName_xp)
+                        if old_thesaName:
+                            messages.addMessage('removing old thesaName')
+                            messages.addMessage(old_thesaName)
+                            pcode_keys_parent.remove(old_thesaName)
+                        if old_pcode_keys_thesaLang:
+                            messages.addMessage('removing old thesaLang')
+                            pcode_keys_parent.remove(old_pcode_keys_thesaLang)
+                        static_pcode_keys_thesaName = '''
+                        <thesaName>
+                            <resTitle>Federal Program Inventory</resTitle>
+                            <date>
+                                <pubDate>2013-09-16</pubDate>
+                            </date>
+                            <citOnlineRes>
+                                <linkage>https://www.performance.gov/federalprograminventory</linkage>
+                                <orFunct>
+                                    <OnFunctCd value="002">
+                                    </OnFunctCd>
+                                </orFunct>
+                                <orName>Federal Program Inventory</orName>
+                            </citOnlineRes>
+                        </thesaName>
+                        '''
+                        static_pcode_keys_thesaLang = '''
+                        <thesaLang>
+                            <languageCode value="eng"/>
+                            <countryCode value="US"/>
+                        </thesaLang>
+                        '''
+                        static_pcode_keys_thesaName_element = ET.fromstring(static_pcode_keys_thesaName)
+                        static_pcode_keys_thesaLang_element = ET.fromstring(static_pcode_keys_thesaLang)
+                        if pcode_keys_parent:
+                            pcode_keys_parent.append(deepcopy(static_pcode_keys_thesaName_element))
+                            pcode_keys_parent.append(deepcopy(static_pcode_keys_thesaLang_element))
+
+                        # apply changes
+                        source_md.xml = ET.tostring(root_temp)
+                    except Exception as e:
+                        messages.addWarningMessage(e)
 
                     source_md.saveAsUsingCustomXSLT(final_xml, EPAUpgradeCleanup_xslt)
                     # temp_temp = md.Metadata().importMetadata(source_md.uri, 'CUSTOM', EPAUpgradeCleanup_xslt)
@@ -607,7 +777,6 @@ class mergeTemplate(object):
 
         # messages.addMessage("Setting Defaults...")
         tool_file_path = os.path.dirname(os.path.realpath(__file__))
-        from copy import deepcopy
 
         try:
             """The source code of the tool."""
@@ -1333,3 +1502,182 @@ class editDates(object):
             # Regardless of errors, clean up intermediate products.
             pass
         return
+
+class keywords2tags(object):
+    def __init__(self):
+        """Define the tool (tool name is the name of the class)."""
+        self.label = "Copy Keywords to Tags"
+        self.description = "This tool copies ALL keywords present in the metadata to the Tags section. The tool does not alter the keywords, and any existing 'tags' will be preserved but not duplicated. Note that 'tags' should be empty when creating compliant metadata, but this utility is useful prior to sharing as a web layer."
+        self.canRunInBackground = False
+
+    def getParameterInfo(self):
+        """Define parameter definitions"""
+        # Second parameter
+        param0 = arcpy.Parameter(
+            displayName="Target Metadata",
+            name="Target_Metadata",
+            datatype="DEType",
+            parameterType="Required",
+            direction="Input",
+            multiValue=True)
+
+        params = [param0]
+        return params
+
+    def isLicensed(self):
+        """Set whether tool is licensed to execute."""
+        return True
+
+    def updateParameters(self, parameters):
+        """Modify the values and properties of parameters before internal
+        validation is performed.  This method is called whenever a parameter
+        has been changed."""
+        return
+
+    def updateMessages(self, parameters):
+        """Modify the messages created by internal validation for each tool
+        parameter.  This method is called after internal validation."""
+        return
+
+    def execute(self, parameters, messages):
+        # for keywords2tags
+        def create_keyword(string_value):
+            keyW = ET.TreeBuilder()
+            keyW.start('keyword')
+            keyW.data(string_value)
+            keyW.end('keyword')
+            keywordComponent = keyW.close()
+            return keywordComponent
+
+        # for keywords2tags
+        def getPcode(pCode, Progroot):
+            progcodes_xp = "ProgramCode/[pCode='{}']/programName".format(pCode)
+            programcode = Progroot.find(progcodes_xp)
+            pc = programcode.text
+            return pc
+        try:
+            """The source code of the tool."""
+            Metadata_Inputs = parameters[0].valueAsText
+            # emeDB path
+            emeDB_path = os.path.join(os.getenv('APPDATA'), 'U.S. EPA', 'EME Toolkit', 'EMEdb')
+            messages.addMessage(emeDB_path)
+
+            for t in str(Metadata_Inputs).split(";"):
+
+                messages.addMessage("Copying keywords to tags for {}".format(t))
+
+                emeDB_path = os.path.join(os.getenv('APPDATA'), 'U.S. EPA', 'EME Toolkit', 'EMEdb')
+                messages.addMessage(emeDB_path)
+
+                target_md = md.Metadata(t)
+                messages.addMessage(target_md.title)
+                target_root = ET.fromstring(target_md.xml)
+                searchKeys_xp = "dataIdInfo/searchKeys"
+                existingTags = [t.text for t in target_root.findall(searchKeys_xp + "/keyword")]
+                messages.addMessage(existingTags)
+
+                # ISO 19115-3 Topic Categories
+                tpCat_lookup = {'001': 'Farming',
+                                '002': 'Biota',
+                                '003': 'Boundaries',
+                                '004': 'Atmospheric Science',
+                                '005': 'Economy',
+                                '006': 'Elevation',
+                                '007': 'Environment',
+                                '008': 'Geoscientific',
+                                '009': 'Health',
+                                '010': 'Imagery & Basemaps',
+                                '011': 'Military & Intelligence',
+                                '012': 'Inland Waters',
+                                '013': 'Location',
+                                '014': 'Oceans',
+                                '015': 'Planning & Cadastral',
+                                '016': 'Society',
+                                '017': 'Structure',
+                                '018': 'Transportation',
+                                '019': 'Utilities & Communication'}
+                tpCat_xp = "dataIdInfo/tpCat/TopicCatCd[@value]"
+                tpCat_values = [tpCat_lookup[x.attrib['value']] for x in target_root.findall(tpCat_xp)]
+                tpCat_keywords = [create_keyword(kw) for kw in tpCat_values]
+
+                # # EPA Keywords
+                # epaKeywords_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus'][1]/../keyword"
+                # epaKeywords_keywords = [kw for kw in target_root.findall(epaKeywords_xp)]
+                #
+                # # Place Keywords
+                # placeKeywords_xp = "dataIdInfo/placeKeys/thesaName/[resTitle='EPA Place Names'][1]/../keyword"
+                # placeKeywords_keywords = [kw for kw in target_root.findall(placeKeywords_xp)]
+
+                # Program Codes
+                programCodes_path = os.path.join(emeDB_path, 'ProgramCode.xml')
+                programCodes_root = ET.parse(programCodes_path).getroot()
+                programCodes_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='Federal Program Inventory'][1]/../keyword"
+                programCodes_code_keyw = target_root.findall(programCodes_xp)
+
+                programCodes_values = [getPcode(v.text, programCodes_root) for v in
+                                       target_root.findall(programCodes_xp)]
+                programCodes_keywords = [create_keyword(kw) for kw in programCodes_values]
+                messages.addMessage(programCodes_values)
+
+                # All keywords (includes user, epa, place, custom, and program code keywords
+                gen_keywords_xp = './/keyword'
+                gen_keywords_all = target_root.findall(gen_keywords_xp)
+                gen_keywords = [x for x in gen_keywords_all if x not in programCodes_code_keyw]
+
+                # Parent searchKeys component
+                searchKeys_xp = "dataIdInfo/searchKeys"
+                tags_parent_node = target_root.findall(searchKeys_xp)
+                if not tags_parent_node:
+                    messages.addMessage('Creating searchKeys component...')
+                    # Then need to create searchKeys
+                    dataIdInfo = target_root.find('dataIdInfo')
+                    sK = ET.TreeBuilder()
+                    sK.start('searchKeys')
+                    sK.end('searchKeys')
+                    md_component = sK.close()
+                    dataIdInfo.append(deepcopy(md_component))
+                tags_parent_node = target_root.find(searchKeys_xp)
+
+                for keys in [tpCat_keywords, gen_keywords, programCodes_keywords]:
+                    try:
+                        for kw in keys:
+                            if kw.text in existingTags:
+                                print('{} already exists as Tag'.format(kw.text))
+                                messages.addMessage('{} already exists as Tag'.format(kw.text))
+                                continue
+                            try:
+                                tags_parent_node.append(deepcopy(kw))
+                                existingTags.append(kw.text)
+                                messages.addMessage('{} added to Tags'.format(kw.text))
+                            except Exception as ee:
+                                print(ee)
+                                messages.addWarningMessage(ee)
+                    except Exception as ee:
+                        print(ee)
+                        messages.addWarningMessage(ee)
+                messages.addMessage("Process complete - please review the output carefully.")
+                # Save
+                target_md.xml = ET.tostring(target_root)
+                try:
+                    fileExtension = t[-4:].lower()
+                    if fileExtension == ".xml":
+                        try:
+                            os.remove(target_md.uri)
+                            target_md.saveAsXML(target_md.uri)
+                        except Exception as ee:
+                            messages.addWarningMessage(ee)
+                    target_md.save()
+                except Exception as ee:
+                    print(ee)
+                    messages.addWarningMessage(ee)
+        except:
+            # Cycle through Geoprocessing tool specific errors
+            for msg in range(0, arcpy.GetMessageCount()):
+                if arcpy.GetSeverity(msg) == 2:
+                    arcpy.AddReturnMessage(msg)
+        finally:
+            # Regardless of errors, clean up intermediate products.
+            pass
+        return
+
+
