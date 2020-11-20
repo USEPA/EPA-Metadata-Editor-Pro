@@ -1234,7 +1234,7 @@ limitations under the License.​
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/VersionRefresh16.png"
                 largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/VersionRefresh32.png">
           <tooltip heading="Synchronize Metadata">
-            This tool uses Esri's Metadata Synchronizer with additional options availble only via python. Please refer to Esri's tool documentation for details.
+            This tool uses Esri's Metadata Synchronizer with additional options available only via python. Please refer to Esri's tool documentation for details.
             <disabledText /></tooltip>
         </button>
         
@@ -1266,70 +1266,77 @@ limitations under the License.​
         largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ItemThumbnailCreate32.png">
           <tooltip heading="Project Default Basemap">
             Click to update the thumbnail one or many items. Items must be selected in catalog view.
-            <disabledText />Disabled Text here
+
           </tooltip>
         </button>
         <button id="EMEProToolkit_SplitBasemap_None" condition="catalogview_selected_object" caption="No Basemap" className="EMEMenu_SplitBasemap_None" loadOnClick="true">
           <tooltip heading="No Basemap">
             Click to update the thumbnail one or many items. Items must be selected in catalog view
-            <disabledText />Disabled Text here
+
           </tooltip>
         </button>
         <button id="EMEProToolkit_SplitBasemap_Satellite" condition="catalogview_selected_object" caption="Satellite Basemap" className="EMEMenu_SplitBasemap_Satellite" loadOnClick="true">
           <tooltip heading="Satellite Basemap">
             Click to update the thumbnail one or many items. Items must be selected in catalog view
-            <disabledText />Disabled Text here
+
           </tooltip>
         </button>
         <button id="EMEProToolkit_SplitBasemap_Hybrid" condition="catalogview_selected_object" caption="Hybrid Basemap" className="EMEMenu_SplitBasemap_Hybrid" loadOnClick="true">
           <tooltip heading="Hybrid Basemap">
             Click to update the thumbnail one or many items. Items must be selected in catalog view
-            <disabledText />Disabled Text here
+
           </tooltip>
         </button>
         <button id="EMEProToolkit_SplitBasemap_Streets" condition="catalogview_selected_object" caption="Streets Basemap" className="EMEMenu_SplitBasemap_Streets" loadOnClick="true">
           <tooltip heading="Streets Basemap">
             Click to update the thumbnail one or many items. Items must be selected in catalog view
-            <disabledText />Disabled Text here
+
           </tooltip>
         </button>
         <button id="EMEProToolkit_SplitBasemap_Topographic" condition="catalogview_selected_object" caption="Topographic Basemap" className="EMEMenu_SplitBasemap_Topographic" loadOnClick="true">
           <tooltip heading="Topographic Basemap">
             Click to update the thumbnail one or many items. Items must be selected in catalog view
-            <disabledText />Disabled Text here
+
           </tooltip>
         </button>
         <button id="EMEProToolkit_SplitBasemap_DarkGray" condition="catalogview_selected_object" caption="Dark Gray Basemap" className="EMEMenu_SplitBasemap_DarkGray" loadOnClick="true">
           <tooltip heading="Dark Gray Basemap">
             Click to update the thumbnail one or many items. Items must be selected in catalog view
-            <disabledText />Disabled Text here
+
           </tooltip>
         </button>
         <button id="EMEProToolkit_SplitBasemap_Gray" condition="catalogview_selected_object" caption="Gray Basemap" className="EMEMenu_SplitBasemap_Gray" loadOnClick="true">
 						<tooltip heading="Gray Basemap">
             Click to update the thumbnail one or many items. Items must be selected in catalog view
-            <disabledText />Disabled Text here
+
           </tooltip>
         </button>
         <button id="EMEProToolkit_SplitBasemap_NationalGeographic" condition="catalogview_selected_object" caption="National Geographic Basemap" className="EMEMenu_SplitBasemap_NationalGeographic" loadOnClick="true">
           <tooltip heading="National Geographic Basemap">
             Click to update the thumbnail one or many items. Items must be selected in catalog view
-            <disabledText />Disabled Text here
+
           </tooltip>
         </button>
         <button id="EMEProToolkit_SplitBasemap_Oceans" condition="catalogview_selected_object" caption="Oceans Basemap" className="EMEMenu_SplitBasemap_Oceans" loadOnClick="true">
           <tooltip heading="Oceans Basemap">
             Click to update the thumbnail one or many items. Items must be selected in catalog view
-            <disabledText />Disabled Text here
+
           </tooltip>
         </button>
         <button id="EMEProToolkit_SplitBasemap_Terrain" condition="catalogview_selected_object" caption="Terrain Basemap" className="EMEMenu_SplitBasemap_Terrain" loadOnClick="true">
           <tooltip heading="Terrain Basemap">
             Click to update the thumbnail one or many items. Items must be selected in catalog view
-            <disabledText />Disabled Text here
           </tooltip>
         </button>
 
+        <button id="EMEProToolkit_Nav2EMETools"  caption="Use EME Tools!" 
+                className="EMEMenu_Nav2EMETools" loadOnClick="true"
+                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/GeoprocessingEnvironmentSettings16.png" 
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingEnvironmentSettings32.png">>
+          <tooltip>
+            Click to navigate to the EME Metadata Tools Tab
+          </tooltip>
+        </button>
       </controls>
       <!--<menus>
         <menu id="EMEProToolkit_EMEMenu" caption="EMEMenu" smallImage="GenericButtonGreen16.png" largeImage="GenericButtonGreen32.png">
@@ -1377,16 +1384,18 @@ limitations under the License.​
           <button refID="EMEProToolkit_EMEMenu_Items_editDatesMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_clearMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_importMD" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_keywords2tags" size="large"/>
           <button refID="EMEProToolkit_EMEMenu_Items_cleanexportMD" size="large" />
-          <!--<button refID="EMEProToolkit_EMEMenu_Items_cleanUpTool" size="large" />-->              
+          <!--<button refID="EMEProToolkit_EMEMenu_Items_cleanUpTool" size="large" />--> 
+          
           <button refID="EMEProToolkit_EMEMenu_Items_exportISOToolMD" size="large"/>
         </group>
         
-        <group id="UpdateThumbnailsGroup" caption="Utilities">
+        <group id="UpdateThumbnailsGroup" caption="Update Thumbnail">
           <!--<comboBox refID="update_thumbnails_basemap_combo"></comboBox>
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />-->
           <splitButton refID="BasemapSplitButton"/> 
-          <button refID="EMEProToolkit_EMEMenu_Items_keywords2tags" size="large"/>  
+            
         </group>
         
         <!--<group id="EMEProToolkit_Group4" caption="Thumbnails" condition="esri_core_resourcesPane">          
@@ -1402,7 +1411,17 @@ limitations under the License.​
      
       </groups>
     </insertModule>
+    
+  <updateModule refID="esri_core_module">
+    <groups>
+      <updateGroup refID="esri_metadata_metadataViewGroup">
+        <insertButton refID="EMEProToolkit_Nav2EMETools" />
+      </updateGroup>
+    </groups>
+  </updateModule>  
+
   </modules>
+
   <conditions>
     <insertCondition id="catalogview_selected_object" caption="Catalog view with selected object">
       <and>

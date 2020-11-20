@@ -564,4 +564,41 @@ namespace EMEProToolkit
             thumbsup.ExportFrameAsync(basemap: "Terrain");
         }
     }
+    internal class EMEMenu_Nav2EMETools : Button
+    {
+        protected override void OnClick()
+        {
+            FrameworkApplication.ActivateTab("EMEProToolkit_Tab1");
+        }
+    }
+    
+    internal class ProToolsChecked : Button
+    {
+        public ProToolsChecked()
+        {
+            IsChecked = false;
+            Caption = "Lock";
+            SmallImage = new System.Windows.Media.Imaging.BitmapImage(new Uri(
+       @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUnLockNoColor16.png"));
+        }
+
+        protected override void OnClick()
+        {
+            IsChecked = !IsChecked;
+
+            if (IsChecked)
+            {
+                Caption = "Unlock";
+                Uri uriSource = new Uri(
+        "pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericLockNoColor16.png");
+                SmallImage = new System.Windows.Media.Imaging.BitmapImage(uriSource);
+            }
+            else
+            {
+                Caption = "Lock";
+                SmallImage = new System.Windows.Media.Imaging.BitmapImage(new Uri(
+       @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUnLockNoColor16.png"));
+            }
+        }
+    }
 }
