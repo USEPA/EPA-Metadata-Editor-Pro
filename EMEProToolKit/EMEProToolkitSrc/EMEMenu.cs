@@ -572,14 +572,14 @@ namespace EMEProToolkit
         }
     }
     
-    internal class ProToolsChecked : Button
+    internal class EMEMenu_ProToolsChecked : Button
     {
-        public ProToolsChecked()
+        public EMEMenu_ProToolsChecked()
         {
-            IsChecked = false;
+            IsChecked = true;
             Caption = "Lock";
-            SmallImage = new System.Windows.Media.Imaging.BitmapImage(new Uri(
-       @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUnLockNoColor16.png"));
+            LargeImage = new System.Windows.Media.Imaging.BitmapImage(new Uri(
+       @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericLockNoColor32.png"));
         }
 
         protected override void OnClick()
@@ -588,16 +588,18 @@ namespace EMEProToolkit
 
             if (IsChecked)
             {
-                Caption = "Unlock";
+                FrameworkApplication.State.Deactivate("stock_metadata_tools_state");
+                Caption = "Locked";
                 Uri uriSource = new Uri(
-        "pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericLockNoColor16.png");
-                SmallImage = new System.Windows.Media.Imaging.BitmapImage(uriSource);
+        "pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericLockNoColor32.png");
+                LargeImage = new System.Windows.Media.Imaging.BitmapImage(uriSource);
             }
             else
             {
-                Caption = "Lock";
-                SmallImage = new System.Windows.Media.Imaging.BitmapImage(new Uri(
-       @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUnLockNoColor16.png"));
+                FrameworkApplication.State.Activate("stock_metadata_tools_state");
+                Caption = "Unlocked";
+                LargeImage = new System.Windows.Media.Imaging.BitmapImage(new Uri(
+       @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUnLockNoColor32.png"));
             }
         }
     }

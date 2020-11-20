@@ -22,7 +22,7 @@ limitations under the License.​
 	<Image>Images\AddinDesktop32.png</Image>
 	<Author>U.S. EPA Office of Information Management</Author>
 	<Company>U.S. EPA Metadata Editor for ArcGIS Pro</Company>
-	<Date>5/27/2020 3:45:00 PM, 2020</Date>
+	<Date>11/20/2020</Date>
 	<Subject>Content</Subject>
   </AddInInfo>
   <categories>
@@ -397,6 +397,10 @@ limitations under the License.​
           
 				  <page class="EMEProToolkit.Pages.MTK_ResourcePoc">
             <validation>
+              <for xpath="/metadata/dataIdInfo">
+								<exists xpath="//idPoC/role[RoleCd/@value = '010']" ref="publisherReq"/>
+								<exists xpath="//idPoC/role[RoleCd/@value = '010']" ref="publisherReq_hint"/>
+							</for>
               <!-- contact name, org or role -->
               <for xpath="//dataIdInfo/idPoC">
                 <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
@@ -1332,11 +1336,18 @@ limitations under the License.​
         <button id="EMEProToolkit_Nav2EMETools"  caption="Use EME Tools!" 
                 className="EMEMenu_Nav2EMETools" loadOnClick="true"
                 smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/GeoprocessingEnvironmentSettings16.png" 
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingEnvironmentSettings32.png">>
+                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingEnvironmentSettings32.png">
           <tooltip>
-            Click to navigate to the EME Metadata Tools Tab
+            Click to navigate to the EME Metadata Tools Tab. EME metadata tools have been specifically customized for EPA metadata workflows.
           </tooltip>
         </button>
+        <button id="EMEProToolkit_ProToolsChecked"  caption="Enable ArcGIS Pro Metadata Tools" 
+                className="EMEMenu_ProToolsChecked" loadOnClick="false">
+          <tooltip>
+           Click to unlock/lock the default ArcGIS Pro Metadata Tools - use caution as these tools may behave differently than the EME Metadata Tools.
+          </tooltip>
+        </button>
+        
       </controls>
       <!--<menus>
         <menu id="EMEProToolkit_EMEMenu" caption="EMEMenu" smallImage="GenericButtonGreen16.png" largeImage="GenericButtonGreen32.png">
@@ -1379,7 +1390,7 @@ limitations under the License.​
           <!--<button refID="EMEProToolkit_TestButton1" size="large" />-->          
           <button refID="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" size="large" />
           <button refID ="EMEProToolkit_EMEMenu_Items_mergeTemplateMD" size="large"/>
-          <button refID ="EMEProToolkit_EMEMenu_Items_esriSyncMD" size="large"/>
+          <button refID ="EMEProToolkit_EMEMenu_Items_esriSyncMD" size="medium"/>
           <button refID="EMEProToolkit_EMEMenu_Items_editElementMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_editDatesMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_clearMD" size="large" />
@@ -1408,16 +1419,41 @@ limitations under the License.​
           <button refID="esri_metadata_edit" />
           <!--<button refID="EMEProToolkit_EMEMenu_Items_test" />-->
         </group>
-     
+        <group id="Default_Metadata_Tools" caption="Metadata Tools" condition="StockMetadataToolsCondition">
+          <button refID="esri_metadata_edit" />
+          <button refID="esri_metadata_import" size="large" />
+          <button refID="esri_metadata_saveAs" size="small" />
+          <button refID="esri_metadata_sync" size="large"/>
+          <button refID="esri_metadata_upgrade" size="small" placeWith="esri_metadata_saveAs"/>
+          <button refID="esri_metadata_export" />
+        </group>
       </groups>
     </insertModule>
     
   <updateModule refID="esri_core_module">
     <groups>
       <updateGroup refID="esri_metadata_metadataViewGroup">
+        <deleteButton refID="esri_metadata_edit" />
+        <deleteButton refID="esri_metadata_import" />
+        <deleteButton refID="esri_metadata_saveAs" />
+        <deleteButton refID="esri_metadata_sync" />
+        <deleteButton refID="esri_metadata_upgrade" />
+        <deleteButton refID="esri_metadata_export" />
         <insertButton refID="EMEProToolkit_Nav2EMETools" />
+        <insertButton refID="EMEProToolkit_ProToolsChecked" />
       </updateGroup>
     </groups>
+  </updateModule>  
+    
+  <updateModule refID="esri_core_module">
+    <tabs>
+      <!--<updateTab refID="esri_core_homeTab">
+        <deleteGroup refID="esri_metadata_metadataViewGroup"/>
+      </updateTab>-->
+      <updateTab refID="esri_core_homeTab">
+        <insertGroup refID="Default_Metadata_Tools"/>
+      </updateTab>
+    </tabs>
   </updateModule>  
 
   </modules>
@@ -1438,5 +1474,8 @@ limitations under the License.​
         <state id="sync_contacts_state"/>
       </not>
     </insertCondition>
+  <insertCondition id="StockMetadataToolsCondition" caption="default pro metadata tools">
+    <state id="stock_metadata_tools_state"/>
+  </insertCondition>
   </conditions>
 </ArcGIS>
