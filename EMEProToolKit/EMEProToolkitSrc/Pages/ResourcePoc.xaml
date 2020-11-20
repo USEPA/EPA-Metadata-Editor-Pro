@@ -63,6 +63,11 @@ limitations under the License.​
     <v:MetadataIssueInfo x:Key="city" Message="{x:Static r:Issues.city_REQ}" />
     <v:MetadataIssueInfo x:Key="postCode" Message="{x:Static r:Issues.postCode_REQ}" />
 
+    <v:MetadataIssueInfo x:Key="publisherReq" Message="publisher role is required" />
+    <v:MetadataIssueInfo x:Key="publisherReq_hint" Message="   >validaiton hint > /Contact/Role[Publisher]" />
+    
+    
+
   </UserControl.Resources>
 
   <Grid Style="{DynamicResource EditorFrontPageStyle}">
