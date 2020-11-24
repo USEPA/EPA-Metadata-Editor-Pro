@@ -60,8 +60,8 @@
                         <TextBlock Text="Publisher"/>
                     </Hyperlink>
                 </Label>
-                <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
-                    <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#publisher" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME Style Guide">
+                    <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5-and-eme-pro#publisher" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
                         <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
                     </Hyperlink>
                 </Label>

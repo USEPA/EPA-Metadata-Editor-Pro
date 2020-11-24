@@ -241,8 +241,8 @@ limitations under the License.​
                         <TextBlock Text="ISO 19115 Topic Categories" FontWeight="Bold" />
                       </Hyperlink>
                     </Label>
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
-                      <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-iso" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME Style Guide">
+                      <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5-and-eme-pro#tags-iso" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
                         <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
                       </Hyperlink>
                     </Label>
@@ -311,8 +311,8 @@ limitations under the License.​
                                 <TextBlock Text="EPA Keywords" FontWeight="Bold"/>
                               </Hyperlink>
                             </Label>
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
-                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-epa-theme" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME Style Guide">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5-and-eme-pro#tags-epa-theme" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
                                 <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
                               </Hyperlink>
                             </Label>
@@ -353,8 +353,8 @@ limitations under the License.​
                                 <TextBlock Text="Program Code Keywords" FontWeight="Bold"/>
                               </Hyperlink>
                             </Label>
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
-                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-federal-program-code" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME Style Guide">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5-and-eme-pro#tags-federal-program-code" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
                                 <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
                               </Hyperlink>
                             </Label>
@@ -392,8 +392,8 @@ limitations under the License.​
                                 <TextBlock Text="Place Keywords" FontWeight="Bold"/>
                               </Hyperlink>
                             </Label>
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
-                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-place" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME Style Guide">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5-and-eme-pro#tags-place" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
                                 <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
                               </Hyperlink>
                             </Label>
@@ -437,8 +437,8 @@ limitations under the License.​
                                 <TextBlock Text="User Keywords" FontWeight="Bold"/>
                               </Hyperlink>
                             </Label>
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
-                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-general" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME Style Guide">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5-and-eme-pro#tags-general" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
                                 <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
                               </Hyperlink>
                             </Label>
@@ -483,8 +483,8 @@ limitations under the License.​
                                 <TextBlock Text="Custom Keywords" FontWeight="Bold"/>
                               </Hyperlink>
                             </Label>
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
-                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-general" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME Style Guide">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5-and-eme-pro#tags-general" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
                                 <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
                               </Hyperlink>
                             </Label>
@@ -527,8 +527,8 @@ limitations under the License.​
                                 <TextBlock Text="Keywords and Program Code" FontWeight="Bold"/>
                               </Hyperlink>
                             </Label>
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME 5.0 Style Guide">
-                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5#tags-general" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="EME Style Guide">
+                              <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-geospatial-metadata-style-guide-using-eme-5-and-eme-pro#tags-general" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="{x:Null}">
                                 <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
                               </Hyperlink>
                             </Label>
