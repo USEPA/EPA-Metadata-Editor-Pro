@@ -89,7 +89,7 @@ limitations under the License.​
     <v:MetadataIssueInfo x:Key="userNote" Message="Security Constraints - EPA User Note required if Access Level is not Unclassified" />
 
     <v:MetadataIssueInfo x:Key="othConsts" Message="{x:Static r:Issues.othConsts_REQ}" />
-    <v:MetadataIssueInfo x:Key="othConsts_hint" Message="   > validaiton hint > /Legal Constraint[Other Constraints]" />
+    <v:MetadataIssueInfo x:Key="othConsts_hint" Message="   > validation hint > /Legal Constraint[Other Constraints]" />
     <v:MetadataIssueInfo x:Key="resConst" Message="{x:Static r:Issues.resConst_REQ}" />
     <v:MetadataIssueInfo x:Key="useLimit" Message="{x:Static r:Issues.useLimit_REQ}" />
     <v:MetadataIssueInfo x:Key="useLimit_hint" Message="   > validation hint > /General Constraints[Use Limitation]" />

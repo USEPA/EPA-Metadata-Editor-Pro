@@ -42,7 +42,9 @@ namespace EMEProToolkit.Pages
     /// </summary>
     internal partial class MTK_ImageAttachement : EditorPage
     {
-        private Image _thumbnailImage = null;
+    private static Image _thumbnailImage = null;
+    private static object _dataContext = null;
+    private bool _isDefault = false;
 
         public string XPath { get; set; }
         public string Rel { get; set; }
@@ -51,20 +53,36 @@ namespace EMEProToolkit.Pages
         public MTK_ImageAttachement()
         {
             InitializeComponent();
+
+      this.LostFocus += OnLostFocus;
+      this.Unloaded += OnUnloaded;
+    }
+
+    private void OnLostFocus(object sender, RoutedEventArgs e)
+    {
+      _dataContext = null;
+    }
+
+    private void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+      _dataContext = null;
         }
 
         public void DeleteThumbnail(object sender, EventArgs e)
         {
-            _thumbnailImage.Source = null;
+      UseDefaultImage();
 
             var mdModule = FrameworkApplication.FindModule("esri_metadata_module") as IMetadataEditorHost;
             if (mdModule != null)
+      {
+        CommitChanges();
                 mdModule.OnUpdateThumbnail(this);
         }
+    }
 
         public void UpdateThumbnail(object sender, EventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new();
+      Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = ""; // Default file name
             dlg.DefaultExt = ".png"; // Default file extension
             dlg.Filter = "Image Files(*.PNG;*.JPG;*.BMP;*.GIF)|*.PNG;*.JPG;*.BMP;*.GIF|All files (*.*)|*.*";
@@ -78,16 +96,20 @@ namespace EMEProToolkit.Pages
                     try
                     {
                         // fetch via URL
-                        Uri imageUri = new(dlg.FileName);
+            Uri imageUri = new Uri(dlg.FileName);
                         BitmapDecoder bmd = BitmapDecoder.Create(imageUri, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
 
                         // set the source
                         _thumbnailImage.Source = bmd.Frames[0];
+            _isDefault = false;
 
                         var mdModule = FrameworkApplication.FindModule("esri_metadata_module") as IMetadataEditorHost;
                         if (mdModule != null)
+            {
+              CommitChanges();
                             mdModule.OnUpdateThumbnail(this);
                     }
+          }
                     catch (Exception) { /* noop */ }
                 }
             }
@@ -95,8 +117,10 @@ namespace EMEProToolkit.Pages
 
         private void CreateThumbnailNode()
         {
-            object context = Utils.Utils.GetDataContext(this);
-            IEnumerable<XmlNode> nodes = Utils.Utils.GetXmlDataContext(context);
+      if (_dataContext == null)
+        _dataContext = Utils.Utils.GetDataContext(this);
+
+      IEnumerable<XmlNode> nodes = Utils.Utils.GetXmlDataContext(_dataContext);
             if (null != nodes)
             {
                 var node = nodes.First().OwnerDocument;
@@ -105,27 +129,29 @@ namespace EMEProToolkit.Pages
                 XmlDataProvider provider = Resources["ImageXml"] as XmlDataProvider;
                 string xmlString = provider.Document.InnerXml;
                 xmlString = xmlString.Replace("{rel}", Rel);
-                XmlDocument newDoc = new();
+        XmlDocument newDoc = new XmlDocument();
                 newDoc.LoadXml(xmlString);
 
                 // copy new XML into document
-                XmlDocument owner = (null == node.OwnerDocument) ? node : node.OwnerDocument;
+        XmlDocument owner = (null == node?.OwnerDocument) ? node : node.OwnerDocument;
+        if (owner != null)
                 Utils.Utils.CopyElements(owner, newDoc.FirstChild, true, false);
-
             }
         }
 
         private XmlNode GetBinaryThumbnailNode(object sender, bool is_empty_ok)
         {
-            object context = Utils.Utils.GetDataContext(sender);
-            var nodes = Utils.Utils.GetXmlDataContext(context);
+      if (_dataContext == null)
+        _dataContext = Utils.Utils.GetDataContext(this);
+
+      var nodes = Utils.Utils.GetXmlDataContext(_dataContext);
 
             if (null != nodes)
             {
                 var node = nodes.First().OwnerDocument;
                 // fetch base64 image
                 //  <Binary><Thumbnail><Data EsriPropertyType="Picture">... 
-                XmlNode dataNode = node.SelectSingleNode(XPath);
+        XmlNode dataNode = node?.SelectSingleNode(XPath);
                 if (null != dataNode && (is_empty_ok || 0 < dataNode.InnerText.Trim().Length))
                     return dataNode;
             }
@@ -135,8 +161,10 @@ namespace EMEProToolkit.Pages
 
         private void CleanThumbnailNodes(bool cleanAll)
         {
-            object context = Utils.Utils.GetDataContext(this);
-            var nodes = Utils.Utils.GetXmlDataContext(context);
+      if (_dataContext == null)
+        _dataContext = Utils.Utils.GetDataContext(this);
+
+      var nodes = Utils.Utils.GetXmlDataContext(_dataContext);
 
             if (null != nodes)
             {
@@ -144,13 +172,13 @@ namespace EMEProToolkit.Pages
 
                 // fetch base64 image
                 //  <Binary><Thumbnail><Data EsriPropertyType="Picture">... 
-                XmlNode dataNode = node.SelectSingleNode(XPath);
+        XmlNode dataNode = node?.SelectSingleNode(XPath);
                 if (null != dataNode)
                     dataNode.ParentNode.RemoveChild(dataNode);
 
                 if (cleanAll)
                 {
-                    dataNode = node.SelectSingleNode(XPath);
+          dataNode = node?.SelectSingleNode(XPath);
                     if (null != dataNode)
                         dataNode.ParentNode.RemoveChild(dataNode);
                 }
@@ -171,11 +199,14 @@ namespace EMEProToolkit.Pages
                     string base64 = base64imageNode.InnerText;
                     byte[] base64bytes = System.Convert.FromBase64String(base64);
 
-                    MemoryStream ms = new(base64bytes);
+          MemoryStream ms = new MemoryStream(base64bytes);
                     BitmapDecoder bmd = BitmapDecoder.Create(ms, BitmapCreateOptions.None, BitmapCacheOption.None);
 
                     if (null != _thumbnailImage)
+          {
                         _thumbnailImage.Source = bmd.Frames[0];
+            _isDefault = false;
+          }
                 }
                 catch (Exception)
                 {
@@ -184,18 +215,36 @@ namespace EMEProToolkit.Pages
             }
         }
 
+    private void UseDefaultImage()
+    {
+      var obj = this.Resources["EmptyImage"];
+      if (null != obj)
+      {
+        BitmapImage emptyImage = obj as BitmapImage;
+        _thumbnailImage.Source = emptyImage;
+        ThumbnailImage.Width = 32;
+      }
+      else
+      {
+        _thumbnailImage.Source = null;
+      }
+
+      // now using default
+      _isDefault = true;
+    }
+
         override public void CommitChanges()
         {
-            if (null == _thumbnailImage.Source)
+      if (null == _thumbnailImage?.Source || _isDefault)
             {
                 CleanThumbnailNodes(true);
                 return;
             }
 
-            JpegBitmapEncoder jbe = new();
+      JpegBitmapEncoder jbe = new JpegBitmapEncoder();
             jbe.Frames.Add(BitmapFrame.Create(_thumbnailImage.Source as BitmapSource));
 
-            MemoryStream ms = new();
+      MemoryStream ms = new MemoryStream();
             jbe.Save(ms);
 
             string base64 = System.Convert.ToBase64String(ms.ToArray(), Base64FormattingOptions.InsertLineBreaks);

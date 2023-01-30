@@ -68,6 +68,7 @@ namespace EMEProToolkit.Pages
         public void DeleteThumbnail(object sender, EventArgs e)
         {
             UseDefaultImage();
+      		CommitChanges();
 
             var mdModule = FrameworkApplication.FindModule("esri_metadata_module") as IMetadataEditorHost;
             if (mdModule != null)
@@ -102,6 +103,8 @@ namespace EMEProToolkit.Pages
 
                         var mdModule = FrameworkApplication.FindModule("esri_metadata_module") as IMetadataEditorHost;
                         if (mdModule != null)
+            {
+              CommitChanges();
                             mdModule.OnUpdateThumbnail(this);
                     }
                     catch (Exception) { /* noop */ }
@@ -229,7 +232,7 @@ namespace EMEProToolkit.Pages
 
         override public void CommitChanges()
         {
-            if (null == _thumbnailImage.Source || _isDefault)
+      if (null == _thumbnailImage?.Source || _isDefault)
             {
                 CleanThumbnailNodes(true);
                 return;
