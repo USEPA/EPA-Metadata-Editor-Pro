@@ -20,7 +20,7 @@ namespace EMEProToolkit.Utils
 {
     internal class LanguageConverter
     {
-        private static Dictionary<string, string> langDict = new Dictionary<string, string>();
+        private static Dictionary<string, string> langDict = new();
 
         public static string GetThreeLetterCode(string twoLetterCode)
         {

@@ -54,7 +54,7 @@ namespace EMEProToolkit.Pages
     {
         private Image _thumbnailImage = null;
         private bool _isDefault = false;
-        private List<string> _listThemeK = new List<string>();
+        private List<string> _listThemeK = new();
 
         public MTK_ItemInfo()
         {
@@ -76,7 +76,7 @@ namespace EMEProToolkit.Pages
 
         public void UpdateThumbnail(object sender, EventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
+            OpenFileDialog dlg = new();
             dlg.FileName = ""; // Default file name
             dlg.DefaultExt = ".png"; // Default file extension
             dlg.Filter = "Image Files(*.PNG;*.JPG;*.BMP;*.GIF)|*.PNG;*.JPG;*.BMP;*.GIF|All files (*.*)|*.*";
@@ -90,7 +90,7 @@ namespace EMEProToolkit.Pages
                     try
                     {
                         // fetch via URL
-                        Uri imageUri = new Uri(dlg.FileName);
+                        Uri imageUri = new(dlg.FileName);
                         BitmapDecoder bmd = BitmapDecoder.Create(imageUri, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
 
                         // reset width
@@ -185,7 +185,7 @@ namespace EMEProToolkit.Pages
                     string base64 = base64imageNode.InnerText;
                     byte[] base64bytes = System.Convert.FromBase64String(base64);
 
-                    MemoryStream ms = new MemoryStream(base64bytes);
+                    MemoryStream ms = new(base64bytes);
                     BitmapDecoder bmd = BitmapDecoder.Create(ms, BitmapCreateOptions.None, BitmapCacheOption.None);
 
                     // reset width
@@ -235,10 +235,10 @@ namespace EMEProToolkit.Pages
                 return;
             }
 
-            JpegBitmapEncoder jbe = new JpegBitmapEncoder();
+            JpegBitmapEncoder jbe = new();
             jbe.Frames.Add(BitmapFrame.Create(_thumbnailImage.Source as BitmapSource));
 
-            MemoryStream ms = new MemoryStream();
+            MemoryStream ms = new();
             jbe.Save(ms);
 
             string base64 = System.Convert.ToBase64String(ms.ToArray(), Base64FormattingOptions.InsertLineBreaks);
@@ -307,7 +307,7 @@ namespace EMEProToolkit.Pages
                     var liBoxName = "tbxSearchTags";
                     var liBoxCtrl = (TextBox)liBoxChildren.First(c => c.Name == liBoxName);
                     //Add logic to copy to clipboard
-                    List<string> listSearchTag = new List<string>();
+                    List<string> listSearchTag = new();
                     if (liBoxCtrl.Text.Any())
                     {
                         string[] strsearchTag = liBoxCtrl.Text.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);

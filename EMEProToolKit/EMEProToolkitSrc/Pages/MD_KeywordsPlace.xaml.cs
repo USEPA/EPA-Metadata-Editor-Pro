@@ -23,7 +23,7 @@ namespace EMEProToolkit.Pages
     /// </summary>
     public partial class MD_KeywordsPlace : EditorPage
     {
-        private List<string> _listPlaceK = new List<string>();
+        private List<string> _listPlaceK = new();
         private string _pathEmeDb = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
         public MD_KeywordsPlace()
         {
@@ -144,7 +144,7 @@ namespace EMEProToolkit.Pages
             //MessageBox.Show("Place Theme Key")
             if (lbxEpaPlaceK.IsVisible == true)
             {
-                List<string> MDKeywords = new List<string>();
+                List<string> MDKeywords = new();
                 if (tbxMDEpaPlaceK.Text.Any())
                 {
                     string[] strMDKeywords = tbxMDEpaPlaceK.Text.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);

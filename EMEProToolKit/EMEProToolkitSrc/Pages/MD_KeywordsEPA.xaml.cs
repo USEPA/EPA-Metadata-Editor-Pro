@@ -24,7 +24,7 @@ namespace EMEProToolkit.Pages
     /// </summary>
     internal partial class MD_KeywordsEPA : EditorPage
     {
-        private List<string> _listThemeK = new List<string>();
+        private List<string> _listThemeK = new();
         private string _pathEmeDb = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
 
         public MD_KeywordsEPA()
@@ -124,7 +124,7 @@ namespace EMEProToolkit.Pages
             //MessageBox.Show("EPA Keywords Metadata" + "\n" + "tbxMDEpaThemeK.Loaded" + "\n" + "IsEnabled = " + tbxMDEpaThemeK.IsEnabled.ToString() + "\n" + "IsVisible = " + tbxMDEpaThemeK.IsVisible.ToString());
             if (lbxEpaThemeK.IsVisible == true)
             {
-                List<string> MDKeywords = new List<string>();
+                List<string> MDKeywords = new();
                 if (tbxMDEpaThemeK.Text.Any())
                 {
                     string[] strMDKeywords = tbxMDEpaThemeK.Text.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);

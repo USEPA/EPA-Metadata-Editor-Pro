@@ -190,7 +190,7 @@ namespace EMEProToolkit
                     string tempMap = "TempMap";
                     //var newmap = MapFactory.Instance.CreateMap("NewMap", basemap:Basemap.ProjectDefault);
                     // Create a new CIM page
-                    CIMPage newPage = new CIMPage();
+                    CIMPage newPage = new();
 
                     // Add properties
 
@@ -210,20 +210,20 @@ namespace EMEProToolkit
                     Basemap bmap = (Basemap)Enum.Parse(typeof(Basemap), basemap);
                     Map newMap = MapFactory.Instance.CreateMap(tempMap, MapType.Map, MapViewingMode.Map, bmap);
 
-                    Uri uri = new Uri(item.Path);
+                    Uri uri = new(item.Path);
                     var lyr = LayerFactory.Instance.CreateLayer(uri, newMap);
                     string thumbpath = String.Format(_temppathEme + "{0}.jpg", g);
                     
                     
 
                     // Build a map frame geometry / envelope
-                    Coordinate2D ll = new Coordinate2D(1, 0.5);
-                    Coordinate2D ur = new Coordinate2D(13, 9);
-                    Envelope mapEnv = EnvelopeBuilder.CreateEnvelope(ll, ur);
+                    Coordinate2D ll = new(1, 0.5);
+                    Coordinate2D ur = new(13, 9);
+                    Envelope mapEnv = EnvelopeBuilderEx.CreateEnvelope(ll, ur);
 
                     // Create a map frame and add it to the layout
-                    MapFrame newMapframe = LayoutElementFactory.Instance.CreateMapFrame(newLayout, mapEnv, newMap);
-                    newMapframe.SetName("Map Frame");
+                    MapFrame newMapframe = ElementFactory.Instance.CreateMapFrameElement(newLayout, mapEnv, newMap, "Map Frame");
+                    //newMapframe.SetName("Map Frame");
 
                     // Create and set the camera
                     //Camera camera = newMapframe.Camera;
@@ -234,7 +234,7 @@ namespace EMEProToolkit
                     //newMapframe.ZoomTo(lyr.QueryExtent());
 
                     //Create JPEG format with appropriate settings
-                    JPEGFormat JPEG = new JPEGFormat();
+                    JPEGFormat JPEG = new();
                     JPEG.HasWorldFile = false;
                     JPEG.Resolution = 100;
                     JPEG.OutputFileName = thumbpath;
@@ -250,7 +250,7 @@ namespace EMEProToolkit
                     string b64string = Convert.ToBase64String(b);
 
                     string xxml = item.GetXml();
-                    XmlDocument xmldoc = new XmlDocument();
+                    XmlDocument xmldoc = new();
                     xmldoc.LoadXml(xxml);
                     //xmldoc.Save("C:\\Users\\jmaxm\\Desktop\\expxml.xml");
                     //todo create new xml if not exist

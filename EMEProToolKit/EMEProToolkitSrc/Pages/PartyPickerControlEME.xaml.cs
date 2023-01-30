@@ -31,12 +31,12 @@ namespace EMEProToolkit.Pages
     /// </summary>
     public partial class PartyPickerControlEME : EditorPage
     {
-        XmlDocument _emeConfig = new XmlDocument();
-        XmlDocument _contactsDoc = new XmlDocument();
-        XmlDocument _contactsEsri = new XmlDocument();
-        XmlDocument _contactsEpa = new XmlDocument();
-        XmlDocument _contactsBAK = new XmlDocument();
-        XmlDocument _contactsWEB = new XmlDocument();
+        XmlDocument _emeConfig = new();
+        XmlDocument _contactsDoc = new();
+        XmlDocument _contactsEsri = new();
+        XmlDocument _contactsEpa = new();
+        XmlDocument _contactsBAK = new();
+        XmlDocument _contactsWEB = new();
         string _filePathEsri = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ArcGIS\\Descriptions\\";
         string _filePathEme = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
 
@@ -230,14 +230,14 @@ namespace EMEProToolkit.Pages
             }
 
             // new document
-            XmlDocument clone = new XmlDocument();
+            XmlDocument clone = new();
             XmlNode contactsNode = clone.CreateElement("contacts");
             clone.AppendChild(contactsNode);
 
             // Combine local contacts.xml with EPA contacts
             var listEsri = _contactsEsri.SelectNodes("//contact[editorSave='True']");
             var listEpa = _contactsEpa.SelectNodes("//contact");
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             foreach (XmlNode child in listEsri)
             {
                 // remove editorSource

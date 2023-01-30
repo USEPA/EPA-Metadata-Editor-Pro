@@ -64,7 +64,7 @@ namespace EMEProToolkit.Pages
 
         public void UpdateThumbnail(object sender, EventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog dlg = new();
             dlg.FileName = ""; // Default file name
             dlg.DefaultExt = ".png"; // Default file extension
             dlg.Filter = "Image Files(*.PNG;*.JPG;*.BMP;*.GIF)|*.PNG;*.JPG;*.BMP;*.GIF|All files (*.*)|*.*";
@@ -78,7 +78,7 @@ namespace EMEProToolkit.Pages
                     try
                     {
                         // fetch via URL
-                        Uri imageUri = new Uri(dlg.FileName);
+                        Uri imageUri = new(dlg.FileName);
                         BitmapDecoder bmd = BitmapDecoder.Create(imageUri, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
 
                         // set the source
@@ -105,7 +105,7 @@ namespace EMEProToolkit.Pages
                 XmlDataProvider provider = Resources["ImageXml"] as XmlDataProvider;
                 string xmlString = provider.Document.InnerXml;
                 xmlString = xmlString.Replace("{rel}", Rel);
-                XmlDocument newDoc = new XmlDocument();
+                XmlDocument newDoc = new();
                 newDoc.LoadXml(xmlString);
 
                 // copy new XML into document
@@ -171,7 +171,7 @@ namespace EMEProToolkit.Pages
                     string base64 = base64imageNode.InnerText;
                     byte[] base64bytes = System.Convert.FromBase64String(base64);
 
-                    MemoryStream ms = new MemoryStream(base64bytes);
+                    MemoryStream ms = new(base64bytes);
                     BitmapDecoder bmd = BitmapDecoder.Create(ms, BitmapCreateOptions.None, BitmapCacheOption.None);
 
                     if (null != _thumbnailImage)
@@ -192,10 +192,10 @@ namespace EMEProToolkit.Pages
                 return;
             }
 
-            JpegBitmapEncoder jbe = new JpegBitmapEncoder();
+            JpegBitmapEncoder jbe = new();
             jbe.Frames.Add(BitmapFrame.Create(_thumbnailImage.Source as BitmapSource));
 
-            MemoryStream ms = new MemoryStream();
+            MemoryStream ms = new();
             jbe.Save(ms);
 
             string base64 = System.Convert.ToBase64String(ms.ToArray(), Base64FormattingOptions.InsertLineBreaks);

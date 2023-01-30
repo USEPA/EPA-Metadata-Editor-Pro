@@ -14,7 +14,7 @@ namespace EMEProToolkit.Pages
     /// </summary>
     public partial class MD_KeywordsUser : EditorPage
     {
-        private List<string> _listUserK = new List<string>();
+        private List<string> _listUserK = new();
         private string _pathEmeDb = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
 
         public MD_KeywordsUser()
@@ -114,7 +114,7 @@ namespace EMEProToolkit.Pages
             //MessageBox.Show("User Theme Key")
             if (lbxEpaUserK.IsVisible == true)
             {
-                List<string> MDKeywords = new List<string>();
+                List<string> MDKeywords = new();
                 if (tbxMDEpaUserK.Text.Any())
                 {
                     string[] strMDKeywords = tbxMDEpaUserK.Text.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);

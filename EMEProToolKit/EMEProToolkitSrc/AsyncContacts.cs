@@ -24,36 +24,39 @@ using ArcGIS.Desktop.Framework.Dialogs;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Mapping;
 using ArcGIS.Desktop.Metadata;
+using System.Net.Http;
+using System.Security.Policy;
 
 namespace EMEProToolkit
 {
     public class AsyncContacts
     {
-        XmlDocument _emeConfig = new XmlDocument();
-        XmlDocument _contactsDoc = new XmlDocument();
-        XmlDocument _contactsEsri = new XmlDocument();
-        XmlDocument _contactsEpa = new XmlDocument();
-        XmlDocument _contactsBAK = new XmlDocument();
-        XmlDocument _contactsWEB = new XmlDocument();
+        XmlDocument _emeConfig = new();
+        XmlDocument _contactsDoc = new();
+        XmlDocument _contactsEsri = new();
+        XmlDocument _contactsEpa = new();
+        XmlDocument _contactsBAK = new();
+        XmlDocument _contactsWEB = new();
         private string _filePathEsri = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ArcGIS\\Descriptions\\";
         private string _filePathEme = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
         private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private static HttpClient Client = new();
 
-        public Task LoadContactsAsync(bool checksyncage)
+        public async Task LoadContactsAsync(bool checksyncage)
         {
-            return Task.Run(() =>
+            await Task.Run(async() =>
             {
                 Trace.WriteLine("_filePathEsri: " + _filePathEsri);
                 LogOutput.Log("LoadContactsAsync - Task ");
                 LogOutput.Log("LoadContactsAsync - Esri file path : " + _filePathEsri);
                 //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("LoadContactsAsync Task started...");
                 FrameworkApplication.State.Activate("sync_contacts_state");
-                ReloadContacts(checksyncage);
+                await ReloadContacts(checksyncage);
                 FrameworkApplication.State.Deactivate("sync_contacts_state");
 
             });
         }
-        private void ReloadContacts(bool checkage = true)
+        private async Task ReloadContacts(bool checkage = true)
         {
             #region Load EME Configuration File
             // Load emeConfig.xml
@@ -134,16 +137,16 @@ namespace EMEProToolkit
                 File.Copy(_filePathEsri + "contacts.bak", _filePathEsri + "contacts.xml");
                 File.Delete(_filePathEsri + "contacts.bak");
             }
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(directoryUrl);
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(directoryUrl);
             //one minute timeout
-            request.Timeout = 60000;
-            request.Method = "HEAD"; //test URL without downloading the content
+            //request.Timeout = 60000;
+            //request.Method = "HEAD"; //test URL without downloading the content
             bool dosync = (!checkage | (checkage & (syncAge > (new TimeSpan(0, 8, 0, 0)))));
             if (dosync)
 
             {
                 LogOutput.Log("ReloadContacts - syncing contacts... " );
-                Notification syncnotification = new Notification();
+                Notification syncnotification = new();
                 //syncnotification.Title = FrameworkApplication.Title;
                 syncnotification.Title = "EPA Metadata Editor Pro";
                 syncnotification.Message = $"Syncing Online Contacts... \n Last sync was {lastSync.ToString()}";
@@ -154,7 +157,8 @@ namespace EMEProToolkit
                 {
                     LogOutput.Log("ReloadContacts - trying http request... ");
                     //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("Reload Contacts - Testing HTTP request...");
-                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                    //using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                    using (HttpResponseMessage response = await Client.SendAsync(new HttpRequestMessage(HttpMethod.Head, directoryUrl)))
                     {
 
                         if (response.StatusCode.ToString() == "OK")
@@ -206,7 +210,7 @@ namespace EMEProToolkit
             {
                 LogOutput.Log("ReloadContacts - loading contacts from local cache");
                 //load recent contacts from local cache notification
-                Notification nosyncnotification = new Notification();
+                Notification nosyncnotification = new();
                 //syncnotification.Title = FrameworkApplication.Title;
                 nosyncnotification.Title = "EPA Metadata Editor Pro";
                 nosyncnotification.Message = $"Loading local contacts from {lastSync.ToString()}";
@@ -280,7 +284,7 @@ namespace EMEProToolkit
             }
             LogOutput.Log("ReloadContacts - clone merge contacts...");
             // new document
-            XmlDocument cloneMerge = new XmlDocument();
+            XmlDocument cloneMerge = new();
 
             #region This method took 8.66 seconds to load contacts
             //try { cloneMerge.Load(_filePathEsri + "contacts.cfg"); }
@@ -297,7 +301,7 @@ namespace EMEProToolkit
             // Populate contacts list with local contacts.xml and Agency Directory
             var listEsri = _contactsEsri.SelectNodes("//contact");
             var listEpa = _contactsEpa.SelectNodes("//contact");
-            StringBuilder sb2 = new StringBuilder();
+            StringBuilder sb2 = new();
             foreach (XmlNode child in listEsri)
             {
                 // remove editorSource
@@ -369,7 +373,7 @@ namespace EMEProToolkit
             }
             LogOutput.Log("ReloadContacts - DONE");
             //done notification 
-            Notification donenotification = new Notification();
+            Notification donenotification = new();
             donenotification.Title = "EPA Metadata Editor Pro";
             donenotification.Message = "Contacts Loaded";
             donenotification.ImageUrl = @"pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericCheckMark32.png";

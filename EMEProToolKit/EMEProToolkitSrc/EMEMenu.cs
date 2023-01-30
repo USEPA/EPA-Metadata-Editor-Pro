@@ -590,7 +590,7 @@ namespace EMEProToolkit
             {
                 FrameworkApplication.State.Deactivate("stock_metadata_tools_state");
                 Caption = "Locked";
-                Uri uriSource = new Uri(
+                Uri uriSource = new(
         "pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericLockNoColor32.png");
                 LargeImage = new System.Windows.Media.Imaging.BitmapImage(uriSource);
             }

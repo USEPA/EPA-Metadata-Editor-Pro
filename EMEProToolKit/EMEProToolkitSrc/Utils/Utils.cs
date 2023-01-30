@@ -471,7 +471,7 @@ namespace EMEProToolkit.Utils
         /// <returns></returns>
         public static string GeneratePartyKey(XmlNode node)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             //XmlNodeList list = node.SelectNodes("rpIndName | rpOrgName | rpPosName | role//@value");
             XmlNodeList list = node.SelectNodes("rpIndName | rpOrgName | rpPosName | rpCntInfo/cntAddress/delPoint | rpCntInfo/cntAddress/city | rpCntInfo/cntAddress/adminArea | rpCntInfo/cntAddress/postCode | rpCntInfo/cntAddress/eMailAdd | rpCntInfo/cntAddress/country//@value | rpCntInfo/cntOnlineRes/linkage | rpCntInfo/cntOnlineRes/protocol | rpCntInfo/cntOnlineRes/appProfile | rpCntInfo/cntOnlineRes/orName | rpCntInfo/cntOnlineRes/orDesc | rpCntInfo/cntOnlineRes/orFunct//@value | rpCntInfo/cntPhone/voiceNum | rpCntInfo/cntPhone/faxNum | rpCntInfo/cntHours | rpCntInfo/cntInstr");
@@ -587,7 +587,7 @@ namespace EMEProToolkit.Utils
             byte[] data = sha1Hasher.ComputeHash(Encoding.Default.GetBytes(input));
 
             // Create a new Stringbuilder to collect the bytes and create a string.
-            StringBuilder sBuilder = new StringBuilder();
+            StringBuilder sBuilder = new();
 
             // Loop through each byte of the hashed data and format each one as a hexadecimal string.
             for (int i = 0; i < data.Length; i++)
@@ -683,9 +683,9 @@ namespace EMEProToolkit.Utils
                 RichTextBox box = sender as RichTextBox;
                 box.Document.Blocks.Clear();
 
-                using (MemoryStream xamlMemoryStream = new MemoryStream(Encoding.UTF8.GetBytes(xaml)))
+                using (MemoryStream xamlMemoryStream = new(Encoding.UTF8.GetBytes(xaml)))
                 {
-                    ParserContext parser = new ParserContext();
+                    ParserContext parser = new();
                     parser.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
                     parser.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
 
@@ -704,13 +704,13 @@ namespace EMEProToolkit.Utils
             if (null == context)
                 return;
 
-            TextRange tr = new TextRange(box.Document.ContentStart, box.Document.ContentEnd);
-            using (MemoryStream ms = new MemoryStream())
+            TextRange tr = new(box.Document.ContentStart, box.Document.ContentEnd);
+            using (MemoryStream ms = new())
             {
                 tr.Save(ms, DataFormats.Xaml);
 
                 // Need to explictly create this to force a byte-order-mark
-                UTF8Encoding encoder = new UTF8Encoding(true, true);
+                UTF8Encoding encoder = new(true, true);
                 string xamlText = encoder.GetString(ms.ToArray());
                 var html = HtmlFromXamlConverter.ConvertXamlToHtml(xamlText, false);
 
@@ -772,7 +772,7 @@ namespace EMEProToolkit.Utils
         public static string GenerateLabel(string anchorBase, XmlNode childNode)
         {
             // new string builder
-            StringBuilder sb = new StringBuilder(anchorBase);
+            StringBuilder sb = new(anchorBase);
 
             // if passed a null childNode
             if (null == childNode)
