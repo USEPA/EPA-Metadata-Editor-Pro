@@ -103,8 +103,8 @@ namespace EMEProToolkit.Pages
 
                         var mdModule = FrameworkApplication.FindModule("esri_metadata_module") as IMetadataEditorHost;
                         if (mdModule != null)
-            {
-              CommitChanges();
+
+                        CommitChanges();
                             mdModule.OnUpdateThumbnail(this);
                     }
                     catch (Exception) { /* noop */ }
