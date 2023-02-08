@@ -6,7 +6,7 @@
     <Image>Images\AddinDesktop32.png</Image>
     <Author>U.S. EPA Office of Information Management</Author>
     <Company>U.S. EPA Metadata Editor for ArcGIS Pro</Company>
-    <Date>2/1/2023</Date>
+    <Date>02/21/2023</Date>
     <Subject>Content</Subject>
   </AddInInfo>
   <categories>
@@ -121,22 +121,26 @@
                         <exists xpath="identCode[. != '']" ref="identCode" />
                         <exists xpath="identCode[. != '']" ref="identCode_hint" />
                       </for>
-                      <for xpath="//thesaName[resTitle]">
+                      <for xpath="//thesaName[resTitle | date]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
-                        <exists xpath="resTitle[. != '']" ref="resTitle_hint" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
                       </for>
-                      <for xpath="//thesaName//*[resTitle]">
+                      <for xpath="//thesaName//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                      </for>
+                      <for xpath="//thesaName//*[resTitle | date]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
-                        <exists xpath="resTitle[. != '']" ref="//thesaName//*[resTitle]_hint" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
                       </for>
                     </validation>
                   </page>
                   <page class="EMEProToolkit.Pages.MTK_DatasetCitation">
                     <validation>
                       <!-- citation -->
-                      <!-- title required for main citation and identifier citation -->
-                      <for xpath="//idCitation[resTitle]">
+                      <!-- title and date required for main citation and identifier citation -->
+                      <for xpath="//idCitation[resTitle | date]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
                       </for>
                       <!--  linkage required for online resources for main citation and identifier citation -->
                       <for xpath="//idCitation//citOnlineRes">
@@ -149,9 +153,9 @@
                         <exists xpath="identCode[. != '']" ref="identCode_hint" />
                       </for>
                       <!-- citation identifier authority citation -->
-                      <for xpath="//idCitation/citId/identAuth[resTitle]">
+                      <for xpath="//idCitation/citId/identAuth[resTitle | date]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
-                        <exists xpath="resTitle[. != '']" ref="//idCitation/citId/identAuth[resTitle]_hint" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
                       </for>
                       <!-- identifier citation contacts -->
                       <!-- contact name, org or role -->
@@ -286,9 +290,10 @@
                       <for xpath="//dataIdInfo//scaleDist[value != '']">
                         <exists xpath="value[@uom != '']" ref="uom,@uom" />
                       </for>
-                      <!-- format name -->
+                      <!-- format name and version -->
                       <for xpath="//dsFormat">
                         <exists xpath="formatName[. != '']" ref="formatName" />
+                        <exists xpath="formatVer[. != '']" ref="formatVer" />
                       </for>
                       <!-- browse file name -->
                       <for xpath="//graphOver">
@@ -369,9 +374,12 @@
                         <exists xpath="identCode[. != '']" ref="identCode" />
                         <exists xpath="identCode[. != '']" ref="identCode_hint" />
                       </for>
-                      <for xpath="//dataExt//*[resTitle]">
+                      <for xpath="//dataExt//*[resTitle | date]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
-                        <exists xpath="resTitle[. != '']" ref="resTitle_hint" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                      </for>
+                      <for xpath="//dataExt//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
                       </for>
                     </validation>
                   </page>
@@ -492,6 +500,7 @@
                       <!-- identifier authority citation -->
                       <for xpath="//refSysInfo//identAuth[*]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
                         <exists xpath="resTitle[. != '']" ref="resTitle_hint" />
                       </for>
                       <!-- identifier authority citation linkage -->
@@ -580,8 +589,9 @@
                         <exists xpath="identCode[. != '']" ref="identCode" />
                         <exists xpath="identCode[. != '']" ref="identCode_hint" />
                       </for>
-                      <for xpath="//spatRepInfo//*[resTitle]">
+                      <for xpath="//spatRepInfo//*[resTitle | date]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date/*[. != '']" ref="dates" />
                         <exists xpath="resTitle[. != '']" ref="resTitle_hint" />
                       </for>
                       <!--more specific hint-->
@@ -608,9 +618,10 @@
                   <page class="EMEProToolkit.Pages.MTK_ContentInformation">
                     <validation>
                       <!-- content information citations -->
-                      <!--  title required -->
-                      <for xpath="//contInfo//*[resTitle]">
+                      <!--  title and date required -->
+                      <for xpath="//contInfo//*[resTitle | date]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
                       </for>
                       <for xpath="//FetCatDesc//catCitation//citRespParty//*[resTitle]">
                         <exists xpath="resTitle[. != '']" ref="resTitle_hint" />
@@ -720,8 +731,20 @@
                         <exists xpath=".[@type != '']" ref="ReportType_hint" />
                       </for>
                       <!-- scope level is required -->
-                      <for xpath="//dqInfo/report">
-                        <exists xpath="../dqScope/scpLvl/ScopeCd[@value != '']" ref="scopeCd" />
+                      <for xpath="//dqInfo">
+                        <exists xpath="dqScope/scpLvl/ScopeCd[@value != '']" ref="scopeCd" />
+                      </for>
+                      <!-- if scope does not equal "dataset" or "series", then a Level Description is required -->
+                      <for xpath="//dqInfo/dqScope[scpLvl/ScopeCd/@value != '005' and scpLvl/ScopeCd/@value != '006' and scpLvl/ScopeCd/@value != '']">
+                        <exists xpath="scpLvlDesc[.//* != '']" ref="scpLvlDesc" />
+                      </for>
+                      <!-- either lineage information or a data quality report must be provided for datasets -->
+                      <for xpath="//dqInfo[dqScope/scpLvl/ScopeCd/@value = '005']">
+                        <or ref="datasetReq">
+                          <exists xpath="dataLineage[.//* !='']" />
+                          <exists xpath="report[.//*  !='']" />
+                          <exists xpath="report[descendant-or-self::*/@code !='' or descendant-or-self::*/@value !='' or descendant-or-self::*/@type !='']" />
+                        </or>
                       </for>
                       <!-- within the report section, either a conformance result or a quantitative result must be provided -->
                       <for xpath="//dqInfo/report">
@@ -736,6 +759,7 @@
                       </for>
                       <!-- within the conformance result section, all of its elements are mandatory -->
                       <for xpath="//dqInfo/report/measResult/ConResult">
+                        <exists xpath="conExpl[ . != '']" ref="conExpl" />
                         <exists xpath="conSpec[ descendant::* != '']" ref="conSpec" />
                         <exists xpath="conSpec[ descendant::* != '']" ref="conSpec_hint" />
                         <exists xpath="conPass[ . != '']" ref="conPass" />
@@ -763,16 +787,18 @@
                         <exists xpath="linkage[. != '']" ref="//report//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" />
                       </for>
                       <!-- citation -->
-                      <for xpath="//dqInfo/report//*[resTitle]">
+                      <for xpath="//dqInfo/report//*[resTitle | date]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
                         <exists xpath="resTitle[. != '']" ref="//dqInfo/report//*[resTitle]_hint" />
                       </for>
                       <for xpath="//dqInfo/report//citOnlineRes">
                         <exists xpath="linkage[. != '']" ref="linkage" />
                         <exists xpath="linkage[. != '']" ref="//dqInfo/report//citOnlineRes/linkage_hint" />
                       </for>
-                      <for xpath="//dqInfo/scpExt//*[resTitle]">
+                      <for xpath="//dqInfo/scpExt//*[resTitle | date]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
                         <exists xpath="resTitle[. != '']" ref="//dqInfo/scpExt//*[resTitle]_hint" />
                       </for>
                       <for xpath="//dqInfo/scpExt//citOnlineRes">
@@ -824,12 +850,25 @@
                   </page>
                   <page class="EMEProToolkit.Pages.MTK_LI_Lineage">
                     <validation>
-                      <!-- in lineage, one of process step, data source, or lineage statement is required -->
-                      <for xpath="//dqInfo/dataLineage">
-                        <or ref="lineageContentReqd">
+                      <!-- if scope = "dataset" or "series", one of process step, data source, or lineage statement is required -->
+                      <for xpath="//dqInfo[dqScope/scpLvl/ScopeCd/@value = '005' or dqScope/scpLvl/ScopeCd/@value = '006']">
+                        <exists xpath=".//*[ . != '']" ref="dqInfo" />
+                      </for>
+                      <for xpath="//dqInfo[dqScope/scpLvl/ScopeCd/@value = '005' or dqScope/scpLvl/ScopeCd/@value = '006']">
+                        <for xpath="dataLineage">
+                          <or ref="dataLineage">
                           <exists xpath="statement[. != '']" />
                           <exists xpath="dataSource/*[. != '']" />
                           <exists xpath="prcStep/*[. != '']" />
+                        </or>
+                      </for>
+                      </for>
+                      <!-- either lineage information or a data quality report must be provided for datasets -->
+                      <for xpath="//dqInfo[dqScope/scpLvl/ScopeCd/@value = '005']">
+                        <or ref="datasetReq">
+                          <exists xpath="dataLineage[.//* !='']" />
+                          <exists xpath="report[.//*  !='']" />
+                          <exists xpath="report[descendant-or-self::*/@code !='' or descendant-or-self::*/@value !='' or descendant-or-self::*/@type !='']" />
                         </or>
                       </for>
                       <!-- process step description -->
@@ -898,8 +937,9 @@
                         <exists xpath="identCode[@code != '']" ref="//dataLineage//srcRefSys[identCode]_hint" />
                       </for>
                       <!-- citations -->
-                      <for xpath="//dataLineage//*[resTitle]">
+                      <for xpath="//dataLineage//*[resTitle | date]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
                         <exists xpath="resTitle[. != '']" ref="resTitle_hint" />
                       </for>
                       <!--custom title hint-->
@@ -918,13 +958,15 @@
                   </page>
                   <page class="EMEProToolkit.Pages.MTK_DistributionInfo">
                     <validation>
-                      <!-- format name -->
+                      <!-- format name and version -->
                       <for xpath="//distFormat">
                         <exists xpath="formatName[. != '']" ref="formatName" />
+                        <exists xpath="formatVer[. != '']" ref="formatVer" />
                         <exists xpath="formatName[. != '']" ref="//distFormat/formatName_hint" />
                       </for>
                       <for xpath="//distorFormat">
                         <exists xpath="formatName[. != '']" ref="formatName" />
+                        <exists xpath="formatVer[. != '']" ref="formatVer" />
                         <exists xpath="formatName[. != '']" ref="//distorFormat/formatName_hint" />
                       </for>
                       <!-- if a density value is provided, the density units is mandatory -->
@@ -1003,14 +1045,18 @@
                         <exists xpath="AscTypeCd[@value != '']" ref="AscTypeCd" />
                         <exists xpath="AscTypeCd[@value != '']" ref="AscTypeCd_hint" />
                       </for>
-                      <!-- a citation describing the associated resource is required -->
+                      <!-- either a citation or an identifier for the aggregate resource must be provided -->
                       <for xpath="//aggrInfo">
-                        <exists xpath="aggrDSName//*[. !='']" ref="aggrCitation" />
-                        <exists xpath="aggrDSName//*[. !='']" ref="aggrCitation_hint" />
+                        <or ref="aggrInfo">
+                          <exists xpath="aggrDSIdent/identCode[. !='']" />
+                          <exists xpath="aggrDSName//*[. !='']" />
+                        </or>
+						<exists xpath="aggrDSName//*[. !='']" ref="aggrCitation_hint" />
                       </for>
-                      <!-- title required for citation and identifier citations -->
-                      <for xpath="//aggrInfo//*[resTitle]">
+                      <!-- title and date required for citation and identifier citations -->
+                      <for xpath="//aggrInfo//*[resTitle | date]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
                         <exists xpath="resTitle[. != '']" ref="//aggrInfo//*[resTitle]_hint" />
                       </for>
                       <!--  linkage required for online resources for main citation and identifier citation -->
@@ -1039,8 +1085,9 @@
                       </for>
                       <!-- portrayal catalogue  -->
                       <!-- title and date required for citation and identifier citations -->
-                      <for xpath="//porCatInfo//*[resTitle]">
+                      <for xpath="//porCatInfo//*[resTitle | date]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
                         <exists xpath="resTitle[. != '']" ref="//porCatInfo//*[resTitle]_hint" />
                       </for>
                       <!--  linkage required for online resources for main citation and identifier citation -->
@@ -1068,9 +1115,10 @@
                         <exists xpath="linkage[. != '']" ref="//porCatInfo//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" />
                       </for>
                       <!-- application schema -->
-                      <!-- title required for citation and identifier citations -->
-                      <for xpath="//appSchInfo//*[resTitle]">
+                      <!-- title and date required for citation and identifier citations -->
+                      <for xpath="//appSchInfo//*[resTitle | date]">
                         <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
                         <exists xpath="resTitle[. != '']" ref="//appSchInfo//*[resTitle]_hint" />
                       </for>
                       <!-- schema language is required -->
