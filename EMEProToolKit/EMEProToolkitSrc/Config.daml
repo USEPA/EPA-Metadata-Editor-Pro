@@ -25,8 +25,9 @@
                     <validation>
                       <!-- tags -->
                       <for xpath="/metadata/dataIdInfo/searchKeys">
-                        <exists xpath="bag[not(. != '')]" ref="searchKeys" />
-                      </for>
+                        <!--<exists xpath="bag[not(. != '')]" ref="searchKeys" />-->
+						<exists xpath="bag[. != '']" ref="searchKeys" />
+					  </for>
                       <!-- title -->
                       <exists xpath="/metadata/dataIdInfo/idCitation/resTitle[. != '']" ref="resTitle" />
                       <!-- abstract -->
