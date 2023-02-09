@@ -268,8 +268,7 @@ limitations under the License.​
                 <ListBox.ItemTemplate>
                   <DataTemplate>
                     <controls:Resizer>
-                      <!--<TextBox x:Name="tbxSearchTags" IsReadOnly="True" ToolTip="{x:Static r:Definitions.ESRI_searchTags}" Style="{DynamicResource EditorTextAreaShortResizeStyle}" v:Nav.AnchorName="searchKeys,bag" Text="{e:MetadataBinding XPath=bag}" />-->
-                      <TextBox x:Name="tbxSearchTags" IsReadOnly="True" ToolTip="Please use the Keywords to Tags tool on the EME toolbar to populate this element." Style="{DynamicResource EditorTextAreaShortResizeStyle}" v:Nav.AnchorName="searchKeys,bag" Text="{e:MetadataBinding XPath=bag}" />
+                        <TextBox x:Name="tbxSearchTags" IsReadOnly="True" ToolTip="{x:Static r:Definitions.ESRI_searchTags}" Style="{DynamicResource EditorTextAreaShortResizeStyle}" v:Nav.AnchorName="searchKeys,bag" Text="{e:MetadataBinding XPath=bag}" />
                     </controls:Resizer>
                   </DataTemplate>
                 </ListBox.ItemTemplate>

@@ -26,8 +26,8 @@
                       <!-- tags -->
                       <for xpath="/metadata/dataIdInfo/searchKeys">
                         <!--<exists xpath="bag[not(. != '')]" ref="searchKeys" />-->
-						<exists xpath="bag[. != '']" ref="searchKeys" />
-					  </for>
+                        <exists xpath="bag[. != '']" ref="searchKeys" />
+                      </for>
                       <!-- title -->
                       <exists xpath="/metadata/dataIdInfo/idCitation/resTitle[. != '']" ref="resTitle" />
                       <!-- abstract -->
@@ -858,11 +858,11 @@
                       <for xpath="//dqInfo[dqScope/scpLvl/ScopeCd/@value = '005' or dqScope/scpLvl/ScopeCd/@value = '006']">
                         <for xpath="dataLineage">
                           <or ref="dataLineage">
-                          <exists xpath="statement[. != '']" />
-                          <exists xpath="dataSource/*[. != '']" />
-                          <exists xpath="prcStep/*[. != '']" />
-                        </or>
-                      </for>
+                            <exists xpath="statement[. != '']" />
+                            <exists xpath="dataSource/*[. != '']" />
+                            <exists xpath="prcStep/*[. != '']" />
+                          </or>
+                        </for>
                       </for>
                       <!-- either lineage information or a data quality report must be provided for datasets -->
                       <for xpath="//dqInfo[dqScope/scpLvl/ScopeCd/@value = '005']">
@@ -1052,7 +1052,7 @@
                           <exists xpath="aggrDSIdent/identCode[. !='']" />
                           <exists xpath="aggrDSName//*[. !='']" />
                         </or>
-						<exists xpath="aggrDSName//*[. !='']" ref="aggrCitation_hint" />
+                        <exists xpath="aggrDSName//*[. !='']" ref="aggrCitation_hint" />
                       </for>
                       <!-- title and date required for citation and identifier citations -->
                       <for xpath="//aggrInfo//*[resTitle | date]">

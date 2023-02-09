@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CI_Address_administrativeArea" xml:space="preserve">
     <value>The state or province of the location. Data type: CharacterString. From: ISO 19115:2003.</value>
@@ -307,7 +307,7 @@
     <value>A detailed description of the level of the data specified by the scope. A description must be provided if the information covers a scope other than "dataset" or "series". Data type: MD_ScopeDescription. From: ISO 19115:2003.</value>
   </data>
   <data name="ESRI_searchTags" xml:space="preserve">
-    <value>A set of terms that can be used by ArcGIS to search for the resource. Terms should be provided as a comma-separated list. These terms are not derived from a thesaurus. Data type: CharacterString. From: ArcGIS metadata.</value>
+    <value>A set of terms that can be used by ArcGIS to search for the resource. Please use the Keywords to Tags tool on the EME toolbar to populate this element. These terms are not derived from a thesaurus. Data type: CharacterString. From: ArcGIS metadata.</value>
   </data>
   <data name="EX_BoundingPolygon" xml:space="preserve">
     <value>A polygon enclosing the resource, expressed as a closed set of (x,y) coordinates—that is, the last point of the polygon is the same as the first point. Data type: EX_BoundingPolygon. From: ISO 19115:2003.</value>
