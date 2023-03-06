@@ -102,7 +102,7 @@ class upgradeTool(object):
 
     def execute(self, parameters, messages):
 
-        Target_Metadata = parameters[0].valueAsText
+        Target_Metadata = parameters[0].valueAsText.replace("'","")
 
         try:
 
@@ -111,7 +111,7 @@ class upgradeTool(object):
             # messages.addMessage("Scratch: {}".format(arcpy.env.scratchFolder))
             # messages.addMessage("path {}".format(os.path.join(arcpy.env.scratchFolder, 'junk.xml')))
             scratch_folder = arcpy.env.scratchFolder
-            output_dir = parameters[2].valueAsText
+            output_dir = parameters[2].valueAsText.replace("'","")
             output_prefix = parameters[3].valueAsText
             if not output_prefix:
                 output_prefix = 'tmp_'
@@ -122,9 +122,9 @@ class upgradeTool(object):
 
             for t in str(Target_Metadata).split(";"):
 
-                if ' ' in t:
-                    messages.addWarningMessage('*Upgrade process skipped for {} due to space found in name'.format(t))
-                    continue
+                #if ' ' in t:
+                #    messages.addWarningMessage('*Upgrade process skipped for {} due to space found in name'.format(t))
+                #    continue
 
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
 
@@ -446,8 +446,8 @@ class cleanupTool(object):
     def execute(self, parameters, messages):
         try:
             """The source code of the tool."""
-            Target_Metadata = parameters[0].valueAsText
-            Output_Dir = parameters[1].valueAsText
+            Target_Metadata = parameters[0].valueAsText.replace("'","")
+            Output_Dir = parameters[1].valueAsText.replace("'","")
 
             for t in str(Target_Metadata).split(";"):
 
@@ -568,9 +568,9 @@ class exportISOTool(object):
             https://pro.arcgis.com/en/pro-app/arcpy/metadata/migrating-from-arcmap-to-arcgis-pro.htm
             '''
             """The source code of the tool."""
-            Target_Metadata = parameters[0].valueAsText
+            Target_Metadata = parameters[0].valueAsText.replace("'","")
             # messages.addMessage(Target_Metadata)
-            Output_Dir = parameters[1].valueAsText
+            Output_Dir = parameters[1].valueAsText.replace("'","")
             ISO_format = parameters[2].valueAsText
 
             for t in str(Target_Metadata).split(";"):
@@ -667,9 +667,9 @@ class saveTemplate(object):
             """The source code of the tool."""
             tool_file_path = os.path.dirname(os.path.realpath(__file__))
 
-            Target_Metadata = parameters[0].valueAsText
+            Target_Metadata = parameters[0].valueAsText.replace("'","")
             messages.addMessage(Target_Metadata)
-            Output_Dir = parameters[1].valueAsText
+            Output_Dir = parameters[1].valueAsText.replace("'","")
 
             for t in str(Target_Metadata).split(";"):
                 if ' ' in t:
@@ -780,9 +780,9 @@ class mergeTemplate(object):
 
         try:
             """The source code of the tool."""
-            Template_Metadata = parameters[1].valueAsText
+            Template_Metadata = parameters[1].valueAsText.replace("'","")
             template_md = md.Metadata(Template_Metadata)
-            Target_Metadata = parameters[0].valueAsText
+            Target_Metadata = parameters[0].valueAsText.replace("'","")
 
             try:
                 defaults_xpath = ET.parse(tool_file_path + r"\GenericTemplateXpathSettings.xml")
@@ -957,7 +957,7 @@ class esriSync(object):
         try:
             """The source code of the tool."""
 
-            Target_Metadata = parameters[0].valueAsText
+            Target_Metadata = parameters[0].valueAsText.replace("'","")
             sync_option = parameters[1].valueAsText
 
             #ToDo: Start Loop here for multiple source MDs
@@ -1029,7 +1029,7 @@ class deleteTool(object):
         try:
             """The source code of the tool."""
             # Target_Metadata = sys.argv[1]
-            Target_Metadata = parameters[0].valueAsText
+            Target_Metadata = parameters[0].valueAsText.replace("'","")
             # messages.addMessage("Got the Target")
             # messages.addMessage("Target {}".format(Target_Metadata))
             # messages.addMessage("Parameter {}".format(parameters[0].value))
@@ -1119,8 +1119,8 @@ class importTool(object):
     def execute(self, parameters, messages):
         try:
             """The source code of the tool."""
-            Source_Metadata = parameters[0].valueAsText
-            Target_Metadata = parameters[1].valueAsText
+            Source_Metadata = parameters[0].valueAsText.replace("'","")
+            Target_Metadata = parameters[1].valueAsText.replace("'","")
             source_md = md.Metadata(Source_Metadata)
 
             # Local variables:
@@ -1229,8 +1229,8 @@ class cleanExportTool(object):
             """The source code of the tool."""
 
             tool_file_path = os.path.dirname(os.path.realpath(__file__))
-            Target_Metadata = parameters[0].valueAsText
-            Output_Dir = parameters[1].valueAsText
+            Target_Metadata = parameters[0].valueAsText.replace("'","")
+            Output_Dir = parameters[1].valueAsText.replace("'","")
             output_prefix = parameters[2].valueAsText
 
             # Local variables:
@@ -1333,7 +1333,7 @@ class editElement(object):
     def execute(self, parameters, messages):
         try:
             """The source code of the tool."""
-            Target_Metadata = parameters[0].valueAsText
+            Target_Metadata = parameters[0].valueAsText.replace("'","")
             Xpath_Expression = parameters[1].valueAsText
             New_Value = parameters[2].valueAsText
 
@@ -1473,7 +1473,7 @@ class editDates(object):
     def execute(self, parameters, messages):
         try:
             """The source code of the tool."""
-            Target_Metadata = parameters[0].valueAsText
+            Target_Metadata = parameters[0].valueAsText.replace("'","")
             Date_Label = parameters[1].valueAsText
             Date_Value = parameters[2].valueAsText
 
@@ -1557,7 +1557,7 @@ class keywords2tags(object):
             return pc
         try:
             """The source code of the tool."""
-            Metadata_Inputs = parameters[0].valueAsText
+            Metadata_Inputs = parameters[0].valueAsText.replace("'","")
             # emeDB path
             emeDB_path = os.path.join(os.getenv('APPDATA'), 'U.S. EPA', 'EME Toolkit', 'EMEdb')
             messages.addMessage(emeDB_path)
