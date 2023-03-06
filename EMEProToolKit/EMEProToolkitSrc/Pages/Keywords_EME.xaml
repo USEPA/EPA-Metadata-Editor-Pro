@@ -232,10 +232,10 @@ limitations under the License.​
                 <StackPanel>
                   <!-- topics -->
                   <StackPanel Orientation="Horizontal">
-                    <Label Style="{DynamicResource EditorVLabelNoIndentStyle}"
+                  <Label Style="{DynamicResource EditorVLabelNoIndentStyle}"
                            ToolTip="{x:Static r:Definitions.MD_DataIdentification_topicCategory}"
                            v:Nav.AnchorName="topics, tpCatBag">
-                          <!--Content="{x:Static r:Resources.LBL_DESC_TOPICS}" />-->
+                                            <!--Content="{x:Static r:Resources.LBL_DESC_TOPICS}" />-->
                       <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#tags-iso" RequestNavigate="Hyperlink_RequestNavigate">
                         <!--<TextBlock Text="{x:Static r:Resources.LBL_DESC_TOPICS}"/>-->
                         <TextBlock Text="ISO 19115 Topic Categories" FontWeight="Bold" />
@@ -246,7 +246,7 @@ limitations under the License.​
                         <Image Source="../Icons/info.rnd.white.png" RenderOptions.BitmapScalingMode="Fant" MaxHeight="14"/>
                       </Hyperlink>
                     </Label>
-                  </StackPanel>
+                </StackPanel>
                   <Grid>
                     <Grid.ColumnDefinitions>
                       <ColumnDefinition Width="*"/>
@@ -347,6 +347,9 @@ limitations under the License.​
                                                                RelativeSource={RelativeSource FindAncestor,
                                                                AncestorType={x:Type ContentPresenter}},
                                                                Mode=OneWayToSource}" LastChildFill="True">
+                            <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}">
+                                <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                            </Button>
                             <!--<Label Style="{DynamicResource EditorHExpanderLabel}"  Content="Program Code Keywords"/>-->
                             <Label Style="{DynamicResource EditorHExpanderLabel}">
                               <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#tags-federal-program-code" RequestNavigate="Hyperlink_RequestNavigate">
@@ -386,6 +389,9 @@ limitations under the License.​
                                                                RelativeSource={RelativeSource FindAncestor,
                                                                AncestorType={x:Type ContentPresenter}},
                                                                Mode=OneWayToSource}" LastChildFill="True">
+                            <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}">
+                                <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                            </Button>
                             <!--<Label Style="{DynamicResource EditorHExpanderLabel}"  Content="Place Keywords"/>-->
                             <Label Style="{DynamicResource EditorHExpanderLabel}">
                               <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#tags-place" RequestNavigate="Hyperlink_RequestNavigate">

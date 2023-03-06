@@ -39,6 +39,7 @@
       <HintPath>C:\Users\thultgre\AppData\Local\Programs\ArcGIS\Pro\bin\Extensions\Metadata\ArcGIS.Desktop.Metadata.dll</HintPath>
       <CopyLocal>False</CopyLocal>
       <Private>False</Private>
+      <SpecificVersion></SpecificVersion>
     </Reference>
     <Reference Include="ArcGIS.Desktop.Catalog">
       <HintPath>C:\Users\thultgre\AppData\Local\Programs\ArcGIS\Pro\bin\Extensions\Catalog\ArcGIS.Desktop.Catalog.dll</HintPath>

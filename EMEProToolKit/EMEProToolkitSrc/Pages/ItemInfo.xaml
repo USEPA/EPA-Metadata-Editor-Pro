@@ -247,8 +247,9 @@ limitations under the License.​
               <!--keywords-->
               <DockPanel>
                 <!--<Label DockPanel.Dock="Left" Style="{DynamicResource EditorHLabelNoIdentStyle}" Content="{x:Static r:Resources.LBL_ITEMINFO_KEY}" FontWeight="Bold"/>-->
-                <Label DockPanel.Dock="Left" Style="{DynamicResource EditorHLabelNoIdentStyle}" ToolTip="Link to Technical Specification" >
-                  <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#tags-general" RequestNavigate="Hyperlink_RequestNavigate">
+                <!--<Label DockPanel.Dock="Left" Style="{DynamicResource EditorHLabelNoIdentStyle}" ToolTip="Link to Technical Specification" >-->
+                <Label Style="{DynamicResource EditorVLabelNoIndentStyle}" ToolTip="{x:Static r:Definitions.ESRI_searchTags}" >
+                    <Hyperlink NavigateUri="https://www.epa.gov/geospatial/epa-metadata-technical-specification#tags-general" RequestNavigate="Hyperlink_RequestNavigate">
                     <TextBlock Text="{x:Static r:Resources.LBL_ITEMINFO_KEY}" FontWeight="Bold"/>
                   </Hyperlink>
                 </Label>
@@ -268,7 +269,7 @@ limitations under the License.​
                 <ListBox.ItemTemplate>
                   <DataTemplate>
                     <controls:Resizer>
-                        <TextBox x:Name="tbxSearchTags" IsReadOnly="True" ToolTip="{x:Static r:Definitions.ESRI_searchTags}" Style="{DynamicResource EditorTextAreaShortResizeStyle}" v:Nav.AnchorName="searchKeys,bag" Text="{e:MetadataBinding XPath=bag}" />
+                        <TextBox x:Name="tbxSearchTags" IsReadOnly="True" ToolTip="{x:Static r:Definitions.ESRI_searchTags}" Style="{DynamicResource EditorTextAreaShortResizeStyle}" v:Nav.AnchorName="searchKeys,bag" Text="{e:MetadataBinding XPath=bag}" IsInactiveSelectionHighlightEnabled="True" />
                     </controls:Resizer>
                   </DataTemplate>
                 </ListBox.ItemTemplate>

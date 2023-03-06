@@ -369,7 +369,7 @@
                                                v:Nav.AnchorName="dates,date/createDate"                        
                                                Content="{x:Static r:Resources.LBL_CREATED_DATE}" />
                     <controls:DateTimeIsoControl Grid.Row="0" Grid.Column="1" ToolTip="{x:Static r:Definitions.CI_Date_creationDate}"                         
-                                                                     Items="{Binding XPath=date/createDate}"/>
+                                                                     Items="{Binding XPath=date/createDate, StringFormat='yyyy-MM-dd'}"/>
 
                     <!-- published date -->
                     <Border Grid.Row="1" Grid.ColumnSpan="2" Background="LemonChiffon"></Border>
