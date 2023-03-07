@@ -122,10 +122,6 @@ class upgradeTool(object):
 
             for t in str(Target_Metadata).split(";"):
 
-                #if ' ' in t:
-                #    messages.addWarningMessage('*Upgrade process skipped for {} due to space found in name'.format(t))
-                #    continue
-
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
 
                 output_name = "{}{}.xml".format(output_prefix, basename)
@@ -451,10 +447,6 @@ class cleanupTool(object):
 
             for t in str(Target_Metadata).split(";"):
 
-                if ' ' in t:
-                    messages.addWarningMessage('*Check results for {} due to space found in name'.format(t))
-                    continue
-
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
                 Output_Name = "_{}_cleanup.xml".format(basename)
 
@@ -575,10 +567,6 @@ class exportISOTool(object):
 
             for t in str(Target_Metadata).split(";"):
 
-                if ' ' in t:
-                    messages.addWarningMessage('*Export skipped for {} due to space found in name'.format(t))
-                    continue
-
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
                 Output_Name = "export_{}_{}.xml".format(ISO_format, basename)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
@@ -672,9 +660,6 @@ class saveTemplate(object):
             Output_Dir = parameters[1].valueAsText.replace("'","")
 
             for t in str(Target_Metadata).split(";"):
-                if ' ' in t:
-                    messages.addWarningMessage('*Check results for {} due to space found in name'.format(t))
-                    continue
 
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
                 Output_Name = "_{}_template.xml".format(basename)
@@ -708,9 +693,6 @@ class saveTemplate(object):
             # Regardless of errors, clean up intermediate products.
             pass
         return
-# For sync tool, might need to look at a handful of elements that need to have the sync attribute
-# set to true, or remove the tag. e.g., Data Quality Bounding Box (might not even get sync'd)
-# or other nested elements
 
 class mergeTemplate(object):
     def __init__(self):
@@ -794,9 +776,6 @@ class mergeTemplate(object):
             # xpath_list = ["dataIdInfo/idPoC/role/RoleCd[@value='010']/../..","dataIdInfo/resConst", ".//dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/..", "mdLang"]
 
             for t in str(Target_Metadata).split(';'):
-                if ' ' in t:
-                    messages.addWarningMessage('*Merge process skipped for {} due to space found in name'.format(t))
-                    continue
 
                 messages.addMessage("Processing Target {}".format(t))
 
@@ -898,6 +877,9 @@ class mergeTemplate(object):
 
 
 class esriSync(object):
+    # For sync tool, might need to look at a handful of elements that need to have the sync attribute
+    # set to true, or remove the tag. e.g., Data Quality Bounding Box (might not even get sync'd)
+    # or other nested elements
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
         self.label = "Esri Synchronize"
@@ -908,9 +890,9 @@ class esriSync(object):
         """Define parameter definitions"""
 
         param0 = arcpy.Parameter(
-            displayName="Target Feature Class",
+            displayName="Target Feature Class or Table",
             name="Target_Metadata",
-            datatype="DEFeatureClass",
+            datatype="DEType",
             parameterType="Required",
             direction="Input",
             multiValue=True)
@@ -962,9 +944,6 @@ class esriSync(object):
 
             #ToDo: Start Loop here for multiple source MDs
             for t in str(Target_Metadata).split(';'):
-                if ' ' in t:
-                    messages.addWarningMessage('*Sync process skipped for {} due to space found in name'.format(t))
-                    continue
 
                 target_md = md.Metadata(t)
                 try:
@@ -1081,7 +1060,6 @@ class importTool(object):
 
     def getParameterInfo(self):
         """Define parameter definitions"""
-            # Second parameter
         param0 = arcpy.Parameter(
             displayName="Source Metadata",
             name="Source_Metadata",
@@ -1089,11 +1067,10 @@ class importTool(object):
             parameterType="Required",
             direction="Input")
 
-        # Third parameter
         param1 = arcpy.Parameter(
             displayName="Target Metadata",
             name="Target_Metadata",
-            datatype="DEType",
+            datatype=["DEType","GPLayer","GPMap"],
             parameterType="Required",
             direction="Input",
             multiValue=True)
@@ -1123,15 +1100,20 @@ class importTool(object):
             Target_Metadata = parameters[1].valueAsText.replace("'","")
             source_md = md.Metadata(Source_Metadata)
 
-            # Local variables:
-            # blankDoc = "blankdoc.xml"
-            # blank_md = md.Metadata(blankDoc)
-
             messages.addMessage("Importing new metadata")
             for t in str(Target_Metadata).split(";"):
+                # Test to see whether this is a dataset (or something else)
+                if arcpy.Exists(t):
+                    #messages.addMessage(t)
+                    target_md = md.Metadata(t)
+                else:
+                    # Check to see whether it's a map in the current project.
+                    current_aprx = arcpy.mp.ArcGISProject('CURRENT')
+                    maps = current_aprx.listMaps(t)
+                    if len(maps)>0:
+                        target_md = maps[0].metadata
 
-                target_md = md.Metadata(t)
-
+                #messages.addMessage(target_md.xml)
                 fileExtension = t[-4:].lower()
                 if fileExtension == ".xml":
                     try:
@@ -1238,10 +1220,6 @@ class cleanExportTool(object):
             # blank_md = md.Metadata(blankDoc)
 
             for t in str(Target_Metadata).split(";"):
-
-                if ' ' in t:
-                    messages.addWarningMessage('*Check results for {} due to space found in name'.format(t))
-                    continue
 
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
 
