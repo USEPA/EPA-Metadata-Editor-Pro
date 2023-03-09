@@ -1,2 +1,221 @@
-<?xml version="1.0"?>
-<metadata><dataIdInfo><placeKeys xmlns=""><thesaName xmlns=""><resTitle>EPA Place Names</resTitle><date><pubDate>2015-01-31T00:00:00</pubDate></date><citOnlineRes xmlns=""><linkage>https://ofmpub.epa.gov/sor_internet/registry/termreg/searchandretrieve/taxonomies/search.do?search=&amp;searchString=&amp;taxonomyName=WBT%20-%20Geographic%20Locations</linkage><orFunct><OnFunctCd value="002"/></orFunct><orName>Web Taxonomy - Geographic Locations</orName></citOnlineRes></thesaName><thesaLang><languageCode value="eng"/><countryCode value="US"/></thesaLang></placeKeys><dataLang><languageCode value="eng"/></dataLang><dataChar><CharSetCd value="004"/></dataChar><idPoC><editorSource>EPA Contact</editorSource><editorDigest>79da749937011fab165e93ed4460ffdb38028423</editorDigest><rpOrgName>U.S. Environmental Protection Agency, Region 9</rpOrgName><rpIndName>Cheryl Henley</rpIndName><rpPosName>GIS Coordinator</rpPosName><rpCntInfo><cntAddress addressType="both"><delPoint>75 Hawthorne Street</delPoint><delPoint>MTS-6-1</delPoint><city>San Francisco</city><adminArea>CA</adminArea><postCode>94105</postCode><eMailAdd>henley.cheryl@epa.gov</eMailAdd></cntAddress><cntPhone><voiceNum tddtty="">415-972-3586</voiceNum></cntPhone><cntOnlineRes><linkage>http://www.epa.gov/region09/</linkage><protocol>website</protocol><orFunct><OnFunctCd value="002"/></orFunct></cntOnlineRes></rpCntInfo><editorSave>True</editorSave><displayName>[EPA Contact]   Cheryl Henley</displayName><role><RoleCd value="010">Publisher</RoleCd></role></idPoC><idCredit>U.S. EPA Region 9 Technology and Data Solutions Center</idCredit><resConst><Consts xmlns=""><useLimit>Please check sources, scale, accuracy, currency and other available information. Please confirm that you are using the most recent copy of both data and metadata.</useLimit></Consts></resConst><idCitation xmlns=""><resTitle>Generic Template For Setting Default Values In Target Metadata Records</resTitle></idCitation><themeKeys xmlns=""><thesaLang><languageCode value="eng"/><countryCode value="US"/></thesaLang><thesaName xmlns=""><resTitle>EPA GIS Keyword Thesaurus</resTitle><date><pubDate>2007-11-02</pubDate></date><citOnlineRes xmlns=""><linkage>https://www.epa.gov/geospatial/epa-metadata-technical-specification</linkage><orFunct><OnFunctCd value="002"/></orFunct><orName>EPA Metadata Technical Specification</orName></citOnlineRes></thesaName></themeKeys><idAbs>This is a template metadata record that can be used to auto-populate target metadata records.  This template is used in conjunction with the EME.  Elements must be populated this document and contain a matching XPath expression within the DefaultTemplateElements.xml document.</idAbs><resConst><LegConsts xmlns=""><accessConsts><RestrictCd value="009">Unrestricted License</RestrictCd></accessConsts><othConsts>https://edg.epa.gov/EPA_Data_License.html</othConsts><useLimit>EPA Public Domain License</useLimit></LegConsts></resConst><themeKeys xmlns=""><thesaLang><languageCode value="eng"/><countryCode value="US"/></thesaLang><thesaName xmlns=""><resTitle>Federal Program Inventory</resTitle><date><pubDate>2013-09-16</pubDate></date><citOnlineRes xmlns=""><linkage>https://www.performance.gov/federalprograminventory</linkage><orFunct><OnFunctCd value="002"/></orFunct><orName>Federal Program Inventory</orName></citOnlineRes></thesaName></themeKeys></dataIdInfo><mdHrLv><ScopeCd value="005"/></mdHrLv><mdLang><languageCode value="eng"/><countryCode value="US"/></mdLang><mdChar><CharSetCd value="004"/></mdChar><mdDateSt Sync="FALSE">2020-11-06</mdDateSt><mdContact xmlns=""><editorSource>EPA Contact</editorSource><editorDigest>79da749937011fab165e93ed4460ffdb38028423</editorDigest><rpOrgName>U.S. Environmental Protection Agency, Region 9</rpOrgName><rpIndName>Cheryl Henley</rpIndName><rpPosName>GIS Coordinator</rpPosName><rpCntInfo xmlns=""><cntAddress addressType="both"><delPoint>75 Hawthorne Street</delPoint><delPoint>MTS-6-1</delPoint><city>San Francisco</city><adminArea>CA</adminArea><postCode>94105</postCode><eMailAdd>henley.cheryl@epa.gov</eMailAdd></cntAddress><cntPhone><voiceNum tddtty="">415-972-3586</voiceNum></cntPhone><cntOnlineRes><linkage>http://www.epa.gov/region09/</linkage><protocol>website</protocol><orFunct><OnFunctCd value="002"/></orFunct></cntOnlineRes></rpCntInfo><editorSave>True</editorSave><displayName>[EPA Contact]   Cheryl Henley</displayName><role><RoleCd value="007"/></role></mdContact><refSysInfo><RefSystem dimension="horizontal"/></refSysInfo><mdFileID xmlns:esri="http://www.esri.com/metadata/"/><Esri><scaleRange><minScale>150000000</minScale><maxScale>5000</maxScale></scaleRange><DataProperties><itemProps><imsContentType export="False"/></itemProps></DataProperties><ArcGISFormat>1.0</ArcGISFormat></Esri><mdMaint xmlns=""><maintFreq><MaintFreqCd value="009"/></maintFreq></mdMaint></metadata>
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+	<distInfo>
+		<distTranOps>
+			<onLineSrc>
+				<protocol>download</protocol>
+				<orFunct>
+					<OnFunctCd value="001"/>
+				</orFunct>
+				<orName>Zipped File Geodatabase</orName>
+			</onLineSrc>
+			<onLineSrc>
+				<protocol>information</protocol>
+				<orFunct>
+					<OnFunctCd value="002"/>
+				</orFunct>
+				<orName>EPA Geoplatform Item page</orName>
+			</onLineSrc>
+			<onLineSrc>
+				<protocol>order</protocol>
+				<orFunct>
+					<OnFunctCd value="004"/>
+				</orFunct>
+				<orName>EDG Open Data site with Clip N Ship capability</orName>
+			</onLineSrc>
+			<onLineSrc>
+				<protocol>ESRI:ArcGIS</protocol>
+				<orFunct>
+					<OnFunctCd value="011"/>
+				</orFunct>
+				<orName>EPA GeoPlatform Hosted Feature Service</orName>
+			</onLineSrc>
+		</distTranOps>
+		<distFormat>
+			<formatVer>1</formatVer>
+		</distFormat>
+	</distInfo>
+	<dataIdInfo>
+		<idStatus>
+			<ProgCd value="001"/>
+		</idStatus>
+		<resMaint xmlns="">
+			<maintFreq>
+				<MaintFreqCd value="009"/>
+			</maintFreq>
+		</resMaint>
+		<dataLang>
+			<languageCode value="eng"/>
+		</dataLang>
+		<resConst>
+			<LegConsts>
+				<accessConsts>
+					<RestrictCd value="009">Unrestricted License</RestrictCd>
+				</accessConsts>
+				<othConsts>https://edg.epa.gov/EPA_Data_License.html</othConsts>
+				<useLimit>EPA Public Domain License</useLimit>
+			</LegConsts>
+		</resConst>
+		<resConst>
+			<Consts>
+				<useLimit>Terms of Use for Geospatial Data (https://www.epa.gov/web-policies-and-procedures/epa-disclaimers#geospatial)
+These geospatial data and corresponding cartographic materials have been approved for use by the U.S. Environmental Protection Agency (EPA) as advised by the EPA Geospatial Advisory Committee (EGAC). This approved release is on the condition that neither the EPA nor the U.S. Government may be held liable for any damages resulting from its authorized or unauthorized use. These data and any corresponding products, services, or materials do not necessarily represent the EPA’s official position or viewpoint, expressed or implied. These content items are not intended for use in establishing liability or calculating cost recovery statutes of limitations. They cannot be relied upon to create any rights, substantive or procedural, enforceable by any party in litigation with the United States or third parties. Additionally, although these data have been processed successfully on EPA computer systems, no warranty expressed or implied can be made regarding the accuracy or utility of the data on any other system or for general or scientific purposes, nor shall the act of distribution constitute any such warranty. The Agency reserves the right to revise EPA-stewarded datasets pursuant to further analysis and review without public notice. Unless otherwise specified, geospatial data produced by the EPA is by default in the public domain and is not subject to domestic copyright protection under 17 U.S.C. § 105.  Referenced data from non-EPA sources are neither inherently verified nor independently tested by the Agency in all circumstances. Permission to reproduce copyrighted items not produced by the EPA must be secured from the copyright owner. EPA strongly recommends careful attention be paid to metadata files associated with these data to better understand limitations, restrictions or intended use. The U.S. EPA shall not be held liable for improper or incorrect use of the data.</useLimit>
+			</Consts>
+		</resConst>
+		<resConst>
+			<SecConsts>
+				<class>
+					<ClasscationCd value="001">Unclassified</ClasscationCd>
+				</class>
+			</SecConsts>
+		</resConst>
+		<themeKeys>
+			<thesaLang>
+				<languageCode value="eng"/>
+				<countryCode value="US"/>
+			</thesaLang>
+			<thesaName>
+				<resTitle>EPA GIS Keyword Thesaurus</resTitle>
+				<date>
+					<pubDate>2007-11-02</pubDate>
+				</date>
+				<citOnlineRes>
+					<linkage>https://www.epa.gov/geospatial/epa-metadata-technical-specification</linkage>
+					<orFunct>
+						<OnFunctCd value="002"/>
+					</orFunct>
+					<orName>EPA Metadata Technical Specification</orName>
+				</citOnlineRes>
+			</thesaName>
+			<keyword>Environment</keyword>
+		</themeKeys>
+		<themeKeys>
+			<thesaLang>
+				<languageCode value="eng"/>
+				<countryCode value="US"/>
+			</thesaLang>
+			<thesaName>
+				<resTitle>Federal Program Inventory</resTitle>
+				<date>
+					<pubDate>2013-09-16</pubDate>
+				</date>
+				<citOnlineRes>
+					<linkage>https://www.performance.gov/federalprograminventory</linkage>
+					<orFunct>
+						<OnFunctCd value="002"/>
+					</orFunct>
+					<orName>Federal Program Inventory</orName>
+				</citOnlineRes>
+			</thesaName>
+			<keyword>020:072</keyword>
+		</themeKeys>
+		<placeKeys>
+			<thesaName>
+				<resTitle>EPA Place Names</resTitle>
+				<date>
+					<pubDate>2015-01-31</pubDate>
+				</date>
+				<citOnlineRes>
+					<linkage>https://ofmpub.epa.gov/sor_internet/registry/termreg/searchandretrieve/taxonomies/search.do?search=&amp;searchString=&amp;taxonomyName=WBT%20-%20Geographic%20Locations</linkage>
+					<orFunct>
+						<OnFunctCd value="002"/>
+					</orFunct>
+					<orName>Web Taxonomy - Geographic Locations</orName>
+				</citOnlineRes>
+			</thesaName>
+			<thesaLang>
+				<languageCode value="eng"/>
+				<countryCode value="US"/>
+			</thesaLang>
+			<keyword>United States</keyword>
+		</placeKeys>
+		<dataChar>
+			<CharSetCd value="004"/>
+		</dataChar>
+		<tpCat>
+			<TopicCatCd value="007"/>
+		</tpCat>
+	</dataIdInfo>
+	<dqInfo>
+		<dqScope>
+			<scpLvl>
+				<ScopeCd value="005"/>
+			</scpLvl>
+		</dqScope>
+		<report type="DQConcConsis">
+			<measResult>
+				<ConResult>
+					<conSpec>
+						<resTitle>EPA Guidance for Geospatially Related Quality Assurance Project Plans</resTitle>
+						<date>
+							<pubDate>2003-03-03</pubDate>
+						</date>
+						<citOnlineRes>
+							<linkage>https://www.epa.gov/geospatial/epa-guidance-geospatially-related-quality-assurance-project-plans</linkage>
+							<protocol>information</protocol>
+							<appProfile>PDF</appProfile>
+							<orDesc>This document contains advice and recommendations for developing a QA Project Plan for projects involving geospatial data, including both newly collected data and data acquired from other sources.</orDesc>
+							<orFunct>
+								<OnFunctCd value="010"/>
+							</orFunct>
+						</citOnlineRes>
+						<citRespParty>
+							<rpOrgName>U.S. Environmental Protection Agency, Office of Environmental Information</rpOrgName>
+							<rpIndName>U.S. EPA Quality Staff</rpIndName>
+							<rpPosName>Coordinator</rpPosName>
+							<rpCntInfo>
+								<cntAddress addressType="both">
+									<delPoint>1200 Pennsylvania Avenue, N.W.</delPoint>
+									<city>Washington</city>
+									<adminArea>DC</adminArea>
+									<postCode>20460</postCode>
+									<eMailAdd>quality@epa.gov</eMailAdd>
+									<country>US</country>
+								</cntAddress>
+								<cntPhone>
+									<voiceNum>(202) 564-6830</voiceNum>
+									<faxNum>202-565-2441</faxNum>
+								</cntPhone>
+								<cntOnlineRes>
+									<linkage>http://www.epa.gov/quality</linkage>
+									<protocol>website</protocol>
+									<orFunct>
+										<OnFunctCd value="002"/>
+									</orFunct>
+								</cntOnlineRes>
+							</rpCntInfo>
+							<displayName>U.S. EPA Quality Staff</displayName>
+							<role>
+								<RoleCd value="007"/>
+							</role>
+						</citRespParty>
+					</conSpec>
+					<conPass>1</conPass>
+				</ConResult>
+			</measResult>
+		</report>
+	</dqInfo>
+	<mdMaint>
+		<maintFreq>
+			<MaintFreqCd value="009"/>
+		</maintFreq>
+	</mdMaint>
+	<mdChar>
+		<CharSetCd value="004"/>
+	</mdChar>
+	<mdLang>
+		<languageCode value="eng"/>
+	</mdLang>
+	<Esri>
+		<scaleRange>
+			<minScale>150000000</minScale>
+			<maxScale>5000</maxScale>
+		</scaleRange>
+		<ArcGISFormat>1.0</ArcGISFormat>
+		<ArcGISProfile>ISO19115_3</ArcGISProfile>
+	</Esri>
+	<mdHrLv>
+		<ScopeCd value="005"/>
+	</mdHrLv>
+	<mdDateSt Sync="TRUE">20230308</mdDateSt>
+</metadata>

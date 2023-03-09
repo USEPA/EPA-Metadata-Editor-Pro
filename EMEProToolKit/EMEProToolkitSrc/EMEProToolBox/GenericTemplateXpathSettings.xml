@@ -65,11 +65,6 @@
     <IsDefault>true</IsDefault>
   </ElementName>
   <ElementName>
-    <Xpath>dataIdInfo/dataLang</Xpath>
-    <Label>Data Character Set</Label>
-    <IsDefault>true</IsDefault>
-  </ElementName>
-  <ElementName>
     <Xpath>dataIdInfo/idPoC/role/RoleCd[@value='010']/../..</Xpath>
     <Label>POC (Publisher)</Label>
     <IsDefault>true</IsDefault>
@@ -78,11 +73,6 @@
     <Xpath>dataIdInfo/idPoC/role/RoleCd[@value='007']/../..</Xpath>
     <Label>POC (POC)</Label>
     <IsDefault>false</IsDefault>
-  </ElementName>
-  <ElementName>
-    <Xpath>dataIdInfo/resConst</Xpath>
-    <Label>Constraints: EPA Use Limitations | Legal Constraints</Label>
-    <IsDefault>true</IsDefault>
   </ElementName>
   <ElementName>
     <Xpath>dataIdInfo/idCredit</Xpath>
@@ -114,4 +104,74 @@
     <Label>Metadata Language</Label>
     <IsDefault>true</IsDefault>
   </ElementName>
+  <ElementName>
+    <Xpath>distInfo/distFormat</Xpath>
+    <Label>Distribution Format</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName> 
+  <ElementName>
+    <Xpath>distInfo/distTranOps</Xpath>
+    <Label>Distribution Transfer Options</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>  
+  <ElementName>
+    <Xpath>dataIdInfo/idStatus</Xpath>
+    <Label>Resource Status</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>    
+  <ElementName>
+    <Xpath>dataIdInfo/resMaint</Xpath>
+    <Label>Resource Maintentance</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>    
+  <ElementName>
+    <Xpath>dataIdInfo/resConst/LegConsts</Xpath>
+    <Label>Constraints: EPA Use Limitations | Legal Constraints</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>  
+  <ElementName>
+    <Xpath>dataIdInfo/resConst/Consts</Xpath>
+    <Label>Constraints: EPA Use Limitations | General Constraints</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>  
+  <ElementName>
+    <Xpath>dataIdInfo/resConst/SecConsts</Xpath>
+    <Label>Constraints: EPA Use Limitations | General Constraints</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>  
+  <ElementName>
+    <Xpath>dqInfo</Xpath>
+    <Label>Data Quality - Basic Guidance</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>   
+  <ElementName>
+    <Xpath>mdMaint</Xpath>
+    <Label>Metadata Maintenance</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>  
+  <ElementName>
+    <Xpath>eainfo/overview</Xpath>
+    <Label>Entity and Attribute Overview</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>  
+  <ElementName>
+    <Xpath>dataIdInfo/idCitation/citRespParty</Xpath>
+    <Label>Data Citation Responsible Party</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>    
+  <ElementName>
+    <Xpath>dataIdInfo/aggrInfo</Xpath>
+    <Label>Aggregate Dataset Information</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName> 
+  <ElementName>
+    <Xpath>dataIdInfo/suppInfo</Xpath>
+    <Label>Supplementary Dataset Information</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName>   
+  <ElementName>
+    <Xpath>dataIdInfo/idPoC</Xpath>
+    <Label>Dataset Citation Point of Contact</Label>
+    <IsDefault>true</IsDefault>
+  </ElementName> 
 </emeData>

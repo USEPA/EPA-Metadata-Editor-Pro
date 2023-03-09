@@ -402,14 +402,6 @@ class cleanupTool(object):
             direction="Input",
             multiValue=True)
 
-        # # second parameter
-        # param1 = arcpy.Parameter(
-        #     displayName="Output Metadata",
-        #     name="Output_Metadata",
-        #     datatype="DEFile",
-        #     parameterType="Required",
-        #     direction="Output")
-        # second parameter
         param1 = arcpy.Parameter(
             displayName="Output Directory",
             name="Output_Directory",
@@ -504,14 +496,6 @@ class exportISOTool(object):
             direction="Input",
             multiValue=True)
 
-        # # second parameter
-        # param1 = arcpy.Parameter(
-        #     displayName="Output Metadata",
-        #     name="Output_Metadata",
-        #     datatype="DEFile",
-        #     parameterType="Required",
-        #     direction="Output")
-        # second parameter
         param1 = arcpy.Parameter(
             displayName="Output Directory",
             name="Output_Dir",
@@ -615,12 +599,6 @@ class saveTemplate(object):
             direction="Input",
             multiValue=True)
 
-        # param1 = arcpy.Parameter(
-        #     displayName="Output Metadata",
-        #     name="Output_Metadata",
-        #     datatype="DEFile",
-        #     parameterType="Required",
-        #     direction="Output")
         param1 = arcpy.Parameter(
             displayName="Output Directory",
             name="Output_Dir",
@@ -720,18 +698,16 @@ class mergeTemplate(object):
             direction="Input")
         param1.value = os.path.dirname(os.path.realpath(__file__)) + r"\GenericMetadataTemplate_EMEPro.xml"
 
-        # param2 = arcpy.Parameter(
-        #     displayName="Update Elements",
-        #     name="Xpath_Expression",
-        #     datatype="GPString",
-        #     parameterType="Optional",
-        #     direction="Input",
-        #     multiValue=True
-        # )
-        # # param2.value = ["dataIdInfo/idCitation/resTitle","dataIdInfo/idAbs","dataIdInfo/idPurp"]
-        # param2.value = [".//dataIdInfo/resConst", ".//dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/..", "mdLang"]
+        param2 = arcpy.Parameter(
+            displayName="Overwrite Existing Elements",
+            name="Overwrite",
+            datatype="GPBoolean",
+            parameterType="Required",
+            direction="Input"
+        )
+        param2.value = "False"
 
-        params = [param0, param1]
+        params = [param0, param1, param2]
         return params
 
     def isLicensed(self):
@@ -742,10 +718,6 @@ class mergeTemplate(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        # if parameters[2].valueAsText:
-        #     fileExtension = parameters[2].valueAsText[-4:].lower()
-        #     if fileExtension != ".xml":
-        #         parameters[2].value = parameters[2].valueAsText + ".xml"
 
         return
 
@@ -765,15 +737,13 @@ class mergeTemplate(object):
             Template_Metadata = parameters[1].valueAsText.replace("'","")
             template_md = md.Metadata(Template_Metadata)
             Target_Metadata = parameters[0].valueAsText.replace("'","")
+            replaceElements = parameters[2].valueAsText
 
             try:
                 defaults_xpath = ET.parse(tool_file_path + r"\GenericTemplateXpathSettings.xml")
                 defaults_xpath_list = defaults_xpath.getroot().findall("ElementName[IsDefault='true']")
             except Exception as parse_error:
                 messages.addWarningMessage("Error Parsing GenericTemplateXpathSettings.xml {}".format(parse_error))
-
-            # xpath_list = parameters[2].valueAsText
-            # xpath_list = ["dataIdInfo/idPoC/role/RoleCd[@value='010']/../..","dataIdInfo/resConst", ".//dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus']/..", "mdLang"]
 
             for t in str(Target_Metadata).split(';'):
 
@@ -782,60 +752,63 @@ class mergeTemplate(object):
                 source_md = md.Metadata(t)
                 source_root = ET.fromstring(source_md.xml)
                 template_root = ET.fromstring(template_md.xml)
-                # messages.addMessage("starting xpath loop")
+                messages.addMessage("starting xpath loop, replaceElements is " + replaceElements)
                 for xp in defaults_xpath_list:
                     try:
                         # messages.addMessage("First one {}".format(xp[0].text))
                         if len(template_root.findall(xp[0].text)) > 0:
                             messages.addMessage('- Found in template {}: {}'.format(xp[1].text, xp[0].text))
-                            # Remove source data
-                            if len(source_root.findall(xp[0].text)) > 0:
-                                parent = source_root.findall(xp[0].text + "/..")[0]
-                                try:
-                                    for e in source_root.findall(xp[0].text):
-                                        parent.remove(e)
-                                        messages.addMessage('- Removed old target element: {}: {}'.format(xp[1].text, xp[0].text))
-                                except Exception as ee:
-                                    messages.addWarningMessage(ee)
+                            # Remove source data if set to replace elements and elements found in template.
+                            if len(source_root.findall(xp[0].text)) > 0 and replaceElements == "true":
+                                if len(source_root.findall(xp[0].text)) > 0 and len(template_root.findall(xp[0].text)) > 0:
+                                    parent = source_root.findall(xp[0].text + "/..")[0]
+                                    try:
+                                        for e in source_root.findall(xp[0].text):
+                                            parent.remove(e)
+                                            messages.addMessage('- Removed old target element: {}: {}'.format(xp[1].text, xp[0].text))
+                                    except Exception as ee:
+                                        messages.addWarningMessage(ee)
 
-                            # Build out the list of req'd nodes leading up to the parent. Use template_md
-                            node_list = []
-                            current_node_path = xp[0].text
-                            current_node_tag = template_root.findall(xp[0].text)[0].tag
-                            parent_node_path = ""
-                            while current_node_tag != 'metadata':
-                                current_node_path += "/.."
-                                parent = template_root.findall(current_node_path)
-                                if parent:
-                                    if not parent[0].tag == 'metadata':
-                                        node_list.insert(0, parent[0].tag)
-                                    current_node_tag = parent[0].tag
-                                else:
-                                    #this should never happend, but just in case
-                                    current_node_tag = 'metadata'
-                                    messages.addMessage('This should not happen')
+                                # Build out the list of req'd nodes leading up to the parent. Use template_md
+                                node_list = []
+                                current_node_path = xp[0].text
+                                current_node_tag = template_root.findall(xp[0].text)[0].tag
+                                parent_node_path = ""
+                                while current_node_tag != 'metadata':
+                                    current_node_path += "/.."
+                                    parent = template_root.findall(current_node_path)
+                                    if parent:
+                                        if not parent[0].tag == 'metadata':
+                                            node_list.insert(0, parent[0].tag)
+                                        current_node_tag = parent[0].tag
+                                    else:
+                                        #this should never happen, but just in case
+                                        current_node_tag = 'metadata'
+                                        messages.addMessage('This should not happen')
 
-                            # node_list does not include root node, since that should always exist
-                            source_parent_node = source_root
-                            if node_list:
-                                parent_node_path = "/".join(node_list)
-                                # messages.addMessage('Parent Xpath: {}'.format(parent_node_path))
-                                xpathList = []
-                                thisNode = source_root
-                                for xpathElem in node_list:
-                                    xpathList.append(xpathElem)
-                                    buildXPath = "/".join(xpathList)
-                                    if len(source_root.findall(buildXPath)) == 0:
-                                        ET.SubElement(thisNode, xpathElem)
-                                    thisNode = source_root.findall(buildXPath)[0]
-                                source_parent_node = source_root.findall(parent_node_path)[0]
+                                # node_list does not include root node, since that should always exist
+                                source_parent_node = source_root
+                                if node_list:
+                                    parent_node_path = "/".join(node_list)
+                                    # messages.addMessage('Parent Xpath: {}'.format(parent_node_path))
+                                    xpathList = []
+                                    thisNode = source_root
+                                    for xpathElem in node_list:
+                                        xpathList.append(xpathElem)
+                                        buildXPath = "/".join(xpathList)
+                                        if len(source_root.findall(buildXPath)) == 0:
+                                            ET.SubElement(thisNode, xpathElem)
+                                        thisNode = source_root.findall(buildXPath)[0]
+                                    source_parent_node = source_root.findall(parent_node_path)[0]
 
-                            for template_element in template_root.findall(xp[0].text):
-                                try:
-                                    source_parent_node.append(deepcopy(template_element))
-                                    messages.addMessage('- Copied to target: {}: {}'.format(xp[1].text, xp[0].text))
-                                except Exception as ee:
-                                    messages.addWarningMessage(ee)
+                                for template_element in template_root.findall(xp[0].text):
+                                    try:
+                                        source_parent_node.append(deepcopy(template_element))
+                                        messages.addMessage('- Copied to target: {}: {}'.format(xp[1].text, xp[0].text))
+                                    except Exception as ee:
+                                        messages.addWarningMessage(ee)
+                            else:
+                                messages.addMessage('- Existing element found in target metadata, skipping to next element')
                     except Exception as err:
                         messages.addWarningMessage("Error: {}".format(err))
 
@@ -1161,13 +1134,6 @@ class cleanExportTool(object):
             direction="Input",
             multiValue=True)
 
-        # second parameter
-        # param1 = arcpy.Parameter(
-        #     displayName="Output Metadata",
-        #     name="Output_Metadata",
-        #     datatype="DEFile",
-        #     parameterType="Required",
-        #     direction="Output")
         param1 = arcpy.Parameter(
             displayName="Output Directory",
             name="Output_Dir",

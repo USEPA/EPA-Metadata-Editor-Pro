@@ -29,7 +29,7 @@
 	</xsl:template>
     
     <!-- Extend excluded elements for EPA Template-->
-    <xsl:template match="eainfo | mdDateSt | idCitation | idAbs | suppInfo | distInfo | dqInfo | contInfo | spatRepInfo | refSysInfo" priority="1" >
+    <xsl:template match="eainfo/detailed | mdDateSt | idCitation/resTitle | idAbs | envirDesc | contInfo | spatRepInfo | refSysInfo | Binary | spatRpType | dataExt | dqInfo/dataLineage" priority="1" >
 	</xsl:template>
 	
 	<!-- match elements only; run after above processing has stripped out unwanted elements -->
