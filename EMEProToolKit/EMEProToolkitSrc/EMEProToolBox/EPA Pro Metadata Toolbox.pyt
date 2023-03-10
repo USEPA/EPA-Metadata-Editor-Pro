@@ -1280,26 +1280,31 @@ class editElement(object):
             Target_Metadata = parameters[0].valueAsText.replace("'","")
             Xpath_Expression = parameters[1].valueAsText
             New_Value = parameters[2].valueAsText
+            valueIsXML = False
+            try:
+                New_Value = ET.fromstring(New_Value)
+                valueIsXML = True
+                messages.addMessage("New value is recognized as XML...")
+            except:
+                messages.addMessage("New value being handled as string...")
 
             for t in str(Target_Metadata).split(";"):
 
                 target_md = md.Metadata(t)
-                # scratch_md = md.Metadata()
-                # scratch_md.copy(target_md)
-
-                # Use scratchCopy class to make a standalone XML doc to work with.
-                # scratchCopier = scratchCopy(messages)
-                # scratch_Metadata = scratchCopier.makeScratchCopy(Target_Metadata)
-
                 messages.addMessage("Editing the metadata record...")
-                # Process: EPA Cleanup
-                # tree = ET.parse(scratch_Metadata)
-                # root = tree.getroot()
-                # at the root when parsing from string
                 root = ET.fromstring(target_md.xml)
 
                 # This section iterates through the xpath components, adding any missing SubElements so there's at least one element to populate.
+                # Strip leading slashes:
+                if Xpath_Expression[0] == "/":
+                    Xpath_Expression = Xpath_Expression[1:]
                 xpathElements = Xpath_Expression.split("/")
+                # If the user happened to include /metadata in the xpath, remove
+                if xpathElements[0] == 'metadata':
+                    xpathElements.pop(0)
+                Xpath_Expression = "/".join(xpathElements)
+
+                # If the specified Xpath doesn't already exist, this adds the necessary nodes.
                 xpathList = []
                 thisNode = root
                 for xpathElem in xpathElements:
@@ -1312,10 +1317,12 @@ class editElement(object):
                 # This section updates the values of any matching xpath expressions
                 elements = root.findall(Xpath_Expression)
                 for elem in elements:
-                    elem.text = New_Value
-
-                # tree.write(scratch_Metadata)
-                # messages.addMessage("writing back to xml object")
+                    if valueIsXML:
+                        for child in list(elem):
+                            elem.remove(child)
+                        elem.append(deepcopy(New_Value))
+                    else:
+                        elem.text = New_Value
 
                 target_md.xml = ET.tostring(root)
 
@@ -1334,21 +1341,6 @@ class editElement(object):
 
                 messages.addMessage("Process complete, element update count: {}.".format(str(len(elements))))
                 messages.addMessage("Output: {}".format(t))
-
-                # If the target is a standalone XML doc, just copy the scratch over the source file.
-                # if Target_Metadata[-4:].lower() == ".xml":
-                #     import shutil
-                #     shutil.copy(scratch_Metadata,Target_Metadata)
-                # else:
-                #     # Otherwise import the scratch metadata back to the source data.
-                #     importer = importTool()
-                #     importParams = importer.getParameterInfo()
-                #     import_source = importParams[0]
-                #     import_source.value = scratch_Metadata
-                #     import_target = importParams[1]
-                #     import_target.value = Target_Metadata
-                #
-                #     importer.execute([import_source,import_target],messages)
 
         except:
             # Cycle through Geoprocessing tool specific errors
