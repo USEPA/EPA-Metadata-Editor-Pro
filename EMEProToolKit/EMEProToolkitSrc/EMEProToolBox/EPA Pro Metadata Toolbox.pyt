@@ -1479,7 +1479,7 @@ class keywords2tags(object):
         # for keywords2tags
         def create_keyword(string_value):
             keyW = ET.TreeBuilder()
-            keyW.start('keyword')
+            keyW.start('keyword', {})
             keyW.data(string_value)
             keyW.end('keyword')
             keywordComponent = keyW.close()
@@ -1510,6 +1510,7 @@ class keywords2tags(object):
                 target_root = ET.fromstring(target_md.xml)
                 searchKeys_xp = "dataIdInfo/searchKeys"
                 existingTags = [t.text for t in target_root.findall(searchKeys_xp + "/keyword")]
+                messages.addMessage("Existing tags:")
                 messages.addMessage(existingTags)
 
                 # ISO 19115-3 Topic Categories
@@ -1534,6 +1535,8 @@ class keywords2tags(object):
                                 '019': 'Utilities & Communication'}
                 tpCat_xp = "dataIdInfo/tpCat/TopicCatCd[@value]"
                 tpCat_values = [tpCat_lookup[x.attrib['value']] for x in target_root.findall(tpCat_xp)]
+                messages.addMessage("ISO Keywords:")
+                messages.addMessage(tpCat_values)
                 tpCat_keywords = [create_keyword(kw) for kw in tpCat_values]
 
                 # # EPA Keywords
@@ -1549,16 +1552,21 @@ class keywords2tags(object):
                 programCodes_root = ET.parse(programCodes_path).getroot()
                 programCodes_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='Federal Program Inventory'][1]/../keyword"
                 programCodes_code_keyw = target_root.findall(programCodes_xp)
+                messages.addMessage("Program Codes:")
+                messages.addMessage(programCodes_code_keyw)
 
                 programCodes_values = [getPcode(v.text, programCodes_root) for v in
                                        target_root.findall(programCodes_xp)]
                 programCodes_keywords = [create_keyword(kw) for kw in programCodes_values]
+                messages.addMessage("Program Code Values:")
                 messages.addMessage(programCodes_values)
 
                 # All keywords (includes user, epa, place, custom, and program code keywords
                 gen_keywords_xp = './/keyword'
                 gen_keywords_all = target_root.findall(gen_keywords_xp)
                 gen_keywords = [x for x in gen_keywords_all if x not in programCodes_code_keyw]
+                messages.addMessage("All other keywords:")
+                messages.addMessage([x.text for x in gen_keywords])
 
                 # Parent searchKeys component
                 searchKeys_xp = "dataIdInfo/searchKeys"
@@ -1568,7 +1576,7 @@ class keywords2tags(object):
                     # Then need to create searchKeys
                     dataIdInfo = target_root.find('dataIdInfo')
                     sK = ET.TreeBuilder()
-                    sK.start('searchKeys')
+                    sK.start('searchKeys',{})
                     sK.end('searchKeys')
                     md_component = sK.close()
                     dataIdInfo.append(deepcopy(md_component))
