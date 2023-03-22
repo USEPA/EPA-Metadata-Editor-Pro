@@ -6,6 +6,28 @@ import xml.etree.ElementTree as ET
 from copy import deepcopy
 import sys
 
+def readXML(input):
+    # Handle feature service option using featureLayer:
+    if input[:5]=='https':
+        from arcgis.gis import GIS
+        gis = GIS('home')
+        from arcgis.features import FeatureLayer
+        fLayer = FeatureLayer(input)
+        return md.Metadata(fLayer.metadata)
+    # Test to see whether this is a dataset (or something else)
+    elif arcpy.Exists(input):
+        return md.Metadata(input)
+    else:
+        # Check to see whether it's a map in the current project.
+        current_aprx = arcpy.mp.ArcGISProject('CURRENT')
+        maps = current_aprx.listMaps(input)
+        if len(maps)>0:
+            return maps[0].metadata
+
+def writeXML(xmlDoc, target):
+    pass
+    # Then at end, use fLayer.update_metadata(file_path)
+    # https://developers.arcgis.com/python/api-reference/arcgis.features.toc.html#featurelayer
 
 class Toolbox(object):
     def __init__(self):
@@ -74,10 +96,6 @@ class upgradeTool(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        # if parameters[1].valueAsText:
-        #     fileExtension = parameters[1].valueAsText[-4:].lower()
-        #     if fileExtension != ".xml":
-        #         parameters[1].value = parameters[1].valueAsText + ".xml"
 
         if parameters[1].value is True:
             parameters[2].enabled = 'False'
@@ -108,8 +126,6 @@ class upgradeTool(object):
 
             overwrite_md = parameters[1].valueAsText
             messages.addMessage("overwrite_md: {}".format(overwrite_md))
-            # messages.addMessage("Scratch: {}".format(arcpy.env.scratchFolder))
-            # messages.addMessage("path {}".format(os.path.join(arcpy.env.scratchFolder, 'junk.xml')))
             scratch_folder = arcpy.env.scratchFolder
             output_dir = parameters[2].valueAsText.replace("'","")
             output_prefix = parameters[3].valueAsText
@@ -118,15 +134,12 @@ class upgradeTool(object):
             if not output_dir:
                 output_dir = arcpy.env.scratchFolder
 
-            # messages.addMessage("outPrefix: {}, outdir: {}".format(output_prefix, output_dir))
-
             for t in str(Target_Metadata).split(";"):
 
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
 
                 output_name = "{}{}.xml".format(output_prefix, basename)
                 output_metadata = ""
-                # output_metadata = os.path.join(output_dir, output_name)
 
                 tool_file_path = os.path.dirname(os.path.realpath(__file__))
                 EPAUpgradeCleanup_xslt = tool_file_path + r'\EPAUpgradeCleanup.xslt'
@@ -151,14 +164,12 @@ class upgradeTool(object):
                     tmp_md.upgrade('FGDC_CSDGM')
                     tmp_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, upgrade_name), EPAUpgradeCleanup_xslt)
 
-                    # source_md.saveAsXML(os.path.join(scratch_folder, backup_name))
                     messages.addWarningMessage('*Upgrade process skipped for {} since it is in ArcGIS 1.0 format. Cleaning up legacy elements and preserving the UUID...'.format(t))
                     messages.addMessage('Backups of the source metadata placed at: {} and named the following for additional review {} {} {}'\
                                         .format(scratch_folder, clean_name, original_name, upgrade_name))
 
                 try:
                     final_xml = os.path.join(output_dir, output_name)
-                    # messages.addMessage("Temp file: {}".format(final_xml))
                     messages.addMessage("Cleaning up legacy elements and preserving the UUID...")
 
                     root_temp = ET.fromstring(source_md.xml)
@@ -345,7 +356,6 @@ class upgradeTool(object):
                         messages.addWarningMessage(e)
 
                     source_md.saveAsUsingCustomXSLT(final_xml, EPAUpgradeCleanup_xslt)
-                    # temp_temp = md.Metadata().importMetadata(source_md.uri, 'CUSTOM', EPAUpgradeCleanup_xslt)
                     output_metadata = final_xml
                     # if overwrite back to source :
                     if overwrite_md == 'true':
@@ -420,10 +430,6 @@ class cleanupTool(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        # if parameters[1].valueAsText:
-        #     fileExtension = parameters[1].valueAsText[-4:].lower()
-        #     if fileExtension != ".xml":
-        #         parameters[1].value = parameters[1].valueAsText + ".xml"
         return
 
     def updateMessages(self, parameters):
@@ -456,8 +462,6 @@ class cleanupTool(object):
                 # Process: EPA Cleanup
                 try:
                     source_md.saveAsUsingCustomXSLT(Output_Metadata, EPAUpgradeCleanup_xslt)
-                    # Process: EPA Cleanup
-                    # arcpy.XSLTransform_conversion(Upgraded_Metadata, EPAUpgradeCleanup_xslt, Output_Metadata, "")
                 except Exception as e:
                     messages.addWarningMessage(e)
 
@@ -512,7 +516,6 @@ class exportISOTool(object):
         )
 
         param2.filter.type = "ValueList"
-        # param2.filter.list = ["FGDC_CSDGM", "ISO19139", "ISO19139_GML32", "ISO19115_3"]
         param2.filter.list = ["ISO19139", "ISO19139_GML32", "ISO19115_3"]
         param2.value = 'ISO19139'
         params = [param0, param1, param2]
@@ -526,10 +529,6 @@ class exportISOTool(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        # if parameters[1].valueAsText:
-        #     fileExtension = parameters[1].valueAsText[-4:].lower()
-        #     if fileExtension != ".xml":
-        #         parameters[1].value = parameters[1].valueAsText + ".xml"
         return
 
     def updateMessages(self, parameters):
@@ -554,13 +553,8 @@ class exportISOTool(object):
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
                 Output_Name = "export_{}_{}.xml".format(ISO_format, basename)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
-                # messages.addMessage(t)
                 messages.addMessage(Output_Metadata)
                 messages.addMessage(ISO_format)
-
-                # Local variables:
-                # messages.addMessage('Install Dir: {}'.format(arcpy.GetInstallInfo()['InstallDir']))
-                # translator = arcpy.GetInstallInfo()['InstallDir'] + "Metadata\\Translator\\ArcGIS2ISO19139.xml"
 
                 src_md = md.Metadata(t)
                 # generate output path from input name
@@ -617,10 +611,6 @@ class saveTemplate(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        # if parameters[1].valueAsText:
-        #     fileExtension = parameters[1].valueAsText[-4:].lower()
-        #     if fileExtension != ".xml":
-        #         parameters[1].value = parameters[1].valueAsText + ".xml"
         return
 
     def updateMessages(self, parameters):
@@ -642,7 +632,6 @@ class saveTemplate(object):
                 basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
                 Output_Name = "_{}_template.xml".format(basename)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
-                # messages.addMessage(f'param 1 {Output_Metadata}')
 
                 source_md = md.Metadata(t)
 
@@ -651,7 +640,6 @@ class saveTemplate(object):
 
                 # Process: EPA Cleanup
                 try:
-                    # arcpy.XSLTransform_conversion(Source_Metadata, saveTemplate_xslt, Output_Metadata, "")
                     source_md.saveAsUsingCustomXSLT(Output_Metadata, saveTemplate_xslt)
                 except Exception as e:
                     messages.addWarningMessage(e)
@@ -755,7 +743,6 @@ class mergeTemplate(object):
                 messages.addMessage("starting xpath loop, replaceElements is " + replaceElements)
                 for xp in defaults_xpath_list:
                     try:
-                        # messages.addMessage("First one {}".format(xp[0].text))
                         if len(template_root.findall(xp[0].text)) > 0:
                             messages.addMessage('- Found in template {}: {}'.format(xp[1].text, xp[0].text))
                             # Remove source data if set to replace elements and elements found in template.
@@ -790,7 +777,6 @@ class mergeTemplate(object):
                                 source_parent_node = source_root
                                 if node_list:
                                     parent_node_path = "/".join(node_list)
-                                    # messages.addMessage('Parent Xpath: {}'.format(parent_node_path))
                                     xpathList = []
                                     thisNode = source_root
                                     for xpathElem in node_list:
@@ -892,11 +878,6 @@ class esriSync(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        # if parameters[2].valueAsText:
-        #     fileExtension = parameters[2].valueAsText[-4:].lower()
-        #     if fileExtension != ".xml":
-        #         parameters[2].value = parameters[2].valueAsText + ".xml"
-
         return
 
     def updateMessages(self, parameters):
@@ -911,7 +892,6 @@ class esriSync(object):
 
         try:
             """The source code of the tool."""
-
             Target_Metadata = parameters[0].valueAsText.replace("'","")
             sync_option = parameters[1].valueAsText
 
@@ -950,7 +930,6 @@ class deleteTool(object):
 
     def getParameterInfo(self):
         """Define parameter definitions"""
-            # Second parameter
         param0 = arcpy.Parameter(
             displayName="Target Metadata",
             name="Target_Metadata",
@@ -980,22 +959,12 @@ class deleteTool(object):
     def execute(self, parameters, messages):
         try:
             """The source code of the tool."""
-            # Target_Metadata = sys.argv[1]
             Target_Metadata = parameters[0].valueAsText.replace("'","")
-            # messages.addMessage("Got the Target")
-            # messages.addMessage("Target {}".format(Target_Metadata))
-            # messages.addMessage("Parameter {}".format(parameters[0].value))
-
-            # Local variables:
-            # blankDoc = "blankdoc.xml" This no longer needed
             source_md = md.Metadata()
-            # messages.addMessage("Got the blank")
 
             for t in str(Target_Metadata).split(";"):
 
                 messages.addMessage("Performing complete purge of {}".format(t))
-                # Process: Purge
-                # arcpy.MetadataImporter_conversion(blankDoc, Target_Metadata)
                 target_md = md.Metadata(t)
 
                 fileExtension = t[-4:].lower()
@@ -1077,7 +1046,6 @@ class importTool(object):
             for t in str(Target_Metadata).split(";"):
                 # Test to see whether this is a dataset (or something else)
                 if arcpy.Exists(t):
-                    #messages.addMessage(t)
                     target_md = md.Metadata(t)
                 else:
                     # Check to see whether it's a map in the current project.
@@ -1086,7 +1054,6 @@ class importTool(object):
                     if len(maps)>0:
                         target_md = maps[0].metadata
 
-                #messages.addMessage(target_md.xml)
                 fileExtension = t[-4:].lower()
                 if fileExtension == ".xml":
                     try:
@@ -1129,7 +1096,7 @@ class cleanExportTool(object):
         param0 = arcpy.Parameter(
             displayName="Source Metadata",
             name="Source_Metadata",
-            datatype="DEType",
+            datatype=["DEType","GPLayer","GPMap"],
             parameterType="Required",
             direction="Input",
             multiValue=True)
@@ -1161,10 +1128,6 @@ class cleanExportTool(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        # if parameters[1].valueAsText:
-        #     fileExtension = parameters[1].valueAsText[-4:].lower()
-        #     if fileExtension != ".xml":
-        #         parameters[1].value = parameters[1].valueAsText + ".xml"
         return
 
     def updateMessages(self, parameters):
@@ -1181,19 +1144,19 @@ class cleanExportTool(object):
             Output_Dir = parameters[1].valueAsText.replace("'","")
             output_prefix = parameters[2].valueAsText
 
-            # Local variables:
-            # blankDoc = "blankdoc.xml"
-            # blank_md = md.Metadata(blankDoc)
-
             for t in str(Target_Metadata).split(";"):
 
-                basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
-
+                if t[:5]=='https':
+                    serviceName = t.split("/arcgis/rest/services/")[1]
+                    basename = re.sub('[^_0-9a-zA-Z]+', '', t.split("/arcgis/rest/services/")[1])
+                else:
+                    basename = re.sub('[^_0-9a-zA-Z]+', '', os.path.splitext(os.path.basename(t))[0])
 
                 Output_Name = "{}{}.xml".format(output_prefix, basename)
                 Output_Metadata = os.path.join(Output_Dir, Output_Name)
 
-                source_md = md.Metadata(t)
+                #source_md = md.Metadata(t)
+                source_md = readXML(t)
 
                 # Local variables:
                 EPACleanExport_xslt = tool_file_path + r"\EPACleanExport.xslt"
@@ -1289,6 +1252,8 @@ class editElement(object):
                 messages.addMessage("New value being handled as string...")
 
             for t in str(Target_Metadata).split(";"):
+
+                xml = getXML(t)
 
                 target_md = md.Metadata(t)
                 messages.addMessage("Editing the metadata record...")
@@ -1538,14 +1503,6 @@ class keywords2tags(object):
                 messages.addMessage("ISO Keywords:")
                 messages.addMessage(tpCat_values)
                 tpCat_keywords = [create_keyword(kw) for kw in tpCat_values]
-
-                # # EPA Keywords
-                # epaKeywords_xp = "dataIdInfo/themeKeys/thesaName/[resTitle='EPA GIS Keyword Thesaurus'][1]/../keyword"
-                # epaKeywords_keywords = [kw for kw in target_root.findall(epaKeywords_xp)]
-                #
-                # # Place Keywords
-                # placeKeywords_xp = "dataIdInfo/placeKeys/thesaName/[resTitle='EPA Place Names'][1]/../keyword"
-                # placeKeywords_keywords = [kw for kw in target_root.findall(placeKeywords_xp)]
 
                 # Program Codes
                 programCodes_path = os.path.join(emeDB_path, 'ProgramCode.xml')
