@@ -6,26 +6,75 @@ import xml.etree.ElementTree as ET
 from copy import deepcopy
 import sys
 
-def readXML(input):
-    # Handle feature service option using featureLayer:
-    if input[:5]=='https':
-        from arcgis.gis import GIS
-        gis = GIS('home')
-        from arcgis.features import FeatureLayer
-        fLayer = FeatureLayer(input)
-        return md.Metadata(fLayer.metadata)
-    # Test to see whether this is a dataset (or something else)
-    elif arcpy.Exists(input):
-        return md.Metadata(input)
-    else:
-        # Check to see whether it's a map in the current project.
-        current_aprx = arcpy.mp.ArcGISProject('CURRENT')
-        maps = current_aprx.listMaps(input)
-        if len(maps)>0:
-            return maps[0].metadata
+def readXML(source):
+    try:
+        # Handle services:
+        if source[:5]=='https':
+            from arcgis.gis import GIS, Item
+            gis = GIS('home')
+            from arcgis.features import FeatureLayer, FeatureLayerCollection
+            desc = arcpy.Describe(source)
+            # Syntax is different between services and service layers
+            if desc.dataType == "FeatureClass":
+                fLayer = FeatureLayer(source, gis)
+                return md.Metadata(fLayer.metadata)
+            elif desc.dataType == "Workspace":
+                flc = FeatureLayerCollection(source, gis)
+                flcitem = Item(gis,flc.properties["serviceItemId"])
+                return md.Metadata(flcitem.metadata)
+        # Test to see whether this is a dataset (or something else)
+        if arcpy.Exists(source):
+            return md.Metadata(source)
+        else:
+            # Check to see whether it's a map in the current project.
+            current_aprx = arcpy.mp.ArcGISProject('CURRENT')
+            maps = current_aprx.listMaps(source)
+            if len(maps)>0:
+                return maps[0].metadata
+    except Exception as ee:
+        raise ee
 
-def writeXML(xmlDoc, target):
-    pass
+def writeXML(source, target):
+    try:
+        fileExtension = target[-4:].lower()
+        if fileExtension == ".xml":
+            os.remove(target)
+            source.saveAsXML(target)
+        elif target[:5]=='https':
+            from arcgis.gis import GIS, Item
+            gis = GIS('home')
+            from arcgis.features import FeatureLayer, FeatureLayerCollection
+            desc = arcpy.Describe(target)
+            # Services need a path to a saved file for updating metadata
+            if source.uri:
+                sourcePath = source.uri
+            else:
+                sourcePath = os.path.join(arcpy.env.scratchFolder,"metadata.xml")
+                source.saveAsXML(sourcePath)
+            # Syntax is different between services and service layers
+            if desc.dataType == "FeatureClass":
+                fLayer = FeatureLayer(target, gis)
+                fLayer.update_metadata(sourcePath)
+            elif desc.dataType == "Workspace":
+                flc = FeatureLayerCollection(target, gis)
+                flcitem = Item(gis,flc.properties["serviceItemId"])
+                flcitem.update(metadata=sourcePath)
+        # Test to see whether this is a dataset (or something else)
+        else:
+            if arcpy.Exists(target):
+                target_md = md.Metadata(target)
+            else:
+                # Check to see whether it's a map in the current project.
+                current_aprx = arcpy.mp.ArcGISProject('CURRENT')
+                maps = current_aprx.listMaps(target)
+                if len(maps)>0:
+                    target_md = maps[0].metadata
+                else:
+                    raise "Unknown target"
+                target_md.copy(source)
+                target_md.save()
+    except Exception as ee:
+        raise ee
     # Then at end, use fLayer.update_metadata(file_path)
     # https://developers.arcgis.com/python/api-reference/arcgis.features.toc.html#featurelayer
 
@@ -38,8 +87,6 @@ class Toolbox(object):
 
         # List of tool classes associated with this toolbox
         self.tools = [upgradeTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate, exportISOTool, esriSync, keywords2tags]
-        # self.tools = [upgradeTool,cleanupTool,exportISOTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate]
-
 
 class upgradeTool(object):
     def __init__(self):
@@ -55,7 +102,7 @@ class upgradeTool(object):
         param0 = arcpy.Parameter(
             displayName="Source Metadata",
             name="Source_Metadata",
-            datatype="DEType",
+            datatype=["DEType","GPLayer","GPMap"],
             parameterType="Required",
             direction="Input",
             multiValue=True)
@@ -933,7 +980,7 @@ class deleteTool(object):
         param0 = arcpy.Parameter(
             displayName="Target Metadata",
             name="Target_Metadata",
-            datatype="DEType",
+            datatype=["DEType","GPLayer","GPMap"],
             parameterType="Required",
             direction="Input",
             multiValue=True)
@@ -960,30 +1007,20 @@ class deleteTool(object):
         try:
             """The source code of the tool."""
             Target_Metadata = parameters[0].valueAsText.replace("'","")
-            source_md = md.Metadata()
+            blank_md = md.Metadata()
 
             for t in str(Target_Metadata).split(";"):
 
                 messages.addMessage("Performing complete purge of {}".format(t))
-                target_md = md.Metadata(t)
 
-                fileExtension = t[-4:].lower()
-                if fileExtension == ".xml":
-                    try:
-                        os.remove(t)
-                    except Exception as ee:
-                        messages.addWarningMessage(ee)
-                    source_md.saveAsXML(target_md.uri)
-                else:
-                    try:
-                        target_md.copy(source_md)
-                        target_md.save()
-                    except Exception as ee:
-                        messages.addWarningMessage(ee)
+                target_md = readXML(t)
+
+                writeXML(blank_md, t)
 
                 messages.addMessage("Process complete - please review the output carefully.")
 
-        except:
+        except Exception as ee:
+            messages.addMessage(ee)
             # Cycle through Geoprocessing tool specific errors
             for msg in range(0, arcpy.GetMessageCount()):
                 if arcpy.GetSeverity(msg) == 2:
