@@ -53,7 +53,8 @@ namespace EMEProToolkit.Pages
         }
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            //New method (.NET 6 https://learn.microsoft.com/en-us/answers/questions/809281/net6-system-diagnostics-process-start-error)
+            Process.Start(new ProcessStartInfo { FileName = e.Uri.AbsoluteUri, UseShellExecute = true });
             e.Handled = true;
         }
 

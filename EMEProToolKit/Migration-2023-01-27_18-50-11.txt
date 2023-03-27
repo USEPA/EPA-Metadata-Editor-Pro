@@ -1,0 +1,10 @@
+Migration Status Report
+  Migrate ArcGIS Pro extension: from 2.x to 3.0, for this migration ArcGIS Pro target version 3.0.3 was used.
+  Convert Solution: C:\Users\thultgre\Repos\EPA-Metadata-Editor-Pro\EMEProToolKit\EMEProToolkitSolution.sln
+  EMEProToolkit.csproj
+   project folder: 
+   C:\Users\thultgre\Repos\EPA-Metadata-Editor-Pro\EMEProToolKit\EMEProToolkitSrc\
+   C:\Users\thultgre\Repos\EPA-Metadata-Editor-Pro\EMEProToolKit\EMEProToolkitSrc\
+   language: CS
+   Error: can't process a project folder that contains other projects in sub directories: C:\Users\thultgre\Repos\EPA-Metadata-Editor-Pro\EMEProToolKit\EMEProToolkitSrc\
+    Other projects: C:\Users\thultgre\Repos\EPA-Metadata-Editor-Pro\EMEProToolKit\EMEProToolkitSrc\EMEProToolBox\EMEToolbox.pyproj

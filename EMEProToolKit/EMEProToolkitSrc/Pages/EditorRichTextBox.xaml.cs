@@ -136,14 +136,14 @@ namespace EMEProToolkit.Pages
 
         /**** COMMANDS ****/
 
-        public static readonly RoutedUICommand HyperlinkCommand = new RoutedUICommand(
+        public static readonly RoutedUICommand HyperlinkCommand = new(
           /*"Do something", "DoSomething", typeof(UserControl)*/);
 
 
-        public static readonly RoutedUICommand IncreaseFontSizeCommand = new RoutedUICommand(
+        public static readonly RoutedUICommand IncreaseFontSizeCommand = new(
           /*"Do something", "DoSomething", typeof(UserControl)*/);
 
-        public static readonly RoutedUICommand DecreaseFontSizeCommand = new RoutedUICommand(
+        public static readonly RoutedUICommand DecreaseFontSizeCommand = new(
           /*"Do something", "DoSomething", typeof(UserControl)*/);
 
         internal void DecreaseFontSizeCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -274,7 +274,7 @@ namespace EMEProToolkit.Pages
             TextPointer endOfApply = (currentOffset <= 0) ? endingPoint : next;
 
             // apply the style for this portion
-            TextRange range = new TextRange(currentPoint, endOfApply);
+            TextRange range = new(currentPoint, endOfApply);
             try
             {
                 string text = currentPoint.GetTextInRun(LogicalDirection.Forward);
@@ -349,7 +349,7 @@ namespace EMEProToolkit.Pages
                 if (inline is Hyperlink)
                 {
                     hyperlink = (Hyperlink)inline;
-                    TextRange textRangeHyper = new TextRange(hyperlink.ElementStart, hyperlink.ElementEnd);
+                    TextRange textRangeHyper = new(hyperlink.ElementStart, hyperlink.ElementEnd);
                     if (textRange.Text == textRangeHyper.Text)
                     {
                         // here's the link
@@ -466,7 +466,7 @@ namespace EMEProToolkit.Pages
             else if (null != hyperlink)
             {
                 // old text
-                TextRange textRangeHyper = new TextRange(hyperlink.ElementStart, hyperlink.ElementEnd);
+                TextRange textRangeHyper = new(hyperlink.ElementStart, hyperlink.ElementEnd);
                 string oldText = textRangeHyper.Text;
 
                 // remove hyperlink

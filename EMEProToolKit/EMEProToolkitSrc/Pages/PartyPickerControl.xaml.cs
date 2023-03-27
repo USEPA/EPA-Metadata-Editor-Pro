@@ -32,7 +32,7 @@ namespace EMEProToolkit.Pages
 
         public void LoadList(object sender, EventArgs e)
         {
-            XmlDocument _contactsDoc = new XmlDocument();
+            XmlDocument _contactsDoc = new();
 
             var list = Utils.Utils.GenerateContactsList(_contactsDoc, this.DataContext);
             if (list == null)

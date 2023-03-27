@@ -1,423 +1,414 @@
-﻿<!--
-Copyright 2019 Esri
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-	http://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.​
--->
-<ArcGIS defaultAssembly="EMEProToolkit.dll" 
-        defaultNamespace="EMEProToolkit" 
-        xmlns="http://schemas.esri.com/DADF/Registry" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  
-  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="1.0" desktopVersion="2.6.24783">
-	<Name>EMEProToolkit</Name>
-	<Description>US EPA Metadata Editor (EME) AddIn for ArcGIS Pro based off Esri's Metadata Toolkit</Description>
-	<Image>Images\AddinDesktop32.png</Image>
-	<Author>U.S. EPA Office of Information Management</Author>
-	<Company>U.S. EPA Metadata Editor for ArcGIS Pro</Company>
-	<Date>11/20/2020</Date>
-	<Subject>Content</Subject>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArcGIS defaultAssembly="EMEProToolkit.dll" defaultNamespace="EMEProToolkit" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Users/thultgre/AppData/Local/Programs/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
+  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="2.0" desktopVersion="3.0.3.36057">
+    <Name>EMEProToolkit</Name>
+    <Description>US EPA Metadata Editor (EME) AddIn for ArcGIS Pro based off Esri's Metadata Toolkit</Description>
+    <Image>Images\AddinDesktop32.png</Image>
+    <Author>U.S. EPA Office of Information Management</Author>
+    <Company>U.S. EPA Metadata Editor for ArcGIS Pro</Company>
+    <Date>02/21/2023</Date>
+    <Subject>Content</Subject>
   </AddInInfo>
   <categories>
-	<updateCategory refID="esri_metadata_metadataEditors">
-	  <insertComponent id="EMEProToolkit_metadataEditor_toolkit" className="ToolkitMetadataEditor">
-		<content type="ToolkitEditor" displayName="EPA Metadata Editor Pro" id="8328efcc-345c-4f6b-9b4a-918f9f443771">
-		  <metadataConfig ArcGISProfile="ISO19115_3" ValidatePages="True">
-      <validationNamespaceURI>http://standards.iso.org/iso/19115/-3/mdb/1.0</validationNamespaceURI>
-			<validationSchemaURL></validationSchemaURL>
-			<tranformStyle>ISO19115_3</tranformStyle>
-			<viewerXslt>Metadata\Stylesheets\ArcGISProFull.xsl</viewerXslt>
-			<editor>
-			  <forms>
-				<section class="EMEProToolkit.Sections.Overview">
-				  <page class="EMEProToolkit.Pages.MTK_ItemInfo">
-            <validation>
-            <!-- tags -->
-            <for xpath="/metadata/dataIdInfo/searchKeys">
-              <exists xpath="bag[not(. != '')]" ref="searchKeys"/>
-            </for>
-              <!-- title -->
-              <exists xpath="/metadata/dataIdInfo/idCitation/resTitle[. != '']" ref="resTitle"/>
-              <!-- abstract -->
-              <for xpath="/metadata[not(tool)]">
-                <exists xpath="dataIdInfo/idAbs[. != '']" ref="idAbs"/>
-              </for>
-              <!-- tool summary -->
-              <for xpath="/metadata[tool]">
-                <exists xpath="tool/summary[. != '']" ref="toolSummary"/>
-              </for>
-              <!-- tools -->
-              <for xpath="//scriptExample">
-                <exists xpath="title[. != '']" ref="scriptTitle"/>
-              </for>
-              <!-- extent -->
-              <for xpath="//dataExt//GeoBndBox[@esriExtentType = 'search' AND * != '']">
-                <exists xpath="westBL[. != '']" ref="westBL,.,westBL"/>
-                <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL"/>
-                <exists xpath="northBL[. != '']" ref="northBL,.,northBL"/>
-                <exists xpath="southBL[. != '']" ref="southBL,.,southBL"/>
-                <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range"/>
-                <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.Keywords_EME">
-            <validation>
-              <!-- topic categories required for dataset or series -->
-              <for xpath="/metadata[mdHrLv/ScopeCd/@value = '005' or mdHrLv/ScopeCd/@value = '006']">
-                <exists xpath="//dataIdInfo/tpCatBag[*/@value='True']" ref="topics"/>
-              </for>
-              <!-- theme keywords -->
-              <for xpath="/metadata/dataIdInfo/themeKeys">
-                <exists xpath="bag[. != '']" ref="bag,.,themeKeywords"/>
-              </for>
-              
-              <!-- epa keywords -->
-              <for xpath="/metadata/dataIdInfo">
-                <exists xpath="//themeKeys/thesaName/resTitle[. = 'EPA GIS Keyword Thesaurus']" ref="themeKeywordsEpa"/>
-              </for>
-              <!--<for xpath="/metadata/dataIdInfo/themeKeys[thesaName/resTitle[contains(. , 'EPA GIS Keyword Thesaurus')]]">
-                <exists xpath="bag[. != '']" ref="bag,.,themeKeywords"/>
-              </for>-->
-
-              <!-- program code -->
-              <for xpath="/metadata/dataIdInfo">
-                <exists xpath="//themeKeys/thesaName/resTitle[. = 'Federal Program Inventory']" ref="themeKeywordsCd"/>
-              </for>
-              <!--<for xpath="/metadata/dataIdInfo/themeKeys[thesaName/resTitle[contains(. , 'Federal Program Inventory')]]">
+    <updateCategory refID="esri_metadata_metadataEditors">
+      <insertComponent id="EMEProToolkit_metadataEditor_toolkit" className="ToolkitMetadataEditor">
+        <content type="ToolkitEditor" displayName="EPA Metadata Editor Pro" id="8328efcc-345c-4f6b-9b4a-918f9f443771">
+          <metadataConfig ArcGISProfile="ISO19115_3" ValidatePages="True">
+            <validationNamespaceURI>http://standards.iso.org/iso/19115/-3/mdb/1.0</validationNamespaceURI>
+            <validationSchemaURL></validationSchemaURL>
+            <tranformStyle>ISO19115_3</tranformStyle>
+            <viewerXslt>Metadata\Stylesheets\ArcGISProFull.xsl</viewerXslt>
+            <editor>
+              <forms>
+                <section class="EMEProToolkit.Sections.Overview">
+                  <page class="EMEProToolkit.Pages.MTK_ItemInfo">
+                    <validation>
+                      <!-- tags -->
+                      <for xpath="/metadata/dataIdInfo/searchKeys">
+                        <!--<exists xpath="bag[not(. != '')]" ref="searchKeys" />-->
+                        <exists xpath="bag[. != '']" ref="searchKeys" />
+                      </for>
+                      <!-- title -->
+                      <exists xpath="/metadata/dataIdInfo/idCitation/resTitle[. != '']" ref="resTitle" />
+                      <!-- abstract -->
+                      <for xpath="/metadata[not(tool)]">
+                        <exists xpath="dataIdInfo/idAbs[. != '']" ref="idAbs" />
+                      </for>
+                      <!-- tool summary -->
+                      <for xpath="/metadata[tool]">
+                        <exists xpath="tool/summary[. != '']" ref="toolSummary" />
+                      </for>
+                      <!-- tools -->
+                      <for xpath="//scriptExample">
+                        <exists xpath="title[. != '']" ref="scriptTitle" />
+                      </for>
+                      <!-- extent -->
+                      <for xpath="//dataExt//GeoBndBox[@esriExtentType = 'search' AND * != '']">
+                        <exists xpath="westBL[. != '']" ref="westBL,.,westBL" />
+                        <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL" />
+                        <exists xpath="northBL[. != '']" ref="northBL,.,northBL" />
+                        <exists xpath="southBL[. != '']" ref="southBL,.,southBL" />
+                        <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range" />
+                        <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.Keywords_EME">
+                    <validation>
+                      <!-- topic categories required for dataset or series -->
+                      <for xpath="/metadata[mdHrLv/ScopeCd/@value = '005' or mdHrLv/ScopeCd/@value = '006']">
+                        <exists xpath="//dataIdInfo/tpCatBag[*/@value='True']" ref="topics" />
+                      </for>
+                      <!-- theme keywords -->
+                      <for xpath="/metadata/dataIdInfo/themeKeys">
+                        <exists xpath="bag[. != '']" ref="bag,.,themeKeywords" />
+                      </for>
+                      <!-- epa keywords -->
+                      <for xpath="/metadata/dataIdInfo">
+                        <exists xpath="//themeKeys/thesaName/resTitle[. = 'EPA GIS Keyword Thesaurus']" ref="themeKeywordsEpa" />
+                      </for>
+                      <!--<for xpath="/metadata/dataIdInfo/themeKeys[thesaName/resTitle[contains(. , 'EPA GIS Keyword Thesaurus')]]">
                 <exists xpath="bag[. != '']" ref="bag,.,themeKeywords"/>
               </for>-->
-              
-              <!-- place keywords -->
-              <for xpath="/metadata/dataIdInfo/placeKeys">
-                <exists xpath="bag[. != '']" ref="bag,.,placeKeywords"/>
-              </for>
-              <!-- temporal keywords -->
-              <for xpath="/metadata/dataIdInfo/tempKeys">
-                <exists xpath="bag[. != '']" ref="bag,.,temporalKeywords"/>
-              </for>
-              <!-- discipline keywords -->
-              <for xpath="/metadata/dataIdInfo/discKeys">
-                <exists xpath="bag[. != '']" ref="bag,.,disciplineKeywords"/>
-              </for>
-              <!-- stratum keywords -->
-              <for xpath="/metadata/dataIdInfo/stratKeys">
-                <exists xpath="bag[. != '']" ref="bag,.,stratumKeywords"/>
-              </for>
-              <!-- other keywords -->
-              <for xpath="/metadata/dataIdInfo/otherKeys">
-                <exists xpath="bag[. != '']" ref="bag,.,otherKeywords"/>
-              </for>
-              <!-- product keywords -->
-              <for xpath="/metadata/dataIdInfo/productKeys">
-                <exists xpath="bag[. != '']" ref="bag,.,productKeywords"/>
-              </for>
-              <!-- contact name, org or role -->
-              <for xpath="//thesaName/citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//thesaName/citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//thesaName/citRespParty/rpCntInfo/cntOnlineRes/linkage_hint"/>
-              <for xpath="thesaName//citOnlineReslinkage_hint">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="thesaName//citOnlineReslinkage_hint"/>
-              </for>
-              </for>
-              <!-- citation -->
-              <for xpath="//thesaName//*[identCode]">
-                <exists xpath="identCode[. != '']" ref="identCode"/>
-                <exists xpath="identCode[. != '']" ref="identCode_hint"/>
-              </for>
-              <for xpath="//thesaName[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-                <exists xpath="resTitle[. != '']" ref="resTitle_hint"/>
-              </for>
-
-              <for xpath="//thesaName//*[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-                <exists xpath="resTitle[. != '']" ref="//thesaName//*[resTitle]_hint"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_DatasetCitation">
-            <validation>
-              <!-- citation -->
-              <!-- title required for main citation and identifier citation -->
-              <for xpath="//idCitation[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-              </for>
-              <!--  linkage required for online resources for main citation and identifier citation -->
-              <for xpath="//idCitation//citOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-              </for>
-              <!-- citation identifier -->
-              <!--  code required for identifiers -->
-              <for xpath="//idCitation/citId[identCode]">
-                <exists xpath="identCode[. != '']" ref="identCode"/>
-                <exists xpath="identCode[. != '']" ref="identCode_hint"/>
-              </for>
-              <!-- citation identifier authority citation -->
-              <for xpath="//idCitation/citId/identAuth[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-                <exists xpath="resTitle[. != '']" ref="//idCitation/citId/identAuth[resTitle]_hint"/>
-              </for>
-              <!-- identifier citation contacts -->
-              <!-- contact name, org or role -->
-              <for xpath="//idCitation/citId/identAuth/citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//idCitation/citId/identAuth/citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="linkage_hint"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_ResourceCitationContacts">
-            <validation>
-              <!-- contact name, org or role -->
-              <for xpath="/metadata/dataIdInfo/idCitation/citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="/metadata/dataIdInfo/idCitation/citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="linkage_hint"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_ContactManager"></page>
-				  <page class="EMEProToolkit.Pages.MTK_Locales">
+                      <!-- program code -->
+                      <for xpath="/metadata/dataIdInfo">
+                        <exists xpath="//themeKeys/thesaName/resTitle[. = 'Federal Program Inventory']" ref="themeKeywordsCd" />
+                      </for>
+                      <!--<for xpath="/metadata/dataIdInfo/themeKeys[thesaName/resTitle[contains(. , 'Federal Program Inventory')]]">
+                <exists xpath="bag[. != '']" ref="bag,.,themeKeywords"/>
+              </for>-->
+                      <!-- place keywords -->
+                      <for xpath="/metadata/dataIdInfo/placeKeys">
+                        <exists xpath="bag[. != '']" ref="bag,.,placeKeywords" />
+                      </for>
+                      <!-- temporal keywords -->
+                      <for xpath="/metadata/dataIdInfo/tempKeys">
+                        <exists xpath="bag[. != '']" ref="bag,.,temporalKeywords" />
+                      </for>
+                      <!-- discipline keywords -->
+                      <for xpath="/metadata/dataIdInfo/discKeys">
+                        <exists xpath="bag[. != '']" ref="bag,.,disciplineKeywords" />
+                      </for>
+                      <!-- stratum keywords -->
+                      <for xpath="/metadata/dataIdInfo/stratKeys">
+                        <exists xpath="bag[. != '']" ref="bag,.,stratumKeywords" />
+                      </for>
+                      <!-- other keywords -->
+                      <for xpath="/metadata/dataIdInfo/otherKeys">
+                        <exists xpath="bag[. != '']" ref="bag,.,otherKeywords" />
+                      </for>
+                      <!-- product keywords -->
+                      <for xpath="/metadata/dataIdInfo/productKeys">
+                        <exists xpath="bag[. != '']" ref="bag,.,productKeywords" />
+                      </for>
+                      <!-- contact name, org or role -->
+                      <for xpath="//thesaName/citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//thesaName/citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//thesaName/citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" />
+                        <for xpath="thesaName//citOnlineReslinkage_hint">
+                          <exists xpath="linkage[. != '']" ref="linkage" />
+                          <exists xpath="linkage[. != '']" ref="thesaName//citOnlineReslinkage_hint" />
+                        </for>
+                      </for>
+                      <!-- citation -->
+                      <for xpath="//thesaName//*[identCode]">
+                        <exists xpath="identCode[. != '']" ref="identCode" />
+                        <exists xpath="identCode[. != '']" ref="identCode_hint" />
+                      </for>
+                      <for xpath="//thesaName[resTitle | date]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                      </for>
+                      <for xpath="//thesaName//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                      </for>
+                      <for xpath="//thesaName//*[resTitle | date]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_DatasetCitation">
+                    <validation>
+                      <!-- citation -->
+                      <!-- title and date required for main citation and identifier citation -->
+                      <for xpath="//idCitation[resTitle | date]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                      </for>
+                      <!--  linkage required for online resources for main citation and identifier citation -->
+                      <for xpath="//idCitation//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                      </for>
+                      <!-- citation identifier -->
+                      <!--  code required for identifiers -->
+                      <for xpath="//idCitation/citId[identCode]">
+                        <exists xpath="identCode[. != '']" ref="identCode" />
+                        <exists xpath="identCode[. != '']" ref="identCode_hint" />
+                      </for>
+                      <!-- citation identifier authority citation -->
+                      <for xpath="//idCitation/citId/identAuth[resTitle | date]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                      </for>
+                      <!-- identifier citation contacts -->
+                      <!-- contact name, org or role -->
+                      <for xpath="//idCitation/citId/identAuth/citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//idCitation/citId/identAuth/citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="linkage_hint" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_ResourceCitationContacts">
+                    <validation>
+                      <!-- contact name, org or role -->
+                      <for xpath="/metadata/dataIdInfo/idCitation/citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="/metadata/dataIdInfo/idCitation/citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="linkage_hint" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_ContactManager"></page>
+                  <page class="EMEProToolkit.Pages.MTK_Locales">
+                    <validation>
+                      <!-- language is required for all locales -->
+                      <for xpath="/metadata/Esri/locales/locale">
+                        <exists xpath=".[@language != '']" ref="language" />
+                      </for>
+                    </validation>
+                  </page>
+                </section>
+                <section class="EMEProToolkit.Sections.Metadata">
+                  <page class="EMEProToolkit.Pages.MetadataDetailsEME">
+                    <validation>
+                      <!-- language is required for all iso styles -->
+                      <exists xpath="/metadata/mdLang/languageCode[@value != '']" ref="languageCode" />
+                      <!-- if the level code is not 'dataset', then level name is required -->
+                      <for xpath="/metadata[mdHrLv/ScopeCd/@value != '005' and mdHrLv/ScopeCd/@value != '']">
+                        <exists xpath="/metadata/mdHrLvName[. != '']" ref="mdHrLvName" />
+                      </for>
+                      <!-- date stamp is required -->
+                      <exists xpath="/metadata/mdDateSt[. != '']" ref="mdDateSt" />
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_MetadataContacts">
+                    <validation>
+                      <!-- one contact requried -->
+                      <exists xpath="/metadata[mdContact]" ref="mdContact" />
+                      <!-- contact name, org or role -->
+                      <for xpath="//mdContact">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//mdContact/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="linkage_hint" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_MetadataMaintenance">
+                    <validation>
+                      <for xpath="//mdMaint">
+                        <!-- maintentance frequency -->
+                        <for xpath="maintFreq">
+                          <exists xpath="MaintFreqCd[@value != '']" ref="maintFreq" />
+                        </for>
+                        <!-- maintenance scope -->
+                        <for xpath="maintScp">
+                          <exists xpath="ScopeCd[@value != '']" ref="scopeCd" />
+                        </for>
+                      </for>
+                      <!-- contact name, org or role -->
+                      <for xpath="//mdMaint/maintCont">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//mdMaint/maintCont/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="linkage_hint" />
+                      </for>
+                    </validation>
+                  </page>
+                  <!--TODO - Review - no metadata constraints?-->
+                  <!--<page class="EMEProToolkit.Pages.MTK_MetadataConstraints">
 					<validation>
-					  <!-- language is required for all locales -->
-					  <for xpath="/metadata/Esri/locales/locale">
-						<exists xpath=".[@language != '']" ref="language" />
-					  </for>
-					</validation>
-				  </page>
-				</section>
-				<section class="EMEProToolkit.Sections.Metadata">
-				  <page class="EMEProToolkit.Pages.MetadataDetailsEME">
-            <validation>
-              <!-- language is required for all iso styles -->
-              <exists xpath="/metadata/mdLang/languageCode[@value != '']" ref="languageCode"/>
-              <!-- if the level code is not 'dataset', then level name is required -->
-              <for xpath="/metadata[mdHrLv/ScopeCd/@value != '005' and mdHrLv/ScopeCd/@value != '']">
-                <exists xpath="/metadata/mdHrLvName[. != '']" ref="mdHrLvName"/>
-              </for>
-              <!-- date stamp is required -->
-              <exists xpath="/metadata/mdDateSt[. != '']" ref="mdDateSt"/>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_MetadataContacts">
-            <validation>
-              <!-- one contact requried -->
-              <exists xpath="/metadata[mdContact]" ref="mdContact"/>
-              <!-- contact name, org or role -->
-              <for xpath="//mdContact">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//mdContact/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="linkage_hint"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_MetadataMaintenance">
-            <validation>
-              <for xpath="//mdMaint">
-                <!-- maintentance frequency -->
-                <for xpath="maintFreq">
-                  <exists xpath="MaintFreqCd[@value != '']" ref="maintFreq"/>
-                </for>
-                <!-- maintenance scope -->
-                <for xpath="maintScp">
-                  <exists xpath="ScopeCd[@value != '']" ref="scopeCd"/>
-                </for>
-              </for>
-              <!-- contact name, org or role -->
-              <for xpath="//mdMaint/maintCont">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//mdMaint/maintCont/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="linkage_hint"/>
-              </for>
-            </validation>
-				  </page>
-					<!--TODO - Review - no metadata constraints?-->
-				  <!--<page class="EMEProToolkit.Pages.MTK_MetadataConstraints">
-					<validation>
-					  --><!-- classification code --><!--
+					  -->
+                  <!-- classification code -->
+                  <!--
 					  <for xpath="//mdConst/SecConsts">
 						<exists xpath="class/ClasscationCd[@value != '']" ref="ClasscationCd" />
 					  </for>
-					  --><!-- if the 'other contraints' code is used, then the other contraints tag is required --><!--
+					  -->
+                  <!-- if the 'other contraints' code is used, then the other contraints tag is required -->
+                  <!--
 					  <for xpath="//mdConst/LegConsts[*/RestrictCd/@value = '008']">
 						<exists xpath="othConsts[. != '']" ref="othConsts" />
 					  </for>
-					  --><!-- use constraint is required in the general class --><!--
+					  -->
+                  <!-- use constraint is required in the general class -->
+                  <!--
 					  <for xpath="//mdConst/Consts">
 						<exists xpath="useLimit[. != '']" ref="useLimit" />
 					  </for>
 					</validation>
 				  </page>-->
-				</section>
-				<section class="EMEProToolkit.Sections.Resource">
-				  <page class="EMEProToolkit.Pages.MTK_ResourceDetails">
-            <validation>
-              <!-- language of the dataset is mandatory as long as the hierarchy level code != service -->
-              <for xpath="/metadata[mdHrLv/ScopeCd/@value != '014']">
-                <exists xpath="//dataIdInfo/dataLang/languageCode[@value != '']" ref="languageCode"/>
-              </for>
-              <!-- scale -->
-              <for xpath="//dataIdInfo//scaleDist[value != '']">
-                <exists xpath="value[@uom != '']" ref="uom,@uom"/>
-              </for>
-              <!-- format name -->
-              <for xpath="//dsFormat">
-                <exists xpath="formatName[. != '']" ref="formatName"/>
-              </for>
-              <!-- browse file name -->
-              <for xpath="//graphOver">
-                <exists xpath="bgFileName[. != '']" ref="bgFileName"/>
-                <exists xpath="bgFileName[. != '']" ref="bgFileName_hint"/>
-              </for>
-              
-              <!--spec usage, contact name or or role, and linkage not present in Resource Details page-->
-              
-              <!-- spec usage -->
-              <for xpath="//idSpecUse">
-                <exists xpath="specUsage[. != '']" ref="specUsage"/>
-              </for>
-              <!-- contact name, org or role -->
-              <for xpath="//idSpecUse/usrCntInfo">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//idSpecUse/usrCntInfo/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-              </for>
-            </validation>
-				  </page>
-          <!--<page class="EPAMetadataEditor.Pages.Services,EPAMetadataEditor">-->
-          <!--this page is not included in ISO 19115-5 and was not used in eme5x-->
-          <!--<validation>-->          
-            
-            <!-- service validation -->            
-            <!--<for xpath="/metadata[mdHrLv/ScopeCd/@value = '014']/dataIdInfo">-->          
-              <!--<exists xpath="svType/genericName[. != '']" ref="genericName"/>-->
-              <!--<exists xpath="svCouplType[CouplTypCd/@value != '']" ref="svCouplType"/>-->
-            <!--</for>-->
-            <!--<for xpath="//svCouplType[CouplTypCd/@value = '003']">-->
-              <!--<exists xpath="//svCouplRes[svOpName != '' and svResCitId/identCode != '']" ref="svCouplRes svOpName,svOpName svResCitId,svResCitId/identCode"/>--> 
-            <!--</for>-->
-            
-          <!--</validation>-->
-        <!--</page>-->
-				  <page class="EMEProToolkit.Pages.MTK_ResourceExtent">
-            <validation>
-              <!-- either a bounding box or a geographic description (identifier) must be provided if the item's hierarchy level is "dataset" -->
-              <for xpath="/metadata[mdHrLv/ScopeCd/@value = '005']">
-                <or ref="dataExtReq">
-                  <exists xpath="//dataExt//GeoBndBox[*]"/>
-                  <exists xpath="//dataExt//GeoDesc/geoId/identCode[ . != '']"/>
-                </or>
-              </for>
-              <for xpath="//dataExt//GeoBndBox[*]">
-                <exists xpath="westBL[. != '']" ref="westBL,.,westBL"/>
-                <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL"/>
-                <exists xpath="northBL[. != '']" ref="northBL,.,northBL"/>
-                <exists xpath="southBL[. != '']" ref="southBL,.,southBL"/>
-                <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range"/>
-                <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range"/>
-              </for>
-              <!-- vertical max and min -->
-              <for xpath="//dataExt//vertEle[*]">
-                <exists xpath="vertMinVal[. != '']" ref="vertMinVal"/>
-                <exists xpath="vertMaxVal[. != '']" ref="vertMaxVal"/>
-              </for>
-              <for xpath="//dataExt//vertEle[* != '']">
-                <exists xpath="self::*[vertMinVal &lt; vertMaxVal]" ref="vertMinMaxVal vertMinVal,vertMinVal vertMaxVal,vertMaxVal"/>
-              </for>
-              <!-- contact name, org or role -->
-              <for xpath="//dataExt//GeoDesc//citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//dataExt//GeoDesc//citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-              </for>
-              <for xpath="//dataExt//citOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="dataExt//citOnlineRes/linkage_hint"/>
-              </for>
-              <!-- citation -->
-              <for xpath="//dataExt//*[identCode]">
-                <exists xpath="identCode[. != '']" ref="identCode"/>
-                <exists xpath="identCode[. != '']" ref="identCode_hint"/>
-              </for>
-              <for xpath="//dataExt//*[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-                <exists xpath="resTitle[. != '']" ref="resTitle_hint"/>
-              </for>
-
-            </validation>
-				  </page>
-          
-				  <page class="EMEProToolkit.Pages.MTK_ResourcePoc">
-            <validation>
-              <for xpath="/metadata/dataIdInfo">
-								<exists xpath="//idPoC/role[RoleCd/@value = '010']" ref="publisherReq"/>
-								<exists xpath="//idPoC/role[RoleCd/@value = '010']" ref="publisherReq_hint"/>
-							</for>
-              <!-- contact name, org or role -->
-              <for xpath="//dataIdInfo/idPoC">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//dataIdInfo/idPoC/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-              </for>
-            </validation>
-				  </page>
-					<!--<page class="EMEProToolkit.Pages.ResourcePub">
+                </section>
+                <section class="EMEProToolkit.Sections.Resource">
+                  <page class="EMEProToolkit.Pages.MTK_ResourceDetails">
+                    <validation>
+                      <!-- language of the dataset is mandatory as long as the hierarchy level code != service -->
+                      <for xpath="/metadata[mdHrLv/ScopeCd/@value != '014']">
+                        <exists xpath="//dataIdInfo/dataLang/languageCode[@value != '']" ref="languageCode" />
+                      </for>
+                      <!-- scale -->
+                      <for xpath="//dataIdInfo//scaleDist[value != '']">
+                        <exists xpath="value[@uom != '']" ref="uom,@uom" />
+                      </for>
+                      <!-- format name and version -->
+                      <for xpath="//dsFormat">
+                        <exists xpath="formatName[. != '']" ref="formatName" />
+                        <exists xpath="formatVer[. != '']" ref="formatVer" />
+                      </for>
+                      <!-- browse file name -->
+                      <for xpath="//graphOver">
+                        <exists xpath="bgFileName[. != '']" ref="bgFileName" />
+                        <exists xpath="bgFileName[. != '']" ref="bgFileName_hint" />
+                      </for>
+                      <!--spec usage, contact name or or role, and linkage not present in Resource Details page-->
+                      <!-- spec usage -->
+                      <for xpath="//idSpecUse">
+                        <exists xpath="specUsage[. != '']" ref="specUsage" />
+                      </for>
+                      <!-- contact name, org or role -->
+                      <for xpath="//idSpecUse/usrCntInfo">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//idSpecUse/usrCntInfo/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                      </for>
+                    </validation>
+                  </page>
+                  <!--<page class="EPAMetadataEditor.Pages.Services,EPAMetadataEditor">-->
+                  <!--this page is not included in ISO 19115-5 and was not used in eme5x-->
+                  <!--<validation>-->
+                  <!-- service validation -->
+                  <!--<for xpath="/metadata[mdHrLv/ScopeCd/@value = '014']/dataIdInfo">-->
+                  <!--<exists xpath="svType/genericName[. != '']" ref="genericName"/>-->
+                  <!--<exists xpath="svCouplType[CouplTypCd/@value != '']" ref="svCouplType"/>-->
+                  <!--</for>-->
+                  <!--<for xpath="//svCouplType[CouplTypCd/@value = '003']">-->
+                  <!--<exists xpath="//svCouplRes[svOpName != '' and svResCitId/identCode != '']" ref="svCouplRes svOpName,svOpName svResCitId,svResCitId/identCode"/>-->
+                  <!--</for>-->
+                  <!--</validation>-->
+                  <!--</page>-->
+                  <page class="EMEProToolkit.Pages.MTK_ResourceExtent">
+                    <validation>
+                      <!-- either a bounding box or a geographic description (identifier) must be provided if the item's hierarchy level is "dataset" -->
+                      <for xpath="/metadata[mdHrLv/ScopeCd/@value = '005']">
+                        <or ref="dataExtReq">
+                          <exists xpath="//dataExt//GeoBndBox[*]" />
+                          <exists xpath="//dataExt//GeoDesc/geoId/identCode[ . != '']" />
+                        </or>
+                      </for>
+                      <for xpath="//dataExt//GeoBndBox[*]">
+                        <exists xpath="westBL[. != '']" ref="westBL,.,westBL" />
+                        <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL" />
+                        <exists xpath="northBL[. != '']" ref="northBL,.,northBL" />
+                        <exists xpath="southBL[. != '']" ref="southBL,.,southBL" />
+                        <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range" />
+                        <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range" />
+                      </for>
+                      <!-- vertical max and min -->
+                      <for xpath="//dataExt//vertEle[*]">
+                        <exists xpath="vertMinVal[. != '']" ref="vertMinVal" />
+                        <exists xpath="vertMaxVal[. != '']" ref="vertMaxVal" />
+                      </for>
+                      <for xpath="//dataExt//vertEle[* != '']">
+                        <exists xpath="self::*[vertMinVal &lt; vertMaxVal]" ref="vertMinMaxVal vertMinVal,vertMinVal vertMaxVal,vertMaxVal" />
+                      </for>
+                      <!-- contact name, org or role -->
+                      <for xpath="//dataExt//GeoDesc//citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//dataExt//GeoDesc//citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                      </for>
+                      <for xpath="//dataExt//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="dataExt//citOnlineRes/linkage_hint" />
+                      </for>
+                      <!-- citation -->
+                      <for xpath="//dataExt//*[identCode]">
+                        <exists xpath="identCode[. != '']" ref="identCode" />
+                        <exists xpath="identCode[. != '']" ref="identCode_hint" />
+                      </for>
+                      <for xpath="//dataExt//*[resTitle | date]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                      </for>
+                      <for xpath="//dataExt//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_ResourcePoc">
+                    <validation>
+                      <for xpath="/metadata/dataIdInfo">
+                        <exists xpath="//idPoC/role[RoleCd/@value = '010']" ref="publisherReq" />
+                        <exists xpath="//idPoC/role[RoleCd/@value = '010']" ref="publisherReq_hint" />
+                      </for>
+                      <!-- contact name, org or role -->
+                      <for xpath="//dataIdInfo/idPoC">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//dataIdInfo/idPoC/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                      </for>
+                    </validation>
+                  </page>
+                  <!--<page class="EMEProToolkit.Pages.ResourcePub">
 						<validation>
 
-							--><!-- contact name, org or role --><!--
+							-->
+                  <!-- contact name, org or role -->
+                  <!--
 							<for xpath="/metadata/dataIdInfo">
 								<exists xpath="//idPoC/role[RoleCd/@value = '010']" ref="role"/>
 							</for>
@@ -428,733 +419,768 @@ limitations under the License.​
 								<exists xpath="rpCntInfo/cntAddress/eMailAdd[. != '']/.." ref="pubEmail"/>
 							</for>
 
-							--><!-- linkage --><!--
+							-->
+                  <!-- linkage -->
+                  <!--
 							<for xpath="//dataIdInfo/idPoC/rpCntInfo/cntOnlineRes">
 								<exists xpath="linkage[. != '']" ref="linkage"/>
 							</for>
 
-							--><!-- NAP: protocol --><!--
+							-->
+                  <!-- NAP: protocol -->
+                  <!--
 							<for xpath="//dataIdInfo/idPoC/rpCntInfo/cntOnlineRes">
 								<exists xpath="protocol[. != '']" ref="protocol"/>
 							</for>
 
-							--><!-- NAP: {count(phone + address + onlineResource) > 0} --><!--
+							-->
+                  <!-- NAP: {count(phone + address + onlineResource) > 0} -->
+                  <!--
 							<for xpath="//dataIdInfo/idPoC/rpCntInfo">
 								<exists xpath="(cntPhone/voiceNum | cntAddress/* | cntOnlineRes/linkage)[. != '']/.." ref="rpCntInfo_NAP_REQ voiceNum,cntPhone/voiceNum delPoint,cntAddress/* linkage,cntOnlineRes/linkage"/>
-							</for>--><!--
+							</for>-->
+                  <!--
 
 						</validation>
 					</page>-->
-
-				  <page class="EMEProToolkit.Pages.MTK_ResourceMaintenance">
-            <validation>
-              <for xpath="//resMaint">
-                <!-- maintentance frequency -->
-                <for xpath="maintFreq">
-                  <exists xpath="MaintFreqCd[@value != '']" ref="maintFreq"/>
-                </for>
-                <!-- maintenance scope -->
-                <for xpath="maintScp">
-                  <exists xpath="ScopeCd[@value != '']" ref="scopeCd"/>
-                </for>
-              </for>
-              <!-- contact name, org or role -->
-              <for xpath="//resMaint/maintCont">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//resMaint/maintCont/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="linkage_hint"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_ResourceConstraints">
-            <validation>
-              <!-- classification code -->
-              <for xpath="//resConst/SecConsts">
-                <exists xpath="class/ClasscationCd[@value != '']" ref="ClasscationCd"/>
-                <exists xpath="class/ClasscationCd[@value != '']" ref="ClasscationCd_hint"/>
-              </for>
-              
-              <!-- if classification is other than public require "EPA Classification: ..." -->
-              <for xpath="//resConst/SecConsts[not(class/ClasscationCd[@value = '001'])]">
-                <exists xpath="userNote[contains(. , 'EPA Category:')]" ref="userNote"/>
-              </for>
-              
-              <!-- if the 'other contraints' code is used, then the other contraints tag is required -->
-              <for xpath="//resConst/LegConsts[*/RestrictCd/@value = '008']">
-                <exists xpath="othConsts[. != '']" ref="othConsts"/>
-                <exists xpath="othConsts[. != '']" ref="othConsts_hint"/>
-              </for>
-              <!-- use constraint is required in the general class -->
-              <for xpath="//resConst/Consts">
-                <exists xpath="useLimit[. != '']" ref="useLimit"/>
-                <exists xpath="useLimit[. != '']" ref="useLimit_hint"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_ReferenceSystem">
-            <validation>
-              <!-- reference system ID -->
-              <for xpath="//RefSystem">
-                <exists xpath="refSysID/identCode[@code != '']" ref="refSysID"/>
-              </for>
-              <!-- identifier authority citation -->
-              <for xpath="//refSysInfo//identAuth[*]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-                <exists xpath="resTitle[. != '']" ref="resTitle_hint"/>
-              </for>
-              <!-- identifier authority citation linkage -->
-              <for xpath="//refSysInfo//citOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="linkage_hint"/>
-              </for>
-              <!-- identifier authority citation identifier -->
-              <for xpath="//refSysInfo//identAuth/citId">
-                <exists xpath="identCode[. != '']" ref="identCode"/>
-                <exists xpath="identCode[. != '']" ref="identCode_hint"/>
-              </for>
-              <!-- identifier authority citation contacts -->
-              <!-- contact name, org or role -->
-              <for xpath="//refSysInfo//identAuth//citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//refSysInfo//identAuth//citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//refSysInfo//identAuth//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_SpatialRepresentation">
-            <validation>
-              <!-- dimension type and size -->
-              <for xpath="//axisDimension">
-                <exists xpath=".[@type != '']" ref="DimType"/>
-                <exists xpath=".[@type != '']" ref="DimType_hint"/>
-                <exists xpath="dimSize[. != '']" ref="dimSize"/>
-                <exists xpath="dimSize[. != '']" ref="dimSize_hint"/>
-              </for>
-              <for xpath="//dimResol[value != '']">
-                <exists xpath="value[@uom != '']" ref="ValueUoMUnits"/>
-                <exists xpath="value[@uom != '']" ref="ValueUoMUnits_hint"/>
-              </for>
-              <!-- point in pixel -->
-              <for xpath="//Georect[ptInPixel]">
-                <exists xpath="ptInPixel/PixOrientCd[@value != '']" ref="ptInPixel"/>
-                <exists xpath="ptInPixel/PixOrientCd[@value != '']" ref="ptInPixel_hint"/>
-              </for>
-              <!-- cell geometry -->
-              <for xpath="//cellGeo">
-                <exists xpath="CellGeoCd[@value != '']" ref="cellGeo"/>
-                <exists xpath="CellGeoCd[@value != '']" ref="cellGeo_hint"/>
-              </for>
-              <!-- feature count -->
-              <for xpath="//geometObjs">
-                <exists xpath="geoObjCnt[. != '']" ref="geoObjCnt"/>
-                <exists xpath="geoObjCnt[. != '']" ref="geoObjCnt_hint"/>
-              </for>
-              <!-- geometric object type -->
-              <for xpath="//geoObjTyp[GeoObjTypCd]">
-                <exists xpath="GeoObjTypCd[@value != '']" ref="GeoObjTypCd"/>
-                <exists xpath="GeoObjTypCd[@value != '']" ref="GeoObjTypCd_hint"/>
-              </for>
-              <!-- number of dimensions -->
-              <for xpath="//GridSpatRep">
-                <exists xpath="numDims[. != '']" ref="numDims"/>
-                <exists xpath="numDims[. != '']" ref="//GridSpatRep/numDims_hint"/>
-              </for>
-              <!-- number of dimensions -->
-              <for xpath="//Georect">
-                <exists xpath="numDims[. != '']" ref="numDims"/>
-                <exists xpath="numDims[. != '']" ref="//Georect/numDims_hint"/>
-              </for>
-              <!-- check point availablity -->
-              <for xpath="//Georect[chkPtAv = 'True']">
-                <exists xpath="chkPtDesc[. != '']" ref="chkPtDesc"/>
-                <exists xpath="chkPtDesc[. != '']" ref="chkPtDesc_hint"/>
-              </for>
-              <!-- parameters -->
-              <for xpath="//Georef">
-                <exists xpath="georefPars[. != '']" ref="georefPars"/>
-                <exists xpath="georefPars[. != '']" ref="georefPars_hint"/>
-              </for>
-              <!-- number of dimensions -->
-              <for xpath="//Georef">
-                <exists xpath="numDims[. != '']" ref="numDims"/>
-                <exists xpath="numDims[. != '']" ref="//Georef/numDims_hint"/>
-              </for>
-              <!-- citation -->
-              <for xpath="//spatRepInfo//*[identCode]">
-                <exists xpath="identCode[. != '']" ref="identCode"/>
-                <exists xpath="identCode[. != '']" ref="identCode_hint"/>
-              </for>
-
-              <for xpath="//spatRepInfo//*[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-                <exists xpath="resTitle[. != '']" ref="resTitle_hint"/>
-              </for>
-              <!--more specific hint-->
-              <for xpath="//Georef//paraCit//*[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="//Georef//paraCit//*[resTitle]/resTitle_hint"/>
-              </for>
-              <!-- contact name, org or role -->
-              <for xpath="//spatRepInfo//paraCit//citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//spatRepInfo//paraCit//citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <!--<exists xpath="linkage[. != '']" ref="linkage_hint"/>-->
-              </for>
-              <for xpath="//Georef//paraCit//citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage_hint"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_ContentInformation">
-            <validation>
-              <!-- content information citations -->
-              <!--  title required -->
-              <for xpath="//contInfo//*[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-              </for>
-              <for xpath="//FetCatDesc//catCitation//citRespParty//*[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle_hint"/>
-              </for>
-              <!--  linkage required for online resources -->
-              <for xpath="//contInfo//citOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="linkage_hint"/>
-              </for>
-              <!--  code required for identifiers -->
-              <for xpath="//contInfo//*[identCode]">
-                <exists xpath="identCode[. != '']" ref="identCode"/>
-              </for>
-              <for xpath="//FetCatDesc//*[identCode]">
-                <exists xpath="identCode[. != '']" ref="identCode_hint"/>
-              </for>
-              <!--  feature catalogue -->
-              <!--  included With dataset is mandatory -->
-              <for xpath="//FetCatDesc[incWithDS]">
-                <exists xpath="incWithDS[. != '']" ref="incWithDS"/>
-                <exists xpath="incWithDS[. != '']" ref="incWithDS_hint"/>
-              </for>
-              <!-- citation contact name, org or role -->
-              <for xpath="//catCitation//citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role_hint"/>
-              </for>
-              <!-- citation contact linkage custom hint -->
-              <for xpath="//catCitation//citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//catCitation//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint"/>
-              </for>
-              <!--  coverage and image description -->
-              <!-- attribute description -->
-              <for xpath="//CovDesc">
-                <exists xpath="attDesc[. != '']" ref="attDesc"/>
-                <exists xpath="attDesc[. != '']" ref="//CovDesc/attDesc_hint"/>
-              </for>
-              <for xpath="//ImgDesc">
-                <exists xpath="attDesc[. != '']" ref="attDesc"/>
-                <exists xpath="attDesc[. != '']" ref="//ImgDesc/attDesc_hint"/>
-              </for>
-              <!-- content type code -->
-              <for xpath="//contentTyp">
-                <exists xpath="ContentTypCd[@value != '']" ref="ContentTypCd"/>
-                <exists xpath="ContentTypCd[@value != '']" ref="ContentTypCd_hint"/>
-              </for>
-               <!--sequence identifier--> 
-              <for xpath="//CovDesc//RangeDim">
-                <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="seqID aName,aName attributeType,attributeType/aName"/>
-                <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="//CovDesc//RangeDim/seqID_hint"/>
-              </for>
-              <for xpath="//CovDesc//Band">
-                <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="seqID aName,aName attributeType,attributeType/aName"/>
-                <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="//CovDesc//Band/seqID_hint"/>
-              </for>
-              <for xpath="//ImgDesc//RangeDim">
-                <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="seqID aName,aName attributeType,attributeType/aName"/>
-                <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="//ImgDesc//RangeDim/seqID_hint"/>
-              </for>
-              <for xpath="//ImgDesc//Band">
-                <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="seqID aName,aName attributeType,attributeType/aName"/>
-                <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="//ImgDesc//Band/seqID_hint"/>
-              </for>
-              <!-- band -->
-              <for xpath="//Band[minVal != '' or maxVal != '']">
-                <exists xpath="self::*[minVal &lt; maxVal]" ref="Band,.,bandMinMax minVal,minVal maxVal,maxVal"/>
-                <exists xpath="self::*[minVal &lt; maxVal]" ref="bandMinMax_hint"/>
-                <exists xpath="valUnit/UOM/unitSymbol[. != '']" ref="uom"/>
-                <exists xpath="valUnit/UOM/unitSymbol[. != '']" ref="uom_hint"/>
-              </for>
-              <!--  image description identifiers --><!--
-              --><!-- citation contact name, org or role --><!--
+                  <page class="EMEProToolkit.Pages.MTK_ResourceMaintenance">
+                    <validation>
+                      <for xpath="//resMaint">
+                        <!-- maintentance frequency -->
+                        <for xpath="maintFreq">
+                          <exists xpath="MaintFreqCd[@value != '']" ref="maintFreq" />
+                        </for>
+                        <!-- maintenance scope -->
+                        <for xpath="maintScp">
+                          <exists xpath="ScopeCd[@value != '']" ref="scopeCd" />
+                        </for>
+                      </for>
+                      <!-- contact name, org or role -->
+                      <for xpath="//resMaint/maintCont">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//resMaint/maintCont/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="linkage_hint" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_ResourceConstraints">
+                    <validation>
+                      <!-- classification code -->
+                      <for xpath="//resConst/SecConsts">
+                        <exists xpath="class/ClasscationCd[@value != '']" ref="ClasscationCd" />
+                        <exists xpath="class/ClasscationCd[@value != '']" ref="ClasscationCd_hint" />
+                      </for>
+                      <!-- if classification is other than public require "EPA Classification: ..." -->
+                      <for xpath="//resConst/SecConsts[not(class/ClasscationCd[@value = '001'])]">
+                        <exists xpath="userNote[contains(. , 'EPA Category:')]" ref="userNote" />
+                      </for>
+                      <!-- if the 'other contraints' code is used, then the other contraints tag is required -->
+                      <for xpath="//resConst/LegConsts[*/RestrictCd/@value = '008']">
+                        <exists xpath="othConsts[. != '']" ref="othConsts" />
+                        <exists xpath="othConsts[. != '']" ref="othConsts_hint" />
+                      </for>
+                      <!-- use constraint is required in the general class -->
+                      <for xpath="//resConst/Consts">
+                        <exists xpath="useLimit[. != '']" ref="useLimit" />
+                        <exists xpath="useLimit[. != '']" ref="useLimit_hint" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_ReferenceSystem">
+                    <validation>
+                      <!-- reference system ID -->
+                      <for xpath="//RefSystem">
+                        <exists xpath="refSysID/identCode[@code != '']" ref="refSysID" />
+                      </for>
+                      <!-- identifier authority citation -->
+                      <for xpath="//refSysInfo//identAuth[*]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                        <exists xpath="resTitle[. != '']" ref="resTitle_hint" />
+                      </for>
+                      <!-- identifier authority citation linkage -->
+                      <for xpath="//refSysInfo//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="linkage_hint" />
+                      </for>
+                      <!-- identifier authority citation identifier -->
+                      <for xpath="//refSysInfo//identAuth/citId">
+                        <exists xpath="identCode[. != '']" ref="identCode" />
+                        <exists xpath="identCode[. != '']" ref="identCode_hint" />
+                      </for>
+                      <!-- identifier authority citation contacts -->
+                      <!-- contact name, org or role -->
+                      <for xpath="//refSysInfo//identAuth//citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//refSysInfo//identAuth//citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//refSysInfo//identAuth//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_SpatialRepresentation">
+                    <validation>
+                      <!-- dimension type and size -->
+                      <for xpath="//axisDimension">
+                        <exists xpath=".[@type != '']" ref="DimType" />
+                        <exists xpath=".[@type != '']" ref="DimType_hint" />
+                        <exists xpath="dimSize[. != '']" ref="dimSize" />
+                        <exists xpath="dimSize[. != '']" ref="dimSize_hint" />
+                      </for>
+                      <for xpath="//dimResol[value != '']">
+                        <exists xpath="value[@uom != '']" ref="ValueUoMUnits" />
+                        <exists xpath="value[@uom != '']" ref="ValueUoMUnits_hint" />
+                      </for>
+                      <!-- point in pixel -->
+                      <for xpath="//Georect[ptInPixel]">
+                        <exists xpath="ptInPixel/PixOrientCd[@value != '']" ref="ptInPixel" />
+                        <exists xpath="ptInPixel/PixOrientCd[@value != '']" ref="ptInPixel_hint" />
+                      </for>
+                      <!-- cell geometry -->
+                      <for xpath="//cellGeo">
+                        <exists xpath="CellGeoCd[@value != '']" ref="cellGeo" />
+                        <exists xpath="CellGeoCd[@value != '']" ref="cellGeo_hint" />
+                      </for>
+                      <!-- feature count -->
+                      <for xpath="//geometObjs">
+                        <exists xpath="geoObjCnt[. != '']" ref="geoObjCnt" />
+                        <exists xpath="geoObjCnt[. != '']" ref="geoObjCnt_hint" />
+                      </for>
+                      <!-- geometric object type -->
+                      <for xpath="//geoObjTyp[GeoObjTypCd]">
+                        <exists xpath="GeoObjTypCd[@value != '']" ref="GeoObjTypCd" />
+                        <exists xpath="GeoObjTypCd[@value != '']" ref="GeoObjTypCd_hint" />
+                      </for>
+                      <!-- number of dimensions -->
+                      <for xpath="//GridSpatRep">
+                        <exists xpath="numDims[. != '']" ref="numDims" />
+                        <exists xpath="numDims[. != '']" ref="//GridSpatRep/numDims_hint" />
+                      </for>
+                      <!-- number of dimensions -->
+                      <for xpath="//Georect">
+                        <exists xpath="numDims[. != '']" ref="numDims" />
+                        <exists xpath="numDims[. != '']" ref="//Georect/numDims_hint" />
+                      </for>
+                      <!-- check point availablity -->
+                      <for xpath="//Georect[chkPtAv = 'True']">
+                        <exists xpath="chkPtDesc[. != '']" ref="chkPtDesc" />
+                        <exists xpath="chkPtDesc[. != '']" ref="chkPtDesc_hint" />
+                      </for>
+                      <!-- parameters -->
+                      <for xpath="//Georef">
+                        <exists xpath="georefPars[. != '']" ref="georefPars" />
+                        <exists xpath="georefPars[. != '']" ref="georefPars_hint" />
+                      </for>
+                      <!-- number of dimensions -->
+                      <for xpath="//Georef">
+                        <exists xpath="numDims[. != '']" ref="numDims" />
+                        <exists xpath="numDims[. != '']" ref="//Georef/numDims_hint" />
+                      </for>
+                      <!-- citation -->
+                      <for xpath="//spatRepInfo//*[identCode]">
+                        <exists xpath="identCode[. != '']" ref="identCode" />
+                        <exists xpath="identCode[. != '']" ref="identCode_hint" />
+                      </for>
+                      <for xpath="//spatRepInfo//*[resTitle | date]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date/*[. != '']" ref="dates" />
+                        <exists xpath="resTitle[. != '']" ref="resTitle_hint" />
+                      </for>
+                      <!--more specific hint-->
+                      <for xpath="//Georef//paraCit//*[resTitle]">
+                        <exists xpath="resTitle[. != '']" ref="//Georef//paraCit//*[resTitle]/resTitle_hint" />
+                      </for>
+                      <!-- contact name, org or role -->
+                      <for xpath="//spatRepInfo//paraCit//citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//spatRepInfo//paraCit//citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <!--<exists xpath="linkage[. != '']" ref="linkage_hint"/>-->
+                      </for>
+                      <for xpath="//Georef//paraCit//citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage_hint" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_ContentInformation">
+                    <validation>
+                      <!-- content information citations -->
+                      <!--  title and date required -->
+                      <for xpath="//contInfo//*[resTitle | date]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                      </for>
+                      <for xpath="//FetCatDesc//catCitation//citRespParty//*[resTitle]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle_hint" />
+                      </for>
+                      <!--  linkage required for online resources -->
+                      <for xpath="//contInfo//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="linkage_hint" />
+                      </for>
+                      <!--  code required for identifiers -->
+                      <for xpath="//contInfo//*[identCode]">
+                        <exists xpath="identCode[. != '']" ref="identCode" />
+                      </for>
+                      <for xpath="//FetCatDesc//*[identCode]">
+                        <exists xpath="identCode[. != '']" ref="identCode_hint" />
+                      </for>
+                      <!--  feature catalogue -->
+                      <!--  included With dataset is mandatory -->
+                      <for xpath="//FetCatDesc[incWithDS]">
+                        <exists xpath="incWithDS[. != '']" ref="incWithDS" />
+                        <exists xpath="incWithDS[. != '']" ref="incWithDS_hint" />
+                      </for>
+                      <!-- citation contact name, org or role -->
+                      <for xpath="//catCitation//citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role_hint" />
+                      </for>
+                      <!-- citation contact linkage custom hint -->
+                      <for xpath="//catCitation//citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//catCitation//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" />
+                      </for>
+                      <!--  coverage and image description -->
+                      <!-- attribute description -->
+                      <for xpath="//CovDesc">
+                        <exists xpath="attDesc[. != '']" ref="attDesc" />
+                        <exists xpath="attDesc[. != '']" ref="//CovDesc/attDesc_hint" />
+                      </for>
+                      <for xpath="//ImgDesc">
+                        <exists xpath="attDesc[. != '']" ref="attDesc" />
+                        <exists xpath="attDesc[. != '']" ref="//ImgDesc/attDesc_hint" />
+                      </for>
+                      <!-- content type code -->
+                      <for xpath="//contentTyp">
+                        <exists xpath="ContentTypCd[@value != '']" ref="ContentTypCd" />
+                        <exists xpath="ContentTypCd[@value != '']" ref="ContentTypCd_hint" />
+                      </for>
+                      <!--sequence identifier-->
+                      <for xpath="//CovDesc//RangeDim">
+                        <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="seqID aName,aName attributeType,attributeType/aName" />
+                        <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="//CovDesc//RangeDim/seqID_hint" />
+                      </for>
+                      <for xpath="//CovDesc//Band">
+                        <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="seqID aName,aName attributeType,attributeType/aName" />
+                        <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="//CovDesc//Band/seqID_hint" />
+                      </for>
+                      <for xpath="//ImgDesc//RangeDim">
+                        <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="seqID aName,aName attributeType,attributeType/aName" />
+                        <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="//ImgDesc//RangeDim/seqID_hint" />
+                      </for>
+                      <for xpath="//ImgDesc//Band">
+                        <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="seqID aName,aName attributeType,attributeType/aName" />
+                        <exists xpath="seqID[aName != '' and attributeType/aName != '']" ref="//ImgDesc//Band/seqID_hint" />
+                      </for>
+                      <!-- band -->
+                      <for xpath="//Band[minVal != '' or maxVal != '']">
+                        <exists xpath="self::*[minVal &lt; maxVal]" ref="Band,.,bandMinMax minVal,minVal maxVal,maxVal" />
+                        <exists xpath="self::*[minVal &lt; maxVal]" ref="bandMinMax_hint" />
+                        <exists xpath="valUnit/UOM/unitSymbol[. != '']" ref="uom" />
+                        <exists xpath="valUnit/UOM/unitSymbol[. != '']" ref="uom_hint" />
+                      </for>
+                      <!--  image description identifiers -->
+                      <!--
+              -->
+                      <!-- citation contact name, org or role -->
+                      <!--
               <for xpath="//ImgDesc//citRespParty">
                 <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
                 <exists xpath="role[RoleCd/@value != '']" ref="role"/>
               </for>-->
-              <!--  image description identifiers -->
-              <!-- citation contact name, org or role -->
-              <for xpath="//ImgDesc//citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//ImgDesc//citRespParty/party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="//ImgDesc//citRespParty/role_hint"/>
-              </for>
-              <!-- citation contact linkage -->
-              <for xpath="//ImgDesc//citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//ImgDesc//citRespParty/rpCntInfo/cntOnlineReslinkage_hint"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_DataQuality">
-           <validation>
-             <!-- data quality report required in data quality (separate from lineage) -->
-            <for xpath="//dqInfo">
-              <exists xpath="report//*[. != '']" ref="DQReportRequired" />
-            </for>
-            <!-- data quality report type -->
-            <for xpath="//dqInfo/report">
-              <exists xpath=".[@type != '']" ref="ReportType"/>
-              <exists xpath=".[@type != '']" ref="ReportType_hint"/>
-            </for>
-            <!-- scope level is required -->
-            <for xpath="//dqInfo/report">
-              <exists xpath="../dqScope/scpLvl/ScopeCd[@value != '']" ref="scopeCd"/>
-            </for>
-            <!-- within the report section, either a conformance result or a quantitative result must be provided -->
-            <for xpath="//dqInfo/report">
-              <or ref="reportReq">
-                <exists xpath="measResult/ConResult//*[ . != '']"/>
-                <exists xpath="measResult/QuanResult//*[ . != '']"/>
-              </or>
-              <or ref="reportReq_hint">
-                <exists xpath="measResult/ConResult//*[ . != '']"/>
-                <exists xpath="measResult/QuanResult//*[ . != '']"/>
-              </or>
-            </for>
-            <!-- within the conformance result section, all of its elements are mandatory -->
-            <for xpath="//dqInfo/report/measResult/ConResult">
-              <exists xpath="conSpec[ descendant::* != '']" ref="conSpec"/>
-              <exists xpath="conSpec[ descendant::* != '']" ref="conSpec_hint"/>
-              <exists xpath="conPass[ . != '']" ref="conPass"/>
-              <exists xpath="conPass[ . != '']" ref="conPass_hint"/>
-            </for>
-            <!-- within the Quantitative Result section, a value and a unit of measure are required. -->
-            <for xpath="//dqInfo/report/measResult/QuanResult">
-              <exists xpath="quanValUnit/UOM/unitSymbol[ .!= '']" ref="uom"/>
-              <exists xpath="quanValUnit/UOM/unitSymbol[ .!= '']" ref="uom_quan_result_hint"/>
-            </for>
-            <for xpath="//dqInfo/report/measResult/QuanResult/quanVal">
-              <exists xpath="self::*[ . != '']" ref="quanVal"/>
-              <exists xpath="self::*[ . != '']" ref="quanVal_hint"/>
-            </for>
-            <!-- contact name, org or role -->
-            <for xpath="//report//citRespParty">
-              <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-              <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//report//citRespParty/party_hint"/>
-              <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-              <exists xpath="role[RoleCd/@value != '']" ref="//report//citRespParty/role_hint"/>
-            </for>
-            <!-- linkage -->
-            <for xpath="//report//citRespParty/rpCntInfo/cntOnlineRes">
-              <exists xpath="linkage[. != '']" ref="linkage"/>
-              <exists xpath="linkage[. != '']" ref="//report//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint"/>
-            </for>
-            <!-- citation -->
-            <for xpath="//dqInfo/report//*[resTitle]">
-              <exists xpath="resTitle[. != '']" ref="resTitle"/>
-              <exists xpath="resTitle[. != '']" ref="//dqInfo/report//*[resTitle]_hint"/>
-            </for>
-            <for xpath="//dqInfo/report//citOnlineRes">
-              <exists xpath="linkage[. != '']" ref="linkage"/>
-              <exists xpath="linkage[. != '']" ref="//dqInfo/report//citOnlineRes/linkage_hint"/>
-            </for>
-            <for xpath="//dqInfo/scpExt//*[resTitle]">
-              <exists xpath="resTitle[. != '']" ref="resTitle"/>
-              <exists xpath="resTitle[. != '']" ref="//dqInfo/scpExt//*[resTitle]_hint"/>
-            </for>
-            <for xpath="//dqInfo/scpExt//citOnlineRes">
-              <exists xpath="linkage[. != '']" ref="linkage"/>
-              <exists xpath="linkage[. != '']" ref="//dqInfo/scpExt//citOnlineRes/linkage_hint"/>
-            </for>
-            <!-- identifier -->
-            <for xpath="//dqInfo/report//*[identCode]">
-              <exists xpath="identCode[. != '']" ref="identCode"/>
-              <exists xpath="identCode[. != '']" ref="//dqInfo/report//*[identCode]_hint"/>
-            </for>
-            <for xpath="//dqInfo/scpExt//*[identCode]">
-              <exists xpath="identCode[. != '']" ref="identCode"/>
-              <exists xpath="identCode[. != '']" ref="//dqInfo/scpExt//*[identCode]_hint"/>
-            </for>
-            <!-- bounding box -->
-            <for xpath="//scpExt//GeoBndBox[*]">
-              <exists xpath="westBL[. != '']" ref="westBL,.,westBL"/>
-              <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL"/>
-              <exists xpath="northBL[. != '']" ref="northBL,.,northBL"/>
-              <exists xpath="southBL[. != '']" ref="southBL,.,southBL"/>
-              <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range"/>
-              <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range"/>
-              <exists xpath="westBL[. != '']" ref="westBL_hint"/>
-              <exists xpath="eastBL[. != '']" ref="eastBL_hint"/>
-              <exists xpath="northBL[. != '']" ref="northBL_hint"/>
-              <exists xpath="southBL[. != '']" ref="southBL_hint"/>
-              <exists xpath=".[westBL &lt; eastBL]" ref="westBL_range_hint"/>
-              <exists xpath=".[southBL &lt; northBL]" ref="northBL_range_hint"/>
-            </for>
-            <!-- vertical max and min -->
-            <for xpath="//scpExt//vertEle[*]">
-              <exists xpath="vertMinVal[. != '']" ref="vertMinVal"/>
-              <exists xpath="vertMaxVal[. != '']" ref="vertMaxVal"/>              
-            </for>
-            <!-- contact name, org or role -->
-            <for xpath="//scpExt//citRespParty">
-              <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-              <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//scpExt//citRespParty/party_hint"/>
-              <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-              <exists xpath="role[RoleCd/@value != '']" ref="//scpExt//citRespParty/role_hint"/>
-            </for>
-            <!-- linkage -->
-            <for xpath="//scpExt//citRespParty/rpCntInfo/cntOnlineRes">
-              <exists xpath="linkage[. != '']" ref="linkage"/>
-              <exists xpath="linkage[. != '']" ref="//scpExt//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint"/>
-            </for>
-          </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_LI_Lineage">
-            <validation>
-              <!-- in lineage, one of process step, data source, or lineage statement is required -->
-              <for xpath="//dqInfo/dataLineage">
-                <or ref="lineageContentReqd">
-                  <exists xpath="statement[. != '']"/>
-                  <exists xpath="dataSource/*[. != '']"/>
-                  <exists xpath="prcStep/*[. != '']"/>
-                </or>
-              </for>
-              <!-- process step description -->
-              <for xpath="//prcStep">
-                <exists xpath="stepDesc[. != '']" ref="stepDesc"/>
-                <exists xpath="stepDesc[. != '']" ref="stepDesc_hint"/>
-              </for>
-              <!-- Within data source, either an extent or a description must be provided -->
-              <for xpath="//dqInfo/dataLineage/dataSource">
-                <or ref="dataSource">
-                  <exists xpath="srcDesc[. != '']"/>
-                  <exists xpath="srcExt/*[. != '']"/>
-                </or>
-              <or ref="dataSource_hint">
-                  <exists xpath="srcDesc[. != '']"/>
-                  <exists xpath="srcExt/*[. != '']"/>
-                </or>
-              </for>
-              <!-- contact name, org or role -->
-              <for xpath="//prcStep/stepProc">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//prcStep/stepProc/party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="//prcStep/stepProc/role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//prcStep/stepProc/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//prcStep/stepProc/rpCntInfo/cntOnlineRes/linkage_hint"/>
-              </for>
-              <!-- contact name, org or role -->
-              <for xpath="//dataLineage//citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//dataLineage//citRespParty/party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="//dataLineage//citRespParty/role_hint"/>
-              </for>
-
-              <!-- linkage -->
-              <for xpath="//dataLineage//citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//dataLineage//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint"/>
-              </for>
-              <!-- bounding box -->
-              <for xpath="//srcExt//GeoBndBox[*]">
-                <exists xpath="westBL[. != '']" ref="westBL,.,westBL"/>
-                <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL"/>
-                <exists xpath="northBL[. != '']" ref="northBL,.,northBL"/>
-                <exists xpath="southBL[. != '']" ref="southBL,.,southBL"/>
-                <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range"/>
-                <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range"/>
-              
-                <exists xpath="westBL[. != '']" ref="westBL_hint"/>
-                <exists xpath="eastBL[. != '']" ref="eastBL_hint"/>
-                <exists xpath="northBL[. != '']" ref="northBL_hint"/>
-                <exists xpath="southBL[. != '']" ref="southBL_hint"/>
-                <exists xpath=".[westBL &lt; eastBL]" ref="westBL_range_hint"/>
-                <exists xpath=".[southBL &lt; northBL]" ref="northBL_range_hint"/>
-              </for>
-
-              <!-- vertical max and min -->
-              <for xpath="//srcExt//vertEle[*]">
-                <exists xpath="vertMinVal[. != '']" ref="vertMinVal"/>
-                <exists xpath="vertMaxVal[. != '']" ref="vertMaxVal"/>
-              </for>
-              <!-- data source reference system -->
-              <for xpath="//dataLineage//srcRefSys[identCode]">
-                <exists xpath="identCode[@code != '']" ref="identCode"/>
-                <exists xpath="identCode[@code != '']" ref="//dataLineage//srcRefSys[identCode]_hint"/>
-              </for>
-              <!-- citations -->
-              <for xpath="//dataLineage//*[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-                <exists xpath="resTitle[. != '']" ref="resTitle_hint"/>
-              </for>
-              <!--custom title hint-->
-              <for xpath="//dqInfo/dataLineage/dataSource//*[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="dataSource_resTitle_hint"/>
-              </for>
-
-              <for xpath="//dataLineage//citOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//dataLineage//citOnlineRes/linkage_hint"/>
-              </for>
-              <!-- identifiers -->
-              <for xpath="//dataLineage//*[identCode and not(identCode/@code)]">
-                <exists xpath="identCode[. != '']" ref="identCode"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_DistributionInfo">
-            <validation>
-              <!-- format name -->
-              <for xpath="//distFormat">
-                <exists xpath="formatName[. != '']" ref="formatName"/>
-                <exists xpath="formatName[. != '']" ref="//distFormat/formatName_hint"/>
-              </for>
-              <for xpath="//distorFormat">
-                <exists xpath="formatName[. != '']" ref="formatName"/>
-                <exists xpath="formatName[. != '']" ref="//distorFormat/formatName_hint"/>
-              </for>
-              <!-- if a density value is provided, the density units is mandatory -->
-              <for xpath="//offLineMed[medDensity != '']">
-                <exists xpath="medDenUnits[. != '']" ref="medDenUnits"/>
-                <exists xpath="medDenUnits[. != '']" ref="medDenUnits_hint"/>
-              </for>
-              <!-- contact name, org or role -->
-              <for xpath="//distributor/distorCont">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//distributor/distorCont/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//distributor/distorCont/rpCntInfo/cntOnlineRes/linkage_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//distInfo//onLineSrc">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//distInfo//onLineSrc/linkage_hint"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_EntityAttributeInfo">
-            <validation>
-              <!-- codeset domains -->
-              <for xpath="//codesetd">
-                <exists xpath="codesetn[. != '']" ref="codesetn"/>
-                <exists xpath="codesets[. != '']" ref="codesets"/>
-              </for>
-              <!-- enumerated domains -->
-              <for xpath="//edom">
-                <exists xpath="edomv[. != '']" ref="edomv"/>
-                <exists xpath="edomvd[. != '']" ref="edomvd"/>
-                <exists xpath="edomvds[. != '']" ref="edomvds"/>
-              </for>
-              <!-- range domains -->
-              <for xpath="//rdom">
-                <exists xpath="rdommin[. != '']" ref="rdommin"/>
-                <exists xpath="rdommax[. != '']" ref="rdommax"/>
-                <exists xpath=".[rdommin &lt; rdommax]" ref="rdommin,rdommin,rdommin_range"/>
-              </for>
-              <!-- entity type -->
-              <for xpath="//enttyp">
-                <exists xpath="enttypd[. != '']" ref="enttypd"/>
-                <exists xpath="enttypds[. != '']" ref="enttypds"/>
-                <!-- entity type label -->
-                <exists xpath="enttypl[. != '']" ref="enttypl"/>
-              </for>
-              <!-- attribute label -->
-              <for xpath="//attr">
-                <exists xpath="attrlabl[. != '']" ref="attrlabl"/>
-                <!-- attribute definition -->
-                <exists xpath="attrdef[. != '']" ref="attrdef"/>
-                <!-- attribute source -->
-                <exists xpath="attrdefs[. != '']" ref="attrdefs"/>
-                <!-- TODO: not working / attribute type -->
-                <exists xpath="attrtype[. != '']" ref="attrtype"/>
-                <!-- TODO: not working / attribute width -->
-                <exists xpath="attwidth[. != '']" ref="attwidth"/>
-              </for>
-              <!--" at least one type of attribute domain is required"-->
-              <for xpath="/metadata/eainfo/detailed/attr">
-                <exists xpath="attrdomv[count(edom | rdom | codesetd | udom) = 1]" ref="attrdomv"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_References">
-            <validation>
-              <!-- aggregate resource -->
-              <!-- association type required under aggregate information -->
-              <for xpath="//aggrInfo/assocType">
-                <exists xpath="AscTypeCd[@value != '']" ref="AscTypeCd"/>
-                <exists xpath="AscTypeCd[@value != '']" ref="AscTypeCd_hint"/>
-              </for>
-              <!-- a citation describing the associated resource is required -->
-              <for xpath="//aggrInfo">
-                <exists xpath="aggrDSName//*[. !='']" ref="aggrCitation" />
-                <exists xpath="aggrDSName//*[. !='']" ref="aggrCitation_hint" />
-              </for>
-              <!-- title required for citation and identifier citations -->
-              <for xpath="//aggrInfo//*[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-                <exists xpath="resTitle[. != '']" ref="//aggrInfo//*[resTitle]_hint"/>
-              </for>
-              <!--  linkage required for online resources for main citation and identifier citation -->
-              <for xpath="//aggrInfo//citOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//aggrInfo//citOnlineRes/linkage_hint"/>
-              </for>
-              <!-- citation identifier -->
-              <!--  code required for identifiers -->
-              <for xpath="//aggrInfo//*[identCode]">
-                <exists xpath="identCode[. != '']" ref="identCode"/>
-                <exists xpath="identCode[. != '']" ref="//aggrInfo//*[identCode]_hint"/>
-              </for>
-              <!-- citation or identifier citation cited responsible party  -->
-              <!-- contact name, org or role -->
-              <for xpath="//aggrInfo//citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//aggrInfo//citRespParty/party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="//aggrInfo//citRespParty/role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//aggrInfo//citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//aggrInfo//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint"/>
-              </for>
-              <!-- portrayal catalogue  -->
-              <!-- title and date required for citation and identifier citations -->
-              <for xpath="//porCatInfo//*[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-                <exists xpath="resTitle[. != '']" ref="//porCatInfo//*[resTitle]_hint"/>
-              </for>
-              <!--  linkage required for online resources for main citation and identifier citation -->
-              <for xpath="//porCatInfo//citOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//porCatInfo//citOnlineRes/linkage_hint"/>
-              </for>
-              <!-- citation identifier -->
-              <!--  code required for identifiers -->
-              <for xpath="//porCatInfo//*[identCode]">
-                <exists xpath="identCode[. != '']" ref="identCode"/>
-                <exists xpath="identCode[. != '']" ref="//porCatInfo//*[identCode]_hint"/>
-              </for>
-              <!-- citation or identifier citation cited responsible party  -->
-              <!-- contact name, org or role -->
-              <for xpath="//porCatInfo//citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//porCatInfo//citRespParty/party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="//porCatInfo//citRespParty/role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//porCatInfo//citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//porCatInfo//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint"/>
-              </for>
-              <!-- application schema -->
-              <!-- title required for citation and identifier citations -->
-              <for xpath="//appSchInfo//*[resTitle]">
-                <exists xpath="resTitle[. != '']" ref="resTitle"/>
-                <exists xpath="resTitle[. != '']" ref="//appSchInfo//*[resTitle]_hint"/>
-              </for>
-              <!-- schema language is required -->
-              <for xpath="//appSchInfo">
-                <exists xpath="asSchLang[. !='']" ref="schemaLanguage" />
-                <exists xpath="asSchLang[. !='']" ref="schemaLanguage_hint" />
-              </for>
-              <!-- constraint language is required -->
-              <for xpath="//appSchInfo">
-                <exists xpath="asCstLang[. !='']" ref="constraintLanguage" />
-                <exists xpath="asCstLang[. !='']" ref="constraintLanguage_hint" />
-              </for>
-              <!--  linkage required for online resources for main citation and identifier citation -->
-              <for xpath="//appSchInfo//citOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//appSchInfo//citOnlineRes/linkage_hint"/>
-              </for>
-              <!-- citation identifier -->
-              <!--  code required for identifiers -->
-              <for xpath="//appSchInfo//*[identCode]">
-                <exists xpath="identCode[. != '']" ref="identCode"/>
-                <exists xpath="identCode[. != '']" ref="//appSchInfo//*[identCode]_hint"/>
-              </for>
-              <!-- citation or identifier citation cited responsible party  -->
-              <!-- contact name, org or role -->
-              <for xpath="//appSchInfo//citRespParty">
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName"/>
-                <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//appSchInfo//citRespParty/party_hint"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="role"/>
-                <exists xpath="role[RoleCd/@value != '']" ref="//appSchInfo//citRespParty/role_hint"/>
-              </for>
-              <!-- linkage -->
-              <for xpath="//appSchInfo//citRespParty/rpCntInfo/cntOnlineRes">
-                <exists xpath="linkage[. != '']" ref="linkage"/>
-                <exists xpath="linkage[. != '']" ref="//appSchInfo//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint"/>
-              </for>
-            </validation>
-				  </page>
-				  <page class="EMEProToolkit.Pages.MTK_GeoprocessingHistory"></page>
-				</section>
-			  </forms>
-			</editor>
-		  </metadataConfig>
-		</content>
-	  </insertComponent>
-	</updateCategory>
+                      <!--  image description identifiers -->
+                      <!-- citation contact name, org or role -->
+                      <for xpath="//ImgDesc//citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//ImgDesc//citRespParty/party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="//ImgDesc//citRespParty/role_hint" />
+                      </for>
+                      <!-- citation contact linkage -->
+                      <for xpath="//ImgDesc//citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//ImgDesc//citRespParty/rpCntInfo/cntOnlineReslinkage_hint" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_DataQuality">
+                    <validation>
+                      <!-- data quality report required in data quality (separate from lineage) -->
+                      <for xpath="//dqInfo">
+                        <exists xpath="report//*[. != '']" ref="DQReportRequired" />
+                      </for>
+                      <!-- data quality report type -->
+                      <for xpath="//dqInfo/report">
+                        <exists xpath=".[@type != '']" ref="ReportType" />
+                        <exists xpath=".[@type != '']" ref="ReportType_hint" />
+                      </for>
+                      <!-- scope level is required -->
+                      <for xpath="//dqInfo">
+                        <exists xpath="dqScope/scpLvl/ScopeCd[@value != '']" ref="scopeCd" />
+                      </for>
+                      <!-- if scope does not equal "dataset" or "series", then a Level Description is required -->
+                      <for xpath="//dqInfo/dqScope[scpLvl/ScopeCd/@value != '005' and scpLvl/ScopeCd/@value != '006' and scpLvl/ScopeCd/@value != '']">
+                        <exists xpath="scpLvlDesc[.//* != '']" ref="scpLvlDesc" />
+                      </for>
+                      <!-- either lineage information or a data quality report must be provided for datasets -->
+                      <for xpath="//dqInfo[dqScope/scpLvl/ScopeCd/@value = '005']">
+                        <or ref="datasetReq">
+                          <exists xpath="dataLineage[.//* !='']" />
+                          <exists xpath="report[.//*  !='']" />
+                          <exists xpath="report[descendant-or-self::*/@code !='' or descendant-or-self::*/@value !='' or descendant-or-self::*/@type !='']" />
+                        </or>
+                      </for>
+                      <!-- within the report section, either a conformance result or a quantitative result must be provided -->
+                      <for xpath="//dqInfo/report">
+                        <or ref="reportReq">
+                          <exists xpath="measResult/ConResult//*[ . != '']" />
+                          <exists xpath="measResult/QuanResult//*[ . != '']" />
+                        </or>
+                        <or ref="reportReq_hint">
+                          <exists xpath="measResult/ConResult//*[ . != '']" />
+                          <exists xpath="measResult/QuanResult//*[ . != '']" />
+                        </or>
+                      </for>
+                      <!-- within the conformance result section, all of its elements are mandatory -->
+                      <for xpath="//dqInfo/report/measResult/ConResult">
+                        <exists xpath="conExpl[ . != '']" ref="conExpl" />
+                        <exists xpath="conSpec[ descendant::* != '']" ref="conSpec" />
+                        <exists xpath="conSpec[ descendant::* != '']" ref="conSpec_hint" />
+                        <exists xpath="conPass[ . != '']" ref="conPass" />
+                        <exists xpath="conPass[ . != '']" ref="conPass_hint" />
+                      </for>
+                      <!-- within the Quantitative Result section, a value and a unit of measure are required. -->
+                      <for xpath="//dqInfo/report/measResult/QuanResult">
+                        <exists xpath="quanValUnit/UOM/unitSymbol[ .!= '']" ref="uom" />
+                        <exists xpath="quanValUnit/UOM/unitSymbol[ .!= '']" ref="uom_quan_result_hint" />
+                      </for>
+                      <for xpath="//dqInfo/report/measResult/QuanResult/quanVal">
+                        <exists xpath="self::*[ . != '']" ref="quanVal" />
+                        <exists xpath="self::*[ . != '']" ref="quanVal_hint" />
+                      </for>
+                      <!-- contact name, org or role -->
+                      <for xpath="//report//citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//report//citRespParty/party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="//report//citRespParty/role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//report//citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//report//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" />
+                      </for>
+                      <!-- citation -->
+                      <for xpath="//dqInfo/report//*[resTitle | date]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                        <exists xpath="resTitle[. != '']" ref="//dqInfo/report//*[resTitle]_hint" />
+                      </for>
+                      <for xpath="//dqInfo/report//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//dqInfo/report//citOnlineRes/linkage_hint" />
+                      </for>
+                      <for xpath="//dqInfo/scpExt//*[resTitle | date]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                        <exists xpath="resTitle[. != '']" ref="//dqInfo/scpExt//*[resTitle]_hint" />
+                      </for>
+                      <for xpath="//dqInfo/scpExt//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//dqInfo/scpExt//citOnlineRes/linkage_hint" />
+                      </for>
+                      <!-- identifier -->
+                      <for xpath="//dqInfo/report//*[identCode]">
+                        <exists xpath="identCode[. != '']" ref="identCode" />
+                        <exists xpath="identCode[. != '']" ref="//dqInfo/report//*[identCode]_hint" />
+                      </for>
+                      <for xpath="//dqInfo/scpExt//*[identCode]">
+                        <exists xpath="identCode[. != '']" ref="identCode" />
+                        <exists xpath="identCode[. != '']" ref="//dqInfo/scpExt//*[identCode]_hint" />
+                      </for>
+                      <!-- bounding box -->
+                      <for xpath="//scpExt//GeoBndBox[*]">
+                        <exists xpath="westBL[. != '']" ref="westBL,.,westBL" />
+                        <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL" />
+                        <exists xpath="northBL[. != '']" ref="northBL,.,northBL" />
+                        <exists xpath="southBL[. != '']" ref="southBL,.,southBL" />
+                        <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range" />
+                        <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range" />
+                        <exists xpath="westBL[. != '']" ref="westBL_hint" />
+                        <exists xpath="eastBL[. != '']" ref="eastBL_hint" />
+                        <exists xpath="northBL[. != '']" ref="northBL_hint" />
+                        <exists xpath="southBL[. != '']" ref="southBL_hint" />
+                        <exists xpath=".[westBL &lt; eastBL]" ref="westBL_range_hint" />
+                        <exists xpath=".[southBL &lt; northBL]" ref="northBL_range_hint" />
+                      </for>
+                      <!-- vertical max and min -->
+                      <for xpath="//scpExt//vertEle[*]">
+                        <exists xpath="vertMinVal[. != '']" ref="vertMinVal" />
+                        <exists xpath="vertMaxVal[. != '']" ref="vertMaxVal" />
+                      </for>
+                      <!-- contact name, org or role -->
+                      <for xpath="//scpExt//citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//scpExt//citRespParty/party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="//scpExt//citRespParty/role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//scpExt//citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//scpExt//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_LI_Lineage">
+                    <validation>
+                      <!-- if scope = "dataset" or "series", one of process step, data source, or lineage statement is required -->
+                      <for xpath="//dqInfo[dqScope/scpLvl/ScopeCd/@value = '005' or dqScope/scpLvl/ScopeCd/@value = '006']">
+                        <exists xpath=".//*[ . != '']" ref="dqInfo" />
+                      </for>
+                      <for xpath="//dqInfo[dqScope/scpLvl/ScopeCd/@value = '005' or dqScope/scpLvl/ScopeCd/@value = '006']">
+                        <for xpath="dataLineage">
+                          <or ref="dataLineage">
+                            <exists xpath="statement[. != '']" />
+                            <exists xpath="dataSource/*[. != '']" />
+                            <exists xpath="prcStep/*[. != '']" />
+                          </or>
+                        </for>
+                      </for>
+                      <!-- either lineage information or a data quality report must be provided for datasets -->
+                      <for xpath="//dqInfo[dqScope/scpLvl/ScopeCd/@value = '005']">
+                        <or ref="datasetReq">
+                          <exists xpath="dataLineage[.//* !='']" />
+                          <exists xpath="report[.//*  !='']" />
+                          <exists xpath="report[descendant-or-self::*/@code !='' or descendant-or-self::*/@value !='' or descendant-or-self::*/@type !='']" />
+                        </or>
+                      </for>
+                      <!-- process step description -->
+                      <for xpath="//prcStep">
+                        <exists xpath="stepDesc[. != '']" ref="stepDesc" />
+                        <exists xpath="stepDesc[. != '']" ref="stepDesc_hint" />
+                      </for>
+                      <!-- Within data source, either an extent or a description must be provided -->
+                      <for xpath="//dqInfo/dataLineage/dataSource">
+                        <or ref="dataSource">
+                          <exists xpath="srcDesc[. != '']" />
+                          <exists xpath="srcExt/*[. != '']" />
+                        </or>
+                        <or ref="dataSource_hint">
+                          <exists xpath="srcDesc[. != '']" />
+                          <exists xpath="srcExt/*[. != '']" />
+                        </or>
+                      </for>
+                      <!-- contact name, org or role -->
+                      <for xpath="//prcStep/stepProc">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//prcStep/stepProc/party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="//prcStep/stepProc/role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//prcStep/stepProc/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//prcStep/stepProc/rpCntInfo/cntOnlineRes/linkage_hint" />
+                      </for>
+                      <!-- contact name, org or role -->
+                      <for xpath="//dataLineage//citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//dataLineage//citRespParty/party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="//dataLineage//citRespParty/role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//dataLineage//citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//dataLineage//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" />
+                      </for>
+                      <!-- bounding box -->
+                      <for xpath="//srcExt//GeoBndBox[*]">
+                        <exists xpath="westBL[. != '']" ref="westBL,.,westBL" />
+                        <exists xpath="eastBL[. != '']" ref="eastBL,.,eastBL" />
+                        <exists xpath="northBL[. != '']" ref="northBL,.,northBL" />
+                        <exists xpath="southBL[. != '']" ref="southBL,.,southBL" />
+                        <exists xpath=".[westBL &lt; eastBL]" ref="westBL,westBL,westBL_range" />
+                        <exists xpath=".[southBL &lt; northBL]" ref="northBL,northBL,northBL_range" />
+                        <exists xpath="westBL[. != '']" ref="westBL_hint" />
+                        <exists xpath="eastBL[. != '']" ref="eastBL_hint" />
+                        <exists xpath="northBL[. != '']" ref="northBL_hint" />
+                        <exists xpath="southBL[. != '']" ref="southBL_hint" />
+                        <exists xpath=".[westBL &lt; eastBL]" ref="westBL_range_hint" />
+                        <exists xpath=".[southBL &lt; northBL]" ref="northBL_range_hint" />
+                      </for>
+                      <!-- vertical max and min -->
+                      <for xpath="//srcExt//vertEle[*]">
+                        <exists xpath="vertMinVal[. != '']" ref="vertMinVal" />
+                        <exists xpath="vertMaxVal[. != '']" ref="vertMaxVal" />
+                      </for>
+                      <!-- data source reference system -->
+                      <for xpath="//dataLineage//srcRefSys[identCode]">
+                        <exists xpath="identCode[@code != '']" ref="identCode" />
+                        <exists xpath="identCode[@code != '']" ref="//dataLineage//srcRefSys[identCode]_hint" />
+                      </for>
+                      <!-- citations -->
+                      <for xpath="//dataLineage//*[resTitle | date]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                        <exists xpath="resTitle[. != '']" ref="resTitle_hint" />
+                      </for>
+                      <!--custom title hint-->
+                      <for xpath="//dqInfo/dataLineage/dataSource//*[resTitle]">
+                        <exists xpath="resTitle[. != '']" ref="dataSource_resTitle_hint" />
+                      </for>
+                      <for xpath="//dataLineage//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//dataLineage//citOnlineRes/linkage_hint" />
+                      </for>
+                      <!-- identifiers -->
+                      <for xpath="//dataLineage//*[identCode and not(identCode/@code)]">
+                        <exists xpath="identCode[. != '']" ref="identCode" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_DistributionInfo">
+                    <validation>
+                      <!-- format name and version -->
+                      <for xpath="//distFormat">
+                        <exists xpath="formatName[. != '']" ref="formatName" />
+                        <exists xpath="formatVer[. != '']" ref="formatVer" />
+                        <exists xpath="formatName[. != '']" ref="//distFormat/formatName_hint" />
+                      </for>
+                      <for xpath="//distorFormat">
+                        <exists xpath="formatName[. != '']" ref="formatName" />
+                        <exists xpath="formatVer[. != '']" ref="formatVer" />
+                        <exists xpath="formatName[. != '']" ref="//distorFormat/formatName_hint" />
+                      </for>
+                      <!-- if a density value is provided, the density units is mandatory -->
+                      <for xpath="//offLineMed[medDensity != '']">
+                        <exists xpath="medDenUnits[. != '']" ref="medDenUnits" />
+                        <exists xpath="medDenUnits[. != '']" ref="medDenUnits_hint" />
+                      </for>
+                      <!-- contact name, org or role -->
+                      <for xpath="//distributor/distorCont">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//distributor/distorCont/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//distributor/distorCont/rpCntInfo/cntOnlineRes/linkage_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//distInfo//onLineSrc">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//distInfo//onLineSrc/linkage_hint" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_EntityAttributeInfo">
+                    <validation>
+                      <!-- codeset domains -->
+                      <for xpath="//codesetd">
+                        <exists xpath="codesetn[. != '']" ref="codesetn" />
+                        <exists xpath="codesets[. != '']" ref="codesets" />
+                      </for>
+                      <!-- enumerated domains -->
+                      <for xpath="//edom">
+                        <exists xpath="edomv[. != '']" ref="edomv" />
+                        <exists xpath="edomvd[. != '']" ref="edomvd" />
+                        <exists xpath="edomvds[. != '']" ref="edomvds" />
+                      </for>
+                      <!-- range domains -->
+                      <for xpath="//rdom">
+                        <exists xpath="rdommin[. != '']" ref="rdommin" />
+                        <exists xpath="rdommax[. != '']" ref="rdommax" />
+                        <exists xpath=".[rdommin &lt; rdommax]" ref="rdommin,rdommin,rdommin_range" />
+                      </for>
+                      <!-- entity type -->
+                      <for xpath="//enttyp">
+                        <exists xpath="enttypd[. != '']" ref="enttypd" />
+                        <exists xpath="enttypds[. != '']" ref="enttypds" />
+                        <!-- entity type label -->
+                        <exists xpath="enttypl[. != '']" ref="enttypl" />
+                      </for>
+                      <!-- attribute label -->
+                      <for xpath="//attr">
+                        <exists xpath="attrlabl[. != '']" ref="attrlabl" />
+                        <!-- attribute definition -->
+                        <exists xpath="attrdef[. != '']" ref="attrdef" />
+                        <!-- attribute source -->
+                        <exists xpath="attrdefs[. != '']" ref="attrdefs" />
+                        <!-- TODO: not working / attribute type -->
+                        <exists xpath="attrtype[. != '']" ref="attrtype" />
+                        <!-- TODO: not working / attribute width -->
+                        <exists xpath="attwidth[. != '']" ref="attwidth" />
+                      </for>
+                      <!--" at least one type of attribute domain is required"-->
+                      <for xpath="/metadata/eainfo/detailed/attr">
+                        <exists xpath="attrdomv[count(edom | rdom | codesetd | udom) = 1]" ref="attrdomv" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_References">
+                    <validation>
+                      <!-- aggregate resource -->
+                      <!-- association type required under aggregate information -->
+                      <for xpath="//aggrInfo/assocType">
+                        <exists xpath="AscTypeCd[@value != '']" ref="AscTypeCd" />
+                        <exists xpath="AscTypeCd[@value != '']" ref="AscTypeCd_hint" />
+                      </for>
+                      <!-- either a citation or an identifier for the aggregate resource must be provided -->
+                      <for xpath="//aggrInfo">
+                        <or ref="aggrInfo">
+                          <exists xpath="aggrDSIdent/identCode[. !='']" />
+                          <exists xpath="aggrDSName//*[. !='']" />
+                        </or>
+                        <exists xpath="aggrDSName//*[. !='']" ref="aggrCitation_hint" />
+                      </for>
+                      <!-- title and date required for citation and identifier citations -->
+                      <for xpath="//aggrInfo//*[resTitle | date]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                        <exists xpath="resTitle[. != '']" ref="//aggrInfo//*[resTitle]_hint" />
+                      </for>
+                      <!--  linkage required for online resources for main citation and identifier citation -->
+                      <for xpath="//aggrInfo//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//aggrInfo//citOnlineRes/linkage_hint" />
+                      </for>
+                      <!-- citation identifier -->
+                      <!--  code required for identifiers -->
+                      <for xpath="//aggrInfo//*[identCode]">
+                        <exists xpath="identCode[. != '']" ref="identCode" />
+                        <exists xpath="identCode[. != '']" ref="//aggrInfo//*[identCode]_hint" />
+                      </for>
+                      <!-- citation or identifier citation cited responsible party  -->
+                      <!-- contact name, org or role -->
+                      <for xpath="//aggrInfo//citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//aggrInfo//citRespParty/party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="//aggrInfo//citRespParty/role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//aggrInfo//citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//aggrInfo//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" />
+                      </for>
+                      <!-- portrayal catalogue  -->
+                      <!-- title and date required for citation and identifier citations -->
+                      <for xpath="//porCatInfo//*[resTitle | date]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                        <exists xpath="resTitle[. != '']" ref="//porCatInfo//*[resTitle]_hint" />
+                      </for>
+                      <!--  linkage required for online resources for main citation and identifier citation -->
+                      <for xpath="//porCatInfo//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//porCatInfo//citOnlineRes/linkage_hint" />
+                      </for>
+                      <!-- citation identifier -->
+                      <!--  code required for identifiers -->
+                      <for xpath="//porCatInfo//*[identCode]">
+                        <exists xpath="identCode[. != '']" ref="identCode" />
+                        <exists xpath="identCode[. != '']" ref="//porCatInfo//*[identCode]_hint" />
+                      </for>
+                      <!-- citation or identifier citation cited responsible party  -->
+                      <!-- contact name, org or role -->
+                      <for xpath="//porCatInfo//citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//porCatInfo//citRespParty/party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="//porCatInfo//citRespParty/role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//porCatInfo//citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//porCatInfo//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" />
+                      </for>
+                      <!-- application schema -->
+                      <!-- title and date required for citation and identifier citations -->
+                      <for xpath="//appSchInfo//*[resTitle | date]">
+                        <exists xpath="resTitle[. != '']" ref="resTitle" />
+                        <exists xpath="date[* != '']" ref="dates createDate,createDate pubDate,pubDate reviseDate,reviseDate" />
+                        <exists xpath="resTitle[. != '']" ref="//appSchInfo//*[resTitle]_hint" />
+                      </for>
+                      <!-- schema language is required -->
+                      <for xpath="//appSchInfo">
+                        <exists xpath="asSchLang[. !='']" ref="schemaLanguage" />
+                        <exists xpath="asSchLang[. !='']" ref="schemaLanguage_hint" />
+                      </for>
+                      <!-- constraint language is required -->
+                      <for xpath="//appSchInfo">
+                        <exists xpath="asCstLang[. !='']" ref="constraintLanguage" />
+                        <exists xpath="asCstLang[. !='']" ref="constraintLanguage_hint" />
+                      </for>
+                      <!--  linkage required for online resources for main citation and identifier citation -->
+                      <for xpath="//appSchInfo//citOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//appSchInfo//citOnlineRes/linkage_hint" />
+                      </for>
+                      <!-- citation identifier -->
+                      <!--  code required for identifiers -->
+                      <for xpath="//appSchInfo//*[identCode]">
+                        <exists xpath="identCode[. != '']" ref="identCode" />
+                        <exists xpath="identCode[. != '']" ref="//appSchInfo//*[identCode]_hint" />
+                      </for>
+                      <!-- citation or identifier citation cited responsible party  -->
+                      <!-- contact name, org or role -->
+                      <for xpath="//appSchInfo//citRespParty">
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="party IndName,rpIndName OrgName,rpOrgName PosName,rpPosName" />
+                        <exists xpath="(rpIndName | rpOrgName | rpPosName)[. != '']/.." ref="//appSchInfo//citRespParty/party_hint" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="role" />
+                        <exists xpath="role[RoleCd/@value != '']" ref="//appSchInfo//citRespParty/role_hint" />
+                      </for>
+                      <!-- linkage -->
+                      <for xpath="//appSchInfo//citRespParty/rpCntInfo/cntOnlineRes">
+                        <exists xpath="linkage[. != '']" ref="linkage" />
+                        <exists xpath="linkage[. != '']" ref="//appSchInfo//citRespParty/rpCntInfo/cntOnlineRes/linkage_hint" />
+                      </for>
+                    </validation>
+                  </page>
+                  <page class="EMEProToolkit.Pages.MTK_GeoprocessingHistory"></page>
+                </section>
+              </forms>
+            </editor>
+          </metadataConfig>
+        </content>
+      </insertComponent>
+    </updateCategory>
   </categories>
   <modules>
     <insertModule id="EMEProToolkit_Module" className="MetadataToolkitModule" autoLoad="true" caption="Metadata Toolkit Module">
       <tabs>
-        <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">          
-          
-          
+        <tab id="EMEProToolkit_Tab1" caption="EME Tools" keytip="X">
           <group refID="Esri_Metadata_Edit_Group" />
-          <group refID="UpdateThumbnailsGroup"/>
+          <group refID="UpdateThumbnailsGroup" />
           <!--<group refID="EMEProToolkit_Group4" />-->
           <group refID="EMEProToolkit_MetadataTools_Group" />
           <group refID="EMEProToolkit_EMEDB_Group" />
           <group refID="EMEProToolkit_Catalog_Group" />
-          
         </tab>
       </tabs>
       <controls>
-        <button id="EMEProToolkit_EMEMenu_Items_UpdateContacts" caption="Update Contacts" 
-                className="EMEMenu_UpdateContacts" loadOnClick="true" 
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/ImagesUser16.png" 
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/User32.png"
-                condition="SyncContactsCondition">
+        <button id="EMEProToolkit_EMEMenu_Items_UpdateContacts" caption="Update Contacts" className="EMEMenu_UpdateContacts" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/ImagesUser16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/User32.png" condition="SyncContactsCondition">
           <tooltip heading="Update Contacts">Sync Online Contacts<disabledText /></tooltip>
         </button>
         <!--<button id="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" condition="catalogview_selected_object" caption="Update Thumbnail" className="EMEMenu_UpdateThumbnail" loadOnClick="true" 
@@ -1163,31 +1189,23 @@ limitations under the License.​
           <tooltip heading="Update Thumbnail">Click to update the thumbnail one or many items. Items must be selected in catalog view
           <disabledText />Disabled Text here</tooltip>
         </button>-->
-        <button id="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" condition="esri_core_resourcesPane" caption="EPA Upgrade FGDC to ArcGIS" className="EMEMenu_upgradeFgdcMD" loadOnClick="true"
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUpgrade16.png"
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUpgrade32.png">
+        <button id="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" condition="esri_core_resourcesPane" caption="EPA Upgrade FGDC to ArcGIS" className="EMEMenu_upgradeFgdcMD" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUpgrade16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericUpgrade32.png">
           <tooltip heading="Upgrade/Clean FGDC CSDGM to ArcGIS"> Use this tool to upgrade FGDC CSDGM records or clean up ArcGIS format metadata. This tool will check the metadata format and perform a standard FGDC CSDGM-to-ArcGIS upgrade with additional cleanup steps. 
           Cleanup includes copying legacy UUIDs to the ISO-Compliant element and removing all legacy elements. 
           The cleanup process is also compatible with ArcGIS Format records. Metadata is considered upgraded to ArcGIS format if /metadata/mdStanName = ArcGIS Metadata. 
-          Users can run this multiple times on records if they are unsure of the format or if legacy elements are present.<disabledText /></tooltip>          
+          Users can run this multiple times on records if they are unsure of the format or if legacy elements are present.<disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_clearMD" condition="esri_core_resourcesPane" caption="Clear Metadata" className="EMEMenu_clearMD" loadOnClick="true"
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/DeleteJob16.png"
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/DeleteJob32.png">
+        <button id="EMEProToolkit_EMEMenu_Items_clearMD" condition="esri_core_resourcesPane" caption="Clear Metadata" className="EMEMenu_clearMD" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/DeleteJob16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/DeleteJob32.png">
           <tooltip heading="Clear Metadata">
             It is not unusual for the default Esri tools to merge and preserve legacy metadata sections when performing a standard import. 
             This tool purges all metadata from the target (usually a feature class).<disabledText /></tooltip>
         </button>
-         <button id="EMEProToolkit_EMEMenu_Items_importMD" condition="esri_core_resourcesPane" caption="Import Metadata" className="EMEMenu_importMD" loadOnClick="true"
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobCreate16.png"
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobCreate32.png">
+        <button id="EMEProToolkit_EMEMenu_Items_importMD" condition="esri_core_resourcesPane" caption="Import Metadata" className="EMEMenu_importMD" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobCreate16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobCreate32.png">
           <tooltip heading="Import Metadata">
             It is not unusual for the default Esri tools to merge and preserve legacy metadata sections when performing a standard import. This tool first purges all metadata from the target (usually a feature class), then performs a clean import of the source. It does not perform the EPA upgrade or cleanup function, 
             but rather is intended to supplement those tools and allow for a clean import of the output from those tools into a feature class.<disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_cleanexportMD" condition="esri_core_resourcesPane" caption="Clean Export Metadata" className="EMEMenu_cleanexportMD" loadOnClick="true"
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport16.png"
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport32.png">
+        <button id="EMEProToolkit_EMEMenu_Items_cleanexportMD" condition="esri_core_resourcesPane" caption="Clean Export Metadata" className="EMEMenu_cleanexportMD" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/JobExport32.png">
           <tooltip heading="Clean Export Metadata">Most Esri metadata tools perform some sort of transformation on a metadata record when
           exporting to a standalone XML document. This tool allows a metadata record to be exported as-is with no transformations.<disabledText /></tooltip>
         </button>
@@ -1205,69 +1223,43 @@ limitations under the License.​
             This tool saves a metadata record as a reusable template by excluding those elements which must be unique in every 
             metadata record, such as title, abstract, unique identifier, etc, leaving those elements that are common across many records.<disabledText /></tooltip>
         </button>-->
-        <button id="EMEProToolkit_EMEMenu_Items_editElementMD" condition="esri_core_resourcesPane" caption="Edit Element" className="EMEMenu_editElementMD" loadOnClick="true"
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericProperties16.png"
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericProperties32.png">
+        <button id="EMEProToolkit_EMEMenu_Items_editElementMD" condition="esri_core_resourcesPane" caption="Edit Element" className="EMEMenu_editElementMD" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericProperties16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericProperties32.png">
           <tooltip heading="Edit Metadata Element">
             This tool accepts an XML XPath expression and a text value to update just a single element. If the element does not exist, it will be added. 
             Please be aware that the source metadata will be changed - make a backup copy if necessary.<disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_editDatesMD" condition="esri_core_resourcesPane" caption="Edit Dates" className="EMEMenu_editDatesMD" loadOnClick="true"
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/Add_Archive_Table16.png"
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/Add_Archive_Table32.png">
+        <button id="EMEProToolkit_EMEMenu_Items_editDatesMD" condition="esri_core_resourcesPane" caption="Edit Dates" className="EMEMenu_editDatesMD" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/Add_Archive_Table16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/Add_Archive_Table32.png">
           <tooltip heading="Edit Metadata Dates">
             This tool assists with editing the citation date values in ArcGIS Metadata to ease automated refreshes<disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_exportISOToolMD" condition="esri_core_resourcesPane" caption="Export Metadata to ISO" className="EMEMenu_exportISOToolMD" loadOnClick="true"
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ExportFeatures16.png"
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ExportFeatures32.png">
+        <button id="EMEProToolkit_EMEMenu_Items_exportISOToolMD" condition="esri_core_resourcesPane" caption="Export Metadata to ISO" className="EMEMenu_exportISOToolMD" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ExportFeatures16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ExportFeatures32.png">
           <tooltip heading="Export ArcGIS Metadata to ISO">
             This tool streamlines exporting ArcGIS metadata to compliant ISO 19115. It is equivalent to using the Export Metadata tool with ArcGIS2ISO19139 as the translator.<disabledText /></tooltip>
         </button>
-        
-        <button id="EMEProToolkit_EMEMenu_Items_mergeTemplateMD" caption="Merge" className="EMEMenu_mergeTemplateMD" loadOnClick="true"
-                condition="esri_core_resourcesPane"
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ModelBuilderAddMergeBranch16.png"
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ModelBuilderAddMergeBranch32.png">
+        <button id="EMEProToolkit_EMEMenu_Items_mergeTemplateMD" caption="Merge" className="EMEMenu_mergeTemplateMD" loadOnClick="true" condition="esri_core_resourcesPane" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ModelBuilderAddMergeBranch16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ModelBuilderAddMergeBranch32.png">
           <tooltip heading="Merge from Template Metadata">
             This tool replaces the elements in a metadata record with elements from a saved template record. Elements from the template will overwrite their equivalents in the selected record based on the xpath rules provided in GenericTemplateXpathSettings.xml. The provided template (GenericMetadataTemplate_EMEPro.xml) can be used as a custom Set-To-Default tool. Both files are deployed with the python tool. Caution is urged when using this tool.
             <disabledText /></tooltip>
         </button>
-        <button id="EMEProToolkit_EMEMenu_Items_esriSyncMD" caption="Esri Synchronize" className="EMEMenu_esriSyncMD" loadOnClick="true"
-                condition="esri_core_resourcesPane"
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/VersionRefresh16.png"
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/VersionRefresh32.png">
+        <button id="EMEProToolkit_EMEMenu_Items_esriSyncMD" caption="Esri Synchronize" className="EMEMenu_esriSyncMD" loadOnClick="true" condition="esri_core_resourcesPane" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/VersionRefresh16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/VersionRefresh32.png">
           <tooltip heading="Synchronize Metadata">
             This tool uses Esri's Metadata Synchronizer with additional options available only via python. Please refer to Esri's tool documentation for details.
             <disabledText /></tooltip>
         </button>
-        
-        <button id="EMEProToolkit_EMEMenu_Items_keywords2tags" caption="Copy Keywords to Tags" className="EMEMenu_keywords2tags" loadOnClick="true"
-                condition="esri_core_resourcesPane"
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/LabelingOnOff32.png"
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/LabelingOnOff32.png">
+        <button id="EMEProToolkit_EMEMenu_Items_keywords2tags" caption="Copy Keywords to Tags" className="EMEMenu_keywords2tags" loadOnClick="true" condition="esri_core_resourcesPane" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/LabelingOnOff32.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/LabelingOnOff32.png">
           <tooltip heading="Copy Keywords to Tags">
             This tool copies ALL keywords present in the metadata to the Tags section. The tool does not alter the keywords, and any existing 'tags' will be preserved but not duplicated. Note that 'tags' should be empty when creating compliant metadata, but this utility is useful prior to sharing as a web layer
             <disabledText /></tooltip>
         </button>
-
-        <button id="EMEProToolkit_EMEMenu_Items_EMEdbButton" caption="EME Database Manager" className="EMEMenu_EMEdb" loadOnClick="true"
-        smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeodatabaseBeingEdited16.png"
-				largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeodatabaseBeingEdited32.png">
-          <tooltip heading="EMEdb Manager"> Open<disabledText />
-          </tooltip>
+        <button id="EMEProToolkit_EMEMenu_Items_EMEdbButton" caption="EME Database Manager" className="EMEMenu_EMEdb" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeodatabaseBeingEdited16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeodatabaseBeingEdited32.png">
+          <tooltip heading="EMEdb Manager"> Open<disabledText /></tooltip>
         </button>
-        
-        <button id="EMEProToolkit_EMEMenu_Items_ShowToolbox" caption="Toolbox Path" 
-                className="EMEMenu_ShowToolbox" loadOnClick="true" 
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/GeoprocessingToolboxPythonNew16.png" 
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingToolboxPythonNew32.png">
+        <button id="EMEProToolkit_EMEMenu_Items_ShowToolbox" caption="Toolbox Path" className="EMEMenu_ShowToolbox" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/GeoprocessingToolboxPythonNew16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingToolboxPythonNew32.png">
           <tooltip heading="Show Python Toolbox Path">
           This displays the path the underlying python toolbox that many of the EME tools use<disabledText /></tooltip>
         </button>
         <!---->
-        <button id="EMEProToolkit_SplitBasemap_ProjectDefault" condition="catalogview_selected_object" caption="Project Default Basemap" className="EMEMenu_SplitBasemap_ProjectDefault" loadOnClick="true"
-        largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ItemThumbnailCreate32.png">
+        <button id="EMEProToolkit_SplitBasemap_ProjectDefault" condition="catalogview_selected_object" caption="Project Default Basemap" className="EMEMenu_SplitBasemap_ProjectDefault" loadOnClick="true" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/ItemThumbnailCreate32.png">
           <tooltip heading="Project Default Basemap">
             Click to update the thumbnail one or many items. Items must be selected in catalog view.
 
@@ -1310,7 +1302,7 @@ limitations under the License.​
           </tooltip>
         </button>
         <button id="EMEProToolkit_SplitBasemap_Gray" condition="catalogview_selected_object" caption="Gray Basemap" className="EMEMenu_SplitBasemap_Gray" loadOnClick="true">
-						<tooltip heading="Gray Basemap">
+          <tooltip heading="Gray Basemap">
             Click to update the thumbnail one or many items. Items must be selected in catalog view
 
           </tooltip>
@@ -1332,22 +1324,16 @@ limitations under the License.​
             Click to update the thumbnail one or many items. Items must be selected in catalog view
           </tooltip>
         </button>
-
-        <button id="EMEProToolkit_Nav2EMETools"  caption="Use EME Tools!" 
-                className="EMEMenu_Nav2EMETools" loadOnClick="true"
-                smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/GeoprocessingEnvironmentSettings16.png" 
-                largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingEnvironmentSettings32.png">
+        <button id="EMEProToolkit_Nav2EMETools" caption="Use EME Tools!" className="EMEMenu_Nav2EMETools" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/GeoprocessingEnvironmentSettings16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GeoprocessingEnvironmentSettings32.png">
           <tooltip>
             Click to navigate to the EME Metadata Tools Tab. EME metadata tools have been specifically customized for EPA metadata workflows.
           </tooltip>
         </button>
-        <button id="EMEProToolkit_ProToolsChecked"  caption="Enable ArcGIS Pro Metadata Tools" 
-                className="EMEMenu_ProToolsChecked" loadOnClick="false">
+        <button id="EMEProToolkit_ProToolsChecked" caption="Enable ArcGIS Pro Metadata Tools" className="EMEMenu_ProToolsChecked" loadOnClick="false">
           <tooltip>
            Click to unlock/lock the default ArcGIS Pro Metadata Tools - use caution as these tools may behave differently than the EME Metadata Tools.
           </tooltip>
         </button>
-        
       </controls>
       <!--<menus>
         <menu id="EMEProToolkit_EMEMenu" caption="EMEMenu" smallImage="GenericButtonGreen16.png" largeImage="GenericButtonGreen32.png">
@@ -1358,61 +1344,59 @@ limitations under the License.​
       </menus>-->
       <splitButtons>
         <splitButton id="BasemapSplitButton">
-          <button refID="EMEProToolkit_SplitBasemap_ProjectDefault"/>
-          <button refID="EMEProToolkit_SplitBasemap_None"/>
-          <button refID="EMEProToolkit_SplitBasemap_Satellite"/>
-          <button refID="EMEProToolkit_SplitBasemap_Hybrid"/>
-          <button refID="EMEProToolkit_SplitBasemap_Streets"/>
-          <button refID="EMEProToolkit_SplitBasemap_Topographic"/>
-          <button refID="EMEProToolkit_SplitBasemap_DarkGray"/>
-          <button refID="EMEProToolkit_SplitBasemap_Gray"/>
-          <button refID="EMEProToolkit_SplitBasemap_NationalGeographic"/>
-          <button refID="EMEProToolkit_SplitBasemap_Oceans"/>
-          <button refID="EMEProToolkit_SplitBasemap_Terrain"/>
-          
+          <button refID="EMEProToolkit_SplitBasemap_ProjectDefault" />
+          <button refID="EMEProToolkit_SplitBasemap_None" />
+          <button refID="EMEProToolkit_SplitBasemap_Satellite" />
+          <button refID="EMEProToolkit_SplitBasemap_Hybrid" />
+          <button refID="EMEProToolkit_SplitBasemap_Streets" />
+          <button refID="EMEProToolkit_SplitBasemap_Topographic" />
+          <button refID="EMEProToolkit_SplitBasemap_DarkGray" />
+          <button refID="EMEProToolkit_SplitBasemap_Gray" />
+          <button refID="EMEProToolkit_SplitBasemap_NationalGeographic" />
+          <button refID="EMEProToolkit_SplitBasemap_Oceans" />
+          <button refID="EMEProToolkit_SplitBasemap_Terrain" />
         </splitButton>
       </splitButtons>
       <groups>
-        
         <group id="EMEProToolkit_Catalog_Group" caption="Navigation">
           <button refID="esri_core_showProjectView" />
           <button refID="EMEProToolkit_EMEMenu_Items_ShowToolbox" size="large" />
           <!--<button refID="EMEProToolkit_EMEMenu_Items_test" />-->
         </group>
-        
-        <group id="EMEProToolkit_EMEDB_Group" caption="EMEdb Tools">          
-          <!--<menu refID="EMEProToolkit_EMEMenu" size="middle" />-->          
+        <group id="EMEProToolkit_EMEDB_Group" caption="EMEdb Tools">
+          <!--<menu refID="EMEProToolkit_EMEMenu" size="middle" />-->
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateContacts" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_EMEdbButton" />
         </group>
-        
-        <group id="EMEProToolkit_MetadataTools_Group" caption="Metadata Tools" >
-          <!--<button refID="EMEProToolkit_TestButton1" size="large" />-->          
+        <group id="EMEProToolkit_MetadataTools_Group" caption="Metadata Tools">
+          <!--<button refID="EMEProToolkit_TestButton1" size="large" />-->
           <button refID="EMEProToolkit_EMEMenu_Items_upgradeFgdcMD" size="large" />
-          <button refID ="EMEProToolkit_EMEMenu_Items_mergeTemplateMD" size="large"/>
-          <button refID ="EMEProToolkit_EMEMenu_Items_esriSyncMD" size="medium"/>
+          <button refID="EMEProToolkit_EMEMenu_Items_mergeTemplateMD" size="large" />
+          <button refID="EMEProToolkit_EMEMenu_Items_esriSyncMD" size="medium" />
           <button refID="EMEProToolkit_EMEMenu_Items_editElementMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_editDatesMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_clearMD" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_importMD" size="large" />
-          <button refID="EMEProToolkit_EMEMenu_Items_keywords2tags" size="large"/>
+          <button refID="EMEProToolkit_EMEMenu_Items_keywords2tags" size="large" />
           <button refID="EMEProToolkit_EMEMenu_Items_cleanexportMD" size="large" />
-          <!--<button refID="EMEProToolkit_EMEMenu_Items_cleanUpTool" size="large" />--> 
-          
-          <button refID="EMEProToolkit_EMEMenu_Items_exportISOToolMD" size="large"/>
+          <!--<button refID="EMEProToolkit_EMEMenu_Items_cleanUpTool" size="large" />-->
+          <button refID="EMEProToolkit_EMEMenu_Items_exportISOToolMD" size="large" />
         </group>
-        
         <group id="UpdateThumbnailsGroup" caption="Update Thumbnail">
           <!--<comboBox refID="update_thumbnails_basemap_combo"></comboBox>
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />-->
-          <splitButton refID="BasemapSplitButton"/> 
-            
+          <splitButton refID="BasemapSplitButton" />
         </group>
-        
         <!--<group id="EMEProToolkit_Group4" caption="Thumbnails" condition="esri_core_resourcesPane">          
-          --><!--<gallery refID="esri_mapping_previewBasemapGallery" size="large"/>--><!--          
-          --><!--<button refID="esri_core_previewCaptureThumbnail"/>--><!--          
-          --><!--<button refID="esri_core_previewShowBasemap"/>--><!--
+          -->
+        <!--<gallery refID="esri_mapping_previewBasemapGallery" size="large"/>-->
+        <!--          
+          -->
+        <!--<button refID="esri_core_previewCaptureThumbnail"/>-->
+        <!--          
+          -->
+        <!--<button refID="esri_core_previewShowBasemap"/>-->
+        <!--
           <button refID="EMEProToolkit_EMEMenu_Items_UpdateThumbnail" size="large" />
         </group>-->
         <group id="Esri_Metadata_Edit_Group" caption="Edit Metadata">
@@ -1423,59 +1407,55 @@ limitations under the License.​
           <button refID="esri_metadata_edit" />
           <button refID="esri_metadata_import" size="large" />
           <button refID="esri_metadata_saveAs" size="small" />
-          <button refID="esri_metadata_sync" size="large"/>
-          <button refID="esri_metadata_upgrade" size="small" placeWith="esri_metadata_saveAs"/>
+          <button refID="esri_metadata_sync" size="large" />
+          <button refID="esri_metadata_upgrade" size="small" placeWith="esri_metadata_saveAs" />
           <button refID="esri_metadata_export" />
         </group>
       </groups>
     </insertModule>
-    
-  <updateModule refID="esri_core_module">
-    <groups>
-      <updateGroup refID="esri_metadata_metadataViewGroup">
-        <deleteButton refID="esri_metadata_edit" />
-        <deleteButton refID="esri_metadata_import" />
-        <deleteButton refID="esri_metadata_saveAs" />
-        <deleteButton refID="esri_metadata_sync" />
-        <deleteButton refID="esri_metadata_upgrade" />
-        <deleteButton refID="esri_metadata_export" />
-        <insertButton refID="EMEProToolkit_Nav2EMETools" />
-        <insertButton refID="EMEProToolkit_ProToolsChecked" />
-      </updateGroup>
-    </groups>
-  </updateModule>  
-    
-  <updateModule refID="esri_core_module">
-    <tabs>
-      <!--<updateTab refID="esri_core_homeTab">
+    <updateModule refID="esri_core_module">
+      <groups>
+        <updateGroup refID="esri_metadata_metadataViewGroup">
+          <deleteButton refID="esri_metadata_edit" />
+          <deleteButton refID="esri_metadata_import" />
+          <deleteButton refID="esri_metadata_saveAs" />
+          <deleteButton refID="esri_metadata_sync" />
+          <deleteButton refID="esri_metadata_upgrade" />
+          <deleteButton refID="esri_metadata_export" />
+          <insertButton refID="EMEProToolkit_Nav2EMETools" />
+          <insertButton refID="EMEProToolkit_ProToolsChecked" />
+        </updateGroup>
+      </groups>
+    </updateModule>
+    <updateModule refID="esri_core_module">
+      <tabs>
+        <!--<updateTab refID="esri_core_homeTab">
         <deleteGroup refID="esri_metadata_metadataViewGroup"/>
       </updateTab>-->
-      <updateTab refID="esri_core_homeTab">
-        <insertGroup refID="Default_Metadata_Tools"/>
-      </updateTab>
-    </tabs>
-  </updateModule>  
-
+        <updateTab refID="esri_core_homeTab">
+          <insertGroup refID="Default_Metadata_Tools" />
+        </updateTab>
+      </tabs>
+    </updateModule>
   </modules>
-
   <conditions>
     <insertCondition id="catalogview_selected_object" caption="Catalog view with selected object">
       <and>
-        <state id="esri_core_resourcesPane"/>
-        <state id="esri_core_projectViewHasSelectedItems"/>
+        <state id="esri_core_resourcesPane" />
+        <state id="esri_core_projectViewHasSelectedItems" />
       </and>
     </insertCondition>
     <insertCondition id="eme_state_condition" caption="EME State">
-      <state id="preview_map_state"/>
+      <state id="preview_map_state" />
     </insertCondition>
     <!--update contacts button state-->
     <insertCondition id="SyncContactsCondition" caption="Sync Contacts State">
       <not>
-        <state id="sync_contacts_state"/>
+        <state id="sync_contacts_state" />
       </not>
     </insertCondition>
-  <insertCondition id="StockMetadataToolsCondition" caption="default pro metadata tools">
-    <state id="stock_metadata_tools_state"/>
-  </insertCondition>
+    <insertCondition id="StockMetadataToolsCondition" caption="default pro metadata tools">
+      <state id="stock_metadata_tools_state" />
+    </insertCondition>
   </conditions>
 </ArcGIS>

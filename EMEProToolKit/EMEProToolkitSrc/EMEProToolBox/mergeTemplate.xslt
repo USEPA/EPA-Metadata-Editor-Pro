@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Processes ArcGIS metadata to merge document metadata with saved template metadata.
      Template metadata will overwrite document metadata
+	 2023-03-08 - Best I can tell the mergeTool doesn't use this xslt to perform the merge. 
+				  Instead it uses GenericTemplateXpathSettings.xml. Not sure why.
  -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" >
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes" omit-xml-declaration="no" />

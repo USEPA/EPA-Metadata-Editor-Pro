@@ -24,7 +24,7 @@ namespace EMEProToolkit.Pages
     /// </summary>
     public partial class MD_KeywordsCode : EditorPage
     {
-        private List<string> _listPCode = new List<string>();
+        private List<string> _listPCode = new();
         private string _pathEmeDb = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
 
         public MD_KeywordsCode()
@@ -123,7 +123,7 @@ namespace EMEProToolkit.Pages
         {
             if (lbxPCode.IsVisible == true)
             {
-                List<string> listPCode = new List<string>();
+                List<string> listPCode = new();
                 if (tbxMDPCode.Text.Any())
                 {
                     string[] strlistPCode = tbxMDPCode.Text.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);

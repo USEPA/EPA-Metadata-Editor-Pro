@@ -1,0 +1,9 @@
+Migration Status Report
+  Migrate project: C:\Users\thultgre\Repos\EPA-Metadata-Editor-Pro\EMEProToolKit\EMEProToolkitSrc\EMEProToolkit.csproj
+  EMEProToolkit.csproj
+   project folder: 
+   C:\Users\thultgre\Repos\EPA-Metadata-Editor-Pro\EMEProToolKit\EMEProToolkitSrc\
+   C:\Users\thultgre\Repos\EPA-Metadata-Editor-Pro\EMEProToolKit\EMEProToolkitSrc\
+   language: CS
+   project type: AddIn
+   project has WPF: PresentationFramework

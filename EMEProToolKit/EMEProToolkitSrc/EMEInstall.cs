@@ -29,12 +29,12 @@ namespace EMEProToolkit
 {
     public class EMEInstall
     {
-        XmlDocument _emeConfig = new XmlDocument();
-        XmlDocument _contactsDoc = new XmlDocument();
-        XmlDocument _contactsEsri = new XmlDocument();
-        XmlDocument _contactsEpa = new XmlDocument();
-        XmlDocument _contactsBAK = new XmlDocument();
-        XmlDocument _contactsWEB = new XmlDocument();
+        XmlDocument _emeConfig = new();
+        XmlDocument _contactsDoc = new();
+        XmlDocument _contactsEsri = new();
+        XmlDocument _contactsEpa = new();
+        XmlDocument _contactsBAK = new();
+        XmlDocument _contactsWEB = new();
         private string _filePathEsri = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ArcGIS\\Descriptions\\";
         private string _filePathEme = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
         private string _filePathToolbox = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolbox";

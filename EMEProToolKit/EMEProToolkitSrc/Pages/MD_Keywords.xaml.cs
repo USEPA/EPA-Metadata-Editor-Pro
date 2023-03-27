@@ -15,6 +15,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Xml;
+using ArcGIS.Desktop.Framework;
+using Newtonsoft.Json.Linq;
+using ArcGIS.Desktop.Metadata.Editor.Pages;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -23,7 +27,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ArcGIS.Desktop.Metadata.Editor.Pages;
+using ArcGIS.Desktop.Metadata.Editor.Validation;
 
 namespace EMEProToolkit.Pages
 {

@@ -1,0 +1,9 @@
+Migration Status Report
+  Migrate project: C:\Users\thultgre\Repos\EPA-Metadata-Editor-Pro\EMEProToolKit\EMEProToolkitSrc\EMEProToolkit.csproj
+  EMEProToolkit.csproj
+   project folder: 
+   C:\Users\thultgre\Repos\EPA-Metadata-Editor-Pro\EMEProToolKit\EMEProToolkitSrc\
+   C:\Users\thultgre\Repos\EPA-Metadata-Editor-Pro\EMEProToolKit\EMEProToolkitSrc\
+   language: CS
+   Error: can't process a project folder that contains other projects in sub directories: C:\Users\thultgre\Repos\EPA-Metadata-Editor-Pro\EMEProToolKit\EMEProToolkitSrc\
+    Other projects: C:\Users\thultgre\Repos\EPA-Metadata-Editor-Pro\EMEProToolKit\EMEProToolkitSrc\EMEProToolBox\EMEToolbox.pyproj

@@ -74,7 +74,7 @@
     <!-- Designate Publisher as Publisher - default is "point of contact" -->
     <xsl:template match="metadata/dataIdInfo/idPoC[1]/role/RoleCd" priority="1">
     	<xsl:copy>
-			<xsl:apply-templates select="node() | @*" />
+			<!--<xsl:apply-templates select="node() | @*" />-->
     		<xsl:attribute name="value">010</xsl:attribute>
     		<xsl:text>Publisher</xsl:text>
 		</xsl:copy>
@@ -83,16 +83,25 @@
     <!-- Assign License code if EPA default license - licenseUnrestricted -->
     <xsl:template match="LegConsts" priority="1">
     	<xsl:copy>
-    		<xsl:if test="contains(./useLimit,'edg.epa.gov/EPA_Data_License')">
-                <useLimit>EPA Public Domain License</useLimit>
-				<xsl:apply-templates select="node() | @*" />
-				<xsl:if test="count (./accessConsts) = 0">
-	                <accessConsts>
-	                    <RestrictCd value="009">licenceUnrestricted</RestrictCd>
-	                </accessConsts>
-                    <othConsts>https://edg.epa.gov/EPA_Data_License.html</othConsts>
-	            </xsl:if>
-    		</xsl:if>
+			<xsl:choose>
+				<xsl:when test="contains(./useLimit,'edg.epa.gov/EPA_Data_License')">
+					<useLimit>EPA Public Domain License</useLimit>
+					<xsl:choose>
+						<xsl:when test="count (./accessConsts) = 0">
+							<accessConsts>
+								<RestrictCd value="009">licenceUnrestricted</RestrictCd>
+							</accessConsts>
+							<othConsts>https://edg.epa.gov/EPA_Data_License.html</othConsts>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:apply-templates select="node() | @*" />
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:apply-templates select="node() | @*" />
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:copy>
     </xsl:template> 
     
@@ -110,7 +119,7 @@
     
 
     <!-- exclude Legacy elements from the output -->
-	<xsl:template match="Esri | Binary | idinfo | dataqual | spdoinfo/indspref | spdoinfo/direct | spdoinfo/ptvctinf/sdtsterm | spdoinfo/ptvctinf/vpfterm | spdoinfo/rastinfo | spref | distinfo | metainfo | Esri/MetaID | Esri/Sync | seqId | MemberName | catFetTyps/*[not(name() = 'genericName')] | scaleDist/uom | dimResol/uom | valUnit/*[not(name() = 'UOM')] | quanValUnit/*[not(name() = 'UOM')] | coordinates | usrDefFreq/*[not(name() = 'duration')] | exTemp/TM_GeometricPrimitive | citId/text() | citIdType | geoBox | geoDesc | MdIdent | RS_Identifier | searchKeys" priority="1" >
+	<xsl:template match="Binary | idinfo | dataqual | spdoinfo/indspref | spdoinfo/direct | spdoinfo/ptvctinf/sdtsterm | spdoinfo/ptvctinf/vpfterm | spdoinfo/rastinfo | spref | distinfo | metainfo | Esri/MetaID | Esri/Sync | seqId | MemberName | catFetTyps/*[not(name() = 'genericName')] | scaleDist/uom | dimResol/uom | valUnit/*[not(name() = 'UOM')] | quanValUnit/*[not(name() = 'UOM')] | coordinates | usrDefFreq/*[not(name() = 'duration')] | exTemp/TM_GeometricPrimitive | citId/text() | citIdType | geoBox | geoDesc | MdIdent | RS_Identifier | searchKeys" priority="1" >
 	</xsl:template>
     
 </xsl:stylesheet>

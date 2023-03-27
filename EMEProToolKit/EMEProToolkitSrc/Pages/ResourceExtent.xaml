@@ -81,10 +81,10 @@ limitations under the License.​
     <v:MetadataIssueInfo x:Key="dataExtGeoBndBoxReq" Message="{x:Static r:Issues.extent_dataExtGeoBndBoxReq}" />
 
     <v:MetadataIssueInfo x:Key="party" Message="{x:Static r:Issues.party_REQ}" />
-    <v:MetadataIssueInfo x:Key="party_hint" Message="   > validaiton hint > //Extent//Geographic Description//Contact[Name | Organization | Position] - (//matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="party_hint" Message="   > validation hint > //Extent//Geographic Description//Contact[Name | Organization | Position] - (//matches any descendant)" />
     <v:MetadataIssueInfo x:Key="partyFgdc" Message="{x:Static r:Issues.partyFgdc_FGDC_REQ}" />
     <v:MetadataIssueInfo x:Key="role" Message="{x:Static r:Issues.role_REQ}" />
-    <v:MetadataIssueInfo x:Key="role_hint" Message="   > validaiton hint > //Extent//Geographic Description//Contact[Role] - (//matches any descendant)" />
+    <v:MetadataIssueInfo x:Key="role_hint" Message="   > validation hint > //Extent//Geographic Description//Contact[Role] - (//matches any descendant)" />
     <v:MetadataIssueInfo x:Key="linkage" Message="{x:Static r:Issues.linkage_REQ}" />
     <v:MetadataIssueInfo x:Key="linkage_hint" Message="   > validation hint > //Extent//Geographic Description//Contact/Contact Information/Online Resource[Linkage URL] - (// matches any descendant)" />
     <v:MetadataIssueInfo x:Key="//dataExt//citOnlineRes/linkage_hint" Message="   > validation hint > //Extent//Online Resource[Linkage URL] - (//matches any descendant)" />
