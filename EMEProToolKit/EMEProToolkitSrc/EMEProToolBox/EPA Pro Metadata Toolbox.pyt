@@ -625,7 +625,7 @@ class mergeTemplate(object):
                             if len(template_root.findall(xp[0].text)) > 0:
                                 messages.addMessage('- Found in template {}: {}'.format(xp[1].text, xp[0].text))
                                 # Remove source data if set to replace elements and elements found in template.
-                                if len(source_root.findall(xp[0].text)) > 0 and replaceElements == "true":
+                                if len(source_root.findall(xp[0].text)) == 0 or replaceElements == "true":
                                     if len(source_root.findall(xp[0].text)) > 0 and len(template_root.findall(xp[0].text)) > 0:
                                         parent = source_root.findall(xp[0].text + "/..")[0]
                                         try:
@@ -1488,8 +1488,9 @@ def writeXML(source, target, messages):
             if arcpy.Exists(target):
                 messages.addMessage("Target recognized as local data")
                 target_md = md.Metadata(target)
+                target_md.copy(source)
                 target_md.save()
-                target_me.reload()
+                target_md.reload()
             else:
                 # Check to see whether it's a map in the current project.
                 current_aprx = arcpy.mp.ArcGISProject('CURRENT')
