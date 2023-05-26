@@ -1489,7 +1489,7 @@ def writeXML(source, target, messages):
                 messages.addMessage("Target recognized as local data")
                 target_md = md.Metadata(target)
                 target_md.save()
-                target_me.reload()
+                target_md.reload()
             else:
                 # Check to see whether it's a map in the current project.
                 current_aprx = arcpy.mp.ArcGISProject('CURRENT')
