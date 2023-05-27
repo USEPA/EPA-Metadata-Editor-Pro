@@ -1401,6 +1401,7 @@ class keywords2tags(object):
 
 def readXML(source, messages):
     try:
+         metadata = ''                    
         # Handle services:
         if source[:4]=='http':
             messages.addMessage("Source recognized as URL")
@@ -1434,10 +1435,13 @@ def readXML(source, messages):
             maps = current_aprx.listMaps(source)
             if len(maps)>0:
                 metadata = maps[0].metadata
-        if metadata.xml == "":
+        if metadata == "":
+            messages.addWarningMessage("Could not load metadata from source")
+        elif metadata.xml == "":
             messages.addWarningMessage("Source metadata was empty")
         return metadata
     except Exception as ee:
+        messages.addWarningMessage("Problem reading metadata")                    
         messages.addWarningMessage(ee)
         raise ee
 
@@ -1503,6 +1507,7 @@ def writeXML(source, target, messages):
                 target_md.copy(source)
                 target_md.save()
     except Exception as ee:
+        messages.addWarningMessage("Problem writing metadata")                                                              
         messages.addWarningMessage(ee)
         raise ee
 
