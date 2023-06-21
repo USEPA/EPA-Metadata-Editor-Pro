@@ -1401,7 +1401,7 @@ class keywords2tags(object):
 
 def readXML(source, messages):
     try:
-         metadata = ''                    
+        metadata = ''                    
         # Handle services:
         if source[:4]=='http':
             messages.addMessage("Source recognized as URL")
