@@ -200,8 +200,9 @@ class upgradeTool(object):
                             '''
                             static_epa_keys_thesaName_element = ET.fromstring(static_epa_keys_thesaName)
                             static_epa_keys_thesaLang_element = ET.fromstring(static_epa_keys_thesaLang)
-                            epa_keys_parent.append(deepcopy(static_epa_keys_thesaName_element))
-                            epa_keys_parent.append(deepcopy(static_epa_keys_thesaLang_element))
+                            if epa_keys_parent:
+                                epa_keys_parent.append(deepcopy(static_epa_keys_thesaName_element))
+                                epa_keys_parent.append(deepcopy(static_epa_keys_thesaLang_element))
 
                             # Fix Place Keywords
                             messages.addMessage('fixing place keywords section')
@@ -1401,7 +1402,7 @@ class keywords2tags(object):
 
 def readXML(source, messages):
     try:
-        metadata = ''                    
+        metadata = ''
         # Handle services:
         if source[:4]=='http':
             messages.addMessage("Source recognized as URL")
@@ -1441,7 +1442,7 @@ def readXML(source, messages):
             messages.addWarningMessage("Source metadata was empty")
         return metadata
     except Exception as ee:
-        messages.addWarningMessage("Problem reading metadata")                    
+        messages.addWarningMessage("Problem reading metadata")
         messages.addWarningMessage(ee)
         raise ee
 
@@ -1507,7 +1508,7 @@ def writeXML(source, target, messages):
                 target_md.copy(source)
                 target_md.save()
     except Exception as ee:
-        messages.addWarningMessage("Problem writing metadata")                                                              
+        messages.addWarningMessage("Problem writing metadata")
         messages.addWarningMessage(ee)
         raise ee
 
