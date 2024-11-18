@@ -82,13 +82,13 @@ namespace EMEProToolkit.Pages
                 return;
 
             // new document
-            XmlDocument clone = new();
+      XmlDocument clone = new XmlDocument();
             XmlNode contactsNode = clone.CreateElement("contacts");
             clone.AppendChild(contactsNode);
 
             // write back out the contacts marked saved
             var list = _contactsDoc.SelectNodes("//contact[editorSave='True']");
-            StringBuilder sb = new();
+      StringBuilder sb = new StringBuilder();
 
             foreach (XmlNode child in list)
             {

@@ -90,7 +90,7 @@
             <DataTemplate>
               <Button Name="btnAddThesaEPA" Tag="thesaName" Click="btnAddThesaEPA_Click" Style="{DynamicResource AddButton}">
                 <StackPanel VerticalAlignment="Top" Orientation="Horizontal">
-                  <Image Style="{DynamicResource AddImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericAddGreen16.png"/>
+                  <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
                   <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="Choose Keyword type or Program Code"/>
                 </StackPanel>
               </Button>
@@ -165,7 +165,7 @@
                                        AncestorType={x:Type ContentPresenter}},
                                        Mode=OneWayToSource}" LastChildFill="True">
                 <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}">
-                  <Image Style="{DynamicResource TopButtonImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                  <Image Style="{DynamicResource TopButtonImageStyle}" Source="{DynamicResource GenericDeleteRed16}"/>
                 </Button>
                 <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_DESC_THESCITE}"/>
               </DockPanel>

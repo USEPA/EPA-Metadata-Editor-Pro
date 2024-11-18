@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArcGIS defaultAssembly="EMEProToolkit.dll" defaultNamespace="EMEProToolkit" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Users/thultgre/AppData/Local/Programs/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="2.0" desktopVersion="3.0.3.36057">
+  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="2.3" desktopVersion="3.0.3.36057">
     <Name>EMEProToolkit</Name>
     <Description>US EPA Metadata Editor (EME) AddIn for ArcGIS Pro based off Esri's Metadata Toolkit</Description>
     <Image>Images\AddinDesktop32.png</Image>
     <Author>U.S. EPA Office of Information Management</Author>
     <Company>U.S. EPA Metadata Editor for ArcGIS Pro</Company>
-    <Date>02/21/2023</Date>
+    <Date>2024-11-18</Date>
     <Subject>Content</Subject>
   </AddInInfo>
   <categories>

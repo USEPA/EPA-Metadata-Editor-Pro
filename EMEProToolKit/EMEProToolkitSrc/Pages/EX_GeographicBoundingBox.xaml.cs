@@ -38,7 +38,7 @@ namespace EMEProToolkit.Pages
                 if (null == data)
                     return String.Empty;
 
-                StringBuilder sb = new();
+        StringBuilder sb = new StringBuilder();
                 foreach (XmlNode root in data)
                 {
                     // west

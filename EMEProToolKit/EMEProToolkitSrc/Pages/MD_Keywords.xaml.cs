@@ -28,6 +28,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ArcGIS.Desktop.Metadata.Editor.Validation;
+using ArcGIS.Desktop.Metadata;
 
 namespace EMEProToolkit.Pages
 {
@@ -57,5 +58,105 @@ namespace EMEProToolkit.Pages
         {
             AddRecordByTagToLocal(sender, e);
         }
+		    public static readonly DependencyProperty DefaultTitleProperty = DependencyProperty.Register(
+      "DefaultTitle",
+      typeof(string),
+      typeof(MTK_MD_Keywords));
+
+    public static readonly DependencyProperty DefaultLinkageProperty = DependencyProperty.Register(
+      "DefaultLinkage",
+      typeof(string),
+      typeof(MTK_MD_Keywords));
+
+    public string DefaultTitle
+    {
+      get { return (string)this.GetValue(DefaultTitleProperty); }
+      set { this.SetValue(DefaultTitleProperty, value); }
+    }
+
+    public string DefaultLinkage
+    {
+      get { return (string)this.GetValue(DefaultLinkageProperty); }
+      set { this.SetValue(DefaultLinkageProperty, value); }
+    }
+
+    private void MD_Keywords_Loaded(object sender, RoutedEventArgs e)
+    {
+      string profile = null;
+
+      var mdModule = FrameworkApplication.FindModule("esri_metadata_module") as IMetadataEditorHost;
+      if (mdModule != null)
+        profile = mdModule.GetCurrentProfile(this);
+
+      if (profile == null)
+        return;
+
+      bool bINSPIRE = profile.Equals("INSPIRE", System.StringComparison.InvariantCultureIgnoreCase);
+      DefaultTitle = bINSPIRE ? "GEMET - INSPIRE themes, version 1.0" : string.Empty;
+      DefaultLinkage = bINSPIRE ? "http://www.eionet.europa.eu/gemet/inspire_themes" : string.Empty;
+    }
+
+    private MTK_MD_ThemeKeywords _themekeywords = null;
+
+    private void Lookup_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+      //already open?
+      if (_themekeywords != null)
+        return;
+      _themekeywords = new MTK_MD_ThemeKeywords();
+      _themekeywords.Owner = FrameworkApplication.Current.MainWindow;
+      _themekeywords.Closed += (o, args) => { KeywordsWindowClosed(); };
+      _themekeywords.Show();
+    }
+
+    private void KeywordsWindowClosed()
+    {
+      var selectedKeywords = _themekeywords.SelectedKeywords;
+      if (selectedKeywords != null && selectedKeywords.Count > 0)
+      {
+        var keywords = selectedKeywords.Select((k) => k.Label).ToList();
+        object context = Utils.Utils.GetDataContext(this);
+        IEnumerable<XmlNode> nodes = Utils.Utils.GetXmlDataContext(context);
+        if (nodes != null)
+        {
+          var node = nodes.First();
+          var bag = node.SelectSingleNode("bag");
+
+          if (string.IsNullOrWhiteSpace(bag.InnerText))
+          {
+            string newKeywords = string.Join("\n", keywords);
+            bag.InnerText = newKeywords;
+
+            _themekeywords = null;
+
+            return;
+          }
+
+          string newText = bag.InnerText;
+          var originalTextList = newText.Split('\n').ToList();
+          foreach (string kw in keywords)
+          {
+            if (originalTextList.Contains(kw))
+              continue;
+
+            newText += $"\n" + kw;
+          }
+
+          bag.InnerText = newText;
+        }
+      }
+
+      _themekeywords = null;
+    }
+
+    private void OnKeywordsChanged(object sender, TextChangedEventArgs args)
+    {
+      TextBox tb = sender as TextBox;
+      if (tb is null)
+        return;
+
+      bool hasIssue = string.IsNullOrEmpty(tb.Text);
+      tb.SetValue(MetadataRules.HasIssueProperty, hasIssue);
+    }
     }
 }
