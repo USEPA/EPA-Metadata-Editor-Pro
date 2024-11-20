@@ -77,7 +77,7 @@ namespace EMEProToolkit.Pages
 
         public void UpdateThumbnail(object sender, EventArgs e)
         {
-            OpenFileDialog dlg = new();
+      OpenFileDialog dlg = new OpenFileDialog();
             dlg.FileName = ""; // Default file name
             dlg.DefaultExt = ".png"; // Default file extension
             dlg.Filter = "Image Files(*.PNG;*.JPG;*.BMP;*.GIF)|*.PNG;*.JPG;*.BMP;*.GIF|All files (*.*)|*.*";
@@ -91,7 +91,7 @@ namespace EMEProToolkit.Pages
                     try
                     {
                         // fetch via URL
-                        Uri imageUri = new(dlg.FileName);
+            Uri imageUri = new Uri(dlg.FileName);
                         BitmapDecoder bmd = BitmapDecoder.Create(imageUri, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
 
                         // reset width
@@ -103,10 +103,11 @@ namespace EMEProToolkit.Pages
 
                         var mdModule = FrameworkApplication.FindModule("esri_metadata_module") as IMetadataEditorHost;
                         if (mdModule != null)
-
+            {
                         CommitChanges();
                             mdModule.OnUpdateThumbnail(this);
                     }
+          }
                     catch (Exception) { /* noop */ }
                 }
             }
@@ -188,7 +189,7 @@ namespace EMEProToolkit.Pages
                     string base64 = base64imageNode.InnerText;
                     byte[] base64bytes = System.Convert.FromBase64String(base64);
 
-                    MemoryStream ms = new(base64bytes);
+          MemoryStream ms = new MemoryStream(base64bytes);
                     BitmapDecoder bmd = BitmapDecoder.Create(ms, BitmapCreateOptions.None, BitmapCacheOption.None);
 
                     // reset width
@@ -238,10 +239,10 @@ namespace EMEProToolkit.Pages
                 return;
             }
 
-            JpegBitmapEncoder jbe = new();
+      JpegBitmapEncoder jbe = new JpegBitmapEncoder();
             jbe.Frames.Add(BitmapFrame.Create(_thumbnailImage.Source as BitmapSource));
 
-            MemoryStream ms = new();
+      MemoryStream ms = new MemoryStream();
             jbe.Save(ms);
 
             string base64 = System.Convert.ToBase64String(ms.ToArray(), Base64FormattingOptions.InsertLineBreaks);

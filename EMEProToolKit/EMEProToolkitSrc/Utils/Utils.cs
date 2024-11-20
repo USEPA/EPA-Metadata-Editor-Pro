@@ -36,12 +36,17 @@ using System.Reflection;
 
 using ArcGIS.Desktop.Metadata.Editor.Convert;
 using ArcGIS.Desktop.Metadata.Editor;
+using ArcGIS.Desktop.Framework;
 
 namespace EMEProToolkit.Utils
 {
     internal class Utils
     {
         private static ResourceManager _resourceManager;
+
+    public const string LBL_CI_PARTY_ADD_FORMAT = "%LABEL%";
+    public const string LBL_CI_PARTY_FORMAT = "LBL_CI_PARTY_FORMAT";
+    public const string LBL_CI_PARTY_READONLY_FORMAT = "%LABEL%";
 
         /// <summary>
         /// Get an XML node from the current Data Context
@@ -471,7 +476,7 @@ namespace EMEProToolkit.Utils
         /// <returns></returns>
         public static string GeneratePartyKey(XmlNode node)
         {
-            StringBuilder sb = new();
+      StringBuilder sb = new StringBuilder();
 
             //XmlNodeList list = node.SelectNodes("rpIndName | rpOrgName | rpPosName | role//@value");
             XmlNodeList list = node.SelectNodes("rpIndName | rpOrgName | rpPosName | rpCntInfo/cntAddress/delPoint | rpCntInfo/cntAddress/city | rpCntInfo/cntAddress/adminArea | rpCntInfo/cntAddress/postCode | rpCntInfo/cntAddress/eMailAdd | rpCntInfo/cntAddress/country//@value | rpCntInfo/cntOnlineRes/linkage | rpCntInfo/cntOnlineRes/protocol | rpCntInfo/cntOnlineRes/appProfile | rpCntInfo/cntOnlineRes/orName | rpCntInfo/cntOnlineRes/orDesc | rpCntInfo/cntOnlineRes/orFunct//@value | rpCntInfo/cntPhone/voiceNum | rpCntInfo/cntPhone/faxNum | rpCntInfo/cntHours | rpCntInfo/cntInstr");
@@ -587,7 +592,7 @@ namespace EMEProToolkit.Utils
             byte[] data = sha1Hasher.ComputeHash(Encoding.Default.GetBytes(input));
 
             // Create a new Stringbuilder to collect the bytes and create a string.
-            StringBuilder sBuilder = new();
+      StringBuilder sBuilder = new StringBuilder();
 
             // Loop through each byte of the hashed data and format each one as a hexadecimal string.
             for (int i = 0; i < data.Length; i++)
@@ -683,15 +688,20 @@ namespace EMEProToolkit.Utils
                 RichTextBox box = sender as RichTextBox;
                 box.Document.Blocks.Clear();
 
-                using (MemoryStream xamlMemoryStream = new(Encoding.UTF8.GetBytes(xaml)))
+        using (MemoryStream xamlMemoryStream = new MemoryStream(Encoding.UTF8.GetBytes(xaml)))
                 {
-                    ParserContext parser = new();
+          ParserContext parser = new ParserContext();
                     parser.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
                     parser.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
 
                     try
                     {
                         Section section = XamlReader.Load(xamlMemoryStream, parser) as Section;
+
+            //Set the FlowDirection property based on the framework's current setting. Block.FlowDirection is not set automatically according to its
+            //documentation.
+            section.FlowDirection = FrameworkApplication.FlowDirection;
+
                         box.Document.Blocks.Add(section);
                     }
                     catch { }
@@ -704,13 +714,13 @@ namespace EMEProToolkit.Utils
             if (null == context)
                 return;
 
-            TextRange tr = new(box.Document.ContentStart, box.Document.ContentEnd);
-            using (MemoryStream ms = new())
+      TextRange tr = new TextRange(box.Document.ContentStart, box.Document.ContentEnd);
+      using (MemoryStream ms = new MemoryStream())
             {
                 tr.Save(ms, DataFormats.Xaml);
 
                 // Need to explictly create this to force a byte-order-mark
-                UTF8Encoding encoder = new(true, true);
+        UTF8Encoding encoder = new UTF8Encoding(true, true);
                 string xamlText = encoder.GetString(ms.ToArray());
                 var html = HtmlFromXamlConverter.ConvertXamlToHtml(xamlText, false);
 
@@ -772,7 +782,7 @@ namespace EMEProToolkit.Utils
         public static string GenerateLabel(string anchorBase, XmlNode childNode)
         {
             // new string builder
-            StringBuilder sb = new(anchorBase);
+      StringBuilder sb = new StringBuilder(anchorBase);
 
             // if passed a null childNode
             if (null == childNode)

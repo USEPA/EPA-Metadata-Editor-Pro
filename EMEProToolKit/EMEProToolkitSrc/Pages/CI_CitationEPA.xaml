@@ -197,7 +197,7 @@
                                 AncestorType={x:Type ContentPresenter}},
                                 Mode=OneWayToSource}" LastChildFill="True">
                               <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}">
-                                <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                                <Image Style="{DynamicResource DeleteImageStyle}" Source="{DynamicResource GenericDeleteRed16}"/>
                               </Button>
                               <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{x:Static r:Resources.LBL_CONT_ONRES}"/>
                             </DockPanel>
@@ -217,7 +217,7 @@
                       <DataTemplate>
                         <Button Tag="OnlineRes" Click="AddRecordByTag" Style="{DynamicResource AddButton}">
                           <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                            <Image Style="{DynamicResource AddImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericAddGreen16.png"/>
+                            <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
                             <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_ADD_ONLINE_RES}"/>
                           </StackPanel>
                         </Button>
@@ -241,14 +241,14 @@
                               <ListBox.ItemTemplate>
                                 <DataTemplate>
                                   <Button Tag="PresForm_Parent" Click="AddRecordByTagToLocal" Style="{DynamicResource ImageOnlyButton}">
-                                    <Image Style="{DynamicResource AddImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericAddGreen16.png"/>
+                                    <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
                                   </Button>
                                 </DataTemplate>
                               </ListBox.ItemTemplate>
                             </ListBox>
                             <!-- delete -->
                             <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource ImageOnlyButton}">
-                              <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                              <Image Style="{DynamicResource DeleteImageStyle}" Source="{DynamicResource GenericDeleteRed16}"/>
                             </Button>
                           </StackPanel>
 
@@ -266,7 +266,7 @@
                       <DataTemplate>
                         <Button Tag="PresForm" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}">
                           <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                            <Image Style="{DynamicResource AddImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericAddGreen16.png"/>
+                            <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
                             <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_CI_NEW_PRESFORM}"/>
                           </StackPanel>
                         </Button>
@@ -295,7 +295,7 @@
                                 AncestorType={x:Type ContentPresenter}},
                                 Mode=OneWayToSource}" LastChildFill="True">
                               <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}">
-                                <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                                <Image Style="{DynamicResource DeleteImageStyle}" Source="{DynamicResource GenericDeleteRed16}"/>
                               </Button>
                               <Label Style="{DynamicResource EditorHExpanderLabel}" Content="{x:Static r:Resources.LBL_IDENTIFIERS}"/>
                             </DockPanel>
@@ -312,7 +312,7 @@
                   <!-- ADD Identifier -->
                   <Button Tag="Identifier" Click="AddRecordByTagToLocal" Style="{DynamicResource AddButton}">
                     <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                      <Image Style="{DynamicResource AddImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericAddGreen16.png"/>
+                      <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
                       <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_ADD_ID}"/>
                     </StackPanel>
                   </Button>
@@ -545,7 +545,7 @@
                                 AncestorType={x:Type ContentPresenter}},
                                 Mode=OneWayToSource}" LastChildFill="True">
                               <Button DockPanel.Dock="Right" Click="DeleteItem" Style="{DynamicResource DeleteButton}">
-                                <Image Style="{DynamicResource DeleteImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericDeleteRed16.png"/>
+                                <Image Style="{DynamicResource DeleteImageStyle}" Source="{DynamicResource GenericDeleteRed16}"/>
                               </Button>
                               <Label Style="{DynamicResource EditorHExpanderSimpleLabel}" Content="{x:Static r:Resources.LBL_CI_PARTY}"/>
                               <Label Style="{DynamicResource EditorHExpanderLabel}"  Content="{Binding ElementName=responsibleParty, Path=DefaultValue, Mode=TwoWay}"/>
@@ -570,7 +570,7 @@
               <!-- ADD CONTACT -->
               <Button Click="AddRecordByTagToLocal" Tag="Contact" Style="{DynamicResource AddButton}" Visibility="{Binding ElementName=Citation, Path=SupressParties, Converter={StaticResource VisibleBoolNotConverter}}">
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                  <Image Style="{DynamicResource AddImageStyle}" Source="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericAddGreen16.png"/>
+                  <Image Style="{DynamicResource AddImageStyle}" Source="{DynamicResource GenericAddGreen16}"/>
                   <TextBlock Style="{DynamicResource ButtonTextStyle}" Text="{x:Static r:Resources.BTN_ADD_CONTACT}"/>
                 </StackPanel>
               </Button>
