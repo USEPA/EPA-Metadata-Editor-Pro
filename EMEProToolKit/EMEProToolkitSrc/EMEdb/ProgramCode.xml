@@ -240,11 +240,6 @@
 		<default>false</default>
 	</ProgramCode>
 	<ProgramCode>
-		<programName>Environmental Justice (Environmental Programs and Management, Superfund)</programName>
-		<pCode>020:041</pCode>
-		<default>false</default>
-	</ProgramCode>
-	<ProgramCode>
 		<programName>Exchange Network (Environmental Programs and Management, Superfund)</programName>
 		<pCode>020:042</pCode>
 		<default>false</default>
