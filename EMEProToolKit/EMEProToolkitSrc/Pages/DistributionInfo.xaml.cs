@@ -12,8 +12,8 @@ limitations under the License.​
 */
 
 using ArcGIS.Desktop.Framework.Dialogs;
-using ArcGIS.Desktop.Metadata;
-using ArcGIS.Desktop.Metadata.Editor.Pages;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;
 using System.Collections.Generic;
 using System.Windows.Controls;
 

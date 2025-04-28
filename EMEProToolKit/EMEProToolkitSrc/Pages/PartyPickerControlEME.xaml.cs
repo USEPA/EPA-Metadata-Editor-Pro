@@ -16,9 +16,8 @@ using System.Net;
 using System.IO;
 using System.Xml;
 using ArcGIS.Desktop.Framework;
-using ArcGIS.Desktop.Metadata.Editor.Pages;
-using ArcGIS.Desktop.Metadata;
-using ArcGIS.Desktop.Metadata.Editor;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor;
 using System.Diagnostics;
 
 

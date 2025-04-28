@@ -18,8 +18,8 @@ using System.Windows.Controls;
 using System.Xml;
 
 using ArcGIS.Desktop.Framework;
-using ArcGIS.Desktop.Metadata;
-using ArcGIS.Desktop.Metadata.Editor.Pages;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;
 using System.Net;
 using System.IO;
 using System.Diagnostics;
@@ -154,7 +154,7 @@ namespace EMEProToolkit.Pages
                 MessageBoxImage icon = MessageBoxImage.Warning;
 
                 // show dialog
-                MessageBoxResult result = ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show(EMEProToolkit.Properties.Resources.LBL_CM_Confirm, EMEProToolkit.Properties.Resources.LBL_CM_ConfirmTitle, button, icon);
+                MessageBoxResult result = ArcGIS.Desktop.Internal.Framework.DialogManager.ShowMessageBox(EMEProToolkit.Properties.Resources.LBL_CM_Confirm, EMEProToolkit.Properties.Resources.LBL_CM_ConfirmTitle, button, icon);
 
                 switch (result)
                 {

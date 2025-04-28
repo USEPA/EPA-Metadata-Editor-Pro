@@ -11,10 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.​
 */
 using ArcGIS.Desktop.Framework;
-using ArcGIS.Desktop.Metadata.Pages.Converters;
-using ArcGIS.Desktop.Metadata;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages.Converters;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor;
 using ArcGIS.Desktop.Metadata.Events;
-using ArcGIS.Desktop.Metadata.Editor.Pages;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;
 
 using System;
 using System.Collections;
@@ -41,6 +41,7 @@ namespace EMEProToolkit.Pages
             get { return EMEProToolkit.Properties.Resources.CFG_LBL_GEOPROCESSING; }
         }
     }
+
     /// <summary>
     /// Interaction logic for MTK_GeoprocessingHistory.xaml
     /// </summary>

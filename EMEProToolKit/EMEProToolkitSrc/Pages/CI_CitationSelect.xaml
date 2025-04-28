@@ -7,11 +7,11 @@
              xmlns:tp="clr-namespace:EMEProToolkit.Pages"
              xmlns:tu="clr-namespace:EMEProToolkit.Utils"
              xmlns:r="clr-namespace:EMEProToolkit.Properties"
-             xmlns:p="clr-namespace:ArcGIS.Desktop.Metadata.Editor.Pages;assembly=ArcGIS.Desktop.Metadata"
-             xmlns:v="clr-namespace:ArcGIS.Desktop.Metadata.Editor.Validation;assembly=ArcGIS.Desktop.Metadata"
-             xmlns:e="clr-namespace:ArcGIS.Desktop.Metadata.Editor;assembly=ArcGIS.Desktop.Metadata"             
-             xmlns:controls="clr-namespace:ArcGIS.Desktop.Metadata.Editor.Controls;assembly=ArcGIS.Desktop.Metadata"             
-             xmlns:converters="clr-namespace:ArcGIS.Desktop.Metadata.Pages.Converters;assembly=ArcGIS.Desktop.Metadata" 
+             xmlns:p="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:v="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Validation;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:e="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor;assembly=ArcGIS.Desktop.Metadata"             
+             xmlns:controls="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Controls;assembly=ArcGIS.Desktop.Metadata"             
+             xmlns:converters="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages.Converters;assembly=ArcGIS.Desktop.Metadata" 
              Loaded="FillXml">
   <UserControl.Resources>
     <!--
@@ -129,10 +129,10 @@
       </Setter>
     </Style>
 
-    <p:ExpandVisibleConverter x:Key="ExpandConverter"/>
-    <p:VisibleBoolNotConverter x:Key="VisibleBoolNotConverter"/>
-    <p:VisibleBoolConverter x:Key="VisibleBoolConverter"/>
-    <p:VisibleEmptyConverter x:Key="VisibleEmptyConverter"/>
+    <converters:ExpandVisibleConverter x:Key="ExpandConverter"/>
+    <converters:VisibleBoolNotConverter x:Key="VisibleBoolNotConverter"/>
+    <converters:VisibleBoolConverter x:Key="VisibleBoolConverter"/>
+    <converters:VisibleEmptyConverter x:Key="VisibleEmptyConverter"/>
 
     <e:Codelists x:Key="PresentationForm" CodelistName="PresentationForm"/>
 

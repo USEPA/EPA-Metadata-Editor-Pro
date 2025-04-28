@@ -3,14 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:t="clr-namespace:EMEProToolkit.Pages"
-             xmlns:r="clr-namespace:EMEProToolkit.Properties"             
-             xmlns:p="clr-namespace:ArcGIS.Desktop.Metadata.Editor.Pages;assembly=ArcGIS.Desktop.Metadata"
-             xmlns:v="clr-namespace:ArcGIS.Desktop.Metadata.Editor.Validation;assembly=ArcGIS.Desktop.Metadata"
-             xmlns:e="clr-namespace:ArcGIS.Desktop.Metadata.Editor;assembly=ArcGIS.Desktop.Metadata"
-             xmlns:mp="clr-namespace:ArcGIS.Desktop.Internal.Metadata.Properties;assembly=ArcGIS.Desktop.Metadata"
-             xmlns:controls="clr-namespace:ArcGIS.Desktop.Metadata.Editor.Controls;assembly=ArcGIS.Desktop.Metadata"
-              xmlns:converters="clr-namespace:ArcGIS.Desktop.Metadata.Pages.Converters;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:t="clr-namespace:EMEProToolkit.Pages"          
+             xmlns:p="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:v="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Validation;assembly=ArcGIS.Desktop.Metadata"
+             xmlns:e="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor;assembly=ArcGIS.Desktop.Metadata"
+              xmlns:r="clr-namespace:ArcGIS.Desktop.Internal.Metadata.Properties;assembly=ArcGIS.Desktop.Metadata"
+              xmlns:controls="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Controls;assembly=ArcGIS.Desktop.Metadata"
+              xmlns:converters="clr-namespace:ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages.Converters;assembly=ArcGIS.Desktop.Metadata"
               xmlns:controlsPrimitives="http://schemas.actiprosoftware.com/winfx/xaml/shared"
               xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
               xmlns:frameworkControls="clr-namespace:ArcGIS.Desktop.Internal.Framework.Controls;assembly=ArcGIS.Desktop.Framework"
@@ -20,7 +19,6 @@
   <UserControl.Resources>
     <converters:ListBoxItemToAutomationIdConverter x:Key="_lbiToAutoIdConverter"/>
     <!--
-    
       For each lineage process, show a checkbox, setting a flag that indicates if the entry should be exported.
 
       The checkbox is bound to: /metadata/Esri/DataProperties/lineage/Process/@export
@@ -41,7 +39,6 @@
       <Process Name="Metadata Importer FGDC" 
       ToolSource="C:\ArcGIS\Desktop9.4\ArcToolbox\Toolboxes\Conversion Tools.tbx\MetadataImporter" 
       Date="20091012" Time="133518">MetadataImporter c:\ArcGIS\ArcTutor\Metadata\yellowstone\states_xsltt1.xml c:\arcgis\arctutor\metadata\yellowstone\states c:\arcgis\arctutor\metadata\yellowstone\states</Process>
-
     -->
 
     <XmlDataProvider x:Key="XmlRecord" XPath="/" IsAsynchronous="False" IsInitialLoadEnabled="True">
@@ -64,7 +61,7 @@
     <converters:GeoprocessingHistoryToolSourceToNameConverter x:Key="GeoprocessingHistoryToolSourceToNameConverter"/>
     <converters:GeoprocessingHistoryDatetimeConverter x:Key="GeoprocessingHistoryDatetimeConverter"/>
     <converters:GeoprocessingHistoryLastColumnWidthConverter x:Key="GeoprocessingHistoryLastColumnWidthConverter"/>
-    <p:VisibleBoolNotConverter x:Key="VisibleBoolNotConverter"/>
+    <converters:VisibleBoolNotConverter x:Key="VisibleBoolNotConverter"/>
 
     <Style TargetType="Grid" x:Key="HeaderGridStyle">
       <Setter Property="Height" Value="20" />
@@ -234,6 +231,7 @@
   </UserControl.Resources>
 
   <Grid Style="{DynamicResource EditorFrontPageStyle}">
+
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
@@ -242,7 +240,7 @@
 	<!--org header-->
 
     <Label Style="{DynamicResource EditorPageTitle}"
-           Content="{x:Static mp:Resources.SEC_PROCESSHISTORY}"
+           Content="{x:Static r:Resources.SEC_PROCESSHISTORY}"
            Margin="0"
            Grid.Row="0"/>
 
@@ -259,14 +257,14 @@
       <Button Style="{StaticResource Esri_CommandLinkButtonSmall}"
               Background="{DynamicResource Esri_White}"
               Tag="{StaticResource GenericDiscard16}"
-              Content="{x:Static mp:Resources.GeoprocessingHistory_ButtonDelete}"
+              Content="{x:Static r:Resources.GeoprocessingHistory_ButtonDelete}"
               Command="{Binding DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type p:EditorPage}}}"
               x:Name="DeleteButton" AutomationProperties.AutomationId="GeoprocessingHistory_DeleteButton"/>
 
       <Button Style="{StaticResource Esri_CommandLinkButtonSmall}"
               Background="{DynamicResource Esri_White}"
               Tag="{StaticResource TableClearSelection16}"
-              Content="{x:Static mp:Resources.GeoprocessingHistory_ButtonClearSelection}"
+              Content="{x:Static r:Resources.GeoprocessingHistory_ButtonClearSelection}"
               Command="{Binding ClearSelectionCommand, RelativeSource={RelativeSource AncestorType={x:Type p:EditorPage}}}"
               Grid.Column="1"
               x:Name="ClearSelectionButton"
@@ -275,7 +273,7 @@
       <Button Style="{StaticResource Esri_CommandLinkButtonSmall}"
               Background="{DynamicResource Esri_White}"
               Tag="{StaticResource TableSelectAll16}"
-              Content="{x:Static mp:Resources.GeoprocessingHistory_SelectAll}"
+              Content="{x:Static r:Resources.GeoprocessingHistory_SelectAll}"
               Command="{Binding SelectAllCommand, RelativeSource={RelativeSource AncestorType={x:Type p:EditorPage}}}"
               Grid.Column="2"
               x:Name="SelectAllButton"
@@ -300,7 +298,7 @@
             <GridViewColumnHeader x:Name="NameGridViewColumnHeader"
                                   AutomationProperties.AutomationId="GeoprocessingHistory_NameGridViewColumnHeader"
                                   Click="GridViewColumnHeader_Click"
-                                  Tag="{x:Static mp:Resources.GeoprocessingHistory_NameColumn}"/>
+                                  Tag="{x:Static r:Resources.GeoprocessingHistory_NameColumn}"/>
           </GridViewColumn>
 
           <!--Date-->
@@ -316,7 +314,7 @@
             <GridViewColumnHeader x:Name="DatetimeGridViewColumnHeader"
                                   AutomationProperties.AutomationId="GeoprocessingHistory_DatetimeGridViewColumnHeader"
                                   Click="GridViewColumnHeader_Click"
-                                  Tag="{x:Static mp:Resources.GeoprocessingHistory_DatetimeColumn}"/>
+                                  Tag="{x:Static r:Resources.GeoprocessingHistory_DatetimeColumn}"/>
           </GridViewColumn>
 
           <!--Export-->
@@ -324,14 +322,14 @@
             <GridViewColumnHeader x:Name="ExportGridViewColumnHeader"
                                   AutomationProperties.AutomationId="GeoprocessingHistory_ExportGridViewColumnHeader"
                                   Click="GridViewColumnHeader_Click"
-                                  Tag="{x:Static mp:Resources.GeoprocessingHistory_ExportColumn}"/>
+                                  Tag="{x:Static r:Resources.GeoprocessingHistory_ExportColumn}"/>
             <GridViewColumn.CellTemplate>
               <DataTemplate>
                 <Grid Height="22">
-                                    <CheckBox ToolTip="{x:Static mp:Definitions.ESRI_geoprocessingHistory_export}"
+                  <CheckBox ToolTip="{x:Static r:Definitions.ESRI_geoprocessingHistory_export}"
                             IsChecked="{Binding XPath=@export}"
                             Name="ESRI_geoprocessingHistory_export"
-                            Content="{x:Static mp:Resources.LBL_GEOPROCESSING_EXPORT}"/>
+                            Content="{x:Static r:Resources.LBL_GEOPROCESSING_EXPORT}"/>
                 </Grid>
               </DataTemplate>
             </GridViewColumn.CellTemplate>
@@ -352,7 +350,7 @@
             <GridViewColumnHeader x:Name="ToolExecutionGridViewColumnHeader"
                                   AutomationProperties.AutomationId="GeoprocessingHistory_ToolExecutionGridViewColumnHeader"
                                   Click="GridViewColumnHeader_Click"
-                                  Tag="{x:Static mp:Resources.GeoprocessingHistory_ToolExecutionColumn}"/>
+                                  Tag="{x:Static r:Resources.GeoprocessingHistory_ToolExecutionColumn}"/>
             <GridViewColumn.CellTemplate>
               <DataTemplate>
                 <Grid HorizontalAlignment="Left">
@@ -366,7 +364,7 @@
                                                BitmapSource="{DynamicResource EditCopy16}"
                                                VerticalAlignment="Center"
                                                Click="CopyToolExecutionButton_Click"
-                                               ToolTip="{x:Static mp:Resources.GeoprocessingHistory_ButtonCopy}"/>
+                                               ToolTip="{x:Static r:Resources.GeoprocessingHistory_ButtonCopy}"/>
 
 
                   <TextBlock Text="{Binding XPath=.}"
@@ -388,7 +386,7 @@
 
     </ListView>
 
-        <Label Content="{x:Static mp:Resources.LBL_NO_GEO_PROCESS}"
+    <Label Content="{x:Static r:Resources.LBL_NO_GEO_PROCESS}"
            Grid.Row="2"
            VerticalAlignment="Top"
            FontStyle="Italic"

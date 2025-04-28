@@ -18,7 +18,7 @@ using System.Windows;
 using System.Xml;
 using ArcGIS.Desktop.Framework;
 using Newtonsoft.Json.Linq;
-using ArcGIS.Desktop.Metadata.Editor.Pages;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -27,8 +27,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ArcGIS.Desktop.Metadata.Editor.Validation;
-using ArcGIS.Desktop.Metadata;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Validation;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor;
 
 namespace EMEProToolkit.Pages
 {
@@ -103,6 +103,7 @@ namespace EMEProToolkit.Pages
       //already open?
       if (_themekeywords != null)
         return;
+
       _themekeywords = new MTK_MD_ThemeKeywords();
       _themekeywords.Owner = FrameworkApplication.Current.MainWindow;
       _themekeywords.Closed += (o, args) => { KeywordsWindowClosed(); };
