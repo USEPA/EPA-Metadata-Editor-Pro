@@ -13,7 +13,7 @@ limitations under the License.​
 
 using System.Windows.Controls;
 using System.Windows;
-using ArcGIS.Desktop.Metadata.Editor.Pages;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;
 
 namespace EMEProToolkit.Pages
 {

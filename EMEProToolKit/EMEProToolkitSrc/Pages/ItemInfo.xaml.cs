@@ -22,8 +22,8 @@ using System.Xml;
 using Microsoft.Win32;
 
 using ArcGIS.Desktop.Framework;
-using ArcGIS.Desktop.Metadata;
-using ArcGIS.Desktop.Metadata.Editor.Pages;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;
 using System.Windows.Navigation;
 using System.Diagnostics;
 using System.Windows.Documents;
@@ -263,6 +263,7 @@ namespace EMEProToolkit.Pages
                 base64imageNode.InnerText = base64;
             }
         }
+
         public void LoadedThumbnailImage(object sender, RoutedEventArgs e)
         {
             // add me, so I can be called later
