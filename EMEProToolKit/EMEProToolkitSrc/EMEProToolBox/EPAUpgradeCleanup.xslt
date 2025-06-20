@@ -9,34 +9,19 @@
 		<xsl:apply-templates select="node() | @*" />
 	</xsl:template>
 
-	<!-- copy all nodes and attributes in the XML document -->
-	<xsl:template match="node() | @*" priority="0">    
-		<xsl:copy>      
-			<xsl:apply-templates select="node() | @*" />
-		</xsl:copy>
-	</xsl:template>
+	<!-- copy all nodes and attributes in the XML document but re-order by priority -->
+  <xsl:variable name="vOrdered" select="'|mdFileID|dataIdInfo|mdContact|distInfo|dqInfo|'"/>
+  <xsl:template match="metadata" priority="1">
+    <xsl:copy>
+      <xsl:apply-templates select="*[(self::mdFileID | self::dataIdInfo | self::mdContact | self::distInfo | self::dqInfo)]">
+        <xsl:sort select="substring-before($vOrdered, concat('|',name(),'|'))"/>
+      </xsl:apply-templates>
+	  <xsl:apply-templates select="*[not(self::mdFileID | self::dataIdInfo | self::mdContact | self::distInfo | self::dqInfo)]"/>
+    </xsl:copy>
+  </xsl:template>
 
-	<!-- templates below override the default template above that copies all noes and attributes -->
+	<!-- templates below override the default template above that copies all nodes and attributes -->
 	
-	<!-- add mdFileID section including PublishedDocID if it doesn't already exist -->
-	<xsl:template match="metadata" priority="1">
-		<xsl:copy>
-			<xsl:apply-templates select="node() | @*" />
-			<xsl:if test="count (./mdFileID) = 0">
-				<mdFileID><xsl:value-of select="/metadata/Esri/PublishedDocID"/></mdFileID>
-			</xsl:if>
-		</xsl:copy>
-	</xsl:template>
-    
-    <!-- For some strange reason, the UUID is ending up as a useLimitation. Remove it. -->
-	<xsl:template match="/metadata/mdConst" priority="1">
-		<xsl:copy>
-			<xsl:if test="./Consts/useLimit != /metadata/Esri/PublishedDocID">
-				<xsl:apply-templates select="node() | @*" />
-			</xsl:if>
-		</xsl:copy>
-	</xsl:template>    
-
 	<!-- Move legacy "Purpose" value to "Supplemental Information" -->
 	<xsl:template match="metadata/dataIdInfo/idPurp" priority="1">
 		<xsl:copy>
@@ -106,20 +91,27 @@
     </xsl:template> 
     
     <!-- Map "No Confidentiality" to "Unclassified" as security constraint -->
-    <xsl:template match="/metadata/dataIdInfo/resConst/SecConsts" priority="1">
+    <xsl:template match="/metadata/dataIdInfo/resConst/SecConsts/class" priority="1">
 		<xsl:copy>
-			<xsl:apply-templates select="node() | @*" />        
-            <xsl:if test="../../../idinfo/secinfo/secclass = 'No Confidentiality'">
-				<class>
-                    <ClasscationCd value="001">unclassified</ClasscationCd>
-                </class>
-			</xsl:if>
+			<xsl:choose>     
+				<xsl:when test="./ClasscationCd/@value = 'no confidentiality'">
+					<ClasscationCd value="001">unclassified</ClasscationCd>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:apply-templates select="node() | @*" />
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:copy>
-	</xsl:template>  
-    
+	</xsl:template>   
 
     <!-- exclude Legacy elements from the output -->
 	<xsl:template match="Binary | idinfo | dataqual | spdoinfo/indspref | spdoinfo/direct | spdoinfo/ptvctinf/sdtsterm | spdoinfo/ptvctinf/vpfterm | spdoinfo/rastinfo | spref | distinfo | metainfo | Esri/MetaID | Esri/Sync | seqId | MemberName | catFetTyps/*[not(name() = 'genericName')] | scaleDist/uom | dimResol/uom | valUnit/*[not(name() = 'UOM')] | quanValUnit/*[not(name() = 'UOM')] | coordinates | usrDefFreq/*[not(name() = 'duration')] | exTemp/TM_GeometricPrimitive | citId/text() | citIdType | geoBox | geoDesc | MdIdent | RS_Identifier | searchKeys" priority="1" >
 	</xsl:template>
-    
+
+  <xsl:template match="node() | @*" priority="0">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*"/>
+    </xsl:copy>
+  </xsl:template>
+
 </xsl:stylesheet>

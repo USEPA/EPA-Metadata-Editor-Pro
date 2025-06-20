@@ -5,6 +5,7 @@ from arcpy import metadata as md
 import xml.etree.ElementTree as ET
 from copy import deepcopy
 import sys
+from datetime import datetime
 
 class Toolbox(object):
     def __init__(self):
@@ -108,12 +109,15 @@ class upgradeTool(object):
             if output_prefix == "None":
                 output_prefix = 'tmp_'
 
+            now = datetime.now()
+            time_string = now.strftime("%Y%m%dT%H%M%S")
+
             for t in str(Target_Metadata).split(";"):
                 try:
-                    messages.addMessage("target name: {}".format(t))
+                    messages.addMessage(f"target name: {t}")
                     basename = getSafeName(t)
-                    messages.addMessage("base name: {}".format(basename))
-                    output_name = "{}{}.xml".format(output_prefix, basename)
+                    messages.addMessage(f"base name: {basename}")
+                    output_name = f"{output_prefix}{basename}.xml"
                     output_metadata = ""
 
                     tool_file_path = os.path.dirname(os.path.realpath(__file__))
@@ -123,25 +127,29 @@ class upgradeTool(object):
                     # Test that this metadata hasn't already been upgraded
                     root = ET.fromstring(source_md.xml)
 
+                    uuid_xpath = "Esri/PublishedDocID"
+                    uuid_value = ""
+                    for e in root.findall(uuid_xpath):
+                        uuid_value = e.text
+
+                    original_name = f"{basename}_{time_string}_original_.xml"
+                    upgrade_name = f"{basename}_{time_string}_upgradeOnly_.xml"
+                    clean_name = f"{basename}_{time_string}_upgradeClean_.xml"
+                    source_md.saveAsXML(os.path.join(scratch_folder, original_name))
+
                     # if no ArcGIS Elements - metadata has not been upgraded yet
                     if not any((root.findall('Esri/ArcGISFormat'), root.findall('mdStanName'))):
-                        messages.addMessage("Upgrading the metadata for {}".format(t))
+                        messages.addMessage(f"Upgrading the metadata for {t}")
                         # Process: Upgrade Metadata
                         source_md.upgrade('FGDC_CSDGM')
+                        source_md.saveAsXML(os.path.join(scratch_folder, upgrade_name))
+                        source_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, clean_name), EPAUpgradeCleanup_xslt)
+                        messages.addMessage(f'Backups of the source metadata placed at: {scratch_folder} and named the following for additional review {original_name} {upgrade_name} {clean_name}')
 
                     else:
-                        original_name = "{}{}.xml".format('_original_', basename)
-                        clean_name = "{}{}.xml".format('_cleanOnly_', basename)
-                        upgrade_name = "{}{}.xml".format('_upgradeClean_', basename)
-                        source_md.saveAsXML(os.path.join(scratch_folder, original_name))
                         source_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, clean_name), EPAUpgradeCleanup_xslt)
-                        tmp_md = md.Metadata(source_md.uri)
-                        tmp_md.upgrade('FGDC_CSDGM')
-                        tmp_md.saveAsUsingCustomXSLT(os.path.join(scratch_folder, upgrade_name), EPAUpgradeCleanup_xslt)
-
-                        messages.addWarningMessage('*Upgrade process skipped for {} since it is in ArcGIS 1.0 format. Cleaning up legacy elements and preserving the UUID...'.format(t))
-                        messages.addMessage('Backups of the source metadata placed at: {} and named the following for additional review {} {} {}'\
-                                            .format(scratch_folder, clean_name, original_name, upgrade_name))
+                        messages.addMessage(f'Backups of the source metadata placed at: {scratch_folder} and named the following for additional review {original_name} {clean_name}')
+                        messages.addWarningMessage(f'*Upgrade process skipped for {t} since it is in ArcGIS 1.0 format. Cleaning up legacy elements and preserving the UUID...')
 
                     try:
                         final_xml = os.path.join(output_dir, output_name)
@@ -157,8 +165,7 @@ class upgradeTool(object):
                                     parent.remove(e)
                             except Exception as remove_error:
                                 messages.addWarningMessage('Error Removing Legacy Keywords: {}'.format(remove_error))
-                            source_md.xml = ET.tostring(root_temp, encoding='utf8', method='xml')
-
+                        
                         #Fix for EPA Keywords Section
                         messages.addMessage('fixing epa keywords section')
                         try:
@@ -172,7 +179,6 @@ class upgradeTool(object):
                             old_thesaName = root_temp.find(epa_keys_thesaName_xp)
                             if old_thesaName:
                                 messages.addMessage('removing old thesaName')
-                                messages.addMessage(old_thesaName)
                                 epa_keys_parent.remove(old_thesaName)
                             if old_epa_keys_thesaLang:
                                 messages.addMessage('removing old thesaLang')
@@ -214,7 +220,6 @@ class upgradeTool(object):
                             old_thesaName = root_temp.find(place_keys_thesaName_xp)
                             if old_thesaName:
                                 messages.addMessage('removing old thesaName')
-                                messages.addMessage(old_thesaName)
                                 place_keys_parent.remove(old_thesaName)
                             if old_place_keys_thesaLang:
                                 messages.addMessage('removing old thesaLang')
@@ -257,7 +262,6 @@ class upgradeTool(object):
                             old_thesaName = root_temp.find(user_keys_thesaName_xp)
                             if old_thesaName:
                                 messages.addMessage('removing old thesaName')
-                                messages.addMessage(old_thesaName)
                                 user_keys_parent.remove(old_thesaName)
                             if old_user_keys_thesaLang:
                                 messages.addMessage('removing old thesaLang')
@@ -293,7 +297,6 @@ class upgradeTool(object):
                             old_thesaName = root_temp.find(pcode_keys_thesaName_xp)
                             if old_thesaName:
                                 messages.addMessage('removing old thesaName')
-                                messages.addMessage(old_thesaName)
                                 pcode_keys_parent.remove(old_thesaName)
                             if old_pcode_keys_thesaLang:
                                 messages.addMessage('removing old thesaLang')
@@ -326,12 +329,20 @@ class upgradeTool(object):
                                 pcode_keys_parent.append(deepcopy(static_pcode_keys_thesaName_element))
                                 pcode_keys_parent.append(deepcopy(static_pcode_keys_thesaLang_element))
 
+                            # Restore UUID
+                            if uuid_value:
+                                messages.addMessage('restoring UUID')
+                                uuid_elem_string = f"<mdFileID>{uuid_value}</mdFileID>"
+                                uuid_elem = ET.fromstring(uuid_elem_string)
+                                root_temp.append(uuid_elem)
+
                             # apply changes
-                            source_md.xml = ET.tostring(root_temp)
+                            source_md.xml = ET.tostring(root_temp, encoding='utf8', method='xml')
                         except Exception as e:
                             messages.addWarningMessage(e)
 
-                        source_md.saveAsXML(final_xml)
+                        #source_md.saveAsXML(final_xml)
+                        source_md.saveAsUsingCustomXSLT(final_xml, EPAUpgradeCleanup_xslt)
                         output_metadata = final_xml
                         # if overwrite back to source :
                         if overwrite_md == 'true':
@@ -342,7 +353,7 @@ class upgradeTool(object):
                         messages.addWarningMessage(e)
 
                     messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
-                    messages.addMessage("Output: {}".format(output_metadata))
+                    messages.addMessage(f"Output: {output_metadata}")
                 except Exception as e:
                     messages.addWarningMessage(e)
 
