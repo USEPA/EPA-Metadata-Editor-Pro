@@ -1,5 +1,5 @@
 <!--
-Copyright 2019 Esri
+Copyright 2022 Esri
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -93,7 +93,6 @@ limitations under the License.​
                 <ListBox.ItemTemplate>
                   <DataTemplate>
                     <Border Style="{DynamicResource EditorBorder2Style}">
-                      <!--<Expander Style="{DynamicResource EditorExpander2Style}" IsExpanded="{Binding XPath=@editorExpand, Mode=TwoWay}">-->
                       <Expander Style="{DynamicResource EditorExpander2Style}" 
                                 AutomationProperties.AutomationId="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource _lbiToAutoIdConverter}, ConverterParameter=ResourceCitationContact_ContactGroup}">
                         <Expander.Header>

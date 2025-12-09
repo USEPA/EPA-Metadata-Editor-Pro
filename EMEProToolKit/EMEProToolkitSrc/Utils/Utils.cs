@@ -1,5 +1,5 @@
 /*
-Copyright 2019 Esri
+Copyright 2022 Esri
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -10,33 +10,33 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.​
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Resources;
-using System.Xml.Linq;
-using System.Windows.Resources;
-using System.Windows;
-using System.IO;
-using System.Web;
-using System.Threading;
-using System.Xml;
-using System.Windows.Data;
-using System.Windows.Controls;
-using System.Collections;
-using Microsoft.Win32;
-using System.Windows.Markup;
-using System.Windows.Documents;
-using System.Xml.Xsl;
-using System.Xml.XPath;
-using System.Text.RegularExpressions;
-using System.Windows.Media;
-using System.Reflection;
 
-using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Convert;
-using ArcGIS.Desktop.Metadata.Editors.ClassicEditor;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Resources;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Web;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Resources;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.XPath;
+using System.Xml.Xsl;
 using ArcGIS.Desktop.Framework;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Convert;
+using Microsoft.Win32;
 
 namespace EMEProToolkit.Utils
 {

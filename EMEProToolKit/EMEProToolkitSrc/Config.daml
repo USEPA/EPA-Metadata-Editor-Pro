@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArcGIS defaultAssembly="EMEProToolkit.dll" defaultNamespace="EMEProToolkit" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Users/thultgre/AppData/Local/Programs/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="2.4" desktopVersion="3.0.0.34555">
+  <AddInInfo id="{8328efcc-345c-4f6b-9b4a-918f9f443771}" version="2.6" desktopVersion="3.6.59527" product="ArcGISPro">
     <Name>EMEProToolkit</Name>
     <Description>US EPA Metadata Editor (EME) AddIn for ArcGIS Pro based off Esri's Metadata Toolkit</Description>
     <Image>Images\AddinDesktop32.png</Image>
     <Author>U.S. EPA Office of Information Management</Author>
     <Company>U.S. EPA Metadata Editor for ArcGIS Pro</Company>
-    <Date>2025-04-28</Date>
+    <Date>2025-12-08</Date>
     <Subject>Content</Subject>
   </AddInInfo>
   <categories>
@@ -353,7 +353,7 @@
                         <exists xpath="vertMaxVal[. != '']" ref="vertMaxVal" />
                       </for>
                       <for xpath="//dataExt//vertEle[* != '']">
-                        <exists xpath="self::*[vertMinVal &lt; vertMaxVal]" ref="vertMinMaxVal vertMinVal,vertMinVal vertMaxVal,vertMaxVal" />
+												<exists xpath="self::*[vertMinVal &lt;= vertMaxVal]" ref="vertMinMaxVal vertMinVal,vertMinVal vertMaxVal,vertMaxVal"/>
                       </for>
                       <!-- contact name, org or role -->
                       <for xpath="//dataExt//GeoDesc//citRespParty">

@@ -1,5 +1,5 @@
 /*
-Copyright 2019 Esri
+Copyright 2022 Esri
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -10,12 +10,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.​
 */
-using ArcGIS.Desktop.Framework;
-using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages.Converters;
-using ArcGIS.Desktop.Metadata.Editors.ClassicEditor;
-using ArcGIS.Desktop.Metadata.Events;
-using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,6 +20,11 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Xml;
+using ArcGIS.Desktop.Framework;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages.Converters;
+using ArcGIS.Desktop.Metadata.Events;
 
 namespace EMEProToolkit.Pages
 {
@@ -43,7 +42,7 @@ namespace EMEProToolkit.Pages
     }
 
     /// <summary>
-    /// Interaction logic for MTK_GeoprocessingHistory.xaml
+    /// Interaction logic for GeoprocessingHistory.xaml
     /// </summary>
     internal partial class MTK_GeoprocessingHistory : EditorPage
     {
@@ -52,7 +51,7 @@ namespace EMEProToolkit.Pages
     private RelayCommand _clearSelectionCommand;
     private RelayCommand _selectAllCommand;
     private Dictionary<GridViewColumnHeader, ListSortDirection> _dictSorting = new Dictionary<GridViewColumnHeader, ListSortDirection>();
-    private bool _canDeleteGPHistory = false;
+        private bool _canDeleteGPHistory = true;
 
     private static readonly DependencyProperty SortDirectionProperty = DependencyProperty.Register("SortDirection", typeof(ListSortDirection), typeof(MTK_GeoprocessingHistory));
     private static readonly DependencyProperty CurrentSortColumnHeaderProperty = DependencyProperty.Register("CurrentSortColumnHeader", typeof(GridViewColumnHeader), typeof(MTK_GeoprocessingHistory));
