@@ -19,7 +19,7 @@ using System.Xml;
 
 using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;
 
-namespace Esri_Metadata_Toolkit_36.Pages
+namespace EMEProToolkit.Pages
 {
     /// <summary>
     /// Interaction logic for MTK_EX_GeographicDescription.xaml
