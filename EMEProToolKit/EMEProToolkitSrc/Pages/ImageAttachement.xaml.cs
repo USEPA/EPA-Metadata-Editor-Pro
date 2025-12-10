@@ -1,5 +1,5 @@
 /*
-Copyright 2019 Esri
+Copyright 2022 Esri
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -12,28 +12,27 @@ limitations under the License.​
 */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.IO;
-using System.Web;
 using System.Xml;
-using System.Windows.Markup;
-using System.Collections;
-
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Metadata.Editors.ClassicEditor;
-using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;
 using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Convert;
+using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;
 
 namespace EMEProToolkit.Pages
 {

@@ -1,5 +1,5 @@
 <!--
-Copyright 2019 Esri
+Copyright 2022 Esri
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -244,6 +244,7 @@ limitations under the License.​
         <ListBox.ItemTemplate>
           <DataTemplate>
             <StackPanel>
+
               <!--keywords-->
               <DockPanel>
                 <!--<Label DockPanel.Dock="Left" Style="{DynamicResource EditorHLabelNoIdentStyle}" Content="{x:Static r:Resources.LBL_ITEMINFO_KEY}" FontWeight="Bold"/>-->
@@ -413,7 +414,8 @@ limitations under the License.​
                         <controls:DoubleSlider Grid.Row="0" Grid.Column="1" x:Name="doubleSlider"
                                                                        LowerValue="{Binding XPath=Esri/scaleRange/minScale, Mode=TwoWay, Converter={StaticResource sliderConverter}, ConverterParameter=xml}"
                                                                        UpperValue="{Binding XPath=Esri/scaleRange/maxScale, Mode=TwoWay, Converter={StaticResource sliderConverter}, ConverterParameter=xml}"
-                                                                       Minimum="0" Maximum="6"/>
+                            Minimum="0"
+                            Maximum="6"/>
                       </Grid>
                     </StackPanel>
                   </DataTemplate>

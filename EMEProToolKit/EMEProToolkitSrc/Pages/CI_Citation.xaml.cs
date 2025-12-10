@@ -1,5 +1,5 @@
 /*
-Copyright 2019 Esri
+Copyright 2022 Esri
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -18,6 +18,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml;
+
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Metadata.Editors.ClassicEditor;
 using ArcGIS.Desktop.Metadata.Editors.ClassicEditor.Pages;
