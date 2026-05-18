@@ -77,7 +77,7 @@ These geospatial data and corresponding cartographic materials have been approve
 			<thesaName>
 				<resTitle>EPA GIS Keyword Thesaurus</resTitle>
 				<date>
-					<pubDate>2007-11-02</pubDate>
+					<pubDate>2007-11-02T12:00:00</pubDate>
 				</date>
 				<citOnlineRes>
 					<linkage>https://www.epa.gov/geospatial/epa-metadata-technical-specification</linkage>
@@ -97,7 +97,7 @@ These geospatial data and corresponding cartographic materials have been approve
 			<thesaName>
 				<resTitle>Federal Program Inventory</resTitle>
 				<date>
-					<pubDate>2013-09-16</pubDate>
+					<pubDate>2013-09-16T12:00:00</pubDate>
 				</date>
 				<citOnlineRes>
 					<linkage>https://www.performance.gov/federalprograminventory</linkage>
@@ -113,7 +113,7 @@ These geospatial data and corresponding cartographic materials have been approve
 			<thesaName>
 				<resTitle>EPA Place Names</resTitle>
 				<date>
-					<pubDate>2015-01-31</pubDate>
+					<pubDate>2015-01-31T12:00:00</pubDate>
 				</date>
 				<citOnlineRes>
 					<linkage>https://ofmpub.epa.gov/sor_internet/registry/termreg/searchandretrieve/taxonomies/search.do?search=&amp;searchString=&amp;taxonomyName=WBT%20-%20Geographic%20Locations</linkage>
@@ -148,7 +148,7 @@ These geospatial data and corresponding cartographic materials have been approve
 					<conSpec>
 						<resTitle>EPA Guidance for Geospatially Related Quality Assurance Project Plans</resTitle>
 						<date>
-							<pubDate>2003-03-03</pubDate>
+							<pubDate>2003-03-03T12:00:00</pubDate>
 						</date>
 						<citOnlineRes>
 							<linkage>https://www.epa.gov/geospatial/epa-guidance-geospatially-related-quality-assurance-project-plans</linkage>
