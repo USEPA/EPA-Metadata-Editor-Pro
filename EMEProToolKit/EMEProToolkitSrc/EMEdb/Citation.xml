@@ -43,7 +43,7 @@
   </xs:schema>
   <Citation>
     <origin>US Environmental Protection Agency</origin>
-    <pubdate>2007</pubdate>
+    <pubdate>2007-01-01T12:00:00</pubdate>
     <title>USEPA Geospatial Metadata Sample Title</title>
     <default>true</default>
   </Citation>

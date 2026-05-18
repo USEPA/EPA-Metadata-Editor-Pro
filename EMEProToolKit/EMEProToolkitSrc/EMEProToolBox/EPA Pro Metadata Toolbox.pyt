@@ -187,7 +187,7 @@ class upgradeTool(object):
                             <thesaName xmlns="">
                                 <resTitle>EPA GIS Keyword Thesaurus</resTitle>
                                 <date>
-                                    <pubDate>2007-11-02</pubDate>
+                                    <pubDate>2007-11-02T12:00:00</pubDate>
                                 </date>
                                 <citOnlineRes xmlns="">
                                     <linkage>https://ofmpub.epa.gov/sor_internet/registry/termreg/searchandretrieve/taxonomies/search.do?search=&amp;searchString=&amp;taxonomyName=WBT%20-%20Geographic%20Locations</linkage>
@@ -228,7 +228,7 @@ class upgradeTool(object):
                             <thesaName xmlns="">
                                 <resTitle>EPA Place Names</resTitle>
                                 <date>
-                                    <pubDate>2015-01-31T00:00:00</pubDate>
+                                    <pubDate>2015-01-31T12:00:00</pubDate>
                                 </date>
                                 <citOnlineRes xmlns="">
                                     <linkage>https://ofmpub.epa.gov/sor_internet/registry/termreg/searchandretrieve/taxonomies/search.do?search=&amp;searchString=&amp;taxonomyName=WBT%20-%20Geographic%20Locations</linkage>
@@ -270,7 +270,7 @@ class upgradeTool(object):
                             <thesaName>
                                 <resTitle>User</resTitle>
                                 <date>
-                                    <pubDate>2020-11-18</pubDate>
+                                    <pubDate>2020-11-18T12:00:00</pubDate>
                                 </date>
                             </thesaName>
                             '''
@@ -305,7 +305,7 @@ class upgradeTool(object):
                             <thesaName>
                                 <resTitle>Federal Program Inventory</resTitle>
                                 <date>
-                                    <pubDate>2013-09-16</pubDate>
+                                    <pubDate>2013-09-16T12:00:00</pubDate>
                                 </date>
                                 <citOnlineRes>
                                     <linkage>https://www.performance.gov/federalprograminventory</linkage>
@@ -1220,7 +1220,7 @@ class editDates(object):
                     editElem = editElement()
                     editParams = editElem.getParameterInfo()
                     this_Metadata = editParams[0]
-                    this_Metadata.value = readXML(t, messages)
+                    this_Metadata.value = t
                     Xpath_Expression = editParams[1]
                     Xpath_Expression.value = dateXpath
                     New_Value = editParams[2]
@@ -1228,7 +1228,6 @@ class editDates(object):
 
                     editElem.execute([this_Metadata,Xpath_Expression,New_Value],messages)
 
-                    writeXML(this_Metadata, t, messages)
                 except Exception as e:
                     messages.addWarningMessage(e)
         except Exception as ee:
