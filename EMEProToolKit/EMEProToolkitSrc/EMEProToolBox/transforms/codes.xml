@@ -1,0 +1,2555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<codes>
+  <countryCodes>
+    <country alpha2="AF" alpha3="AFG" displayName="Afghanistan">
+      <name>afghanistan</name>
+    </country>
+    <country alpha2="AX" alpha3="ALA" displayName="Åland Islands">
+      <name>aland islands</name>
+    </country>
+    <country alpha2="AL" alpha3="ALB" displayName="Albania">
+      <name>albania</name>
+    </country>
+    <country alpha2="DZ" alpha3="DZA" displayName="Algeria">
+      <name>algeria</name>
+    </country>
+    <country alpha2="AS" alpha3="ASM" displayName="American Samoa">
+      <name>american samoa</name>
+    </country>
+    <country alpha2="AD" alpha3="AND" displayName="Andorra">
+      <name>andorra</name>
+    </country>
+    <country alpha2="AO" alpha3="AGO" displayName="Angola">
+      <name>angola</name>
+    </country>
+    <country alpha2="AI" alpha3="AIA" displayName="Anguilla">
+      <name>anguilla</name>
+    </country>
+    <country alpha2="AQ" alpha3="ATA" displayName="Antarctica">
+      <name>antarctica</name>
+    </country>
+    <country alpha2="AG" alpha3="ATG" displayName="Antigua and Barbuda">
+      <name>antigua and barbuda</name>
+    </country>
+    <country alpha2="AR" alpha3="ARG" displayName="Argentina">
+      <name>argentina</name>
+    </country>
+    <country alpha2="AM" alpha3="ARM" displayName="Armenia">
+      <name>armenia</name>
+    </country>
+    <country alpha2="AW" alpha3="ABW" displayName="Aruba">
+      <name>aruba</name>
+    </country>
+    <country alpha2="AU" alpha3="AUS" displayName="Australia">
+      <name>australia</name>
+    </country>
+    <country alpha2="AT" alpha3="AUT" displayName="Austria">
+      <name>austria</name>
+    </country>
+    <country alpha2="AZ" alpha3="AZE" displayName="Azerbaijan">
+      <name>azerbaijan</name>
+    </country>
+    <country alpha2="BS" alpha3="BHS" displayName="Bahamas">
+      <name>bahamas</name>
+    </country>
+    <country alpha2="BH" alpha3="BHR" displayName="Bahrain">
+      <name>bahrain</name>
+    </country>
+    <country alpha2="BD" alpha3="BGD" displayName="Bangladesh">
+      <name>bangladesh</name>
+    </country>
+    <country alpha2="BB" alpha3="BRB" displayName="Barbados">
+      <name>barbados</name>
+    </country>
+    <country alpha2="BY" alpha3="BLR" displayName="Belarus">
+      <name>belarus</name>
+    </country>
+    <country alpha2="BE" alpha3="BEL" displayName="Belgium">
+      <name>belgium</name>
+    </country>
+    <country alpha2="BZ" alpha3="BLZ" displayName="Belize">
+      <name>belize</name>
+    </country>
+    <country alpha2="BJ" alpha3="BEN" displayName="Benin">
+      <name>benin</name>
+    </country>
+    <country alpha2="BM" alpha3="BMU" displayName="Bermuda">
+      <name>bermuda</name>
+    </country>
+    <country alpha2="BT" alpha3="BTN" displayName="Bhutan">
+      <name>bhutan</name>
+    </country>
+    <country alpha2="BO" alpha3="BOL" displayName="Bolivia (Plurinational State of)">
+      <name>bolivia plurinational state of</name>
+      <name>bolivia</name>
+      <name>plurinational state of bolivia</name>
+    </country>
+    <country alpha2="BQ" alpha3="BES" displayName="Bonaire, Sint Eustatius and Saba">
+      <name>bonaire sint eustatius and saba</name>
+    </country>
+    <country alpha2="BA" alpha3="BIH" displayName="Bosnia and Herzegovina">
+      <name>bosnia and herzegovina</name>
+    </country>
+    <country alpha2="BW" alpha3="BWA" displayName="Botswana">
+      <name>botswana</name>
+    </country>
+    <country alpha2="BV" alpha3="BVT" displayName="Bouvet Island">
+      <name>bouvet island</name>
+    </country>
+    <country alpha2="BR" alpha3="BRA" displayName="Brazil">
+      <name>brazil</name>
+    </country>
+    <country alpha2="IO" alpha3="IOT" displayName="British Indian Ocean Territory">
+      <name>british indian ocean territory</name>
+    </country>
+    <country alpha2="BN" alpha3="BRN" displayName="Brunei Darussalam">
+      <name>brunei darussalam</name>
+    </country>
+    <country alpha2="BG" alpha3="BGR" displayName="Bulgaria">
+      <name>bulgaria</name>
+    </country>
+    <country alpha2="BF" alpha3="BFA" displayName="Burkina Faso">
+      <name>burkina faso</name>
+    </country>
+    <country alpha2="BI" alpha3="BDI" displayName="Burundi">
+      <name>burundi</name>
+    </country>
+    <country alpha2="CV" alpha3="CPV" displayName="Cabo Verde">
+      <name>cabo verde</name>
+    </country>
+    <country alpha2="KH" alpha3="KHM" displayName="Cambodia">
+      <name>cambodia</name>
+    </country>
+    <country alpha2="CM" alpha3="CMR" displayName="Cameroon">
+      <name>cameroon</name>
+    </country>
+    <country alpha2="CA" alpha3="CAN" displayName="Canada">
+      <name>canada</name>
+    </country>
+    <country alpha2="KY" alpha3="CYM" displayName="Cayman Islands">
+      <name>cayman islands</name>
+    </country>
+    <country alpha2="CF" alpha3="CAF" displayName="Central African Republic">
+      <name>central african republic</name>
+    </country>
+    <country alpha2="TD" alpha3="TCD" displayName="Chad">
+      <name>chad</name>
+    </country>
+    <country alpha2="CL" alpha3="CHL" displayName="Chile">
+      <name>chile</name>
+    </country>
+    <country alpha2="CN" alpha3="CHN" displayName="China">
+      <name>china</name>
+    </country>
+    <country alpha2="CX" alpha3="CXR" displayName="Christmas Island">
+      <name>christmas island</name>
+    </country>
+    <country alpha2="CC" alpha3="CCK" displayName="Cocos (Keeling) Islands">
+      <name>cocos keeling islands</name>
+      <name>cocos islands</name>
+      <name>keeling islands</name>
+    </country>
+    <country alpha2="CO" alpha3="COL" displayName="Colombia">
+      <name>colombia</name>
+    </country>
+    <country alpha2="KM" alpha3="COM" displayName="Comoros">
+      <name>comoros</name>
+    </country>
+    <country alpha2="CG" alpha3="COG" displayName="Congo">
+      <name>congo</name>
+    </country>
+    <country alpha2="CD" alpha3="COD" displayName="Congo (Democratic Republic of the)">
+      <name>congo democratic republic of the</name>
+      <name>congo</name>
+      <name>democratic republic of the congo</name>
+    </country>
+    <country alpha2="CK" alpha3="COK" displayName="Cook Islands">
+      <name>cook islands</name>
+    </country>
+    <country alpha2="CR" alpha3="CRI" displayName="Costa Rica">
+      <name>costa rica</name>
+    </country>
+    <country alpha2="CI" alpha3="CIV" displayName="Côte d'Ivoire">
+      <name>cote divoire</name>
+      <name>ivory coast</name>
+    </country>
+    <country alpha2="HR" alpha3="HRV" displayName="Croatia">
+      <name>croatia</name>
+    </country>
+    <country alpha2="CU" alpha3="CUB" displayName="Cuba">
+      <name>cuba</name>
+    </country>
+    <country alpha2="CW" alpha3="CUW" displayName="Curaçao">
+      <name>curacao</name>
+    </country>
+    <country alpha2="CY" alpha3="CYP" displayName="Cyprus">
+      <name>cyprus</name>
+    </country>
+    <country alpha2="CZ" alpha3="CZE" displayName="Czechia">
+      <name>czechia</name>
+    </country>
+    <country alpha2="DK" alpha3="DNK" displayName="Denmark">
+      <name>denmark</name>
+    </country>
+    <country alpha2="DJ" alpha3="DJI" displayName="Djibouti">
+      <name>djibouti</name>
+    </country>
+    <country alpha2="DM" alpha3="DMA" displayName="Dominica">
+      <name>dominica</name>
+    </country>
+    <country alpha2="DO" alpha3="DOM" displayName="Dominican Republic">
+      <name>dominican republic</name>
+    </country>
+    <country alpha2="EC" alpha3="ECU" displayName="Ecuador">
+      <name>ecuador</name>
+    </country>
+    <country alpha2="EG" alpha3="EGY" displayName="Egypt">
+      <name>egypt</name>
+    </country>
+    <country alpha2="SV" alpha3="SLV" displayName="El Salvador">
+      <name>el salvador</name>
+    </country>
+    <country alpha2="GQ" alpha3="GNQ" displayName="Equatorial Guinea">
+      <name>equatorial guinea</name>
+    </country>
+    <country alpha2="ER" alpha3="ERI" displayName="Eritrea">
+      <name>eritrea</name>
+    </country>
+    <country alpha2="EE" alpha3="EST" displayName="Estonia">
+      <name>estonia</name>
+    </country>
+    <country alpha2="ET" alpha3="ETH" displayName="Ethiopia">
+      <name>ethiopia</name>
+    </country>
+    <country alpha2="FK" alpha3="FLK" displayName="Falkland Islands (Malvinas)">
+      <name>falkland islands malvinas</name>
+      <name>falkland islands</name>
+      <name>malvinas</name>
+    </country>
+    <country alpha2="FO" alpha3="FRO" displayName="Faroe Islands">
+      <name>faroe islands</name>
+    </country>
+    <country alpha2="FJ" alpha3="FJI" displayName="Fiji">
+      <name>fiji</name>
+    </country>
+    <country alpha2="FI" alpha3="FIN" displayName="Finland">
+      <name>finland</name>
+    </country>
+    <country alpha2="FR" alpha3="FRA" displayName="France">
+      <name>france</name>
+    </country>
+    <country alpha2="GF" alpha3="GUF" displayName="French Guiana">
+      <name>french guiana</name>
+    </country>
+    <country alpha2="PF" alpha3="PYF" displayName="French Polynesia">
+      <name>french polynesia</name>
+    </country>
+    <country alpha2="TF" alpha3="ATF" displayName="French Southern Territories">
+      <name>french southern territories</name>
+    </country>
+    <country alpha2="GA" alpha3="GAB" displayName="Gabon">
+      <name>gabon</name>
+    </country>
+    <country alpha2="GM" alpha3="GMB" displayName="Gambia">
+      <name>gambia</name>
+    </country>
+    <country alpha2="GE" alpha3="GEO" displayName="Georgia">
+      <name>georgia</name>
+    </country>
+    <country alpha2="DE" alpha3="DEU" displayName="Germany">
+      <name>germany</name>
+    </country>
+    <country alpha2="GH" alpha3="GHA" displayName="Ghana">
+      <name>ghana</name>
+    </country>
+    <country alpha2="GI" alpha3="GIB" displayName="Gibraltar">
+      <name>gibraltar</name>
+    </country>
+    <country alpha2="GR" alpha3="GRC" displayName="Greece">
+      <name>greece</name>
+    </country>
+    <country alpha2="GL" alpha3="GRL" displayName="Greenland">
+      <name>greenland</name>
+    </country>
+    <country alpha2="GD" alpha3="GRD" displayName="Grenada">
+      <name>grenada</name>
+    </country>
+    <country alpha2="GP" alpha3="GLP" displayName="Guadeloupe">
+      <name>guadeloupe</name>
+    </country>
+    <country alpha2="GU" alpha3="GUM" displayName="Guam">
+      <name>guam</name>
+    </country>
+    <country alpha2="GT" alpha3="GTM" displayName="Guatemala">
+      <name>guatemala</name>
+    </country>
+    <country alpha2="GG" alpha3="GGY" displayName="Guernsey">
+      <name>guernsey</name>
+    </country>
+    <country alpha2="GN" alpha3="GIN" displayName="Guinea">
+      <name>guinea</name>
+    </country>
+    <country alpha2="GW" alpha3="GNB" displayName="Guinea-Bissau">
+      <name>guineabissau</name>
+      <name>guinea bissau</name>
+    </country>
+    <country alpha2="GY" alpha3="GUY" displayName="Guyana">
+      <name>guyana</name>
+    </country>
+    <country alpha2="HT" alpha3="HTI" displayName="Haiti">
+      <name>haiti</name>
+    </country>
+    <country alpha2="HM" alpha3="HMD" displayName="Heard Island and McDonald Islands">
+      <name>heard island and mcdonald islands</name>
+      <name>heard island</name>
+      <name>mcdonald islands</name>
+    </country>
+    <country alpha2="VA" alpha3="VAT" displayName="Holy See">
+      <name>holy see</name>
+      <name>vatican</name>
+    </country>
+    <country alpha2="HN" alpha3="HND" displayName="Honduras">
+      <name>honduras</name>
+    </country>
+    <country alpha2="HK" alpha3="HKG" displayName="Hong Kong">
+      <name>hong kong</name>
+    </country>
+    <country alpha2="HU" alpha3="HUN" displayName="Hungary">
+      <name>hungary</name>
+    </country>
+    <country alpha2="IS" alpha3="ISL" displayName="Iceland">
+      <name>iceland</name>
+    </country>
+    <country alpha2="IN" alpha3="IND" displayName="India">
+      <name>india</name>
+    </country>
+    <country alpha2="ID" alpha3="IDN" displayName="Indonesia">
+      <name>indonesia</name>
+    </country>
+    <country alpha2="IR" alpha3="IRN" displayName="Iran (Islamic Republic of)">
+      <name>iran islamic republic of</name>
+      <name>iran</name>
+      <name>islamic republic of iran</name>
+    </country>
+    <country alpha2="IQ" alpha3="IRQ" displayName="Iraq">
+      <name>iraq</name>
+    </country>
+    <country alpha2="IE" alpha3="IRL" displayName="Ireland">
+      <name>ireland</name>
+    </country>
+    <country alpha2="IM" alpha3="IMN" displayName="Isle of Man">
+      <name>isle of man</name>
+    </country>
+    <country alpha2="IL" alpha3="ISR" displayName="Israel">
+      <name>israel</name>
+    </country>
+    <country alpha2="IT" alpha3="ITA" displayName="Italy">
+      <name>italy</name>
+    </country>
+    <country alpha2="JM" alpha3="JAM" displayName="Jamaica">
+      <name>jamaica</name>
+    </country>
+    <country alpha2="JP" alpha3="JPN" displayName="Japan">
+      <name>japan</name>
+    </country>
+    <country alpha2="JE" alpha3="JEY" displayName="Jersey">
+      <name>jersey</name>
+    </country>
+    <country alpha2="JO" alpha3="JOR" displayName="Jordan">
+      <name>jordan</name>
+    </country>
+    <country alpha2="KZ" alpha3="KAZ" displayName="Kazakhstan">
+      <name>kazakhstan</name>
+    </country>
+    <country alpha2="KE" alpha3="KEN" displayName="Kenya">
+      <name>kenya</name>
+    </country>
+    <country alpha2="KI" alpha3="KIR" displayName="Kiribati">
+      <name>kiribati</name>
+    </country>
+    <country alpha2="KP" alpha3="PRK" displayName="Korea (Democratic People's Republic of)">
+      <name>korea democratic peoples republic of</name>
+      <name>democratic peoples republic of korea</name>
+    </country>
+    <country alpha2="KR" alpha3="KOR" displayName="Korea (Republic of)">
+      <name>korea republic of</name>
+      <name>republic of korea</name>
+    </country>
+    <country alpha2="KW" alpha3="KWT" displayName="Kuwait">
+      <name>kuwait</name>
+    </country>
+    <country alpha2="KG" alpha3="KGZ" displayName="Kyrgyzstan">
+      <name>kyrgyzstan</name>
+    </country>
+    <country alpha2="LA" alpha3="LAO" displayName="Lao People's Democratic Republic">
+      <name>lao peoples democratic republic</name>
+      <name>laos</name>
+    </country>
+    <country alpha2="LV" alpha3="LVA" displayName="Latvia">
+      <name>latvia</name>
+    </country>
+    <country alpha2="LB" alpha3="LBN" displayName="Lebanon">
+      <name>lebanon</name>
+    </country>
+    <country alpha2="LS" alpha3="LSO" displayName="Lesotho">
+      <name>lesotho</name>
+    </country>
+    <country alpha2="LR" alpha3="LBR" displayName="Liberia">
+      <name>liberia</name>
+    </country>
+    <country alpha2="LY" alpha3="LBY" displayName="Libya">
+      <name>libya</name>
+    </country>
+    <country alpha2="LI" alpha3="LIE" displayName="Liechtenstein">
+      <name>liechtenstein</name>
+    </country>
+    <country alpha2="LT" alpha3="LTU" displayName="Lithuania">
+      <name>lithuania</name>
+    </country>
+    <country alpha2="LU" alpha3="LUX" displayName="Luxembourg">
+      <name>luxembourg</name>
+    </country>
+    <country alpha2="MO" alpha3="MAC" displayName="Macao">
+      <name>macao</name>
+    </country>
+    <country alpha2="MK" alpha3="MKD" displayName="Macedonia (the former Yugoslav Republic of)">
+      <name>macedonia the former yugoslav republic of</name>
+      <name>macedonia</name>
+      <name>the former yugoslav republic of macedonia</name>
+    </country>
+    <country alpha2="MG" alpha3="MDG" displayName="Madagascar">
+      <name>madagascar</name>
+    </country>
+    <country alpha2="MW" alpha3="MWI" displayName="Malawi">
+      <name>malawi</name>
+    </country>
+    <country alpha2="MY" alpha3="MYS" displayName="Malaysia">
+      <name>malaysia</name>
+    </country>
+    <country alpha2="MV" alpha3="MDV" displayName="Maldives">
+      <name>maldives</name>
+    </country>
+    <country alpha2="ML" alpha3="MLI" displayName="Mali">
+      <name>mali</name>
+    </country>
+    <country alpha2="MT" alpha3="MLT" displayName="Malta">
+      <name>malta</name>
+    </country>
+    <country alpha2="MH" alpha3="MHL" displayName="Marshall Islands">
+      <name>marshall islands</name>
+    </country>
+    <country alpha2="MQ" alpha3="MTQ" displayName="Martinique">
+      <name>martinique</name>
+    </country>
+    <country alpha2="MR" alpha3="MRT" displayName="Mauritania">
+      <name>mauritania</name>
+    </country>
+    <country alpha2="MU" alpha3="MUS" displayName="Mauritius">
+      <name>mauritius</name>
+    </country>
+    <country alpha2="YT" alpha3="MYT" displayName="Mayotte">
+      <name>mayotte</name>
+    </country>
+    <country alpha2="MX" alpha3="MEX" displayName="Mexico">
+      <name>mexico</name>
+    </country>
+    <country alpha2="FM" alpha3="FSM" displayName="Micronesia (Federated States of)">
+      <name>micronesia federated states of</name>
+      <name>micronesia</name>
+      <name>federated states of micronesia</name>
+    </country>
+    <country alpha2="MD" alpha3="MDA" displayName="Moldova (Republic of)">
+      <name>moldova republic of</name>
+      <name>moldova</name>
+      <name>republic of moldova</name>
+    </country>
+    <country alpha2="MC" alpha3="MCO" displayName="Monaco">
+      <name>monaco</name>
+    </country>
+    <country alpha2="MN" alpha3="MNG" displayName="Mongolia">
+      <name>mongolia</name>
+    </country>
+    <country alpha2="ME" alpha3="MNE" displayName="Montenegro">
+      <name>montenegro</name>
+    </country>
+    <country alpha2="MS" alpha3="MSR" displayName="Montserrat">
+      <name>montserrat</name>
+    </country>
+    <country alpha2="MA" alpha3="MAR" displayName="Morocco">
+      <name>morocco</name>
+    </country>
+    <country alpha2="MZ" alpha3="MOZ" displayName="Mozambique">
+      <name>mozambique</name>
+    </country>
+    <country alpha2="MM" alpha3="MMR" displayName="Myanmar">
+      <name>myanmar</name>
+    </country>
+    <country alpha2="NA" alpha3="NAM" displayName="Namibia">
+      <name>namibia</name>
+    </country>
+    <country alpha2="NR" alpha3="NRU" displayName="Nauru">
+      <name>nauru</name>
+    </country>
+    <country alpha2="NP" alpha3="NPL" displayName="Nepal">
+      <name>nepal</name>
+    </country>
+    <country alpha2="NL" alpha3="NLD" displayName="Netherlands">
+      <name>netherlands</name>
+    </country>
+    <country alpha2="NC" alpha3="NCL" displayName="New Caledonia">
+      <name>new caledonia</name>
+    </country>
+    <country alpha2="NZ" alpha3="NZL" displayName="New Zealand">
+      <name>new zealand</name>
+    </country>
+    <country alpha2="NI" alpha3="NIC" displayName="Nicaragua">
+      <name>nicaragua</name>
+    </country>
+    <country alpha2="NE" alpha3="NER" displayName="Niger">
+      <name>niger</name>
+    </country>
+    <country alpha2="NG" alpha3="NGA" displayName="Nigeria">
+      <name>nigeria</name>
+    </country>
+    <country alpha2="NU" alpha3="NIU" displayName="Niue">
+      <name>niue</name>
+    </country>
+    <country alpha2="NF" alpha3="NFK" displayName="Norfolk Island">
+      <name>norfolk island</name>
+    </country>
+    <country alpha2="MP" alpha3="MNP" displayName="Northern Mariana Islands">
+      <name>northern mariana islands</name>
+    </country>
+    <country alpha2="NO" alpha3="NOR" displayName="Norway">
+      <name>norway</name>
+    </country>
+    <country alpha2="OM" alpha3="OMN" displayName="Oman">
+      <name>oman</name>
+    </country>
+    <country alpha2="PK" alpha3="PAK" displayName="Pakistan">
+      <name>pakistan</name>
+    </country>
+    <country alpha2="PW" alpha3="PLW" displayName="Palau">
+      <name>palau</name>
+    </country>
+    <country alpha2="PS" alpha3="PSE" displayName="Palestine, State of">
+      <name>palestine state of</name>
+      <name>palestine</name>
+      <name>palestinian territory</name>
+    </country>
+    <country alpha2="PA" alpha3="PAN" displayName="Panama">
+      <name>panama</name>
+    </country>
+    <country alpha2="PG" alpha3="PNG" displayName="Papua New Guinea">
+      <name>papua new guinea</name>
+    </country>
+    <country alpha2="PY" alpha3="PRY" displayName="Paraguay">
+      <name>paraguay</name>
+    </country>
+    <country alpha2="PE" alpha3="PER" displayName="Peru">
+      <name>peru</name>
+    </country>
+    <country alpha2="PH" alpha3="PHL" displayName="Philippines">
+      <name>philippines</name>
+    </country>
+    <country alpha2="PN" alpha3="PCN" displayName="Pitcairn">
+      <name>pitcairn</name>
+    </country>
+    <country alpha2="PL" alpha3="POL" displayName="Poland">
+      <name>poland</name>
+    </country>
+    <country alpha2="PT" alpha3="PRT" displayName="Portugal">
+      <name>portugal</name>
+    </country>
+    <country alpha2="PR" alpha3="PRI" displayName="Puerto Rico">
+      <name>puerto rico</name>
+    </country>
+    <country alpha2="QA" alpha3="QAT" displayName="Qatar">
+      <name>qatar</name>
+    </country>
+    <country alpha2="RE" alpha3="REU" displayName="Réunion">
+      <name>reunion</name>
+    </country>
+    <country alpha2="RO" alpha3="ROU" displayName="Romania">
+      <name>romania</name>
+    </country>
+    <country alpha2="RU" alpha3="RUS" displayName="Russian Federation">
+      <name>russian federation</name>
+      <name>russia</name>
+    </country>
+    <country alpha2="RW" alpha3="RWA" displayName="Rwanda">
+      <name>rwanda</name>
+    </country>
+    <country alpha2="BL" alpha3="BLM" displayName="Saint Barthélemy">
+      <name>saint barthelemy</name>
+    </country>
+    <country alpha2="SH" alpha3="SHN" displayName="Saint Helena, Ascension and Tristan da Cunha">
+      <name>saint helena ascension and tristan da cunha</name>
+      <name>saint helena</name>
+      <name>ascension</name>
+      <name>tristan da cunha</name>
+    </country>
+    <country alpha2="KN" alpha3="KNA" displayName="Saint Kitts and Nevis">
+      <name>saint kitts and nevis</name>
+    </country>
+    <country alpha2="LC" alpha3="LCA" displayName="Saint Lucia">
+      <name>saint lucia</name>
+    </country>
+    <country alpha2="MF" alpha3="MAF" displayName="Saint Martin (French part)">
+      <name>saint martin french part</name>
+      <name>saint martin</name>
+    </country>
+    <country alpha2="PM" alpha3="SPM" displayName="Saint Pierre and Miquelon">
+      <name>saint pierre and miquelon</name>
+    </country>
+    <country alpha2="VC" alpha3="VCT" displayName="Saint Vincent and the Grenadines">
+      <name>saint vincent and the grenadines</name>
+    </country>
+    <country alpha2="WS" alpha3="WSM" displayName="Samoa">
+      <name>samoa</name>
+    </country>
+    <country alpha2="SM" alpha3="SMR" displayName="San Marino">
+      <name>san marino</name>
+    </country>
+    <country alpha2="ST" alpha3="STP" displayName="Sao Tome and Principe">
+      <name>sao tome and principe</name>
+    </country>
+    <country alpha2="SA" alpha3="SAU" displayName="Saudi Arabia">
+      <name>saudi arabia</name>
+    </country>
+    <country alpha2="SN" alpha3="SEN" displayName="Senegal">
+      <name>senegal</name>
+    </country>
+    <country alpha2="RS" alpha3="SRB" displayName="Serbia">
+      <name>serbia</name>
+    </country>
+    <country alpha2="SC" alpha3="SYC" displayName="Seychelles">
+      <name>seychelles</name>
+    </country>
+    <country alpha2="SL" alpha3="SLE" displayName="Sierra Leone">
+      <name>sierra leone</name>
+    </country>
+    <country alpha2="SG" alpha3="SGP" displayName="Singapore">
+      <name>singapore</name>
+    </country>
+    <country alpha2="SX" alpha3="SXM" displayName="Sint Maarten (Dutch part)">
+      <name>sint maarten dutch part</name>
+      <name>sint maarten</name>
+    </country>
+    <country alpha2="SK" alpha3="SVK" displayName="Slovakia">
+      <name>slovakia</name>
+    </country>
+    <country alpha2="SI" alpha3="SVN" displayName="Slovenia">
+      <name>slovenia</name>
+    </country>
+    <country alpha2="SB" alpha3="SLB" displayName="Solomon Islands">
+      <name>solomon islands</name>
+    </country>
+    <country alpha2="SO" alpha3="SOM" displayName="Somalia">
+      <name>somalia</name>
+    </country>
+    <country alpha2="ZA" alpha3="ZAF" displayName="South Africa">
+      <name>south africa</name>
+    </country>
+    <country alpha2="GS" alpha3="SGS" displayName="South Georgia and the South Sandwich Islands">
+      <name>south georgia and the south sandwich islands</name>
+    </country>
+    <country alpha2="SS" alpha3="SSD" displayName="South Sudan">
+      <name>south sudan</name>
+    </country>
+    <country alpha2="ES" alpha3="ESP" displayName="Spain">
+      <name>spain</name>
+    </country>
+    <country alpha2="LK" alpha3="LKA" displayName="Sri Lanka">
+      <name>sri lanka</name>
+    </country>
+    <country alpha2="SD" alpha3="SDN" displayName="Sudan">
+      <name>sudan</name>
+    </country>
+    <country alpha2="SR" alpha3="SUR" displayName="Suriname">
+      <name>suriname</name>
+    </country>
+    <country alpha2="SJ" alpha3="SJM" displayName="Svalbard and Jan Mayen">
+      <name>svalbard and jan mayen</name>
+    </country>
+    <country alpha2="SZ" alpha3="SWZ" displayName="Swaziland">
+      <name>swaziland</name>
+    </country>
+    <country alpha2="SE" alpha3="SWE" displayName="Sweden">
+      <name>sweden</name>
+    </country>
+    <country alpha2="CH" alpha3="CHE" displayName="Switzerland">
+      <name>switzerland</name>
+    </country>
+    <country alpha2="SY" alpha3="SYR" displayName="Syrian Arab Republic">
+      <name>syrian arab republic</name>
+    </country>
+    <country alpha2="TW" alpha3="TWN" displayName="Taiwan, Province of China[a]">
+      <name>taiwan province of chinaa</name>
+      <name>taiwan province of china</name>
+      <name>taiwan</name>
+    </country>
+    <country alpha2="TJ" alpha3="TJK" displayName="Tajikistan">
+      <name>tajikistan</name>
+    </country>
+    <country alpha2="TZ" alpha3="TZA" displayName="Tanzania, United Republic of">
+      <name>tanzania united republic of</name>
+      <name>tanzania</name>
+      <name>united republic of tanzania</name>
+    </country>
+    <country alpha2="TH" alpha3="THA" displayName="Thailand">
+      <name>thailand</name>
+    </country>
+    <country alpha2="TL" alpha3="TLS" displayName="Timor-Leste">
+      <name>timorleste</name>
+      <name>timor leste</name>
+    </country>
+    <country alpha2="TG" alpha3="TGO" displayName="Togo">
+      <name>togo</name>
+    </country>
+    <country alpha2="TK" alpha3="TKL" displayName="Tokelau">
+      <name>tokelau</name>
+    </country>
+    <country alpha2="TO" alpha3="TON" displayName="Tonga">
+      <name>tonga</name>
+    </country>
+    <country alpha2="TT" alpha3="TTO" displayName="Trinidad and Tobago">
+      <name>trinidad and tobago</name>
+    </country>
+    <country alpha2="TN" alpha3="TUN" displayName="Tunisia">
+      <name>tunisia</name>
+    </country>
+    <country alpha2="TR" alpha3="TUR" displayName="Turkey">
+      <name>turkey</name>
+    </country>
+    <country alpha2="TM" alpha3="TKM" displayName="Turkmenistan">
+      <name>turkmenistan</name>
+    </country>
+    <country alpha2="TC" alpha3="TCA" displayName="Turks and Caicos Islands">
+      <name>turks and caicos islands</name>
+    </country>
+    <country alpha2="TV" alpha3="TUV" displayName="Tuvalu">
+      <name>tuvalu</name>
+    </country>
+    <country alpha2="UG" alpha3="UGA" displayName="Uganda">
+      <name>uganda</name>
+    </country>
+    <country alpha2="UA" alpha3="UKR" displayName="Ukraine">
+      <name>ukraine</name>
+    </country>
+    <country alpha2="AE" alpha3="ARE" displayName="United Arab Emirates">
+      <name>united arab emirates</name>
+    </country>
+    <country alpha2="GB" alpha3="GBR" displayName="United Kingdom of Great Britain and Northern Ireland">
+      <name>united kingdom of great britain and northern ireland</name>
+      <name>united kingdom</name>
+      <name>great britain</name>
+    </country>
+    <country alpha2="US" alpha3="USA" displayName="United States of America">
+      <name>united states of america</name>
+      <name>united states</name>
+    </country>
+    <country alpha2="UM" alpha3="UMI" displayName="United States Minor Outlying Islands">
+      <name>united states minor outlying islands</name>
+    </country>
+    <country alpha2="UY" alpha3="URY" displayName="Uruguay
+">
+      <name>uruguay</name>
+    </country>
+    <country alpha2="UZ" alpha3="UZB" displayName="Uzbekistan">
+      <name>uzbekistan</name>
+    </country>
+    <country alpha2="VU" alpha3="VUT" displayName="Vanuatu">
+      <name>vanuatu</name>
+    </country>
+    <country alpha2="VE" alpha3="VEN" displayName="Venezuela (Bolivarian Republic of)">
+      <name>venezuela bolivarian republic of</name>
+      <name>venezuela</name>
+      <name>bolivarian republic of venezuela</name>
+    </country>
+    <country alpha2="VN" alpha3="VNM" displayName="Viet Nam">
+      <name>viet nam</name>
+      <name>vietnam</name>
+    </country>
+    <country alpha2="VG" alpha3="VGB" displayName="Virgin Islands (British)">
+      <name>virgin islands british</name>
+      <name>british virgin islands</name>
+    </country>
+    <country alpha2="VI" alpha3="VIR" displayName="Virgin Islands (U.S.)">
+      <name>virgin islands us</name>
+      <name>us virgin islands</name>
+    </country>
+    <country alpha2="WF" alpha3="WLF" displayName="Wallis and Futuna">
+      <name>wallis and futuna</name>
+    </country>
+    <country alpha2="EH" alpha3="ESH" displayName="Western Sahara">
+      <name>western sahara</name>
+    </country>
+    <country alpha2="YE" alpha3="YEM" displayName="Yemen">
+      <name>yemen</name>
+    </country>
+    <country alpha2="ZM" alpha3="ZMB" displayName="Zambia">
+      <name>zambia</name>
+    </country>
+    <country alpha2="ZW" alpha3="ZWE" displayName="Zimbabwe">
+      <name>zimbabwe</name>
+    </country>
+  </countryCodes>
+
+  <languageCodes>
+    <language alpha2="aa" alpha3="aar" alpha3t="" displayName="Afar">
+      <name>afar</name>
+    </language>
+    <language alpha2="ab" alpha3="abk" alpha3t="" displayName="Abkhazian">
+      <name>abkhazian</name>
+    </language>
+    <language alpha2="" alpha3="ace" alpha3t="" displayName="Achinese">
+      <name>achinese</name>
+    </language>
+    <language alpha2="" alpha3="ach" alpha3t="" displayName="Acoli">
+      <name>acoli</name>
+    </language>
+    <language alpha2="" alpha3="ada" alpha3t="" displayName="Adangme">
+      <name>adangme</name>
+    </language>
+    <language alpha2="" alpha3="ady" alpha3t="" displayName="Adyghe; Adygei">
+      <name>adyghe adygei</name>
+      <name>adyghe</name>
+      <name>adygei</name>
+    </language>
+    <language alpha2="" alpha3="afa" alpha3t="" displayName="Afro-Asiatic languages">
+      <name>afroasiatic languages</name>
+      <name>afro asiatic languages</name>
+      <name>afroasiatic</name>
+      <name>afro asiatic</name>
+    </language>
+    <language alpha2="" alpha3="afh" alpha3t="" displayName="Afrihili">
+      <name>afrihili</name>
+    </language>
+    <language alpha2="af" alpha3="afr" alpha3t="" displayName="Afrikaans">
+      <name>afrikaans</name>
+    </language>
+    <language alpha2="" alpha3="ain" alpha3t="" displayName="Ainu">
+      <name>ainu</name>
+    </language>
+    <language alpha2="ak" alpha3="aka" alpha3t="" displayName="Akan">
+      <name>akan</name>
+    </language>
+    <language alpha2="" alpha3="akk" alpha3t="" displayName="Akkadian">
+      <name>akkadian</name>
+    </language>
+    <language alpha2="sq" alpha3="alb" alpha3t="sqi" displayName="Albanian">
+      <name>albanian</name>
+    </language>
+    <language alpha2="" alpha3="ale" alpha3t="" displayName="Aleut">
+      <name>aleut</name>
+    </language>
+    <language alpha2="" alpha3="alg" alpha3t="" displayName="Algonquian languages">
+      <name>algonquian languages</name>
+      <name>algonquian</name>
+    </language>
+    <language alpha2="" alpha3="alt" alpha3t="" displayName="Southern Altai">
+      <name>southern altai</name>
+    </language>
+    <language alpha2="am" alpha3="amh" alpha3t="" displayName="Amharic">
+      <name>amharic</name>
+    </language>
+    <language alpha2="" alpha3="ang" alpha3t="" displayName="English, Old (ca.450-1100)">
+      <name>english old ca4501100</name>
+      <name>english old</name>
+      <name>old english</name>
+    </language>
+    <language alpha2="" alpha3="anp" alpha3t="" displayName="Angika">
+      <name>angika</name>
+    </language>
+    <language alpha2="" alpha3="apa" alpha3t="" displayName="Apache languages">
+      <name>apache languages</name>
+      <name>apache</name>
+    </language>
+    <language alpha2="ar" alpha3="ara" alpha3t="" displayName="Arabic">
+      <name>arabic</name>
+    </language>
+    <language alpha2="" alpha3="arc" alpha3t="" displayName="Official Aramaic (700-300 BCE); Imperial Aramaic (700-300 BCE)">
+      <name>official aramaic 700300 bce imperial aramaic 700300 bce</name>
+      <name>official aramaic</name>
+      <name>imperial aramaic</name>
+    </language>
+    <language alpha2="an" alpha3="arg" alpha3t="" displayName="Aragonese">
+      <name>aragonese</name>
+    </language>
+    <language alpha2="hy" alpha3="arm" alpha3t="hye" displayName="Armenian">
+      <name>armenian</name>
+    </language>
+    <language alpha2="" alpha3="arn" alpha3t="" displayName="Mapudungun; Mapuche">
+      <name>mapudungun mapuche</name>
+      <name>mapudungun</name>
+      <name>mapuche</name>
+    </language>
+    <language alpha2="" alpha3="arp" alpha3t="" displayName="Arapaho">
+      <name>arapaho</name>
+    </language>
+    <language alpha2="" alpha3="art" alpha3t="" displayName="Artificial languages">
+      <name>artificial languages</name>
+      <name>artificial</name>
+    </language>
+    <language alpha2="" alpha3="arw" alpha3t="" displayName="Arawak">
+      <name>arawak</name>
+    </language>
+    <language alpha2="as" alpha3="asm" alpha3t="" displayName="Assamese">
+      <name>assamese</name>
+    </language>
+    <language alpha2="" alpha3="ast" alpha3t="" displayName="Asturian; Bable; Leonese; Asturleonese">
+      <name>asturian bable leonese asturleonese</name>
+      <name>asturian</name>
+      <name>bable</name>
+      <name>leonese</name>
+      <name>asturleonese</name>
+    </language>
+    <language alpha2="" alpha3="ath" alpha3t="" displayName="Athapascan languages">
+      <name>athapascan languages</name>
+      <name>athapascan</name>
+    </language>
+    <language alpha2="" alpha3="aus" alpha3t="" displayName="Australian languages">
+      <name>australian languages</name>
+      <name>australian</name>
+    </language>
+    <language alpha2="av" alpha3="ava" alpha3t="" displayName="Avaric">
+      <name>avaric</name>
+    </language>
+    <language alpha2="ae" alpha3="ave" alpha3t="" displayName="Avestan">
+      <name>avestan</name>
+    </language>
+    <language alpha2="" alpha3="awa" alpha3t="" displayName="Awadhi">
+      <name>awadhi</name>
+    </language>
+    <language alpha2="ay" alpha3="aym" alpha3t="" displayName="Aymara">
+      <name>aymara</name>
+    </language>
+    <language alpha2="az" alpha3="aze" alpha3t="" displayName="Azerbaijani">
+      <name>azerbaijani</name>
+    </language>
+    <language alpha2="" alpha3="bad" alpha3t="" displayName="Banda languages">
+      <name>banda languages</name>
+      <name>banda</name>
+    </language>
+    <language alpha2="" alpha3="bai" alpha3t="" displayName="Bamileke languages">
+      <name>bamileke languages</name>
+      <name>bamileke</name>
+    </language>
+    <language alpha2="ba" alpha3="bak" alpha3t="" displayName="Bashkir">
+      <name>bashkir</name>
+    </language>
+    <language alpha2="" alpha3="bal" alpha3t="" displayName="Baluchi">
+      <name>baluchi</name>
+    </language>
+    <language alpha2="bm" alpha3="bam" alpha3t="" displayName="Bambara">
+      <name>bambara</name>
+    </language>
+    <language alpha2="" alpha3="ban" alpha3t="" displayName="Balinese">
+      <name>balinese</name>
+    </language>
+    <language alpha2="eu" alpha3="baq" alpha3t="eus" displayName="Basque">
+      <name>basque</name>
+    </language>
+    <language alpha2="" alpha3="bas" alpha3t="" displayName="Basa">
+      <name>basa</name>
+    </language>
+    <language alpha2="" alpha3="bat" alpha3t="" displayName="Baltic languages">
+      <name>baltic languages</name>
+      <name>baltic</name>
+    </language>
+    <language alpha2="" alpha3="bej" alpha3t="" displayName="Beja; Bedawiyet">
+      <name>beja bedawiyet</name>
+      <name>beja</name>
+      <name>bedawiyet</name>
+    </language>
+    <language alpha2="be" alpha3="bel" alpha3t="" displayName="Belarusian">
+      <name>belarusian</name>
+    </language>
+    <language alpha2="" alpha3="bem" alpha3t="" displayName="Bemba">
+      <name>bemba</name>
+    </language>
+    <language alpha2="bn" alpha3="ben" alpha3t="" displayName="Bengali">
+      <name>bengali</name>
+    </language>
+    <language alpha2="" alpha3="ber" alpha3t="" displayName="Berber languages">
+      <name>berber languages</name>
+      <name>berber</name>
+    </language>
+    <language alpha2="" alpha3="bho" alpha3t="" displayName="Bhojpuri">
+      <name>bhojpuri</name>
+    </language>
+    <language alpha2="bh" alpha3="bih" alpha3t="" displayName="Bihari languages">
+      <name>bihari languages</name>
+      <name>bihari</name>
+    </language>
+    <language alpha2="" alpha3="bik" alpha3t="" displayName="Bikol">
+      <name>bikol</name>
+    </language>
+    <language alpha2="" alpha3="bin" alpha3t="" displayName="Bini; Edo">
+      <name>bini edo</name>
+      <name>bini</name>
+      <name>edo</name>
+    </language>
+    <language alpha2="bi" alpha3="bis" alpha3t="" displayName="Bislama">
+      <name>bislama</name>
+    </language>
+    <language alpha2="" alpha3="bla" alpha3t="" displayName="Siksika">
+      <name>siksika</name>
+    </language>
+    <language alpha2="" alpha3="bnt" alpha3t="" displayName="Bantu (Other)">
+      <name>bantu other</name>
+      <name>bantu</name>
+    </language>
+    <language alpha2="bs" alpha3="bos" alpha3t="" displayName="Bosnian">
+      <name>bosnian</name>
+    </language>
+    <language alpha2="" alpha3="bra" alpha3t="" displayName="Braj">
+      <name>braj</name>
+    </language>
+    <language alpha2="br" alpha3="bre" alpha3t="" displayName="Breton">
+      <name>breton</name>
+    </language>
+    <language alpha2="" alpha3="btk" alpha3t="" displayName="Batak languages">
+      <name>batak languages</name>
+      <name>batak</name>
+    </language>
+    <language alpha2="" alpha3="bua" alpha3t="" displayName="Buriat">
+      <name>buriat</name>
+    </language>
+    <language alpha2="" alpha3="bug" alpha3t="" displayName="Buginese">
+      <name>buginese</name>
+    </language>
+    <language alpha2="bg" alpha3="bul" alpha3t="" displayName="Bulgarian">
+      <name>bulgarian</name>
+    </language>
+    <language alpha2="my" alpha3="bur" alpha3t="mya" displayName="Burmese">
+      <name>burmese</name>
+    </language>
+    <language alpha2="" alpha3="byn" alpha3t="" displayName="Blin; Bilin">
+      <name>blin bilin</name>
+      <name>blin</name>
+      <name>bilin</name>
+    </language>
+    <language alpha2="" alpha3="cad" alpha3t="" displayName="Caddo">
+      <name>caddo</name>
+    </language>
+    <language alpha2="" alpha3="cai" alpha3t="" displayName="Central American Indian languages">
+      <name>central american indian languages</name>
+      <name>central american indian</name>
+      <name>central american</name>
+    </language>
+    <language alpha2="" alpha3="car" alpha3t="" displayName="Galibi Carib">
+      <name>galibi carib</name>
+      <name>galibi</name>
+      <name>carib</name>
+    </language>
+    <language alpha2="ca" alpha3="cat" alpha3t="" displayName="Catalan; Valencian">
+      <name>catalan valencian</name>
+      <name>catalan</name>
+      <name>valencian</name>
+    </language>
+    <language alpha2="" alpha3="cau" alpha3t="" displayName="Caucasian languages">
+      <name>caucasian languages</name>
+      <name>caucasian</name>
+    </language>
+    <language alpha2="" alpha3="ceb" alpha3t="" displayName="Cebuano">
+      <name>cebuano</name>
+    </language>
+    <language alpha2="" alpha3="cel" alpha3t="" displayName="Celtic languages">
+      <name>celtic languages</name>
+      <name>celtic</name>
+    </language>
+    <language alpha2="ch" alpha3="cha" alpha3t="" displayName="Chamorro">
+      <name>chamorro</name>
+    </language>
+    <language alpha2="" alpha3="chb" alpha3t="" displayName="Chibcha">
+      <name>chibcha</name>
+    </language>
+    <language alpha2="ce" alpha3="che" alpha3t="" displayName="Chechen">
+      <name>chechen</name>
+    </language>
+    <language alpha2="" alpha3="chg" alpha3t="" displayName="Chagatai">
+      <name>chagatai</name>
+    </language>
+    <language alpha2="zh" alpha3="chi" alpha3t="zho" displayName="Chinese">
+      <name>chinese</name>
+    </language>
+    <language alpha2="" alpha3="chk" alpha3t="" displayName="Chuukese">
+      <name>chuukese</name>
+    </language>
+    <language alpha2="" alpha3="chm" alpha3t="" displayName="Mari">
+      <name>mari</name>
+    </language>
+    <language alpha2="" alpha3="chn" alpha3t="" displayName="Chinook jargon">
+      <name>chinook jargon</name>
+      <name>chinook</name>
+    </language>
+    <language alpha2="" alpha3="cho" alpha3t="" displayName="Choctaw">
+      <name>choctaw</name>
+    </language>
+    <language alpha2="" alpha3="chp" alpha3t="" displayName="Chipewyan; Dene Suline">
+      <name>chipewyan dene suline</name>
+      <name>chipewyan</name>
+      <name>dene suline</name>
+      <name>dene</name>
+      <name>suline</name>
+    </language>
+    <language alpha2="" alpha3="chr" alpha3t="" displayName="Cherokee">
+      <name>cherokee</name>
+    </language>
+    <language alpha2="cu" alpha3="chu" alpha3t="" displayName="Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic">
+      <name>church slavic old slavonic church slavonic old bulgarian old church slavonic</name>
+      <name>church slavic</name>
+      <name>old slavonic</name>
+      <name>church slavonic</name>
+      <name>old bulgarian</name>
+      <name>old church slavonic</name>
+      <name>slavonic</name>
+      <name>old slavic</name>
+    </language>
+    <language alpha2="cv" alpha3="chv" alpha3t="" displayName="Chuvash">
+      <name>chuvash</name>
+    </language>
+    <language alpha2="" alpha3="chy" alpha3t="" displayName="Cheyenne">
+      <name>cheyenne</name>
+    </language>
+    <language alpha2="" alpha3="cmc" alpha3t="" displayName="Chamic languages">
+      <name>chamic languages</name>
+      <name>chamic</name>
+    </language>
+    <language alpha2="" alpha3="cop" alpha3t="" displayName="Coptic">
+      <name>coptic</name>
+    </language>
+    <language alpha2="kw" alpha3="cor" alpha3t="" displayName="Cornish">
+      <name>cornish</name>
+    </language>
+    <language alpha2="co" alpha3="cos" alpha3t="" displayName="Corsican">
+      <name>corsican</name>
+    </language>
+    <language alpha2="" alpha3="cpe" alpha3t="" displayName="Creoles and pidgins, English based">
+      <name>creoles and pidgins english based</name>
+      <name>english creole</name>
+      <name>english pidgin</name>
+    </language>
+    <language alpha2="" alpha3="cpf" alpha3t="" displayName="Creoles and pidgins, French-based ">
+      <name>creoles and pidgins frenchbased </name>
+      <name>french creole</name>
+      <name>french pidgin</name>
+    </language>
+    <language alpha2="" alpha3="cpp" alpha3t="" displayName="Creoles and pidgins, Portuguese-based ">
+      <name>creoles and pidgins portuguesebased </name>
+      <name>portuguese creole</name>
+      <name>portuguese pidgin</name>
+    </language>
+    <language alpha2="cr" alpha3="cre" alpha3t="" displayName="Cree">
+      <name>cree</name>
+    </language>
+    <language alpha2="" alpha3="crh" alpha3t="" displayName="Crimean Tatar; Crimean Turkish">
+      <name>crimean tatar crimean turkish</name>
+      <name>crimean tatar</name>
+      <name>crimean turkish</name>
+      <name>crimean</name>
+    </language>
+    <language alpha2="" alpha3="crp" alpha3t="" displayName="Creoles and pidgins ">
+      <name>creoles and pidgins </name>
+      <name>creoles</name>
+      <name>creoles</name>
+    </language>
+    <language alpha2="" alpha3="csb" alpha3t="" displayName="Kashubian">
+      <name>kashubian</name>
+    </language>
+    <language alpha2="" alpha3="cus" alpha3t="" displayName="Cushitic languages">
+      <name>cushitic languages</name>
+      <name>cushitic</name>
+    </language>
+    <language alpha2="cs" alpha3="cze" alpha3t="ces" displayName="Czech">
+      <name>czech</name>
+    </language>
+    <language alpha2="" alpha3="dak" alpha3t="" displayName="Dakota">
+      <name>dakota</name>
+    </language>
+    <language alpha2="da" alpha3="dan" alpha3t="" displayName="Danish">
+      <name>danish</name>
+    </language>
+    <language alpha2="" alpha3="dar" alpha3t="" displayName="Dargwa">
+      <name>dargwa</name>
+    </language>
+    <language alpha2="" alpha3="day" alpha3t="" displayName="Land Dayak languages">
+      <name>land dayak languages</name>
+      <name>land dayak</name>
+      <name>dayak</name>
+    </language>
+    <language alpha2="" alpha3="del" alpha3t="" displayName="Delaware">
+      <name>delaware</name>
+    </language>
+    <language alpha2="" alpha3="den" alpha3t="" displayName="Slave (Athapascan)">
+      <name>slave athapascan</name>
+      <name>slave</name>
+    </language>
+    <language alpha2="" alpha3="dgr" alpha3t="" displayName="Dogrib">
+      <name>dogrib</name>
+    </language>
+    <language alpha2="" alpha3="din" alpha3t="" displayName="Dinka">
+      <name>dinka</name>
+    </language>
+    <language alpha2="dv" alpha3="div" alpha3t="" displayName="Divehi; Dhivehi; Maldivian">
+      <name>divehi dhivehi maldivian</name>
+      <name>divehi</name>
+      <name>dhivehi</name>
+      <name>maldivian</name>
+    </language>
+    <language alpha2="" alpha3="doi" alpha3t="" displayName="Dogri">
+      <name>dogri</name>
+    </language>
+    <language alpha2="" alpha3="dra" alpha3t="" displayName="Dravidian languages">
+      <name>dravidian languages</name>
+      <name>dravidian</name>
+    </language>
+    <language alpha2="" alpha3="dsb" alpha3t="" displayName="Lower Sorbian">
+      <name>lower sorbian</name>
+    </language>
+    <language alpha2="" alpha3="dua" alpha3t="" displayName="Duala">
+      <name>duala</name>
+    </language>
+    <language alpha2="" alpha3="dum" alpha3t="" displayName="Dutch, Middle (ca.1050-1350)">
+      <name>dutch middle ca10501350</name>
+      <name>dutch middle</name>
+      <name>middle dutch</name>
+    </language>
+    <language alpha2="nl" alpha3="dut" alpha3t="nld" displayName="Dutch; Flemish">
+      <name>dutch flemish</name>
+      <name>dutch</name>
+      <name>flemish</name>
+    </language>
+    <language alpha2="" alpha3="dyu" alpha3t="" displayName="Dyula">
+      <name>dyula</name>
+    </language>
+    <language alpha2="dz" alpha3="dzo" alpha3t="" displayName="Dzongkha">
+      <name>dzongkha</name>
+    </language>
+    <language alpha2="" alpha3="efi" alpha3t="" displayName="Efik">
+      <name>efik</name>
+    </language>
+    <language alpha2="" alpha3="egy" alpha3t="" displayName="Egyptian (Ancient)">
+      <name>egyptian ancient</name>
+      <name>ancient egyptian</name>
+    </language>
+    <language alpha2="" alpha3="eka" alpha3t="" displayName="Ekajuk">
+      <name>ekajuk</name>
+    </language>
+    <language alpha2="" alpha3="elx" alpha3t="" displayName="Elamite">
+      <name>elamite</name>
+    </language>
+    <language alpha2="en" alpha3="eng" alpha3t="" displayName="English">
+      <name>english</name>
+    </language>
+    <language alpha2="" alpha3="enm" alpha3t="" displayName="English, Middle (1100-1500)">
+      <name>english middle 11001500</name>
+      <name>english middle</name>
+      <name>middle english</name>
+    </language>
+    <language alpha2="eo" alpha3="epo" alpha3t="" displayName="Esperanto">
+      <name>esperanto</name>
+    </language>
+    <language alpha2="et" alpha3="est" alpha3t="" displayName="Estonian">
+      <name>estonian</name>
+    </language>
+    <language alpha2="ee" alpha3="ewe" alpha3t="" displayName="Ewe">
+      <name>ewe</name>
+    </language>
+    <language alpha2="" alpha3="ewo" alpha3t="" displayName="Ewondo">
+      <name>ewondo</name>
+    </language>
+    <language alpha2="" alpha3="fan" alpha3t="" displayName="Fang">
+      <name>fang</name>
+    </language>
+    <language alpha2="fo" alpha3="fao" alpha3t="" displayName="Faroese">
+      <name>faroese</name>
+    </language>
+    <language alpha2="" alpha3="fat" alpha3t="" displayName="Fanti">
+      <name>fanti</name>
+    </language>
+    <language alpha2="fj" alpha3="fij" alpha3t="" displayName="Fijian">
+      <name>fijian</name>
+    </language>
+    <language alpha2="" alpha3="fil" alpha3t="" displayName="Filipino; Pilipino">
+      <name>filipino pilipino</name>
+      <name>filipino</name>
+      <name>pilipino</name>
+    </language>
+    <language alpha2="fi" alpha3="fin" alpha3t="" displayName="Finnish">
+      <name>finnish</name>
+    </language>
+    <language alpha2="" alpha3="fiu" alpha3t="" displayName="Finno-Ugrian languages">
+      <name>finnougrian languages</name>
+      <name>finnougrian</name>
+    </language>
+    <language alpha2="" alpha3="fon" alpha3t="" displayName="Fon">
+      <name>fon</name>
+    </language>
+    <language alpha2="fr" alpha3="fre" alpha3t="fra" displayName="French">
+      <name>french</name>
+    </language>
+    <language alpha2="" alpha3="frm" alpha3t="" displayName="French, Middle (ca.1400-1600)">
+      <name>french middle ca14001600</name>
+      <name>french middle</name>
+      <name>middle french</name>
+    </language>
+    <language alpha2="" alpha3="fro" alpha3t="" displayName="French, Old (842-ca.1400)">
+      <name>french old 842ca1400</name>
+      <name>french old</name>
+      <name>old french</name>
+    </language>
+    <language alpha2="" alpha3="frr" alpha3t="" displayName="Northern Frisian">
+      <name>northern frisian</name>
+    </language>
+    <language alpha2="" alpha3="frs" alpha3t="" displayName="Eastern Frisian">
+      <name>eastern frisian</name>
+    </language>
+    <language alpha2="fy" alpha3="fry" alpha3t="" displayName="Western Frisian">
+      <name>western frisian</name>
+    </language>
+    <language alpha2="ff" alpha3="ful" alpha3t="" displayName="Fulah">
+      <name>fulah</name>
+    </language>
+    <language alpha2="" alpha3="fur" alpha3t="" displayName="Friulian">
+      <name>friulian</name>
+    </language>
+    <language alpha2="" alpha3="gaa" alpha3t="" displayName="Ga">
+      <name>ga</name>
+    </language>
+    <language alpha2="" alpha3="gay" alpha3t="" displayName="Gayo">
+      <name>gayo</name>
+    </language>
+    <language alpha2="" alpha3="gba" alpha3t="" displayName="Gbaya">
+      <name>gbaya</name>
+    </language>
+    <language alpha2="" alpha3="gem" alpha3t="" displayName="Germanic languages">
+      <name>germanic languages</name>
+      <name>germanic</name>
+    </language>
+    <language alpha2="ka" alpha3="geo" alpha3t="kat" displayName="Georgian">
+      <name>georgian</name>
+    </language>
+    <language alpha2="de" alpha3="ger" alpha3t="deu" displayName="German">
+      <name>german</name>
+    </language>
+    <language alpha2="" alpha3="gez" alpha3t="" displayName="Geez">
+      <name>geez</name>
+    </language>
+    <language alpha2="" alpha3="gil" alpha3t="" displayName="Gilbertese">
+      <name>gilbertese</name>
+    </language>
+    <language alpha2="gd" alpha3="gla" alpha3t="" displayName="Gaelic; Scottish Gaelic">
+      <name>gaelic scottish gaelic</name>
+      <name>gaelic</name>
+      <name>scottish gaelic</name>
+    </language>
+    <language alpha2="ga" alpha3="gle" alpha3t="" displayName="Irish">
+      <name>irish</name>
+    </language>
+    <language alpha2="gl" alpha3="glg" alpha3t="" displayName="Galician">
+      <name>galician</name>
+    </language>
+    <language alpha2="gv" alpha3="glv" alpha3t="" displayName="Manx">
+      <name>manx</name>
+    </language>
+    <language alpha2="" alpha3="gmh" alpha3t="" displayName="German, Middle High (ca.1050-1500)">
+      <name>german middle high ca10501500</name>
+      <name>german middle high</name>
+      <name>middle high german</name>
+    </language>
+    <language alpha2="" alpha3="goh" alpha3t="" displayName="German, Old High (ca.750-1050)">
+      <name>german old high ca7501050</name>
+      <name>german old high</name>
+      <name>old high german</name>
+    </language>
+    <language alpha2="" alpha3="gon" alpha3t="" displayName="Gondi">
+      <name>gondi</name>
+    </language>
+    <language alpha2="" alpha3="gor" alpha3t="" displayName="Gorontalo">
+      <name>gorontalo</name>
+    </language>
+    <language alpha2="" alpha3="got" alpha3t="" displayName="Gothic">
+      <name>gothic</name>
+    </language>
+    <language alpha2="" alpha3="grb" alpha3t="" displayName="Grebo">
+      <name>grebo</name>
+    </language>
+    <language alpha2="" alpha3="grc" alpha3t="" displayName="Greek, Ancient (to 1453)">
+      <name>greek ancient to 1453</name>
+      <name>greek ancient</name>
+      <name>ancient greek</name>
+    </language>
+    <language alpha2="el" alpha3="gre" alpha3t="ell" displayName="Greek, Modern (1453-)">
+      <name>greek modern 1453</name>
+      <name>greek modern</name>
+      <name>modern greek</name>
+    </language>
+    <language alpha2="gn" alpha3="grn" alpha3t="" displayName="Guarani">
+      <name>guarani</name>
+    </language>
+    <language alpha2="" alpha3="gsw" alpha3t="" displayName="Swiss German; Alemannic; Alsatian">
+      <name>swiss german alemannic alsatian</name>
+      <name>swiss german</name>
+      <name>alemannic</name>
+      <name>alsatian</name>
+    </language>
+    <language alpha2="gu" alpha3="guj" alpha3t="" displayName="Gujarati">
+      <name>gujarati</name>
+    </language>
+    <language alpha2="" alpha3="gwi" alpha3t="" displayName="Gwich'in">
+      <name>gwichin</name>
+      <name>gwich in</name>
+    </language>
+    <language alpha2="" alpha3="hai" alpha3t="" displayName="Haida">
+      <name>haida</name>
+    </language>
+    <language alpha2="ht" alpha3="hat" alpha3t="" displayName="Haitian; Haitian Creole">
+      <name>haitian haitian creole</name>
+      <name>haitian</name>
+      <name>haitian creole</name>
+    </language>
+    <language alpha2="ha" alpha3="hau" alpha3t="" displayName="Hausa">
+      <name>hausa</name>
+    </language>
+    <language alpha2="" alpha3="haw" alpha3t="" displayName="Hawaiian">
+      <name>hawaiian</name>
+    </language>
+    <language alpha2="he" alpha3="heb" alpha3t="" displayName="Hebrew">
+      <name>hebrew</name>
+    </language>
+    <language alpha2="hz" alpha3="her" alpha3t="" displayName="Herero">
+      <name>herero</name>
+    </language>
+    <language alpha2="" alpha3="hil" alpha3t="" displayName="Hiligaynon">
+      <name>hiligaynon</name>
+    </language>
+    <language alpha2="" alpha3="him" alpha3t="" displayName="Himachali languages; Western Pahari languages">
+      <name>himachali languages western pahari languages</name>
+      <name>himachali languages</name>
+      <name>himachali</name>
+      <name>western pahari languages</name>
+      <name>western pahari</name>
+      <name>pahari</name>
+    </language>
+    <language alpha2="hi" alpha3="hin" alpha3t="" displayName="Hindi">
+      <name>hindi</name>
+    </language>
+    <language alpha2="" alpha3="hit" alpha3t="" displayName="Hittite">
+      <name>hittite</name>
+    </language>
+    <language alpha2="" alpha3="hmn" alpha3t="" displayName="Hmong; Mong">
+      <name>hmong mong</name>
+      <name>hmong</name>
+      <name>mong</name>
+    </language>
+    <language alpha2="ho" alpha3="hmo" alpha3t="" displayName="Hiri Motu">
+      <name>hiri motu</name>
+    </language>
+    <language alpha2="hr" alpha3="hrv" alpha3t="" displayName="Croatian">
+      <name>croatian</name>
+    </language>
+    <language alpha2="" alpha3="hsb" alpha3t="" displayName="Upper Sorbian">
+      <name>upper sorbian</name>
+    </language>
+    <language alpha2="hu" alpha3="hun" alpha3t="" displayName="Hungarian">
+      <name>hungarian</name>
+    </language>
+    <language alpha2="" alpha3="hup" alpha3t="" displayName="Hupa">
+      <name>hupa</name>
+    </language>
+    <language alpha2="" alpha3="iba" alpha3t="" displayName="Iban">
+      <name>iban</name>
+    </language>
+    <language alpha2="ig" alpha3="ibo" alpha3t="" displayName="Igbo">
+      <name>igbo</name>
+    </language>
+    <language alpha2="is" alpha3="ice" alpha3t="isl" displayName="Icelandic">
+      <name>icelandic</name>
+    </language>
+    <language alpha2="io" alpha3="ido" alpha3t="" displayName="Ido">
+      <name>ido</name>
+    </language>
+    <language alpha2="ii" alpha3="iii" alpha3t="" displayName="Sichuan Yi; Nuosu">
+      <name>sichuan yi nuosu</name>
+      <name>sichuan yi</name>
+      <name>nuosu</name>
+    </language>
+    <language alpha2="" alpha3="ijo" alpha3t="" displayName="Ijo languages">
+      <name>ijo languages</name>
+      <name>ijo</name>
+    </language>
+    <language alpha2="iu" alpha3="iku" alpha3t="" displayName="Inuktitut">
+      <name>inuktitut</name>
+    </language>
+    <language alpha2="ie" alpha3="ile" alpha3t="" displayName="Interlingue; Occidental">
+      <name>interlingue occidental</name>
+      <name>interlingue</name>
+      <name>occidental</name>
+    </language>
+    <language alpha2="" alpha3="ilo" alpha3t="" displayName="Iloko">
+      <name>iloko</name>
+    </language>
+    <language alpha2="ia" alpha3="ina" alpha3t="" displayName="Interlingua (International Auxiliary Language Association)">
+      <name>interlingua international auxiliary language association</name>
+      <name>interlingua</name>
+      <name>international auxiliary language association</name>
+      <name>international auxiliary</name>
+      <name>auxiliary</name>
+    </language>
+    <language alpha2="" alpha3="inc" alpha3t="" displayName="Indic languages">
+      <name>indic languages</name>
+      <name>indic</name>
+    </language>
+    <language alpha2="id" alpha3="ind" alpha3t="" displayName="Indonesian">
+      <name>indonesian</name>
+    </language>
+    <language alpha2="" alpha3="ine" alpha3t="" displayName="Indo-European languages">
+      <name>indoeuropean languages</name>
+      <name>indo european languages</name>
+      <name>indoeuropean</name>
+      <name>indo european</name>
+    </language>
+    <language alpha2="" alpha3="inh" alpha3t="" displayName="Ingush">
+      <name>ingush</name>
+    </language>
+    <language alpha2="ik" alpha3="ipk" alpha3t="" displayName="Inupiaq">
+      <name>inupiaq</name>
+    </language>
+    <language alpha2="" alpha3="ira" alpha3t="" displayName="Iranian languages">
+      <name>iranian languages</name>
+      <name>iranian</name>
+    </language>
+    <language alpha2="" alpha3="iro" alpha3t="" displayName="Iroquoian languages">
+      <name>iroquoian languages</name>
+      <name>iroquoian</name>
+    </language>
+    <language alpha2="it" alpha3="ita" alpha3t="" displayName="Italian">
+      <name>italian</name>
+    </language>
+    <language alpha2="jv" alpha3="jav" alpha3t="" displayName="Javanese">
+      <name>javanese</name>
+    </language>
+    <language alpha2="" alpha3="jbo" alpha3t="" displayName="Lojban">
+      <name>lojban</name>
+    </language>
+    <language alpha2="ja" alpha3="jpn" alpha3t="" displayName="Japanese">
+      <name>japanese</name>
+    </language>
+    <language alpha2="" alpha3="jpr" alpha3t="" displayName="Judeo-Persian">
+      <name>judeopersian</name>
+      <name>judeo persian</name>
+    </language>
+    <language alpha2="" alpha3="jrb" alpha3t="" displayName="Judeo-Arabic">
+      <name>judeoarabic</name>
+      <name>judeo arabic</name>
+    </language>
+    <language alpha2="" alpha3="kaa" alpha3t="" displayName="Kara-Kalpak">
+      <name>karakalpak</name>
+      <name>kara kalpak</name>
+    </language>
+    <language alpha2="" alpha3="kab" alpha3t="" displayName="Kabyle">
+      <name>kabyle</name>
+    </language>
+    <language alpha2="" alpha3="kac" alpha3t="" displayName="Kachin; Jingpho">
+      <name>kachin jingpho</name>
+      <name>kachin</name>
+      <name>jingpho</name>
+    </language>
+    <language alpha2="kl" alpha3="kal" alpha3t="" displayName="Kalaallisut; Greenlandic">
+      <name>kalaallisut greenlandic</name>
+      <name>kalaallisut</name>
+      <name>greenlandic</name>
+    </language>
+    <language alpha2="" alpha3="kam" alpha3t="" displayName="Kamba">
+      <name>kamba</name>
+    </language>
+    <language alpha2="kn" alpha3="kan" alpha3t="" displayName="Kannada">
+      <name>kannada</name>
+    </language>
+    <language alpha2="" alpha3="kar" alpha3t="" displayName="Karen languages">
+      <name>karen languages</name>
+      <name>karen</name>
+    </language>
+    <language alpha2="ks" alpha3="kas" alpha3t="" displayName="Kashmiri">
+      <name>kashmiri</name>
+    </language>
+    <language alpha2="kr" alpha3="kau" alpha3t="" displayName="Kanuri">
+      <name>kanuri</name>
+    </language>
+    <language alpha2="" alpha3="kaw" alpha3t="" displayName="Kawi">
+      <name>kawi</name>
+    </language>
+    <language alpha2="kk" alpha3="kaz" alpha3t="" displayName="Kazakh">
+      <name>kazakh</name>
+    </language>
+    <language alpha2="" alpha3="kbd" alpha3t="" displayName="Kabardian">
+      <name>kabardian</name>
+    </language>
+    <language alpha2="" alpha3="kha" alpha3t="" displayName="Khasi">
+      <name>khasi</name>
+    </language>
+    <language alpha2="" alpha3="khi" alpha3t="" displayName="Khoisan languages">
+      <name>khoisan languages</name>
+      <name>khoisan</name>
+    </language>
+    <language alpha2="km" alpha3="khm" alpha3t="" displayName="Central Khmer">
+      <name>central khmer</name>
+    </language>
+    <language alpha2="" alpha3="kho" alpha3t="" displayName="Khotanese; Sakan">
+      <name>khotanese sakan</name>
+      <name>khotanese</name>
+      <name>sakan</name>
+    </language>
+    <language alpha2="ki" alpha3="kik" alpha3t="" displayName="Kikuyu; Gikuyu">
+      <name>kikuyu gikuyu</name>
+      <name>kikuyu</name>
+      <name>gikuyu</name>
+    </language>
+    <language alpha2="rw" alpha3="kin" alpha3t="" displayName="Kinyarwanda">
+      <name>kinyarwanda</name>
+    </language>
+    <language alpha2="ky" alpha3="kir" alpha3t="" displayName="Kirghiz; Kyrgyz">
+      <name>kirghiz kyrgyz</name>
+      <name>kirghiz</name>
+      <name>kyrgyz</name>
+    </language>
+    <language alpha2="" alpha3="kmb" alpha3t="" displayName="Kimbundu">
+      <name>kimbundu</name>
+    </language>
+    <language alpha2="" alpha3="kok" alpha3t="" displayName="Konkani">
+      <name>konkani</name>
+    </language>
+    <language alpha2="kv" alpha3="kom" alpha3t="" displayName="Komi">
+      <name>komi</name>
+    </language>
+    <language alpha2="kg" alpha3="kon" alpha3t="" displayName="Kongo">
+      <name>kongo</name>
+    </language>
+    <language alpha2="ko" alpha3="kor" alpha3t="" displayName="Korean">
+      <name>korean</name>
+    </language>
+    <language alpha2="" alpha3="kos" alpha3t="" displayName="Kosraean">
+      <name>kosraean</name>
+    </language>
+    <language alpha2="" alpha3="kpe" alpha3t="" displayName="Kpelle">
+      <name>kpelle</name>
+    </language>
+    <language alpha2="" alpha3="krc" alpha3t="" displayName="Karachay-Balkar">
+      <name>karachaybalkar</name>
+      <name>karachay balkar</name>
+    </language>
+    <language alpha2="" alpha3="krl" alpha3t="" displayName="Karelian">
+      <name>karelian</name>
+    </language>
+    <language alpha2="" alpha3="kro" alpha3t="" displayName="Kru languages">
+      <name>kru languages</name>
+      <name>kru</name>
+    </language>
+    <language alpha2="" alpha3="kru" alpha3t="" displayName="Kurukh">
+      <name>kurukh</name>
+    </language>
+    <language alpha2="kj" alpha3="kua" alpha3t="" displayName="Kuanyama; Kwanyama">
+      <name>kuanyama kwanyama</name>
+      <name>kuanyama</name>
+      <name>kwanyama</name>
+    </language>
+    <language alpha2="" alpha3="kum" alpha3t="" displayName="Kumyk">
+      <name>kumyk</name>
+    </language>
+    <language alpha2="ku" alpha3="kur" alpha3t="" displayName="Kurdish">
+      <name>kurdish</name>
+    </language>
+    <language alpha2="" alpha3="kut" alpha3t="" displayName="Kutenai">
+      <name>kutenai</name>
+    </language>
+    <language alpha2="" alpha3="lad" alpha3t="" displayName="Ladino">
+      <name>ladino</name>
+    </language>
+    <language alpha2="" alpha3="lah" alpha3t="" displayName="Lahnda">
+      <name>lahnda</name>
+    </language>
+    <language alpha2="" alpha3="lam" alpha3t="" displayName="Lamba">
+      <name>lamba</name>
+    </language>
+    <language alpha2="lo" alpha3="lao" alpha3t="" displayName="Lao">
+      <name>lao</name>
+    </language>
+    <language alpha2="la" alpha3="lat" alpha3t="" displayName="Latin">
+      <name>latin</name>
+    </language>
+    <language alpha2="lv" alpha3="lav" alpha3t="" displayName="Latvian">
+      <name>latvian</name>
+    </language>
+    <language alpha2="" alpha3="lez" alpha3t="" displayName="Lezghian">
+      <name>lezghian</name>
+    </language>
+    <language alpha2="li" alpha3="lim" alpha3t="" displayName="Limburgan; Limburger; Limburgish">
+      <name>limburgan limburger limburgish</name>
+      <name>limburgan</name>
+      <name>limburger</name>
+      <name>limburgish</name>
+    </language>
+    <language alpha2="ln" alpha3="lin" alpha3t="" displayName="Lingala">
+      <name>lingala</name>
+    </language>
+    <language alpha2="lt" alpha3="lit" alpha3t="" displayName="Lithuanian">
+      <name>lithuanian</name>
+    </language>
+    <language alpha2="" alpha3="lol" alpha3t="" displayName="Mongo">
+      <name>mongo</name>
+    </language>
+    <language alpha2="" alpha3="loz" alpha3t="" displayName="Lozi">
+      <name>lozi</name>
+    </language>
+    <language alpha2="lb" alpha3="ltz" alpha3t="" displayName="Luxembourgish; Letzeburgesch">
+      <name>luxembourgish letzeburgesch</name>
+      <name>luxembourgish</name>
+      <name>letzeburgesch</name>
+    </language>
+    <language alpha2="" alpha3="lua" alpha3t="" displayName="Luba-Lulua">
+      <name>lubalulua</name>
+      <name>luba lulua</name>
+    </language>
+    <language alpha2="lu" alpha3="lub" alpha3t="" displayName="Luba-Katanga">
+      <name>lubakatanga</name>
+      <name>luba katanga</name>
+    </language>
+    <language alpha2="lg" alpha3="lug" alpha3t="" displayName="Ganda">
+      <name>ganda</name>
+    </language>
+    <language alpha2="" alpha3="lui" alpha3t="" displayName="Luiseno">
+      <name>luiseno</name>
+    </language>
+    <language alpha2="" alpha3="lun" alpha3t="" displayName="Lunda">
+      <name>lunda</name>
+    </language>
+    <language alpha2="" alpha3="luo" alpha3t="" displayName="Luo (Kenya and Tanzania)">
+      <name>luo kenya and tanzania</name>
+      <name>luo</name>
+    </language>
+    <language alpha2="" alpha3="lus" alpha3t="" displayName="Lushai">
+      <name>lushai</name>
+    </language>
+    <language alpha2="mk" alpha3="mac" alpha3t="mkd" displayName="Macedonian">
+      <name>macedonian</name>
+    </language>
+    <language alpha2="" alpha3="mad" alpha3t="" displayName="Madurese">
+      <name>madurese</name>
+    </language>
+    <language alpha2="" alpha3="mag" alpha3t="" displayName="Magahi">
+      <name>magahi</name>
+    </language>
+    <language alpha2="mh" alpha3="mah" alpha3t="" displayName="Marshallese">
+      <name>marshallese</name>
+    </language>
+    <language alpha2="" alpha3="mai" alpha3t="" displayName="Maithili">
+      <name>maithili</name>
+    </language>
+    <language alpha2="" alpha3="mak" alpha3t="" displayName="Makasar">
+      <name>makasar</name>
+    </language>
+    <language alpha2="ml" alpha3="mal" alpha3t="" displayName="Malayalam">
+      <name>malayalam</name>
+    </language>
+    <language alpha2="" alpha3="man" alpha3t="" displayName="Mandingo">
+      <name>mandingo</name>
+    </language>
+    <language alpha2="mi" alpha3="mao" alpha3t="mri" displayName="Maori">
+      <name>maori</name>
+    </language>
+    <language alpha2="" alpha3="map" alpha3t="" displayName="Austronesian languages">
+      <name>austronesian languages</name>
+      <name>austronesian</name>
+    </language>
+    <language alpha2="mr" alpha3="mar" alpha3t="" displayName="Marathi">
+      <name>marathi</name>
+    </language>
+    <language alpha2="" alpha3="mas" alpha3t="" displayName="Masai">
+      <name>masai</name>
+    </language>
+    <language alpha2="ms" alpha3="may" alpha3t="msa" displayName="Malay">
+      <name>malay</name>
+    </language>
+    <language alpha2="" alpha3="mdf" alpha3t="" displayName="Moksha">
+      <name>moksha</name>
+    </language>
+    <language alpha2="" alpha3="mdr" alpha3t="" displayName="Mandar">
+      <name>mandar</name>
+    </language>
+    <language alpha2="" alpha3="men" alpha3t="" displayName="Mende">
+      <name>mende</name>
+    </language>
+    <language alpha2="" alpha3="mga" alpha3t="" displayName="Irish, Middle (900-1200)">
+      <name>irish middle 9001200</name>
+      <name>irish middle</name>
+      <name>middle irish</name>
+    </language>
+    <language alpha2="" alpha3="mic" alpha3t="" displayName="Mi'kmaq; Micmac">
+      <name>mikmaq micmac</name>
+      <name>mikmaq</name>
+      <name>mi kmaq</name>
+      <name>micmac</name>
+    </language>
+    <language alpha2="" alpha3="min" alpha3t="" displayName="Minangkabau">
+      <name>minangkabau</name>
+    </language>
+    <language alpha2="" alpha3="mis" alpha3t="" displayName="Uncoded languages">
+      <name>uncoded languages</name>
+      <name>uncoded</name>
+    </language>
+    <language alpha2="" alpha3="mkh" alpha3t="" displayName="Mon-Khmer languages">
+      <name>monkhmer languages</name>
+      <name>mon khmer languages</name>
+      <name>monkhmer</name>
+      <name>mon khmer</name>
+    </language>
+    <language alpha2="mg" alpha3="mlg" alpha3t="" displayName="Malagasy">
+      <name>malagasy</name>
+    </language>
+    <language alpha2="mt" alpha3="mlt" alpha3t="" displayName="Maltese">
+      <name>maltese</name>
+    </language>
+    <language alpha2="" alpha3="mnc" alpha3t="" displayName="Manchu">
+      <name>manchu</name>
+    </language>
+    <language alpha2="" alpha3="mni" alpha3t="" displayName="Manipuri">
+      <name>manipuri</name>
+    </language>
+    <language alpha2="" alpha3="mno" alpha3t="" displayName="Manobo languages">
+      <name>manobo languages</name>
+      <name>manobo</name>
+    </language>
+    <language alpha2="" alpha3="moh" alpha3t="" displayName="Mohawk">
+      <name>mohawk</name>
+    </language>
+    <language alpha2="mn" alpha3="mon" alpha3t="" displayName="Mongolian">
+      <name>mongolian</name>
+    </language>
+    <language alpha2="" alpha3="mos" alpha3t="" displayName="Mossi">
+      <name>mossi</name>
+    </language>
+    <language alpha2="" alpha3="mul" alpha3t="" displayName="Multiple languages">
+      <name>multiple languages</name>
+      <name>multiple</name>
+    </language>
+    <language alpha2="" alpha3="mun" alpha3t="" displayName="Munda languages">
+      <name>munda languages</name>
+      <name>munda</name>
+    </language>
+    <language alpha2="" alpha3="mus" alpha3t="" displayName="Creek">
+      <name>creek</name>
+    </language>
+    <language alpha2="" alpha3="mwl" alpha3t="" displayName="Mirandese">
+      <name>mirandese</name>
+    </language>
+    <language alpha2="" alpha3="mwr" alpha3t="" displayName="Marwari">
+      <name>marwari</name>
+    </language>
+    <language alpha2="" alpha3="myn" alpha3t="" displayName="Mayan languages">
+      <name>mayan languages</name>
+      <name>mayan</name>
+    </language>
+    <language alpha2="" alpha3="myv" alpha3t="" displayName="Erzya">
+      <name>erzya</name>
+    </language>
+    <language alpha2="" alpha3="nah" alpha3t="" displayName="Nahuatl languages">
+      <name>nahuatl languages</name>
+      <name>nahuatl</name>
+    </language>
+    <language alpha2="" alpha3="nai" alpha3t="" displayName="North American Indian languages">
+      <name>north american indian languages</name>
+      <name>north american indian</name>
+      <name>north american</name>
+    </language>
+    <language alpha2="" alpha3="nap" alpha3t="" displayName="Neapolitan">
+      <name>neapolitan</name>
+    </language>
+    <language alpha2="na" alpha3="nau" alpha3t="" displayName="Nauru">
+      <name>nauru</name>
+    </language>
+    <language alpha2="nv" alpha3="nav" alpha3t="" displayName="Navajo; Navaho">
+      <name>navajo navaho</name>
+      <name>navajo</name>
+      <name>navaho</name>
+    </language>
+    <language alpha2="nr" alpha3="nbl" alpha3t="" displayName="Ndebele, South; South Ndebele">
+      <name>ndebele south south ndebele</name>
+      <name>ndebele south</name>
+      <name>south ndebele</name>
+    </language>
+    <language alpha2="nd" alpha3="nde" alpha3t="" displayName="Ndebele, North; North Ndebele">
+      <name>ndebele north north ndebele</name>
+      <name>ndebele north</name>
+      <name>north ndebele</name>
+    </language>
+    <language alpha2="ng" alpha3="ndo" alpha3t="" displayName="Ndonga">
+      <name>ndonga</name>
+    </language>
+    <language alpha2="" alpha3="nds" alpha3t="" displayName="Low German; Low Saxon; German, Low; Saxon, Low">
+      <name>low german low saxon german low saxon low</name>
+      <name>low german</name>
+      <name>low saxon</name>
+      <name>german low</name>
+      <name>saxon low</name>
+    </language>
+    <language alpha2="ne" alpha3="nep" alpha3t="" displayName="Nepali">
+      <name>nepali</name>
+    </language>
+    <language alpha2="" alpha3="new" alpha3t="" displayName="Nepal Bhasa; Newari">
+      <name>nepal bhasa newari</name>
+      <name>nepal bhasa</name>
+      <name>newari</name>
+    </language>
+    <language alpha2="" alpha3="nia" alpha3t="" displayName="Nias">
+      <name>nias</name>
+    </language>
+    <language alpha2="" alpha3="nic" alpha3t="" displayName="Niger-Kordofanian languages">
+      <name>nigerkordofanian languages</name>
+      <name>niger kordofanian languages</name>
+      <name>nigerkordofanian</name>
+      <name>niger kordofanian</name>
+    </language>
+    <language alpha2="" alpha3="niu" alpha3t="" displayName="Niuean">
+      <name>niuean</name>
+    </language>
+    <language alpha2="nn" alpha3="nno" alpha3t="" displayName="Norwegian Nynorsk; Nynorsk, Norwegian">
+      <name>norwegian nynorsk nynorsk norwegian</name>
+      <name>norwegian nynorsk</name>
+      <name>nynorsk norwegian</name>
+      <name>nynorsk</name>
+    </language>
+    <language alpha2="nb" alpha3="nob" alpha3t="" displayName="Bokmål, Norwegian; Norwegian Bokmål">
+      <name>bokmål norwegian norwegian bokmål</name>
+      <name>bokmål norwegian</name>
+      <name>norwegian bokmål</name>
+      <name>bokmål</name>
+    </language>
+    <language alpha2="" alpha3="nog" alpha3t="" displayName="Nogai">
+      <name>nogai</name>
+    </language>
+    <language alpha2="" alpha3="non" alpha3t="" displayName="Norse, Old">
+      <name>norse old</name>
+      <name>old norse</name>
+    </language>
+    <language alpha2="no" alpha3="nor" alpha3t="" displayName="Norwegian">
+      <name>norwegian</name>
+    </language>
+    <language alpha2="" alpha3="nqo" alpha3t="" displayName="N'Ko">
+      <name>nko</name>
+      <name>n ko</name>
+    </language>
+    <language alpha2="" alpha3="nso" alpha3t="" displayName="Pedi; Sepedi; Northern Sotho">
+      <name>pedi sepedi northern sotho</name>
+      <name>pedi</name>
+      <name>sepedi</name>
+      <name>northern sotho</name>
+      <name>sotho northern</name>
+    </language>
+    <language alpha2="" alpha3="nub" alpha3t="" displayName="Nubian languages">
+      <name>nubian languages</name>
+      <name>nubian</name>
+    </language>
+    <language alpha2="" alpha3="nwc" alpha3t="" displayName="Classical Newari; Old Newari; Classical Nepal Bhasa">
+      <name>classical newari old newari classical nepal bhasa</name>
+      <name>classical newari</name>
+      <name>old newari</name>
+      <name>classical nepal bhasa</name>
+    </language>
+    <language alpha2="ny" alpha3="nya" alpha3t="" displayName="Chichewa; Chewa; Nyanja">
+      <name>chichewa chewa nyanja</name>
+      <name>chichewa</name>
+      <name>chewa</name>
+      <name>nyanja</name>
+    </language>
+    <language alpha2="" alpha3="nym" alpha3t="" displayName="Nyamwezi">
+      <name>nyamwezi</name>
+    </language>
+    <language alpha2="" alpha3="nyn" alpha3t="" displayName="Nyankole">
+      <name>nyankole</name>
+    </language>
+    <language alpha2="" alpha3="nyo" alpha3t="" displayName="Nyoro">
+      <name>nyoro</name>
+    </language>
+    <language alpha2="" alpha3="nzi" alpha3t="" displayName="Nzima">
+      <name>nzima</name>
+    </language>
+    <language alpha2="oc" alpha3="oci" alpha3t="" displayName="Occitan (post 1500); Provençal">
+      <name>occitan post 1500 provençal</name>
+      <name>occitan</name>
+      <name>provençal</name>
+    </language>
+    <language alpha2="oj" alpha3="oji" alpha3t="" displayName="Ojibwa">
+      <name>ojibwa</name>
+    </language>
+    <language alpha2="or" alpha3="ori" alpha3t="" displayName="Oriya">
+      <name>oriya</name>
+    </language>
+    <language alpha2="om" alpha3="orm" alpha3t="" displayName="Oromo">
+      <name>oromo</name>
+    </language>
+    <language alpha2="" alpha3="osa" alpha3t="" displayName="Osage">
+      <name>osage</name>
+    </language>
+    <language alpha2="os" alpha3="oss" alpha3t="" displayName="Ossetian; Ossetic">
+      <name>ossetian ossetic</name>
+      <name>ossetian</name>
+      <name>ossetic</name>
+    </language>
+    <language alpha2="" alpha3="ota" alpha3t="" displayName="Turkish, Ottoman (1500-1928)">
+      <name>turkish ottoman 15001928</name>
+      <name>turkish ottoman</name>
+      <name>ottoman turkish</name>
+    </language>
+    <language alpha2="" alpha3="oto" alpha3t="" displayName="Otomian languages">
+      <name>otomian languages</name>
+      <name>otomian</name>
+    </language>
+    <language alpha2="" alpha3="paa" alpha3t="" displayName="Papuan languages">
+      <name>papuan languages</name>
+      <name>papuan</name>
+    </language>
+    <language alpha2="" alpha3="pag" alpha3t="" displayName="Pangasinan">
+      <name>pangasinan</name>
+    </language>
+    <language alpha2="" alpha3="pal" alpha3t="" displayName="Pahlavi">
+      <name>pahlavi</name>
+    </language>
+    <language alpha2="" alpha3="pam" alpha3t="" displayName="Pampanga; Kapampangan">
+      <name>pampanga kapampangan</name>
+      <name>pampanga</name>
+      <name>kapampangan</name>
+    </language>
+    <language alpha2="pa" alpha3="pan" alpha3t="" displayName="Panjabi; Punjabi">
+      <name>panjabi punjabi</name>
+      <name>panjabi</name>
+      <name>punjabi</name>
+    </language>
+    <language alpha2="" alpha3="pap" alpha3t="" displayName="Papiamento">
+      <name>papiamento</name>
+    </language>
+    <language alpha2="" alpha3="pau" alpha3t="" displayName="Palauan">
+      <name>palauan</name>
+    </language>
+    <language alpha2="" alpha3="peo" alpha3t="" displayName="Persian, Old (ca.600-400 B.C.)">
+      <name>persian old ca600400 bc</name>
+      <name>persian old</name>
+      <name>old persian</name>
+    </language>
+    <language alpha2="fa" alpha3="per" alpha3t="fas" displayName="Persian">
+      <name>persian</name>
+    </language>
+    <language alpha2="" alpha3="phi" alpha3t="" displayName="Philippine languages">
+      <name>philippine languages</name>
+      <name>philippine</name>
+    </language>
+    <language alpha2="" alpha3="phn" alpha3t="" displayName="Phoenician">
+      <name>phoenician</name>
+    </language>
+    <language alpha2="pi" alpha3="pli" alpha3t="" displayName="Pali">
+      <name>pali</name>
+    </language>
+    <language alpha2="pl" alpha3="pol" alpha3t="" displayName="Polish">
+      <name>polish</name>
+    </language>
+    <language alpha2="" alpha3="pon" alpha3t="" displayName="Pohnpeian">
+      <name>pohnpeian</name>
+    </language>
+    <language alpha2="pt" alpha3="por" alpha3t="" displayName="Portuguese">
+      <name>portuguese</name>
+    </language>
+    <language alpha2="" alpha3="pra" alpha3t="" displayName="Prakrit languages">
+      <name>prakrit languages</name>
+      <name>prakrit</name>
+    </language>
+    <language alpha2="" alpha3="pro" alpha3t="" displayName="Provençal, Old (to 1500)">
+      <name>provençal old to 1500</name>
+      <name>provençal old</name>
+      <name>old provençal</name>
+    </language>
+    <language alpha2="ps" alpha3="pus" alpha3t="" displayName="Pushto; Pashto">
+      <name>pushto pashto</name>
+      <name>pushto</name>
+      <name>pashto</name>
+    </language>
+    <language alpha2="" alpha3="qaa-qtz" alpha3t="" displayName="Reserved for local use">
+      <name>reserved for local use</name>
+      <name>local use</name>
+    </language>
+    <language alpha2="qu" alpha3="que" alpha3t="" displayName="Quechua">
+      <name>quechua</name>
+    </language>
+    <language alpha2="" alpha3="raj" alpha3t="" displayName="Rajasthani">
+      <name>rajasthani</name>
+    </language>
+    <language alpha2="" alpha3="rap" alpha3t="" displayName="Rapanui">
+      <name>rapanui</name>
+    </language>
+    <language alpha2="" alpha3="rar" alpha3t="" displayName="Rarotongan; Cook Islands Maori">
+      <name>rarotongan cook islands maori</name>
+      <name>rarotongan</name>
+      <name>cook islands maori</name>
+      <name>cook islands</name>
+    </language>
+    <language alpha2="" alpha3="roa" alpha3t="" displayName="Romance languages">
+      <name>romance languages</name>
+      <name>romance</name>
+    </language>
+    <language alpha2="rm" alpha3="roh" alpha3t="" displayName="Romansh">
+      <name>romansh</name>
+    </language>
+    <language alpha2="" alpha3="rom" alpha3t="" displayName="Romany">
+      <name>romany</name>
+    </language>
+    <language alpha2="ro" alpha3="rum" alpha3t="ron" displayName="Romanian; Moldavian; Moldovan">
+      <name>romanian moldavian moldovan</name>
+      <name>romanian</name>
+      <name>moldavian</name>
+      <name>moldovan</name>
+    </language>
+    <language alpha2="rn" alpha3="run" alpha3t="" displayName="Rundi">
+      <name>rundi</name>
+    </language>
+    <language alpha2="" alpha3="rup" alpha3t="" displayName="Aromanian; Arumanian; Macedo-Romanian">
+      <name>aromanian arumanian macedoromanian</name>
+      <name>aromanian arumanian macedo romanian</name>
+      <name>aromanian</name>
+      <name>arumanian</name>
+      <name>macedoromanian</name>
+      <name>macedo romanian</name>
+    </language>
+    <language alpha2="ru" alpha3="rus" alpha3t="" displayName="Russian">
+      <name>russian</name>
+    </language>
+    <language alpha2="" alpha3="sad" alpha3t="" displayName="Sandawe">
+      <name>sandawe</name>
+    </language>
+    <language alpha2="sg" alpha3="sag" alpha3t="" displayName="Sango">
+      <name>sango</name>
+    </language>
+    <language alpha2="" alpha3="sah" alpha3t="" displayName="Yakut">
+      <name>yakut</name>
+    </language>
+    <language alpha2="" alpha3="sai" alpha3t="" displayName="South American Indian (Other)">
+      <name>south american indian other</name>
+      <name>south american indian</name>
+      <name>south american</name>
+    </language>
+    <language alpha2="" alpha3="sal" alpha3t="" displayName="Salishan languages">
+      <name>salishan languages</name>
+      <name>salishan</name>
+    </language>
+    <language alpha2="" alpha3="sam" alpha3t="" displayName="Samaritan Aramaic">
+      <name>samaritan aramaic</name>
+      <name>samaritan</name>
+    </language>
+    <language alpha2="sa" alpha3="san" alpha3t="" displayName="Sanskrit">
+      <name>sanskrit</name>
+    </language>
+    <language alpha2="" alpha3="sas" alpha3t="" displayName="Sasak">
+      <name>sasak</name>
+    </language>
+    <language alpha2="" alpha3="sat" alpha3t="" displayName="Santali">
+      <name>santali</name>
+    </language>
+    <language alpha2="" alpha3="scn" alpha3t="" displayName="Sicilian">
+      <name>sicilian</name>
+    </language>
+    <language alpha2="" alpha3="sco" alpha3t="" displayName="Scots">
+      <name>scots</name>
+    </language>
+    <language alpha2="" alpha3="sel" alpha3t="" displayName="Selkup">
+      <name>selkup</name>
+    </language>
+    <language alpha2="" alpha3="sem" alpha3t="" displayName="Semitic languages">
+      <name>semitic languages</name>
+      <name>semitic</name>
+    </language>
+    <language alpha2="" alpha3="sga" alpha3t="" displayName="Irish, Old (to 900)">
+      <name>irish old to 900</name>
+      <name>irish old</name>
+      <name>old irish</name>
+    </language>
+    <language alpha2="" alpha3="sgn" alpha3t="" displayName="Sign Languages">
+      <name>sign languages</name>
+      <name>sign</name>
+    </language>
+    <language alpha2="" alpha3="shn" alpha3t="" displayName="Shan">
+      <name>shan</name>
+    </language>
+    <language alpha2="" alpha3="sid" alpha3t="" displayName="Sidamo">
+      <name>sidamo</name>
+    </language>
+    <language alpha2="si" alpha3="sin" alpha3t="" displayName="Sinhala; Sinhalese">
+      <name>sinhala sinhalese</name>
+      <name>sinhala</name>
+      <name>sinhalese</name>
+    </language>
+    <language alpha2="" alpha3="sio" alpha3t="" displayName="Siouan languages">
+      <name>siouan languages</name>
+      <name>siouan</name>
+    </language>
+    <language alpha2="" alpha3="sit" alpha3t="" displayName="Sino-Tibetan languages">
+      <name>sinotibetan languages</name>
+      <name>sino tibetan languages</name>
+      <name>sinotibetan</name>
+      <name>sino tibetan</name>
+    </language>
+    <language alpha2="" alpha3="sla" alpha3t="" displayName="Slavic languages">
+      <name>slavic languages</name>
+      <name>slavic</name>
+    </language>
+    <language alpha2="sk" alpha3="slo" alpha3t="slk" displayName="Slovak">
+      <name>slovak</name>
+    </language>
+    <language alpha2="sl" alpha3="slv" alpha3t="" displayName="Slovenian">
+      <name>slovenian</name>
+    </language>
+    <language alpha2="" alpha3="sma" alpha3t="" displayName="Southern Sami">
+      <name>southern sami</name>
+    </language>
+    <language alpha2="se" alpha3="sme" alpha3t="" displayName="Northern Sami">
+      <name>northern sami</name>
+    </language>
+    <language alpha2="" alpha3="smi" alpha3t="" displayName="Sami languages">
+      <name>sami languages</name>
+      <name>sami</name>
+    </language>
+    <language alpha2="" alpha3="smj" alpha3t="" displayName="Lule Sami">
+      <name>lule sami</name>
+    </language>
+    <language alpha2="" alpha3="smn" alpha3t="" displayName="Inari Sami">
+      <name>inari sami</name>
+    </language>
+    <language alpha2="sm" alpha3="smo" alpha3t="" displayName="Samoan">
+      <name>samoan</name>
+    </language>
+    <language alpha2="" alpha3="sms" alpha3t="" displayName="Skolt Sami">
+      <name>skolt sami</name>
+    </language>
+    <language alpha2="sn" alpha3="sna" alpha3t="" displayName="Shona">
+      <name>shona</name>
+    </language>
+    <language alpha2="sd" alpha3="snd" alpha3t="" displayName="Sindhi">
+      <name>sindhi</name>
+    </language>
+    <language alpha2="" alpha3="snk" alpha3t="" displayName="Soninke">
+      <name>soninke</name>
+    </language>
+    <language alpha2="" alpha3="sog" alpha3t="" displayName="Sogdian">
+      <name>sogdian</name>
+    </language>
+    <language alpha2="so" alpha3="som" alpha3t="" displayName="Somali">
+      <name>somali</name>
+    </language>
+    <language alpha2="" alpha3="son" alpha3t="" displayName="Songhai languages">
+      <name>songhai languages</name>
+      <name>songhai</name>
+    </language>
+    <language alpha2="st" alpha3="sot" alpha3t="" displayName="Sotho, Southern">
+      <name>sotho southern</name>
+      <name>southern sotho</name>
+    </language>
+    <language alpha2="es" alpha3="spa" alpha3t="" displayName="Spanish; Castilian">
+      <name>spanish castilian</name>
+      <name>spanish</name>
+      <name>castilian</name>
+    </language>
+    <language alpha2="sc" alpha3="srd" alpha3t="" displayName="Sardinian">
+      <name>sardinian</name>
+    </language>
+    <language alpha2="" alpha3="srn" alpha3t="" displayName="Sranan Tongo">
+      <name>sranan tongo</name>
+      <name>sranan</name>
+      <name>tongo</name>
+    </language>
+    <language alpha2="sr" alpha3="srp" alpha3t="" displayName="Serbian">
+      <name>serbian</name>
+    </language>
+    <language alpha2="" alpha3="srr" alpha3t="" displayName="Serer">
+      <name>serer</name>
+    </language>
+    <language alpha2="" alpha3="ssa" alpha3t="" displayName="Nilo-Saharan languages">
+      <name>nilosaharan languages</name>
+      <name>nilo saharan languages</name>
+      <name>nilosaharan</name>
+      <name>nilo saharan</name>
+    </language>
+    <language alpha2="ss" alpha3="ssw" alpha3t="" displayName="Swati">
+      <name>swati</name>
+    </language>
+    <language alpha2="" alpha3="suk" alpha3t="" displayName="Sukuma">
+      <name>sukuma</name>
+    </language>
+    <language alpha2="su" alpha3="sun" alpha3t="" displayName="Sundanese">
+      <name>sundanese</name>
+    </language>
+    <language alpha2="" alpha3="sus" alpha3t="" displayName="Susu">
+      <name>susu</name>
+    </language>
+    <language alpha2="" alpha3="sux" alpha3t="" displayName="Sumerian">
+      <name>sumerian</name>
+    </language>
+    <language alpha2="sw" alpha3="swa" alpha3t="" displayName="Swahili">
+      <name>swahili</name>
+    </language>
+    <language alpha2="sv" alpha3="swe" alpha3t="" displayName="Swedish">
+      <name>swedish</name>
+    </language>
+    <language alpha2="" alpha3="syc" alpha3t="" displayName="Classical Syriac">
+      <name>classical syriac</name>
+    </language>
+    <language alpha2="" alpha3="syr" alpha3t="" displayName="Syriac">
+      <name>syriac</name>
+    </language>
+    <language alpha2="ty" alpha3="tah" alpha3t="" displayName="Tahitian">
+      <name>tahitian</name>
+    </language>
+    <language alpha2="" alpha3="tai" alpha3t="" displayName="Tai languages">
+      <name>tai languages</name>
+      <name>tai</name>
+    </language>
+    <language alpha2="ta" alpha3="tam" alpha3t="" displayName="Tamil">
+      <name>tamil</name>
+    </language>
+    <language alpha2="tt" alpha3="tat" alpha3t="" displayName="Tatar">
+      <name>tatar</name>
+    </language>
+    <language alpha2="te" alpha3="tel" alpha3t="" displayName="Telugu">
+      <name>telugu</name>
+    </language>
+    <language alpha2="" alpha3="tem" alpha3t="" displayName="Timne">
+      <name>timne</name>
+    </language>
+    <language alpha2="" alpha3="ter" alpha3t="" displayName="Tereno">
+      <name>tereno</name>
+    </language>
+    <language alpha2="" alpha3="tet" alpha3t="" displayName="Tetum">
+      <name>tetum</name>
+    </language>
+    <language alpha2="tg" alpha3="tgk" alpha3t="" displayName="Tajik">
+      <name>tajik</name>
+    </language>
+    <language alpha2="tl" alpha3="tgl" alpha3t="" displayName="Tagalog">
+      <name>tagalog</name>
+    </language>
+    <language alpha2="th" alpha3="tha" alpha3t="" displayName="Thai">
+      <name>thai</name>
+    </language>
+    <language alpha2="bo" alpha3="tib" alpha3t="bod" displayName="Tibetan">
+      <name>tibetan</name>
+    </language>
+    <language alpha2="" alpha3="tig" alpha3t="" displayName="Tigre">
+      <name>tigre</name>
+    </language>
+    <language alpha2="ti" alpha3="tir" alpha3t="" displayName="Tigrinya">
+      <name>tigrinya</name>
+    </language>
+    <language alpha2="" alpha3="tiv" alpha3t="" displayName="Tiv">
+      <name>tiv</name>
+    </language>
+    <language alpha2="" alpha3="tkl" alpha3t="" displayName="Tokelau">
+      <name>tokelau</name>
+    </language>
+    <language alpha2="" alpha3="tlh" alpha3t="" displayName="Klingon; tlhIngan-Hol">
+      <name>klingon tlhinganhol</name>
+      <name>klingon tlhingan hol</name>
+      <name>klingon</name>
+      <name>tlhinganhol</name>
+      <name>tlhingan hol</name>
+    </language>
+    <language alpha2="" alpha3="tli" alpha3t="" displayName="Tlingit">
+      <name>tlingit</name>
+    </language>
+    <language alpha2="" alpha3="tmh" alpha3t="" displayName="Tamashek">
+      <name>tamashek</name>
+    </language>
+    <language alpha2="" alpha3="tog" alpha3t="" displayName="Tonga (Nyasa)">
+      <name>tonga nyasa</name>
+      <name>nyasa</name>
+    </language>
+    <language alpha2="to" alpha3="ton" alpha3t="" displayName="Tonga (Tonga Islands)">
+      <name>tonga tonga islands</name>
+      <name>tonga islands</name>
+    </language>
+    <language alpha2="" alpha3="tpi" alpha3t="" displayName="Tok Pisin">
+      <name>tok pisin</name>
+    </language>
+    <language alpha2="" alpha3="tsi" alpha3t="" displayName="Tsimshian">
+      <name>tsimshian</name>
+    </language>
+    <language alpha2="tn" alpha3="tsn" alpha3t="" displayName="Tswana">
+      <name>tswana</name>
+    </language>
+    <language alpha2="ts" alpha3="tso" alpha3t="" displayName="Tsonga">
+      <name>tsonga</name>
+    </language>
+    <language alpha2="tk" alpha3="tuk" alpha3t="" displayName="Turkmen">
+      <name>turkmen</name>
+    </language>
+    <language alpha2="" alpha3="tum" alpha3t="" displayName="Tumbuka">
+      <name>tumbuka</name>
+    </language>
+    <language alpha2="" alpha3="tup" alpha3t="" displayName="Tupi languages">
+      <name>tupi languages</name>
+      <name>tupi</name>
+    </language>
+    <language alpha2="tr" alpha3="tur" alpha3t="" displayName="Turkish">
+      <name>turkish</name>
+    </language>
+    <language alpha2="" alpha3="tut" alpha3t="" displayName="Altaic languages">
+      <name>altaic languages</name>
+      <name>altaic</name>
+    </language>
+    <language alpha2="" alpha3="tvl" alpha3t="" displayName="Tuvalu">
+      <name>tuvalu</name>
+    </language>
+    <language alpha2="tw" alpha3="twi" alpha3t="" displayName="Twi">
+      <name>twi</name>
+    </language>
+    <language alpha2="" alpha3="tyv" alpha3t="" displayName="Tuvinian">
+      <name>tuvinian</name>
+    </language>
+    <language alpha2="" alpha3="udm" alpha3t="" displayName="Udmurt">
+      <name>udmurt</name>
+    </language>
+    <language alpha2="" alpha3="uga" alpha3t="" displayName="Ugaritic">
+      <name>ugaritic</name>
+    </language>
+    <language alpha2="ug" alpha3="uig" alpha3t="" displayName="Uighur; Uyghur">
+      <name>uighur uyghur</name>
+      <name>uighur</name>
+      <name>uyghur</name>
+    </language>
+    <language alpha2="uk" alpha3="ukr" alpha3t="" displayName="Ukrainian">
+      <name>ukrainian</name>
+    </language>
+    <language alpha2="" alpha3="umb" alpha3t="" displayName="Umbundu">
+      <name>umbundu</name>
+    </language>
+    <language alpha2="" alpha3="und" alpha3t="" displayName="Undetermined">
+      <name>undetermined</name>
+    </language>
+    <language alpha2="ur" alpha3="urd" alpha3t="" displayName="Urdu">
+      <name>urdu</name>
+    </language>
+    <language alpha2="uz" alpha3="uzb" alpha3t="" displayName="Uzbek">
+      <name>uzbek</name>
+    </language>
+    <language alpha2="" alpha3="vai" alpha3t="" displayName="Vai">
+      <name>vai</name>
+    </language>
+    <language alpha2="ve" alpha3="ven" alpha3t="" displayName="Venda">
+      <name>venda</name>
+    </language>
+    <language alpha2="vi" alpha3="vie" alpha3t="" displayName="Vietnamese">
+      <name>vietnamese</name>
+    </language>
+    <language alpha2="vo" alpha3="vol" alpha3t="" displayName="Volapük">
+      <name>volapük</name>
+    </language>
+    <language alpha2="" alpha3="vot" alpha3t="" displayName="Votic">
+      <name>votic</name>
+    </language>
+    <language alpha2="" alpha3="wak" alpha3t="" displayName="Wakashan languages">
+      <name>wakashan languages</name>
+      <name>wakashan</name>
+    </language>
+    <language alpha2="" alpha3="wal" alpha3t="" displayName="Walamo">
+      <name>walamo</name>
+    </language>
+    <language alpha2="" alpha3="war" alpha3t="" displayName="Waray">
+      <name>waray</name>
+    </language>
+    <language alpha2="" alpha3="was" alpha3t="" displayName="Washo">
+      <name>washo</name>
+    </language>
+    <language alpha2="cy" alpha3="wel" alpha3t="cym" displayName="Welsh">
+      <name>welsh</name>
+    </language>
+    <language alpha2="" alpha3="wen" alpha3t="" displayName="Sorbian languages">
+      <name>sorbian languages</name>
+      <name>sorbian</name>
+    </language>
+    <language alpha2="wa" alpha3="wln" alpha3t="" displayName="Walloon">
+      <name>walloon</name>
+    </language>
+    <language alpha2="wo" alpha3="wol" alpha3t="" displayName="Wolof">
+      <name>wolof</name>
+    </language>
+    <language alpha2="" alpha3="xal" alpha3t="" displayName="Kalmyk; Oirat">
+      <name>kalmyk oirat</name>
+      <name>kalmyk</name>
+      <name>oirat</name>
+    </language>
+    <language alpha2="xh" alpha3="xho" alpha3t="" displayName="Xhosa">
+      <name>xhosa</name>
+    </language>
+    <language alpha2="" alpha3="yao" alpha3t="" displayName="Yao">
+      <name>yao</name>
+    </language>
+    <language alpha2="" alpha3="yap" alpha3t="" displayName="Yapese">
+      <name>yapese</name>
+    </language>
+    <language alpha2="yi" alpha3="yid" alpha3t="" displayName="Yiddish">
+      <name>yiddish</name>
+    </language>
+    <language alpha2="yo" alpha3="yor" alpha3t="" displayName="Yoruba">
+      <name>yoruba</name>
+    </language>
+    <language alpha2="" alpha3="ypk" alpha3t="" displayName="Yupik languages">
+      <name>yupik languages</name>
+      <name>yupik</name>
+    </language>
+    <language alpha2="" alpha3="zap" alpha3t="" displayName="Zapotec">
+      <name>zapotec</name>
+    </language>
+    <language alpha2="" alpha3="zbl" alpha3t="" displayName="Blissymbols; Blissymbolics; Bliss">
+      <name>blissymbols blissymbolics bliss</name>
+      <name>blissymbols</name>
+      <name>bliss symbols</name>
+      <name>blissymbolics</name>
+      <name>bliss symbolics</name>
+      <name>bliss</name>
+    </language>
+    <language alpha2="" alpha3="zen" alpha3t="" displayName="Zenaga">
+      <name>zenaga</name>
+    </language>
+    <language alpha2="" alpha3="zgh" alpha3t="" displayName="Standard Moroccan Tamazight">
+      <name>standard moroccan tamazight</name>
+      <name>standard moroccan</name>
+      <name>tamazight</name>
+    </language>
+    <language alpha2="za" alpha3="zha" alpha3t="" displayName="Zhuang; Chuang">
+      <name>zhuang chuang</name>
+      <name>zhuang</name>
+      <name>chuang</name>
+    </language>
+    <language alpha2="" alpha3="znd" alpha3t="" displayName="Zande languages">
+      <name>zande languages</name>
+      <name>zande</name>
+    </language>
+    <language alpha2="zu" alpha3="zul" alpha3t="" displayName="Zulu">
+      <name>zulu</name>
+    </language>
+    <language alpha2="" alpha3="zun" alpha3t="" displayName="Zuni">
+      <name>zuni</name>
+    </language>
+    <language alpha2="" alpha3="zxx" alpha3t="" displayName="No linguistic content; Not applicable">
+      <name>no linguistic content not applicable</name>
+      <name>no linguistic content</name>
+      <name>not applicable</name>
+    </language>
+    <language alpha2="" alpha3="zza" alpha3t="" displayName="Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki">
+      <name>zaza dimili dimli kirdki kirmanjki zazaki</name>
+      <name>zaza</name>
+      <name>dimili</name>
+      <name>dimli</name>
+      <name>kirdki</name>
+      <name>kirmanjki</name>
+      <name>zazaki</name>
+    </language>
+  </languageCodes>
+</codes>
