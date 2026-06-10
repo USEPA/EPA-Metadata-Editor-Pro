@@ -10,6 +10,20 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="EMEProToolBox\EPA Pro Metadata Toolbox.keywords2tags.pyt.xml" />
+    <None Remove="EMEProToolBox\EPA Pro Metadata Toolbox.transformMetadata.pyt.xml" />
+    <None Remove="EMEProToolBox\transforms\ArcGIS_2FgdcCsdgm.xslt" />
+    <None Remove="EMEProToolBox\transforms\ArcGIS_2ISO19115_3.xslt" />
+    <None Remove="EMEProToolBox\transforms\ArcGIS_2ISO19139.xslt" />
+    <None Remove="EMEProToolBox\transforms\ArcGIS_2ISO19139gml32.xslt" />
+    <None Remove="EMEProToolBox\transforms\codes.xml" />
+    <None Remove="EMEProToolBox\transforms\EsriIso_2ArcGIS.xslt" />
+    <None Remove="EMEProToolBox\transforms\FgdcCsdgm_2ArcGIS.xslt" />
+    <None Remove="EMEProToolBox\transforms\ISO19115_3_2ArcGIS.xslt" />
+    <None Remove="EMEProToolBox\transforms\ISO19139gml32_2ArcGIS.xslt" />
+    <None Remove="EMEProToolBox\transforms\ISO19139_2ArcGIS.xslt" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="ArcGIS.Desktop.Resources">
       <HintPath>C:\Users\thultgre\AppData\Local\Programs\ArcGIS\Pro\bin\ArcGIS.Desktop.Resources.dll</HintPath>
       <CopyLocal>True</CopyLocal>
@@ -74,6 +88,42 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config.daml" />
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.keywords2tags.pyt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.transformMetadata.pyt.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EMEProToolBox\transforms\ArcGIS_2FgdcCsdgm.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EMEProToolBox\transforms\ArcGIS_2ISO19115_3.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EMEProToolBox\transforms\ArcGIS_2ISO19139.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EMEProToolBox\transforms\ArcGIS_2ISO19139gml32.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EMEProToolBox\transforms\codes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EMEProToolBox\transforms\EsriIso_2ArcGIS.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EMEProToolBox\transforms\FgdcCsdgm_2ArcGIS.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EMEProToolBox\transforms\ISO19115_3_2ArcGIS.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EMEProToolBox\transforms\ISO19139gml32_2ArcGIS.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EMEProToolBox\transforms\ISO19139_2ArcGIS.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\AddInDesktop16.png" />
     <Content Include="Images\AddInDesktop32.png" />
     <Content Include="DarkImages\AddInDesktop16.png" />
@@ -178,57 +228,57 @@
     <None Include="EMEdb\SystemofRecords.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.cleanExportTool.pyt.xml">
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.cleanExportTool.pyt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.cleanupTool.pyt.xml">
+    </Content>
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.cleanupTool.pyt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.deleteTool.pyt.xml">
+    </Content>
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.deleteTool.pyt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.editDates.pyt.xml">
+    </Content>
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.editDates.pyt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.editElement.pyt.xml">
+    </Content>
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.editElement.pyt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.exportISOTool.pyt.xml">
+    </Content>
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.exportISOTool.pyt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.importTool.pyt.xml">
+    </Content>
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.importTool.pyt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.mergeTemplate.pyt.xml">
+    </Content>
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.mergeTemplate.pyt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.pyt.xml">
+    </Content>
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.pyt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.saveTemplate.pyt.xml">
+    </Content>
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.saveTemplate.pyt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.upgradeTool.pyt.xml">
+    </Content>
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.upgradeTool.pyt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\EPACleanExport.xslt">
+    </Content>
+    <Content Include="EMEProToolBox\EPACleanExport.xslt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\EPAUpgradeCleanup.xslt">
+    </Content>
+    <Content Include="EMEProToolBox\EPAUpgradeCleanup.xslt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\mergeTemplate.xslt">
+    </Content>
+    <Content Include="EMEProToolBox\mergeTemplate.xslt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EMEProToolBox\saveTemplate.xslt">
+    </Content>
+    <Content Include="EMEProToolBox\saveTemplate.xslt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="EMEProToolBox\EMEToolbox.pyproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="EMEProToolBox\EPA Pro Metadata Toolbox.pyt">
+    <Content Include="EMEProToolBox\EPA Pro Metadata Toolbox.pyt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="EMEdbManager\EMEdbManager.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

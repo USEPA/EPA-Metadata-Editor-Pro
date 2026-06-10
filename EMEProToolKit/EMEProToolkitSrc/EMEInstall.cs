@@ -37,7 +37,8 @@ namespace EMEProToolkit
         XmlDocument _contactsWEB = new();
         private string _filePathEsri = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\ArcGIS\\Descriptions\\";
         private string _filePathEme = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEdb\\";
-        private string _filePathToolbox = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolbox";
+        private string _filePathToolbox = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolbox\\";
+        private string _filePathTransforms = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\U.S. EPA\\EME Toolkit\\EMEProToolbox\\transforms\\";
         private string _installPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
         public Task CopyDir(string srcDir, string targDir)
@@ -93,7 +94,9 @@ namespace EMEProToolkit
             //ArcGIS.Desktop.Framework.Dialogs.MessageBox.Show("USEPADirAsync - Creating US EPA db dir and copying contents from : " + src);
 
             CopyDir(srcDir: src, targDir: _filePathToolbox);
+            string src_transforms = _installPath + "\\EMEProToolbox\\transforms\\";
 
+            CopyDir(srcDir: src_transforms, targDir: _filePathTransforms);
         }
     }
 }

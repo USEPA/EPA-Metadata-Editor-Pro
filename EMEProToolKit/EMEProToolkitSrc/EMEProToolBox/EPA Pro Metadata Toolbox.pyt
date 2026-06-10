@@ -15,7 +15,7 @@ class Toolbox(object):
         self.alias = ""
 
         # List of tool classes associated with this toolbox
-        self.tools = [upgradeTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate, exportISOTool, esriSync, keywords2tags]
+        self.tools = [upgradeTool,saveTemplate,importTool,deleteTool,cleanExportTool,editElement,editDates, mergeTemplate, exportISOTool, transformMetadata, esriSync, keywords2tags]
 
 class upgradeTool(object):
     def __init__(self):
@@ -464,6 +464,134 @@ class exportISOTool(object):
             pass
         return
 
+class transformMetadata(object):
+    def __init__(self):
+        """Define the tool (tool name is the name of the class)."""
+        self.label = "Transform metadata using custom XSLT"
+        self.description = "This tool allows for transforming ArcGIS metadata using a custom XSLT. It is equivalent to using Esri's Import Metadata tool yet allows for custom transforms and for the output to be a standalone XML file."
+        self.canRunInBackground = False
+
+    def getParameterInfo(self):
+        """Define parameter definitions"""
+            # first parameter
+        param0 = arcpy.Parameter(
+            displayName="Source Metadata",
+            name="Source_Metadata",
+            datatype=["DEType","GPLayer","GPMap"],
+            parameterType="Required",
+            direction="Input",
+            multiValue=True)
+
+        param1 = arcpy.Parameter(
+            displayName="Output Directory",
+            name="Output_Dir",
+            datatype="DEFolder",
+            parameterType="Required",
+            direction="Input")
+
+        param2 = arcpy.Parameter(
+            displayName="Custom XSLT",
+            name="Custom_XSLT",
+            parameterType="Required",
+            direction="Input",
+            datatype="GPString"
+        )
+
+        param2.filter.type = "ValueList"
+        xslt_title_to_file = self.getTransforms()
+        known_transforms = sorted(xslt_title_to_file.keys())
+        known_transforms.append("Custom Transform")
+        param2.filter.list = known_transforms
+
+        param3 = arcpy.Parameter(
+            displayName="Custom Transform",
+            name="Custom_Transform",
+            datatype="DEFile",
+            parameterType="Optional",
+            direction="Input"
+        )
+
+        params = [param0, param1, param2, param3]
+        return params
+
+    def isLicensed(self):
+        """Set whether tool is licensed to execute."""
+        return True
+
+    def updateParameters(self, parameters):
+        """Modify the values and properties of parameters before internal
+        validation is performed.  This method is called whenever a parameter
+        has been changed."""
+        if parameters[2].value == "Custom Transform":
+            parameters[3].enabled = 'True'
+        else:
+            parameters[3].enabled = 'False'
+        return
+
+    def updateMessages(self, parameters):
+        """Modify the messages created by internal validation for each tool
+        parameter.  This method is called after internal validation."""
+        return
+
+    def execute(self, parameters, messages):
+        try:
+            """The source code of the tool."""
+            Source_Metadata = parameters[0].valueAsText.replace("'","")
+            Output_Dir = parameters[1].valueAsText.replace("'","")
+            Transform_String = parameters[2].valueAsText
+            Custom_Transform = parameters[3].valueAsText
+            xslt_title_to_file = self.getTransforms()
+            if Transform_String != "Custom Transform":
+                Transform_File = xslt_title_to_file.get(Transform_String)
+                Selected_Transform = os.path.join(os.path.dirname(__file__), "transforms", Transform_File)
+            else:
+                Selected_Transform = Custom_Transform
+
+            for t in str(Source_Metadata).split(";"):
+                try:
+                    basename = getSafeName(t)
+                    transform_name = os.path.splitext(os.path.basename(Selected_Transform))[0]
+                    Output_Name = f"transform_{basename}_{transform_name}.xml"
+                    Output_Metadata = os.path.join(Output_Dir, Output_Name)
+                    messages.addMessage(Output_Metadata)
+
+                    src_md = readXML(t, messages)
+                    # generate output path from input name
+                    src_md.saveAsUsingCustomXSLT(outputPath=Output_Metadata, customStylesheetPath=Selected_Transform)
+
+                    if arcpy.Exists(Output_Metadata):
+                        messages.addMessage("Process complete - please review the output carefully before importing or harvesting.")
+                        messages.addMessage("Output: {}".format(Output_Metadata))
+                    else:
+                        messages.addWarningMessage("Error Creating output.")
+                except Exception as e:
+                    messages.addWarningMessage(e)
+        except Exception as ee:
+            messages.addWarningMessage(ee)
+            # Cycle through Geoprocessing tool specific errors
+            for msg in range(0, arcpy.GetMessageCount()):
+                if arcpy.GetSeverity(msg) == 2:
+                    arcpy.AddReturnMessage(msg)
+        finally:
+            # Regardless of errors, clean up intermediate products.
+            pass
+        return
+
+    def getTransforms(self):
+        xslt_title_to_file = {}
+        transforms_dir = os.path.join(os.path.dirname(__file__), "transforms")
+        xslt_files = []
+        if os.path.isdir(transforms_dir):
+            xslt_files = [
+                f for f in os.listdir(transforms_dir)
+                if f.lower().endswith(".xslt")
+            ]
+
+        for filename in xslt_files:
+            base_name = os.path.splitext(filename)[0]
+            friendly_title = base_name.replace("_2", " to ", 1)
+            xslt_title_to_file[friendly_title] = filename
+        return xslt_title_to_file
 class saveTemplate(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
@@ -1081,10 +1209,12 @@ class editElement(object):
     def execute(self, parameters, messages):
         try:
             """The source code of the tool."""
+            messages.addMessage("Starting Edit Element Tool...")
             Target_Metadata = parameters[0].valueAsText.replace("'","")
             Xpath_Expression = parameters[1].valueAsText
             New_Value = parameters[2].valueAsText
             valueIsXML = False
+            messages.addMessage(f"The editElement tool is updating {Xpath_Expression} to be {New_Value} in the metadata {Target_Metadata}")
             try:
                 New_Value = ET.fromstring(New_Value)
                 valueIsXML = True
@@ -1133,8 +1263,8 @@ class editElement(object):
                     target_md.xml = ET.tostring(root)
                     writeXML(target_md, t, messages)
 
-                    messages.addMessage("Process complete, element update count: {}.".format(str(len(elements))))
-                    messages.addMessage("Output: {}".format(t))
+                    messages.addMessage(f"Process complete, element update count: {len(elements)}.")
+                    messages.addMessage(f"Output: {t}")
                 except Exception as e:
                     messages.addWarningMessage(e)
         except Exception as ee:
@@ -1205,28 +1335,30 @@ class editDates(object):
     def execute(self, parameters, messages):
         try:
             """The source code of the tool."""
+            messages.addMessage("Starting edit dates tool...")
             Metadata_Inputs = parameters[0].valueAsText.replace("'","")
             Date_Label = parameters[1].valueAsText
             Date_Value = parameters[2].valueAsText
 
             dateTypeLookup = {"Publication Date":"pubDate", "Creation Date":"createDate", "Revision Date":"reviseDate"}
-            dateType = dateTypeLookup[Date_Label]
-            dateXpath = "dataIdInfo/idCitation/date/" + dateType
+            dateXpath = "dataIdInfo/idCitation/date/" + dateTypeLookup[Date_Label]
 
             for t in str(Metadata_Inputs).split(";"):
                 try:
-                    messages.addMessage("Updating {} to {} in {}".format(Date_Label, Date_Value, t))
-                    # Use the provided inputs to run editElement tool.
-                    editElem = editElement()
-                    editParams = editElem.getParameterInfo()
-                    this_Metadata = editParams[0]
-                    this_Metadata.value = t
-                    Xpath_Expression = editParams[1]
-                    Xpath_Expression.value = dateXpath
-                    New_Value = editParams[2]
-                    New_Value.value = Date_Value
+                    messages.addMessage(f"The editDates tool is calling the editElement tool to update the metadata for {t} to assign the xpath of {dateXpath} to be {Date_Value}.")
+                    # editElement.execute reads .valueAsText; provide lightweight objects
+                    # with explicit text values instead of creating new GP parameters.
+                    class _ParamValue(object):
+                        def __init__(self, value_as_text):
+                            self.valueAsText = value_as_text
 
-                    editElem.execute([this_Metadata,Xpath_Expression,New_Value],messages)
+                    editElem = editElement()
+                    editElem.execute([
+                        _ParamValue(t),
+                        _ParamValue(dateXpath),
+                        _ParamValue(Date_Value)
+                    ], messages)
+                    messages.addMessage(f"Finished calling editElement for {t} to update {dateXpath} to be {Date_Value}.")
 
                 except Exception as e:
                     messages.addWarningMessage(e)
@@ -1462,23 +1594,23 @@ def writeXML(source, target, messages):
         scratch_folder = arcpy.env.scratchFolder
         basename = getSafeName(target)
         backup_md = readXML(target, messages)
-        original_name = "{}{}.xml".format('_original_', basename)
-        messages.addMessage(r"Saving backup copy of original metadata to {}\{}".format(scratch_folder, original_name))
+        original_name = f"_original_{basename}.xml"
+        messages.addMessage(f"Saving backup copy of original metadata to {os.path.join(scratch_folder, original_name)}")
         backup_md.saveAsXML(os.path.join(scratch_folder, original_name))
         if fileExtension == ".xml":
-            messages.addMessage("Writing output to standalone XML file {}".format(target))
+            messages.addMessage(f"Writing output to standalone XML file {target}")
             os.remove(target)
             source.saveAsXML(target)
         elif target[:4]=='http':
             # Services need a path to a saved file for updating metadata
             if hasattr(source, "uri") and source.uri:
-                messages.addMessage("Using existing file {}".format(source.uri))
+                messages.addMessage(f"Using existing file {source.uri}")
                 sourcePath = source.uri
                 source.save()
             else:
-                scratch_name = "{}{}.xml".format('_scratch_', basename)
-                sourcePath = os.path.join(scratch_folder,scratch_name)
-                messages.addMessage("Saving scratch copy of updated metadata to {}".format(sourcePath))
+                scratch_name = f"_scratch_{basename}.xml"
+                sourcePath = os.path.join(scratch_folder, scratch_name)
+                messages.addMessage(f"Saving scratch copy of updated metadata to {sourcePath}")
             source.saveAsXML(sourcePath)
             source.reload()
 
@@ -1490,9 +1622,9 @@ def writeXML(source, target, messages):
             if desc.dataType == "FeatureClass":
                 messages.addMessage("Target recognized as Feature Service Layer")
                 fLayer = FeatureLayer(target)
-                messages.addMessage("Obtained feature layer object {}, {}".format(fLayer.properties["name"], fLayer.properties["serviceItemId"]))
+                messages.addMessage(f"Obtained feature layer object {fLayer.properties['name']}, {fLayer.properties['serviceItemId']}")
                 success = fLayer.update_metadata(sourcePath)
-                messages.addMessage("Update success was {}".format(success))
+                messages.addMessage(f"Update success was {success}")
             elif desc.dataType == "Workspace":
                 messages.addMessage("Target recognized as Feature Service")
                 flc = FeatureLayerCollection(target, gis)
