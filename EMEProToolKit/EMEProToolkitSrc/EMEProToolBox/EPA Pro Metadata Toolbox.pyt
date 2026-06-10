@@ -541,7 +541,6 @@ class transformMetadata(object):
             Transform_String = parameters[2].valueAsText
             Custom_Transform = parameters[3].valueAsText
             xslt_title_to_file = self.getTransforms()
-            messages.addMessage(xslt_title_to_file)
             if Transform_String != "Custom Transform":
                 Transform_File = xslt_title_to_file.get(Transform_String)
                 Selected_Transform = os.path.join(os.path.dirname(__file__), "transforms", Transform_File)
@@ -1595,23 +1594,23 @@ def writeXML(source, target, messages):
         scratch_folder = arcpy.env.scratchFolder
         basename = getSafeName(target)
         backup_md = readXML(target, messages)
-        original_name = "{}{}.xml".format('_original_', basename)
-        messages.addMessage(r"Saving backup copy of original metadata to {}\{}".format(scratch_folder, original_name))
+        original_name = f"_original_{basename}.xml"
+        messages.addMessage(f"Saving backup copy of original metadata to {os.path.join(scratch_folder, original_name)}")
         backup_md.saveAsXML(os.path.join(scratch_folder, original_name))
         if fileExtension == ".xml":
-            messages.addMessage("Writing output to standalone XML file {}".format(target))
+            messages.addMessage(f"Writing output to standalone XML file {target}")
             os.remove(target)
             source.saveAsXML(target)
         elif target[:4]=='http':
             # Services need a path to a saved file for updating metadata
             if hasattr(source, "uri") and source.uri:
-                messages.addMessage("Using existing file {}".format(source.uri))
+                messages.addMessage(f"Using existing file {source.uri}")
                 sourcePath = source.uri
                 source.save()
             else:
-                scratch_name = "{}{}.xml".format('_scratch_', basename)
-                sourcePath = os.path.join(scratch_folder,scratch_name)
-                messages.addMessage("Saving scratch copy of updated metadata to {}".format(sourcePath))
+                scratch_name = f"_scratch_{basename}.xml"
+                sourcePath = os.path.join(scratch_folder, scratch_name)
+                messages.addMessage(f"Saving scratch copy of updated metadata to {sourcePath}")
             source.saveAsXML(sourcePath)
             source.reload()
 
@@ -1623,9 +1622,9 @@ def writeXML(source, target, messages):
             if desc.dataType == "FeatureClass":
                 messages.addMessage("Target recognized as Feature Service Layer")
                 fLayer = FeatureLayer(target)
-                messages.addMessage("Obtained feature layer object {}, {}".format(fLayer.properties["name"], fLayer.properties["serviceItemId"]))
+                messages.addMessage(f"Obtained feature layer object {fLayer.properties['name']}, {fLayer.properties['serviceItemId']}")
                 success = fLayer.update_metadata(sourcePath)
-                messages.addMessage("Update success was {}".format(success))
+                messages.addMessage(f"Update success was {success}")
             elif desc.dataType == "Workspace":
                 messages.addMessage("Target recognized as Feature Service")
                 flc = FeatureLayerCollection(target, gis)
