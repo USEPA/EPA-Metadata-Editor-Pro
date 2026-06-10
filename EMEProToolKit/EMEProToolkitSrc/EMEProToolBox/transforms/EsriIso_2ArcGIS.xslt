@@ -699,25 +699,25 @@
 							<maxScale>500000</maxScale>
 						</xsl:when>
 						<!-- State 5,000,000 -->
-						<xsl:when test="($value &lt; 8750000) and ($value = 8750000)">
+						<xsl:when test="($value &lt; 8750000) or ($value = 8750000)">
 							<minScale>20000000</minScale>
 							<maxScale>500000</maxScale>
 						</xsl:when>
-						<xsl:when test="($value &lt; 16250000) and ($value = 16250000)">
+						<xsl:when test="($value &lt; 16250000) or ($value = 16250000)">
 							<minScale>20000000</minScale>
 							<maxScale>5000000</maxScale>
 						</xsl:when>
 						<!-- Country 20,000,000 -->
-						<xsl:when test="($value &lt; 27500000) and ($value = 27500000)">
+						<xsl:when test="($value &lt; 27500000) or ($value = 27500000)">
 							<minScale>50000000</minScale>
 							<maxScale>5000000</maxScale>
 						</xsl:when>
-						<xsl:when test="($value &lt; 42500000) and ($value = 42500000)">
+						<xsl:when test="($value &lt; 42500000) or ($value = 42500000)">
 							<minScale>50000000</minScale>
 							<maxScale>20000000</maxScale>
 						</xsl:when>
 						<!-- Continent 50,000,000 -->
-						<xsl:when test="($value &lt; 75000000) and ($value = 75000000)">
+						<xsl:when test="($value &lt; 75000000) or ($value = 75000000)">
 							<minScale>150000000</minScale>
 							<maxScale>20000000</maxScale>
 						</xsl:when>
