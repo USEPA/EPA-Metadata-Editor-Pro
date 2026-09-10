@@ -1310,7 +1310,8 @@ class editDates(object):
         param2 = arcpy.Parameter(
             displayName="Date Value",
             name="Date_Value",
-            datatype="GPDate",
+            datatype="GPDate", # Esri keeps handling this date with local formatting instead of ISO. Try handling as string instead.
+            #datatype="GPString",
             parameterType="Required",
             direction="Input")
 
@@ -1332,6 +1333,21 @@ class editDates(object):
         parameter.  This method is called after internal validation."""
         return
 
+    def convert_to_iso8601(self, date_str: str) -> str:
+        """Parses an ambiguous date string and returns it in ISO 8601 format. Differentiates between dates only and dateTimes."""
+        from dateutil import parser
+        from datetime import time
+        try:
+            # 1. Parse the string into a datetime object
+            dt_obj = parser.parse(date_str)
+            if dt_obj.time() == time.min:
+                return dt_obj.strftime("%Y-%m-%d")
+            else:
+                # 2. Format the object to an ISO 8601 string
+                return dt_obj.isoformat()
+        except (ValueError, OverflowError) as e:
+            return f"Could not parse date string: {e}"
+
     def execute(self, parameters, messages):
         try:
             """The source code of the tool."""
@@ -1346,6 +1362,9 @@ class editDates(object):
             for t in str(Metadata_Inputs).split(";"):
                 try:
                     messages.addMessage(f"The editDates tool is calling the editElement tool to update the metadata for {t} to assign the xpath of {dateXpath} to be {Date_Value}.")
+                    
+                    ISO_Date_Value = self.convert_to_iso8601(Date_Value)
+                    
                     # editElement.execute reads .valueAsText; provide lightweight objects
                     # with explicit text values instead of creating new GP parameters.
                     class _ParamValue(object):
@@ -1356,9 +1375,9 @@ class editDates(object):
                     editElem.execute([
                         _ParamValue(t),
                         _ParamValue(dateXpath),
-                        _ParamValue(Date_Value)
+                        _ParamValue(ISO_Date_Value)
                     ], messages)
-                    messages.addMessage(f"Finished calling editElement for {t} to update {dateXpath} to be {Date_Value}.")
+                    messages.addMessage(f"Finished calling editElement for {t} to update {dateXpath} to be {ISO_Date_Value}.")
 
                 except Exception as e:
                     messages.addWarningMessage(e)
